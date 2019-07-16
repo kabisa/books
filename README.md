@@ -1,24 +1,18 @@
-# README
+# Books
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Introduction
 
-Things you may want to cover:
+...
 
-* Ruby version
+## Demo
 
-* System dependencies
+A [demo version](https://thawing-badlands-71406.herokuapp.com/) is available on Heroku. 
+This version has been deployed as described [here](https://devcenter.heroku.com/articles/getting-started-with-rails5).
 
-* Configuration
 
-* Database creation
+## Technical details
 
-* Database initialization
+### Daemonite's Material UI
 
-* How to run the test suite
+Since I never used [Material Design](https://material.io/) before, I thought this project would make a good candidate. For this I used [Daemonite's Material UI](http://daemonite.github.io/material/), which uses Bootstrap with some customizations added to it. Instructions on how to use Daemonite's Material UI in a Rails project can be found [here](https://gist.github.com/bazzel/0226bf815c9018388ae2e7e3bc438c57).
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
