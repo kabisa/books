@@ -8,6 +8,8 @@ end
 
 Then("I see the sign in page") do
   expect(current_path).to eql('/sign_in')
-  # No navbar
-  # Check if the page has a sign in form
+  expect(page).not_to have_css('nav')
+  expect(page).to have_text('Simply login with your email')
+  expect(page).to have_field('Email')
+  expect(page).to have_button('Sign in')
 end
