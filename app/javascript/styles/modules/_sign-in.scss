@@ -1,0 +1,12 @@
+.sign-in {
+  @include media-breakpoint-up(sm) {
+    height: 100vh;
+    display: flex;
+
+    .card {
+      width: 550px;
+      margin: 0 auto;
+      border: $border-width solid $border-color;
+    }
+  }
+}
