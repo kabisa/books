@@ -1,7 +1,7 @@
-= t('.subject', user: @user.to_label, app_name: Rails.application.config.app_name)
+= t('.subject', user: @user, app_name: @app_name)
 = "\r\n" * 2
-= t('.body', app_name: Rails.application.config.app_name)
+= t('.body', app_name: @app_name)
 = "\r\n" * 2
 = @magic_link
 = "\r\n" * 3
-= t('.signature', app_name: Rails.application.config.app_name)
+= t('.signature', app_name: @app_name)

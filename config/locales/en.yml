@@ -30,7 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  # Pages
+  # pages
   layouts:
     application:
       sign_in: &sign_in 'Sign in'
@@ -38,6 +38,12 @@ en:
     new:
       title: Simply login with your email
       sign_in: *sign_in
+  # mailers:
+  sessions_mailer:
+    magic_link:
+      subject: '%{user}, welcome to %{app_name}!'
+      body: 'Someone (hopefully you) has requested access to %{app_name}. Follow the link to open the application.'
+      signature: 'The %{app_name} Team'
 
   activerecord:
     attributes:
