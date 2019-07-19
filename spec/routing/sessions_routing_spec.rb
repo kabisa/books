@@ -8,7 +8,14 @@ RSpec.describe 'routes for sessions', type: :routing do
   end
 
   describe 'POST /sign_in' do
-    xit { expect(post('sign_in')).to route_to('sessions#create') }
+    it { expect(post('sign_in')).to route_to('sessions#create') }
   end
+
+  describe 'GET /sign_in/:token' do
+    it { expect(get('sign_in/some_token')).to route_to(controller: 'sessions', action: 'show', token: 'some_token') }
+
+    it { expect(get: token_sign_in_path('some_token')).to route_to(controller: 'sessions', action: 'show', token: 'some_token') }
+  end
+
 end
 

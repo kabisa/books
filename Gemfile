@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'slim-rails' # Provides the generator settings required for Rails 3+ to use Slim
 gem 'simple_form' # Forms made easy!
+gem 'draper' # Draper adds an object-oriented layer of presentation logic to your Rails apps.
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +45,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'html2slim'
+  gem 'letter_opener' # When mail is sent from your application, Letter Opener will open a preview in the browser instead of sending.
 end
 
 group :test do
@@ -54,6 +56,8 @@ group :test do
   gem 'webdrivers'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'email_spec' # Easily test email in RSpec, Cucumber, and MiniTest
+  gem 'rails-controller-testing' # Extracting `assigns` and `assert_template` from ActionDispatch.
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
