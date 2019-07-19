@@ -1,3 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Roboto+Mono:300,400,700|Roboto+Slab:300,400,700');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import '~daemonite-material/css/material';
+@import '~daemonite-material/assets/scss/material';
+
+.sign-in {
+  @include media-breakpoint-up(sm) {
+    height: 100vh;
+    display: flex;
+
+    .card {
+      width: 550px;
+      margin: 0 auto;
+      border: $border-width solid $border-color;
+    }
+  }
+}

@@ -30,7 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  # Pages
   layouts:
     application:
-      sign_in: Sign in
+      sign_in: &sign_in 'Sign in'
+  sessions:
+    new:
+      title: Simply login with your email
+      sign_in: *sign_in
 
+  activerecord:
+    attributes:
+      user:
+        email: Email

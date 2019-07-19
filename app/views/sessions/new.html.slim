@@ -1,8 +1,13 @@
-p Simply login with your email
+.sign-in.align-items-center
+  .card.shadow-none.p-4
+    .card-body
+      h1.card-title= t('.title')
 
-.form-group
-  .floating-label
-    label for="exampleFloatingLabel1" Email
-    input#exampleFloatingLabel1.form-control aria-describedby="exampleFloatingLabel1Help" type="text"
-button.btn.btn-primary type="button"  Sign in
+      = form_tag do
+        .form-group
+          .floating-label
+            = label_tag :email, User.human_attribute_name("email")
+            = email_field_tag :email, nil, class: 'form-control', autofocus: true
+
+        = submit_tag t('.sign_in'), class: 'btn btn-primary'
 
