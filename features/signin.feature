@@ -15,3 +15,7 @@ Feature:
     Then "john.doe@kabisa.nl" should receive an email
     And I see a page with instructions for "john.doe@kabisa.nl" how to login
 
+  Scenario: Sign in with valid url
+    Given I sign up with my email address "john.doe@kabisa.nl"
+    When I use the magic link
+    Then I'm in

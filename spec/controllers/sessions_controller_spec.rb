@@ -17,7 +17,7 @@ RSpec.describe SessionsController, type: :controller do
         post :create, params: params
       end
 
-      context 'new user', focus: true do
+      context 'new user' do
         it 'creates the user' do
           expect do
             do_post
@@ -88,7 +88,7 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-  xdescribe 'GET sessions/:token' do
+  describe 'GET sessions/:token' do
     let(:login_token) { 'lorem-ipsum' }
 
     describe 'on success' do
@@ -110,7 +110,7 @@ RSpec.describe SessionsController, type: :controller do
                change { user.login_token_valid_until }
       end
 
-      it 'it assigns the user' do
+      it 'assigns the user' do
         do_get
         expect(controller.current_user).to eql(user)
       end
@@ -121,7 +121,7 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-  describe 'DELETE sessions' do
+  xdescribe 'DELETE sessions' do
     before { controller.current_user = build_stubbed(:user) }
 
     def do_delete

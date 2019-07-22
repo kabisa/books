@@ -7,6 +7,21 @@ Given("I am on the Sign in page") do
   step %q(I click the "Sign in" button)
 end
 
+Given("I sign up with my email address {string}") do |email|
+  step %q(I am on the Sign in page)
+  step %Q(I fill in "Email" with "#{email}")
+  step %q(I click "Sign in")
+end
+
+Given("I click {string}") do |locator|
+  click_link_or_button locator
+end
+
+When('I use the magic link') do
+  @user = User.last
+  visit token_sign_in_path(@user.login_token)
+end
+
 When("I click the {string} button") do |locator|
   click_link_or_button locator
 end
@@ -19,11 +34,16 @@ Then("I see the sign in page") do
   expect(page).to have_button('Sign in')
 end
 
-Given("I click {string}") do |locator|
-  click_link_or_button locator
-end
-
 Then("I see a page with instructions for {string} how to login") do |email|
   expect(page).to have_text('Check your email!')
   expect(page).to have_text("We've emailed a special link to #{email}. Click the link to confirm your address and get started.")
+end
+
+Then("I'm in") do
+  expect(current_path).to eql('/')
+
+  within('nav') do
+    expect(page).to have_no_link('Sign in')
+    expect(page).not_to have_text(@user.email)
+  end
 end
