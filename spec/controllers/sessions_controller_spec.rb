@@ -121,7 +121,7 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-  xdescribe 'DELETE sessions' do
+  describe 'DELETE sessions' do
     before { controller.current_user = build_stubbed(:user) }
 
     def do_delete

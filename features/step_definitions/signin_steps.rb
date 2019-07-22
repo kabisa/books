@@ -13,6 +13,11 @@ Given("I sign up with my email address {string}") do |email|
   step %q(I click "Sign in")
 end
 
+Given("I signed in with my email address {string}") do |email|
+  step %Q(I sign up with my email address "#{email}")
+  step %q(I use the magic link)
+end
+
 Given("I click {string}") do |locator|
   click_link_or_button locator
 end
@@ -24,6 +29,13 @@ end
 
 When("I click the {string} button") do |locator|
   click_link_or_button locator
+end
+
+When("I sign out") do
+  within('nav') do
+    click_on @user.email
+    click_on 'Log out'
+  end
 end
 
 Then("I see the sign in page") do
@@ -44,6 +56,15 @@ Then("I'm in") do
 
   within('nav') do
     expect(page).to have_no_link('Sign in')
+    expect(page).to have_text(@user.email)
+  end
+end
+
+Then("I'm out") do
+  expect(current_path).to eql('/')
+
+  within('nav') do
+    expect(page).to have_link('Sign in')
     expect(page).not_to have_text(@user.email)
   end
 end
