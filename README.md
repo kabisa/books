@@ -16,3 +16,6 @@ This version has been deployed as described [here](https://devcenter.heroku.com/
 
 Since I never used [Material Design](https://material.io/) before, I thought this project would make a good candidate. For this I used [Daemonite's Material UI](http://daemonite.github.io/material/), which uses Bootstrap with some customizations added to it. Instructions on how to use Daemonite's Material UI in a Rails project can be found [here](https://gist.github.com/bazzel/0226bf815c9018388ae2e7e3bc438c57).
 
+### SendGrid
+
+The production version of this application uses [SendGrid](http://sendgrid.com) for sending mails.
