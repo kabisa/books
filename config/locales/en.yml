@@ -36,8 +36,11 @@ en:
       sign_in: &sign_in 'Sign in'
   sessions:
     new:
-      title: Simply login with your email
+      title: 'Simply login with your email'
       sign_in: *sign_in
+    create:
+      title: 'Check your email!'
+      body: "We've emailed a special link to %{email}. Click the link to confirm your address and get started."
   # mailers:
   sessions_mailer:
     magic_link:
@@ -48,4 +51,4 @@ en:
   activerecord:
     attributes:
       user:
-        email: Email
+        email: 'Email'
