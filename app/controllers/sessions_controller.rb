@@ -23,6 +23,6 @@ class SessionsController < ApplicationController
 
   def destroy
     self.current_user = NullUser.new
-    redirect_to root_path
+    redirect_to root_path, notice: t('flash.logged_out')
   end
 end

@@ -67,4 +67,6 @@ Then("I'm out") do
     expect(page).to have_link('Sign in')
     expect(page).not_to have_text(@user.email)
   end
+
+  expect(page).to have_text('You are now logged out')
 end

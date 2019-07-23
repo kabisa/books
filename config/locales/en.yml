@@ -53,3 +53,6 @@ en:
     attributes:
       user:
         email: 'Email'
+
+  flash:
+    logged_out: 'You are now logged out'
