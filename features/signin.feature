@@ -30,19 +30,18 @@ Feature:
     And I click "Sign in"
     Then I see an error telling me an email address is required
 
-  @wip
   Scenario: Sign up with an invalid email address
     Given I am on the Sign in page
     And I fill in "Email" with "john.doe"
     And I click "Sign in"
-    Then I see an error telling me I have an invalid email address
+    Then I see an error telling me I have entered an invalid email address
 
-  @todo
+  @wip
   Scenario: Sign up with an unauthorized email address
     Given I am on the Sign in page
     And I fill in "Email" with "john.doe@invalid-domain.com"
     And I click "Sign in"
-    Then I see an error telling me I have an invalid email address
+    Then I see an error telling me my email address is unauthorized
 
   @todo
   Scenario: Sign in with invalid url

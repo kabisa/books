@@ -54,5 +54,13 @@ en:
       user:
         email: 'Email'
 
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              not_an_email_address: 'is not an email address'
+
   flash:
     logged_out: 'You are now logged out'

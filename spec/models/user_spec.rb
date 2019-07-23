@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
     it { is_expected.to validate_length_of(:name).is_at_most(100) }
 
-    xit do
+    it do
       expect(build(:user, email: 'invalid')).to be_invalid
     end
   end

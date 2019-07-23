@@ -71,9 +71,9 @@ Then("I'm out") do
   expect(page).to have_text('You are now logged out')
 end
 
-Then("I see an error telling me I have an invalid email address") do
+Then("I see an error telling me I have entered an invalid email address") do
   expect(current_path).to eql('/sign_in')
-  expect(page).to have_text('You can only search and view data with this email address')
+  expect(page).to have_text('is not an email address')
 end
 
 Then("I see an error telling me an email address is required") do
