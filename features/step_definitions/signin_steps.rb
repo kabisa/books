@@ -60,8 +60,12 @@ Then("I'm in") do
   end
 end
 
-Then("I'm out") do
+Then("I'm (back )on the main page") do
   expect(current_path).to eql('/')
+end
+
+Then("I'm out") do
+  step %q(I'm on the main page)
 
   within('nav') do
     expect(page).to have_link('Sign in')

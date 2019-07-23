@@ -36,12 +36,16 @@ Feature:
     And I click "Sign in"
     Then I see an error telling me I have entered an invalid email address
 
-  @wip
   Scenario: Sign up with an unauthorized email address
     Given I am on the Sign in page
     And I fill in "Email" with "john.doe@invalid-domain.com"
     And I click "Sign in"
     Then I see an error telling me my email address is unauthorized
+
+  Scenario: Return to main page
+    Given I am on the Sign in page
+    When I click the "Cancel" button
+    Then I'm back on the main page
 
   @todo
   Scenario: Sign in with invalid url

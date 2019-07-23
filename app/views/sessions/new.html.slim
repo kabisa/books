@@ -11,5 +11,6 @@
             - @user.errors[:email].each do |msg|
               .invalid-feedback= msg
 
-        = submit_tag t('.sign_in'), class: 'btn btn-primary'
+        = submit_tag t('helpers.submit.session.create'), class: 'btn btn-primary'
+        = link_to t('helpers.submit.cancel'), root_path, role: :button, class: 'btn btn-flat'
 

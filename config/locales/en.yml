@@ -30,11 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  helpers:
+    submit:
+      session:
+        create: &sign_in 'Sign in'
+        destroy: 'Log out'
+      cancel: &cancel 'Cancel'
   # pages
   layouts:
     application:
-      sign_in: &sign_in 'Sign in'
-      logout: Log out
+      sign_in: *sign_in
   sessions:
     new:
       title: 'Simply login with your email'
