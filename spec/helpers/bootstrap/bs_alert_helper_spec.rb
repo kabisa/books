@@ -23,21 +23,17 @@ RSpec.describe BootstrapHelper, type: :helper do
       it { is_expected.to have_css('div.alert.alert-info[role="alert"]', text: content) }
     end
 
-    #context 'warning' do
-      #before { flash[:warning] = content }
+    context 'warning' do
+      before { flash[:warning] = content }
 
-      #it { is_expected.to have_css('div.alert.fade.in.alert-warning', text: content) }
-      #it { is_expected.to have_css('div.alert span.pficon.pficon-warning-triangle-o') }
-      #it { is_expected.to have_css('div.alert button.close[data-dismiss="alert"] span.pficon.pficon-close') }
-    #end
+      it { is_expected.to have_css('div.alert.alert-warning[role="alert"]', text: content) }
+    end
 
-    #context 'danger' do
-      #before { flash[:danger] = content }
+    context 'danger' do
+      before { flash[:danger] = content }
 
-      #it { is_expected.to have_css('div.alert.fade.in.alert-danger', text: content) }
-      #it { is_expected.to have_css('div.alert span.pficon.pficon-error-circle-o') }
-      #it { is_expected.to have_css('div.alert button.close[data-dismiss="alert"] span.pficon.pficon-close') }
-    #end
+      it { is_expected.to have_css('div.alert.alert-danger[role="alert"]', text: content) }
+    end
 
     context 'alert' do
       before { flash[:alert] = content }
@@ -45,13 +41,11 @@ RSpec.describe BootstrapHelper, type: :helper do
       it { is_expected.to have_css('div.alert.alert-danger[role="alert"]', text: content) }
     end
 
-    #context 'error' do
-      #before { flash[:error] = content }
+    context 'error' do
+      before { flash[:error] = content }
 
-      #it { is_expected.to have_css('div.alert.fade.in.alert-danger', text: content) }
-      #it { is_expected.to have_css('div.alert span.pficon.pficon-error-circle-o') }
-      #it { is_expected.to have_css('div.alert button.close[data-dismiss="alert"] span.pficon.pficon-close') }
-    #end
+      it { is_expected.to have_css('div.alert.alert-danger[role="alert"]', text: content) }
+    end
 
     context 'others' do
       before { flash[:lorem] = content }
@@ -59,16 +53,25 @@ RSpec.describe BootstrapHelper, type: :helper do
       it { is_expected.to be_empty }
     end
 
-    #context 'with options passed' do
-      #before          { flash[:success] = content }
-      #subject         { helper.pf_flash options }
-      #let(:classname) { 'my-classname' }
-      #let(:options)   { { class: classname } }
+    context 'with options passed' do
+      describe 'class' do
+        before          { flash[:success] = content }
+        subject         { helper.bs_flash options }
+        let(:classname) { 'my-classname' }
+        let(:options)   { { class: classname } }
 
-      #it { is_expected.to have_css('div.alert.fade.in.alert-success.my-classname', text: content) }
-      #it { is_expected.to have_css('div.alert span.pficon.pficon-ok') }
-      #it { is_expected.to have_css('div.alert button.close[data-dismiss="alert"] span.pficon.pficon-close') }
-    #end
+        it { is_expected.to have_css('div.alert.alert-success.my-classname[role="alert"]', text: content) }
+      end
+
+      describe 'dismissible' do
+        before          { flash[:notice] = content }
+        subject         { helper.bs_flash options }
+        let(:options)   { { dismissible: true } }
+
+        it { is_expected.to have_css('div.alert.alert-success.alert-dismissible.fade.show[role="alert"]', text: content) }
+        it { is_expected.to have_css('div.alert button.close[type="button"][data-dismiss="alert"][aria-label="Close"] span[aria-hidden="true"]') }
+      end
+    end
 
     context 'multiple flashes' do
       before         { flash[:success] = content1 }

@@ -5,9 +5,13 @@ module Bootstrap
     BS_ALERT_TYPES = %i[primary secondary success info warning danger].freeze
     delegate :flash, :raw, :content_tag, :safe_join, to: :@template
 
-    attr_reader :options, :template
+    attr_reader :options, :template, :dismissible
 
+    # @param [Hash] options
+    # @option options [Symbol] :class Extra classname added to the flash div
+    # @option options [Symbol] :dismissible Set to `true` to show a close button
     def initialize(options, template)
+      @dismissible = options.delete(:dismissible)
       @options = options
       @template = template
     end
@@ -42,7 +46,7 @@ module Bootstrap
       tag_options = tag_options(type)
 
       messages.delete_if(&:nil?).map do |msg|
-        content_tag(:div, msg, tag_options)
+        content_tag(:div, safe_join([msg, close_button]), tag_options)
       end
     end
 
@@ -55,13 +59,16 @@ module Bootstrap
 
     def tag_class(type)
       tag_class = options.extract!(:class)[:class].to_s
+      tag_class << " alert-dismissible fade show" if dismissible
       tag_class << " alert alert-#{type}"
     end
 
     def close_button
+      return '' unless dismissible
+
       @close_button ||= begin
-                          content_tag(:button, type: 'button', class: 'close', 'data-dismiss' => 'alert') do
-                            Icons.close
+                          content_tag(:button, type: 'button', class: 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close') do
+                            content_tag(:span, '×', 'aria-hidden' => true)
                           end
                         end
     end
