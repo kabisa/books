@@ -24,3 +24,12 @@ Feature:
     Given I signed in with my email address "john.doe@kabisa.nl"
     When I sign out
     Then I'm out
+
+  @todo
+  Scenario: Sign up with invalid email address
+
+  @todo
+  Scenario: Sign in with invalid url
+
+  @todo
+  Scenario: Sign in with expired valid url

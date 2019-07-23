@@ -12,8 +12,8 @@ module Bootstrap
     # @option options [Symbol] :dismissible Set to `true` to show a close button
     def initialize(options, template)
       @dismissible = options.delete(:dismissible)
-      @options = options
-      @template = template
+      @options     = options
+      @template    = template
     end
 
     def render
