@@ -70,3 +70,13 @@ Then("I'm out") do
 
   expect(page).to have_text('You are now logged out')
 end
+
+Then("I see an error telling me I have an invalid email address") do
+  expect(current_path).to eql('/sign_in')
+  expect(page).to have_text('You can only search and view data with this email address')
+end
+
+Then("I see an error telling me an email address is required") do
+  expect(current_path).to eql('/sign_in')
+  expect(page).to have_text('can\'t be blank')
+end

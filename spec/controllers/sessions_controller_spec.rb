@@ -4,18 +4,18 @@ RSpec.describe SessionsController, type: :controller do
   render_views
 
   let(:email) { 'john.doe@example.com' }
+  let(:options) do
+    {
+      email: email
+    }
+  end
 
   describe 'POST /sessions' do
-    describe 'on success' do
-      let(:options) do
-        {
-          email: email
-        }
-      end
+    def do_post(params=options)
+      post :create, params: params
+    end
 
-      def do_post(params=options)
-        post :create, params: params
-      end
+    describe 'on success' do
 
       context 'new user' do
         it 'creates the user' do
@@ -82,7 +82,25 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context 'on failure' do
+      context 'no email address' do
+        let(:email) { '' }
+
+        it 'renders the new template' do
+          expect(do_post).to render_template(:new)
+        end
+
+        it 'does not send a mail' do
+          expect(SessionsMailer).not_to receive(:magic_link)
+          do_post
+        end
+
+      end
+
       context 'invalid email address' do
+
+      end
+
+      context 'unauthorized email address' do
 
       end
     end

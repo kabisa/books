@@ -25,8 +25,24 @@ Feature:
     When I sign out
     Then I'm out
 
+  Scenario: Sign up without email address
+    Given I am on the Sign in page
+    And I click "Sign in"
+    Then I see an error telling me an email address is required
+
+  @wip
+  Scenario: Sign up with an invalid email address
+    Given I am on the Sign in page
+    And I fill in "Email" with "john.doe"
+    And I click "Sign in"
+    Then I see an error telling me I have an invalid email address
+
   @todo
-  Scenario: Sign up with invalid email address
+  Scenario: Sign up with an unauthorized email address
+    Given I am on the Sign in page
+    And I fill in "Email" with "john.doe@invalid-domain.com"
+    And I click "Sign in"
+    Then I see an error telling me I have an invalid email address
 
   @todo
   Scenario: Sign in with invalid url

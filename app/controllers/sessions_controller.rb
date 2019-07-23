@@ -1,11 +1,14 @@
 class SessionsController < ApplicationController
   def create
     @email = params[:email]
-    user = User.find_or_create_by!(email: @email)
-    user.update!(login_token: SecureRandom.urlsafe_base64,
-                 login_token_valid_until: 30.minutes.from_now)
+    @user  = User.find_or_initialize_by(email: @email)
 
-    SessionsMailer.magic_link(user).deliver
+    if @user.update(login_token: SecureRandom.urlsafe_base64,
+                    login_token_valid_until: 30.minutes.from_now)
+      SessionsMailer.magic_link(@user).deliver
+    else
+      render :new
+    end
   end
 
   def show
