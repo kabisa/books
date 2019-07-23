@@ -1,4 +1,8 @@
 class SessionsController < ApplicationController
+  def new
+    @user = NullUser.new
+  end
+
   def create
     @email = params[:email]
     @user  = User.find_or_initialize_by(email: @email)

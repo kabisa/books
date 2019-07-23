@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   render_views
 
-  let(:email) { 'john.doe@example.com' }
+  let(:email) { attributes_for(:user)[:email] }
   let(:options) do
     {
       email: email
