@@ -21,11 +21,11 @@ html
       - else
         ul.navbar-nav.ml-auto
           li.nav-item.dropdown
-            .dropdown
-              a#dropdownMenuLink.btn.dropdown-toggle aria={ expanded: false, haspopup: true } data-toggle="dropdown" href="#" role="button"
-                = current_user.email
-              .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
-                = link_to t('helpers.submit.session.destroy'), sign_out_path, method: :delete, class: 'dropdown-item'
+            a#dropdownMenuLink.btn.dropdown-toggle aria={ expanded: false, haspopup: true } data-toggle="dropdown" href="#" role="button"
+              i.material-icons person
+              span.clearfix.d-none.d-sm-inline-block= current_user.email
+            .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
+              = link_to t('helpers.submit.session.destroy'), sign_out_path, method: :delete, class: 'dropdown-item'
 
     .container
       = bs_flash(dismissible: true)
