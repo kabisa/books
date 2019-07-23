@@ -14,6 +14,8 @@ html
 
   body
     nav.navbar.fixed-top.navbar-full.navbar-light.bg-white
+      button.navbar-toggler aria-controls="navdrawerDefault" aria-expanded="false" aria-label=("Toggle Navdrawer") data-target="#navdrawerDefault" data-toggle="navdrawer"
+        span.navbar-toggler-icon
       span.navbar-brand.mb-0.h1 Books
 
       - if current_user.anonymous?
@@ -26,6 +28,12 @@ html
               span.clearfix.d-none.d-sm-inline-block= current_user.email
             .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
               = link_to t('helpers.submit.session.destroy'), sign_out_path, method: :delete, class: 'dropdown-item'
+
+    #navdrawerDefault.navdrawer aria-hidden="true" tabindex="-1"
+      .navdrawer-content
+        .navdrawer-header
+          a.navbar-brand.px-0 href="#" Books
+
 
     .container
       = bs_flash(dismissible: true)
