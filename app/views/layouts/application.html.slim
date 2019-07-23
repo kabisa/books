@@ -27,6 +27,6 @@ html
               .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
                 = link_to t('helpers.submit.session.destroy'), sign_out_path, method: :delete, class: 'dropdown-item'
 
-
-    = bs_flash(dismissible: true)
-    = yield
+    .container
+      = bs_flash(dismissible: true)
+      = yield
