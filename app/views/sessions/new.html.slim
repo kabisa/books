@@ -8,9 +8,9 @@
           .floating-label
             = label_tag :email, User.human_attribute_name('email')
             - unless @user
-              = email_field_tag :email, nil, class: 'form-control', autofocus: true
+              = email_field_tag :email, nil, class: 'form-control', autofocus: true, required: true
             - else
-              = email_field_tag :email, nil, class: 'form-control is-invalid', autofocus: true
+              = email_field_tag :email, @user.email, class: 'form-control is-invalid', autofocus: true, required: true
               - @user.errors[:email].each do |msg|
                 .invalid-feedback= msg
 

@@ -76,6 +76,11 @@ Then("I see an error telling me I have entered an invalid email address") do
   expect(page).to have_text('is not an email address')
 end
 
+Then("I see an error telling me my email address is unauthorized") do
+  expect(current_path).to eql('/sign_in')
+  expect(page).to have_text('is not authorized to sign in')
+end
+
 Then("I see an error telling me an email address is required") do
   expect(current_path).to eql('/sign_in')
   expect(page).to have_text('can\'t be blank')

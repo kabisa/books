@@ -10,6 +10,16 @@ RSpec.describe User, type: :model do
     it do
       expect(build(:user, email: 'invalid')).to be_invalid
     end
+
+    context 'authorized domains' do
+      it do
+        expect(build(:user, email: 'john.doe@kabisa.nl')).to be_valid
+      end
+
+      it do
+        expect(build(:user, email: 'john.doe@example.org')).to be_invalid
+      end
+    end
   end
 
   describe '#invalidate_user' do
@@ -20,7 +30,7 @@ RSpec.describe User, type: :model do
       expect do
         subject
       end.to change { instance.login_token }.to(nil).and \
-             change {instance.login_token }
+      change {instance.login_token }
     end
   end
 
