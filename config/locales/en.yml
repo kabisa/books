@@ -37,9 +37,9 @@ en:
         destroy: 'Log out'
       cancel: &cancel 'Cancel'
   # pages
-  layouts:
-    application:
-      sign_in: *sign_in
+  application:
+    navbar:
+    sign_in: *sign_in
   sessions:
     new:
       title: 'Simply login with your email'

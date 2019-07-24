@@ -1,0 +1,18 @@
+- # See http://daemonite.github.io/material/docs/4.1/components/navbar/
+nav.navbar.fixed-top.navbar-full.navbar-light.bg-white
+  button.navbar-toggler aria-controls="navdrawerDefault" aria-expanded="false" aria-label=("Toggle Navdrawer") data-target="#navdrawerDefault" data-toggle="navdrawer"
+    span.navbar-toggler-icon
+  span.navbar-brand.mb-0.h1= app_name
+
+  ul.navbar-nav.ml-auto
+    - if current_user.anonymous?
+        li.nav-item
+          = link_to t(".sign_in"), sign_in_path, class: 'btn btn-primary', role: :button
+    - else
+        li.nav-item.dropdown
+          a#dropdownMenuLink.btn.btn-flat.dropdown-toggle aria={ expanded: false, haspopup: true } data-toggle="dropdown" href="#" role="button"
+            i.material-icons person
+            span.clearfix.d-none.d-sm-inline-block= current_user.email
+          .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
+            = link_to t('helpers.submit.session.destroy'), sign_out_path, method: :delete, class: 'dropdown-item'
+
