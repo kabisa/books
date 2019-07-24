@@ -18,16 +18,17 @@ html
         span.navbar-toggler-icon
       span.navbar-brand.mb-0.h1 Books
 
-      - if current_user.anonymous?
-        = link_to t(".sign_in"), sign_in_path, class: 'btn btn-primary', role: :button
-      - else
-        ul.navbar-nav.ml-auto
-          li.nav-item.dropdown
-            a#dropdownMenuLink.btn.btn-flat.dropdown-toggle aria={ expanded: false, haspopup: true } data-toggle="dropdown" href="#" role="button"
-              i.material-icons person
-              span.clearfix.d-none.d-sm-inline-block= current_user.email
-            .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
-              = link_to t('helpers.submit.session.destroy'), sign_out_path, method: :delete, class: 'dropdown-item'
+      ul.navbar-nav.ml-auto
+        - if current_user.anonymous?
+            li.nav-item
+              = link_to t(".sign_in"), sign_in_path, class: 'btn btn-primary', role: :button
+        - else
+            li.nav-item.dropdown
+              a#dropdownMenuLink.btn.btn-flat.dropdown-toggle aria={ expanded: false, haspopup: true } data-toggle="dropdown" href="#" role="button"
+                i.material-icons person
+                span.clearfix.d-none.d-sm-inline-block= current_user.email
+              .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
+                = link_to t('helpers.submit.session.destroy'), sign_out_path, method: :delete, class: 'dropdown-item'
 
     #navdrawerDefault.navdrawer aria-hidden="true" tabindex="-1"
       .navdrawer-content
