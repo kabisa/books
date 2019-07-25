@@ -10,7 +10,7 @@ Then("I'm in") do
     expect(page).to have_text(@user.email)
   end
 
-  expect(page).to have_button('add')
+  expect(page).to have_link('add')
 end
 
 Then("I'm (back )on the main page") do

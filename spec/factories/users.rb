@@ -5,9 +5,11 @@ FactoryBot.define do
     end
     login_token { 'lorem-ipsum' }
     login_token_valid_until { 15.minutes.from_now }
+
+    trait :expired_token do
+      login_token_valid_until { 15.minutes.ago }
+    end
   end
 
-  trait :expired_token do
-    login_token_valid_until { 15.minutes.ago }
-  end
+  factory :guest, class: NullUser
 end

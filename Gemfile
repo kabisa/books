@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'slim-rails' # Provides the generator settings required for Rails 3+ to use Slim
 gem 'simple_form' # Forms made easy!
 gem 'draper' # Draper adds an object-oriented layer of presentation logic to your Rails apps.
+gem 'pundit' # Object oriented authorization for Rails applications
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -60,6 +61,7 @@ group :test do
   gem 'email_spec' # Easily test email in RSpec, Cucumber, and MiniTest
   gem 'rails-controller-testing' # Extracting `assigns` and `assert_template` from ActionDispatch.
   gem 'shoulda-matchers'
+  gem 'pundit-matchers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

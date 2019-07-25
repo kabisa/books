@@ -95,3 +95,5 @@ RSpec.configure do |config|
 =end
   config.filter_run_when_matching :focus
 end
+
+require 'pundit/matchers'

@@ -48,6 +48,10 @@ en:
     create:
       title: 'Check your email!'
       body: "We've emailed a special link to %{email}. Click the link to confirm your address and get started."
+  books:
+    new:
+      title:
+        'Create a new %{subject}'
   # mailers:
   sessions_mailer:
     magic_link:
