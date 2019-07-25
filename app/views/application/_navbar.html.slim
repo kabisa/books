@@ -2,7 +2,7 @@
 nav.navbar.fixed-top.navbar-full.navbar-light.bg-white
   button.navbar-toggler aria-controls="navdrawerDefault" aria-expanded="false" aria-label=("Toggle Navdrawer") data-target="#navdrawerDefault" data-toggle="navdrawer"
     span.navbar-toggler-icon
-  span.navbar-brand.mb-0.h1= app_name
+  = link_to app_name, root_path, class: 'span navbar-brand mb-0 h1'
 
   ul.navbar-nav.ml-auto
     - if current_user.anonymous?
