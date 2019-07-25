@@ -20,8 +20,4 @@ html
       = bs_flash(dismissible: true)
       = yield
 
-  - if policy(Book).new? && !current_page?(controller: 'books', action: 'new')
-    .fab-add
-      = link_to new_book_path, class: 'btn btn-float btn-primary', role: :button do
-        i.material-icons
-          | add
+  = floating_action_button
