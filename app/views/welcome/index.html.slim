@@ -1,0 +1,15 @@
+- 10.times do
+  .jumbotron.jumbotron-fluid.mb-5.px-lg-3.doc-jumbotron
+    .container
+      .row.justify-content-center
+        .col-xl-9
+          h1.typography-display-4
+            | Title
+          p.font-weight-light.typography-title
+            | Description
+
+- unless current_user.anonymous?
+  .fab-add
+    = link_to new_book_path, class: 'btn btn-float btn-primary', role: :button do
+      i.material-icons
+        | add

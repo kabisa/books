@@ -32,6 +32,7 @@
 en:
   helpers:
     submit:
+      create: Save
       session:
         create: &sign_in 'Sign in'
         destroy: 'Log out'
@@ -39,7 +40,7 @@ en:
   # pages
   application:
     navbar:
-    sign_in: *sign_in
+      sign_in: *sign_in
   sessions:
     new:
       title: 'Simply login with your email'

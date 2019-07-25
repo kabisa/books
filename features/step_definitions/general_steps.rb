@@ -9,6 +9,8 @@ Then("I'm in") do
     expect(page).to have_no_link('Sign in')
     expect(page).to have_text(@user.email)
   end
+
+  expect(page).to have_button('add')
 end
 
 Then("I'm (back )on the main page") do
@@ -24,5 +26,6 @@ Then("I'm out") do
   end
 
   expect(page).to have_text('You are now logged out')
+  expect(page).not_to have_button('add')
 end
 

@@ -18,6 +18,10 @@ Given("I signed in with my email address {string}") do |email|
   step %q(I use the magic link)
 end
 
+Given("I signed in as a Kabisaan") do
+  step %q(I signed in with my email address "john.doe@kabisa.nl")
+end
+
 When('I use the magic link') do
   @user = User.last
   visit token_sign_in_path(@user.login_token)
