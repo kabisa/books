@@ -52,6 +52,8 @@ en:
     new:
       title:
         'Create a new %{subject}'
+    show:
+      edit: 'Edit'
   # mailers:
   sessions_mailer:
     magic_link:

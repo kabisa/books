@@ -1,9 +1,6 @@
-p#notice = notice
+.card
+  .card-body
+    h1.card-title= @book.title
 
-p
-  strong Title:
-  = @book.title
-
-=> link_to 'Edit', edit_book_path(@book)
-'|
-=< link_to 'Back', books_path
+  .card-actions
+    = link_to t('.edit'), edit_book_path(@book), class: 'btn btn-flat-primary', role: :button

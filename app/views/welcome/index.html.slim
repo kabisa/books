@@ -8,8 +8,3 @@
           p.font-weight-light.typography-title
             | Description
 
-- if policy(Book).new?
-  .fab-add
-    = link_to new_book_path, class: 'btn btn-float btn-primary', role: :button do
-      i.material-icons
-        | add
