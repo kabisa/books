@@ -17,3 +17,9 @@ require('channels');
 
 import 'bootstrap/dist/js/bootstrap';
 import 'daemonite-material/js/material';
+
+$(document).on('turbolinks:load', function() {
+  $(
+    '.floating-label .custom-select, .floating-label .form-control',
+  ).floatinglabel();
+});

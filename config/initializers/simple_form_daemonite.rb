@@ -6,8 +6,6 @@ SimpleForm.setup do |config|
   #
   # Custom wrapper to support floating label text fields
   # See http://daemonite.github.io/material/docs/4.1/material/text-fields/#floating-label-text-fields.
-  # On rendering we decide whether or not to add the class 'has-value' to the div
-  # for which we override SimpleForm's StringInput class (see app/inputs/string_input.rb)
   config.wrappers :vertical_form_w_floating_label, tag: 'div', class: 'form-group floating-label', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
     b.use :html5
     b.use :placeholder
