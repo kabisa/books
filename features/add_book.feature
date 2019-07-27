@@ -22,5 +22,9 @@ Feature:
     When I try to add an empty book
     Then I see a validation error for "Title"
 
-  @todo
   Scenario: Guest cannot add a book
+    Given I did not sign in
+    When I navigate to page for adding a new book
+    Then I see an error telling me I am not unauthorized
+    And I'm back on the main page
+

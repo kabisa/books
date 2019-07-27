@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  skip_after_action :verify_authorized, only: %i(show)
 
   # GET /books
   # GET /books.json
@@ -14,7 +15,7 @@ class BooksController < ApplicationController
 
   # GET /books/new
   def new
-    @book = Book.new
+    @book = authorize Book.new
   end
 
   # GET /books/1/edit
@@ -24,7 +25,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
+    @book = authorize Book.new(book_params)
 
     respond_to do |format|
       if @book.save

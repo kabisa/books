@@ -1,7 +1,3 @@
-Given("I open the application") do
-  visit '/'
-end
-
 Given("I am on the Sign in page") do
   step %q(I open the application)
   step %q(I click the "Sign in" button)
@@ -16,6 +12,10 @@ end
 Given("I signed in with my email address {string}") do |email|
   step %Q(I sign up with my email address "#{email}")
   step %q(I use the magic link)
+end
+
+Given("I did not sign in") do
+ # no-op
 end
 
 Given("I signed in as a Kabisaan") do
