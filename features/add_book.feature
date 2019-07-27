@@ -17,11 +17,10 @@ Feature:
     And I can edit the book
     Then I am seeing the button for adding a new book
 
-  @todo
   Scenario: Create an invalid book
-
-  @todo
-  Scenario: Create a book with a loooong title
+    Given I'm adding a new book
+    When I try to add an empty book
+    Then I see a validation error for "Title"
 
   @todo
   Scenario: Guest cannot add a book

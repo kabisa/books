@@ -1,6 +1,18 @@
 Given("I'm adding a new book") do
-    step %q(I signed in as a Kabisaan)
-    step %q(I click the "add" button)
+  step %q(I signed in as a Kabisaan)
+  step %q(I click the "add" button)
+end
+
+When("I try to add an empty book") do
+  within('form') do
+    click_on('Save')
+  end
+end
+
+Then("I see a validation error for {string}") do |label|
+  within('form') do
+    expect(page).to have_css('.form-group.form-group-invalid', text: label)
+  end
 end
 
 Then("I am viewing the book") do
