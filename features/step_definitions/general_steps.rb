@@ -2,14 +2,6 @@ When("I click (the ){string}( button)") do |locator|
   click_link_or_button locator
 end
 
-Given("I open the application") do
-  visit '/'
-end
-
-Given("I navigate to page for adding a new book") do
-  visit(new_book_path)
-end
-
 Then("I'm in") do
   expect(current_path).to eql('/')
 

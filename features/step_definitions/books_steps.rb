@@ -3,15 +3,13 @@ Given("I'm adding a new book") do
   step %q(I click the "add" button)
 end
 
+Given("there are {int} books") do |books_count|
+  create_list :book, books_count
+end
+
 When("I try to add an empty book") do
   within('form') do
     click_on('Save')
-  end
-end
-
-Then("I see a validation error for {string}") do |label|
-  within('form') do
-    expect(page).to have_css('.form-group.form-group-invalid', text: label)
   end
 end
 
@@ -37,3 +35,10 @@ end
 Then("I can edit the book") do
   expect(page).to have_link('Edit')
 end
+
+Then("I see a list of {int} books") do |items_count|
+  within('.list-group') do
+    expect(page).to have_css('.list-group-item', count: items_count)
+  end
+end
+

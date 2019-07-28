@@ -4,3 +4,9 @@
     .navdrawer-header
       a.navbar-brand.px-0 href="#"
         = app_name
+    ul.navdrawer-nav
+      li.nav-item
+        = link_to books_path, class: 'nav-link'
+          i.material-icons.mr-3 book
+          = Book.model_name.human.pluralize
+
