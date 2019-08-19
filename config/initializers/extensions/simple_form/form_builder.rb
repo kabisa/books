@@ -13,7 +13,7 @@ module ButtonComponents
 
       # with cancel link
       if cancel = options.delete(:cancel)
-        submit(*args, &block) + '&nbsp;&nbsp;'.html_safe + template.link_to(I18n.t('simple_form.buttons.cancel'), cancel, class: 'btn btn-flat', role: :button)
+        submit(*args, &block) + '&nbsp;&nbsp;'.html_safe + template.link_to(I18n.t('simple_form.buttons.cancel'), cancel, class: 'btn btn-outline', role: :button)
       else
         submit(*args, &block)
       end
