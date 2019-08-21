@@ -15,7 +15,7 @@ class BooksController < ApplicationController
 
   # GET /books/new
   def new
-    @book = authorize Book.new
+    @book = authorize Ebook.new
   end
 
   # GET /books/1/edit
@@ -25,7 +25,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = authorize Book.new(book_params)
+    @book = authorize Ebook.new(book_params)
 
     respond_to do |format|
       if @book.save

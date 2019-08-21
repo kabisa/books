@@ -13,10 +13,17 @@ When("I try to add an empty book") do
   end
 end
 
-Then("I am viewing the book") do
-  book = Book.last
+Then("it's an e-book") do
+  expect(page).to have_content(/e-book/i)
+end
 
-  expect(current_path).to eql("/books/#{book.id}")
+Then("I am viewing the book") do
+  # pathname includes model name, e.g. `/ebooks/1` or `/printed_books/2`
+  book          = Book.last
+  route         = book.model_name.singular_route_key
+  expected_path = send("#{route}_path", book)
+
+  expect(current_path).to eql(expected_path)
   expect(page).to have_content(book.title)
 end
 
