@@ -1,5 +1,5 @@
 = simple_form_for(@book.becomes(Book)) do |f|
   = f.input :title, autofocus: true
-  = f.input :type, as: :radio_buttons, collection: Book.type_symbols
+  = f.input :type, as: :radio_buttons, collection: BookType.types.to_sym
 
   = f.button :submit_cancel, cancel: :back

@@ -25,7 +25,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = authorize type_class.new(book_params)
+    @book = authorize book_class.new(book_params)
 
     respond_to do |format|
       if @book.save
@@ -73,7 +73,7 @@ class BooksController < ApplicationController
       params.require(:book).permit(:title)
     end
 
-    def type_class
-      Book.constantize(params[:book][:type])
+    def book_class
+      BookType.book_class(params[:book][:type])
     end
 end
