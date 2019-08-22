@@ -56,7 +56,7 @@ RSpec.describe BooksController, type: :controller do
     end
   end
 
-  describe 'POST #create', focus: true do
+  describe 'POST #create' do
     def do_post(attributes)
       post :create, params: {book: attributes}, session: valid_session
     end
