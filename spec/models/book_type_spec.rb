@@ -25,4 +25,10 @@ RSpec.describe BookType, type: :model do
       it { is_expected.to eql(Book) }
     end
   end
+
+  describe '#to_sym' do
+    subject { described_class.types.to_sym }
+
+    it { is_expected.to contain_exactly(:Ebook, :PrintedBook) }
+  end
 end
