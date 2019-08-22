@@ -9,7 +9,7 @@ RSpec.describe Book, type: :model do
   describe '.types' do
     subject { described_class.types }
 
-    it { is_expected.to contain_exactly(*%w(Ebook)) }
+    it { is_expected.to contain_exactly(*%i(Ebook PrintedBook)) }
   end
 
   describe '.policy_class' do

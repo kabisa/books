@@ -3,7 +3,7 @@ class Book < ApplicationRecord
 
   class << self
     def types
-      %w(Ebook)
+      %i(Ebook PrintedBook)
     end
 
     def policy_class

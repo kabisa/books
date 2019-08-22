@@ -17,7 +17,6 @@ Feature:
     And I can edit the book
     And I am seeing the button for adding a new book
 
-  @wip
   Scenario: Create an e-book
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"
@@ -25,7 +24,6 @@ Feature:
     Then I am viewing the book
     And it's an e-book
 
-  @todo
   Scenario: Create a printed book
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"

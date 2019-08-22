@@ -13,6 +13,10 @@ When("I try to add an empty book") do
   end
 end
 
+Then("it's a printed book") do
+  expect(page).to have_content(/printed book/i)
+end
+
 Then("it's an e-book") do
   expect(page).to have_content(/e-book/i)
 end

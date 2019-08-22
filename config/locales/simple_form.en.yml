@@ -12,6 +12,11 @@ en:
       default_message: "Please review the problems below:"
     buttons:
       cancel: 'Cancel'
+    options:
+      book:
+        type:
+          Ebook: E-book
+          PrintedBook: Printed book
     # Examples
     # labels:
     #   defaults:
