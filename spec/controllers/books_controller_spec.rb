@@ -95,6 +95,41 @@ RSpec.describe BooksController, type: :controller do
         end
       end
     end
+
+    context 'printed book' do
+      context 'with valid params' do
+        let(:valid_attributes) {
+          attributes_for(:printed_book)
+        }
+
+        let(:invalid_attributes) {
+          attributes_for(:printed_book, :invalid)
+        }
+
+        it 'creates a new PrintedBook' do
+          expect {
+            do_post(valid_attributes)
+          }.to change(PrintedBook, :count).by(1)
+        end
+
+        it 'redirects to the created book' do
+          do_post(valid_attributes)
+          expect(response).to redirect_to(PrintedBook.last)
+        end
+      end
+
+      context 'with invalid params' do
+        it "returns a success response (i.e. to display the 'new' template)" do
+          do_post(invalid_attributes)
+          expect(response).to be_successful
+        end
+
+        it 'renders the new template' do
+          do_post(invalid_attributes)
+          expect(response).to render_template(:new)
+        end
+      end
+    end
   end
 
   xdescribe "PUT #update" do

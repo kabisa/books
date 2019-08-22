@@ -73,11 +73,7 @@ class BooksController < ApplicationController
       params.require(:book).permit(:title)
     end
 
-    def type
-      Book.types.include?(params[:book][:type].to_sym) ? params[:book][:type] : "Book"
-    end
-
     def type_class
-      type.constantize
+      Book.constantize(params[:book][:type])
     end
 end
