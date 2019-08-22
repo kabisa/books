@@ -7,11 +7,11 @@ RSpec.describe BooksController, type: :controller do
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:book)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    attributes_for(:ebook, :invalid)
   }
 
   let(:current_user)       { create :user }
@@ -56,24 +56,43 @@ RSpec.describe BooksController, type: :controller do
     end
   end
 
-  xdescribe "POST #create" do
-    context "with valid params" do
-      it "creates a new Book" do
-        expect {
-          post :create, params: {book: valid_attributes}, session: valid_session
-        }.to change(Book, :count).by(1)
-      end
-
-      it "redirects to the created book" do
-        post :create, params: {book: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Book.last)
-      end
+  describe 'POST #create', focus: true do
+    def do_post(attributes)
+      post :create, params: {book: attributes}, session: valid_session
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {book: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+    context 'e-book' do
+      context 'with valid params' do
+        let(:valid_attributes) {
+          attributes_for(:ebook)
+        }
+
+        let(:invalid_attributes) {
+          attributes_for(:ebook, :invalid)
+        }
+
+        it 'creates a new Ebook' do
+          expect {
+            do_post(valid_attributes)
+          }.to change(Ebook, :count).by(1)
+        end
+
+        it 'redirects to the created book' do
+          do_post(valid_attributes)
+          expect(response).to redirect_to(Ebook.last)
+        end
+      end
+
+      context 'with invalid params' do
+        it "returns a success response (i.e. to display the 'new' template)" do
+          do_post(invalid_attributes)
+          expect(response).to be_successful
+        end
+
+        it 'renders the new template' do
+          do_post(invalid_attributes)
+          expect(response).to render_template(:new)
+        end
       end
     end
   end
