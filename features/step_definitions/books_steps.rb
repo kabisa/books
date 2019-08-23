@@ -41,6 +41,7 @@ end
 
 Then("I am adding a new book") do
   expect(page).to have_content('Create a new book')
+
   within('form') do
     expect(page).to have_button('Save')
   end
@@ -61,15 +62,8 @@ Then("I see a list of {int} books") do |items_count|
   end
 end
 
-Then("I see a list of {int} e-books") do |items_count|
+Then("I see a list of {int} {book_type}") do |items_count, type|
   within('.list-group') do
-    expect(page).to have_css('.list-group-item', text: /e-book/i, count: items_count)
+    expect(page).to have_css('.list-group-item', text: type, count: items_count)
   end
 end
-
-Then("I see a list of {int} printed books") do |items_count|
-  within('.list-group') do
-    expect(page).to have_css('.list-group-item', text: /printed book/i, count: items_count)
-  end
-end
-
