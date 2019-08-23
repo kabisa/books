@@ -7,6 +7,14 @@ Given("there are {int} books") do |books_count|
   create_list :book, books_count
 end
 
+Given("there are {int} e-books") do |books_count|
+  create_list :ebook, books_count
+end
+
+Given("there are {int} printed books") do |books_count|
+  create_list :printed_book, books_count
+end
+
 When("I try to add an empty book") do
   within('form') do
     click_on('Save')
@@ -50,6 +58,18 @@ end
 Then("I see a list of {int} books") do |items_count|
   within('.list-group') do
     expect(page).to have_css('.list-group-item', count: items_count)
+  end
+end
+
+Then("I see a list of {int} e-books") do |items_count|
+  within('.list-group') do
+    expect(page).to have_css('.list-group-item', text: /e-book/i, count: items_count)
+  end
+end
+
+Then("I see a list of {int} printed books") do |items_count|
+  within('.list-group') do
+    expect(page).to have_css('.list-group-item', text: /printed book/i, count: items_count)
   end
 end
 
