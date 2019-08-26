@@ -15,7 +15,22 @@ Feature:
     And I click "Save"
     Then I am viewing the book
     And I can edit the book
-    Then I am seeing the button for adding a new book
+    And I am seeing the button for adding a new book
+
+  Scenario: Create an e-book
+    Given I'm adding a new book
+    When I fill in "Title" with "Awesome Book"
+    And I click "Save"
+    Then I am viewing the book
+    And it's an e-book
+
+  Scenario: Create a printed book
+    Given I'm adding a new book
+    When I fill in "Title" with "Awesome Book"
+    And I select "Printed book" as "Type"
+    And I click "Save"
+    Then I am viewing the book
+    And it's a printed book
 
   Scenario: Create an invalid book
     Given I'm adding a new book

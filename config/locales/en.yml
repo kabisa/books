@@ -65,8 +65,6 @@ en:
     attributes:
       user:
         email: 'Email'
-
-  activerecord:
     errors:
       models:
         user:

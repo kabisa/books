@@ -1,4 +1,7 @@
 en:
+  book_types: &book_types
+    Ebook: E-book
+    PrintedBook: Printed book
   simple_form:
     "yes": 'Yes'
     "no": 'No'
@@ -12,6 +15,9 @@ en:
       default_message: "Please review the problems below:"
     buttons:
       cancel: 'Cancel'
+    options:
+      book:
+        type: *book_types
     # Examples
     # labels:
     #   defaults:

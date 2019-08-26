@@ -20,6 +20,16 @@ SimpleForm.setup do |config|
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
 
+  config.wrappers :toggle_buttons, tag: :div, class: 'btn-group form-group', item_wrapper_tag: false, html: { data: { toggle: 'buttons'}, role: 'group' } do |b|
+    b.use :html5
+    b.optional :readonly
+    b.use :input
+  end
+
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :vertical_form_w_floating_label
+
+  config.wrapper_mappings = {
+    toggle_buttons: :toggle_buttons
+  }
 end

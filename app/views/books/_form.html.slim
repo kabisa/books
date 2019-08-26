@@ -1,4 +1,5 @@
-= simple_form_for(@book) do |f|
+= simple_form_for(@book.becomes(Book)) do |f|
   = f.input :title, autofocus: true
+  = f.input :type, as: :toggle_buttons, collection: BookType.types.to_sym
 
   = f.button :submit_cancel, cancel: :back

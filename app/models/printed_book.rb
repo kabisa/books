@@ -1,0 +1,3 @@
+class PrintedBook < Book
+
+end

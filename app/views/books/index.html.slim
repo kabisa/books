@@ -4,6 +4,4 @@
       = Book.model_name.human.pluralize
 
   .list-group.list-group-flush
-    - @books.each do |book|
-      .list-group-item
-        = book.title
+    = render @books

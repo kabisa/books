@@ -1,0 +1,2 @@
+class EbookDecorator < BookDecorator
+end
