@@ -7,4 +7,4 @@
     - @books.each do |book|
       .list-group-item
         h5.mb-1= book.title
-        small= t(book.type, scope: 'book_types')
+        small= book.formatted_type

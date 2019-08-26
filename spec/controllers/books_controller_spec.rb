@@ -22,13 +22,28 @@ RSpec.describe BooksController, type: :controller do
       get :index, session: valid_session
       expect(response).to be_successful
     end
+
+    it 'decorates the collection' do
+      get :index, session: valid_session
+      expect(assigns(:books)).to be_decorated
+    end
   end
 
-  xdescribe "GET #show" do
-    it "returns a success response" do
-      book = Book.create! valid_attributes
+  describe "GET #show", focus: true do
+    def do_get
       get :show, params: {id: book.to_param}, session: valid_session
+    end
+
+    let!(:book) { create :book }
+
+    it "returns a success response" do
+      do_get
       expect(response).to be_successful
+    end
+
+    it 'decorates the book' do
+      do_get
+      expect(assigns(:book)).to be_decorated
     end
   end
 
