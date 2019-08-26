@@ -29,14 +29,14 @@ RSpec.describe BooksController, type: :controller do
     end
   end
 
-  describe "GET #show", focus: true do
+  describe 'GET #show' do
     def do_get
       get :show, params: {id: book.to_param}, session: valid_session
     end
 
     let!(:book) { create :book }
 
-    it "returns a success response" do
+    it 'returns a success response' do
       do_get
       expect(response).to be_successful
     end
