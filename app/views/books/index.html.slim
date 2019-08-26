@@ -4,7 +4,4 @@
       = Book.model_name.human.pluralize
 
   .list-group.list-group-flush
-    - @books.each do |book|
-      .list-group-item
-        h5.mb-1= book.title
-        small= book.formatted_type
+    = render @books
