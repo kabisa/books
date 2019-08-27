@@ -12,17 +12,21 @@ Feature:
   Scenario: Create a book
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"
+    And I fill in "Link" with "http://www.kabisa.nl/awesome_book.epub"
     And I click "Save"
     Then I am viewing the book
     And I can edit the book
     And I am seeing the button for adding a new book
 
+  @wip
   Scenario: Create an e-book
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"
+    And I fill in "Link" with "http://www.kabisa.nl/awesome_book.epub"
     And I click "Save"
     Then I am viewing the book
     And it's an e-book
+    And I can download the book
 
   Scenario: Create a printed book
     Given I'm adding a new book

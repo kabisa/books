@@ -29,6 +29,12 @@ Then("it's an e-book") do
   expect(page).to have_content(/e-book/i)
 end
 
+
+Then("I can download the book") do
+  book = Book.last
+  expect(page).to have_link('cloud_download', href: book.link)
+end
+
 Then("I am viewing the book") do
   # pathname includes model name, e.g. `/ebooks/1` or `/printed_books/2`
   book          = Book.last
