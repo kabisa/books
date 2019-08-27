@@ -1,0 +1,6 @@
+.list-group-item
+  h5.mb-1= book.title
+  small= book.formatted_type
+  - if book.is_a?(Ebook)
+    p= book.download_link
+
