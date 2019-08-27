@@ -73,3 +73,8 @@ Then("I see a list of {int} {book_type}") do |items_count, type|
     expect(page).to have_css('.list-group-item', text: type, count: items_count)
   end
 end
+
+
+Then("I see {int} download links") do |items_count|
+  expect(page).to have_link('cloud_download', count: items_count)
+end
