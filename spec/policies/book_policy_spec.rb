@@ -8,12 +8,16 @@ describe BookPolicy, type: :policy do
     let(:user) { build :user }
 
     it { is_expected.to permit_action(:new) }
+    it { is_expected.to permit_action(:create) }
+    it { is_expected.to permit_action(:borrow) }
   end
 
   context 'unauthorized user' do
     let(:user) { build :guest }
 
     it { is_expected.to forbid_action(:new) }
+    it { is_expected.to forbid_action(:create) }
+    it { is_expected.to forbid_action(:borrow) }
   end
 
 end

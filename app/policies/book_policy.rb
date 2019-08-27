@@ -8,4 +8,8 @@ class BookPolicy < ApplicationPolicy
   def create?
     !user.anonymous?
   end
+
+  def borrow?
+    !user.anonymous?
+  end
 end

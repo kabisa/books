@@ -27,7 +27,6 @@ Feature:
     And it's an e-book
     And I can download the book
 
-  @wip
   Scenario: Create a printed book
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"
@@ -35,6 +34,7 @@ Feature:
     And I click "Save"
     Then I am viewing the book
     And it's a printed book
+    And I can not download the book
 
   Scenario: Create an invalid book
     Given I'm adding a new book
