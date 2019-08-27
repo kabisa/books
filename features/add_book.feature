@@ -34,12 +34,20 @@ Feature:
     And I click "Save"
     Then I am viewing the book
     And it's a printed book
-    And I can not download the book
+    And I cannot download the book
 
-  Scenario: Create an invalid book
+  Scenario: Create an invalid e-book
     Given I'm adding a new book
     When I try to add an empty book
     Then I see a validation error for "Title"
+    And I see a validation error for "Link"
+
+  Scenario: Create an invalid printed book
+    Given I'm adding a new book
+    When I select "Printed book" as "Type"
+    And I try to add an empty book
+    Then I see a validation error for "Title"
+    And I do not see a validation error for "Link"
 
   Scenario: Guest cannot add a book
     Given I did not sign in

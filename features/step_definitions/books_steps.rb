@@ -30,9 +30,9 @@ Then("it's an e-book") do
 end
 
 
-Then(/I can( not)? download the book/) do |negate|
+Then("I {can_or_not}download the book") do |should_do|
   book                = Book.last
-  to_have_or_not_have = negate ? 'not_to' : 'to'
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
   expect(page).send(to_have_or_not_have, have_link('cloud_download', href: book.link))
 end
 
