@@ -6,11 +6,12 @@ FactoryBot.define do
       title { '' }
     end
 
-    factory :ebook do
+    factory :ebook, class: Ebook do
       type { 'Ebook' }
+      link { 'http://www.kabisa.nl' }
     end
 
-    factory :printed_book do
+    factory :printed_book, class: PrintedBook do
       type { 'PrintedBook' }
     end
   end

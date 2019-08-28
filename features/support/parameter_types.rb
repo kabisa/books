@@ -15,5 +15,5 @@ ParameterType(
   name: 'do_or_not',
   regexp: /((?:(?:\s*do\s*|))(not|)) ?/,
   use_for_snippets: false,
-  transformer: -> (str) { p str; str != 'do not' }
+  transformer: -> (str) { str != 'do not' }
 )

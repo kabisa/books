@@ -72,6 +72,10 @@ en:
             email:
               not_an_email_address: 'is not an email address'
               unauthorized: 'is not authorized to sign in'
+        ebook:
+          attributes:
+            link:
+              not_a_url: 'is not a url'
 
   flash:
     logged_out: 'You are now logged out'
