@@ -37,6 +37,7 @@ en:
         create: &sign_in 'Sign in'
         destroy: 'Log out'
       cancel: &cancel 'Cancel'
+      download: 'Download'
   # pages
   application:
     navbar:
