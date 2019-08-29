@@ -21,6 +21,18 @@ When("I try to add an empty book") do
   end
 end
 
+Then("I {do_or_not}see attributes for a(n) {book_type}") do |should_do, book_type|
+  #p book_type.to_sym
+  #case book_type.to_sym
+  #when :ebook
+    #p 'x'
+  #when :printed_book
+    #p 'y'
+
+  #end
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 Then("it's a printed book") do
   expect(page).to have_content(/printed book/i)
 end

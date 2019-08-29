@@ -42,13 +42,19 @@ Feature:
     Then I see a validation error for "Title"
     And I see a validation error for "Link"
 
-  @wip
   Scenario: Create an e-book with an invalid link
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"
     And I fill in "Link" with "this is an invalid link"
     And I click "Save"
     Then I see a validation error for "Link"
+
+  @wip
+  @javascript
+  Scenario: Toggle book type properties
+    Given I'm adding a new book
+    Then I do not see attributes for a printed book
+    And I see attributes for an e-book
 
   Scenario: Create an invalid printed book
     Given I'm adding a new book

@@ -13,16 +13,23 @@ class ToggleButtonsInput < SimpleForm::Inputs::CollectionRadioButtonsInput
     merged_input_options = merge_wrapper_options(input_html_options, wrapper_options)
 
     @builder.collection_radio_buttons(attribute_name, collection, value_method, label_method,
-                                      input_options, merged_input_options) do |b|
-      b.label(class: label_class(b.value)) { b.radio_button + b.text }
+                                      input_options, merged_input_options) do |builder|
+      builder.label(label_options(builder.value)) { builder.radio_button + builder.text }
     end
   end
 
   private
+    def label_options(value)
+      options = label_html_options.dup
+
+      options[:class] << label_class(value)
+
+      options
+    end
 
     def label_class(value)
       label_class = "btn btn-outline btn-sm"
-      label_class << ' active' if object.send(attribute_name) == value
+      label_class << ' active' if object[attribute_name] == value
 
       label_class
     end

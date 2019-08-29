@@ -1,6 +1,11 @@
-= simple_form_for(@book.becomes(Book)) do |f|
+= simple_form_for(@book.becomes(Book), data: { controller: 'book-form' }) do |f|
   = f.input :title, autofocus: true
-  = f.input :type, as: :toggle_buttons, collection: BookType.types.to_sym
-  = f.input :link, required: true
+  = f.input :type, as: :toggle_buttons, collection: BookType.types.to_sym, input_html: { data: { target: 'book-form.type' }}, label_html: { data: { action: 'click->book-form#toggleTypeProperties' }}
+  div(data-book-type='Ebook')
+    = f.input :link, required: true
+
+  div(data-book-type='PrintedBook')
+    p
+      | PrintedBook properties go here...
 
   = f.button :submit_cancel, cancel: :back
