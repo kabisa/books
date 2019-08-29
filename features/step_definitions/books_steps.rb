@@ -22,15 +22,14 @@ When("I try to add an empty book") do
 end
 
 Then("I {do_or_not}see attributes for a(n) {book_type}") do |should_do, book_type|
-  #p book_type.to_sym
-  #case book_type.to_sym
-  #when :ebook
-    #p 'x'
-  #when :printed_book
-    #p 'y'
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
 
-  #end
-  pending # Write code here that turns the phrase above into concrete actions
+  case book_type
+  when 'ebook'
+    expect(page).send(to_have_or_not_have, have_css('[data-book-type="Ebook"]'))
+  when 'printed book'
+    expect(page).send(to_have_or_not_have, have_css('[data-book-type="PrintedBook"]'))
+  end
 end
 
 Then("it's a printed book") do
@@ -83,7 +82,7 @@ end
 
 Then("I see a list of {int} {book_type}") do |items_count, type|
   within('.list-group') do
-    expect(page).to have_css('.list-group-item', text: type, count: items_count)
+    expect(page).to have_css('.list-group-item', text: /#{type}/i, count: items_count)
   end
 end
 

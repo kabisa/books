@@ -6,6 +6,14 @@ When("I select {string} as {string}") do |value, name|
   choose value
 end
 
+When("I toggle {string} to {string}") do |name, value|
+  if js?
+    find("label", text: value.upcase).click
+  else
+    step %Q(I select "#{value}" as "#{name}")
+  end
+end
+
 Then("I {do_or_not}see a validation error for {string}") do |should_do, label|
   within('form') do
     to_have_or_not_have = should_do ? 'to' : 'not_to'

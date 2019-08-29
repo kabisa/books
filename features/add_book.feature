@@ -30,7 +30,7 @@ Feature:
   Scenario: Create a printed book
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"
-    And I select "Printed book" as "Type"
+    And I toggle "Type" to "Printed book"
     And I click "Save"
     Then I am viewing the book
     And it's a printed book
@@ -49,16 +49,18 @@ Feature:
     And I click "Save"
     Then I see a validation error for "Link"
 
-  @wip
   @javascript
   Scenario: Toggle book type properties
     Given I'm adding a new book
-    Then I do not see attributes for a printed book
-    And I see attributes for an e-book
+    Then I see attributes for an e-book
+    And I do not see attributes for a printed book
+    When I toggle "Type" to "Printed book"
+    Then I do not see attributes for an e-book
+    But I see attributes for a printed book
 
   Scenario: Create an invalid printed book
     Given I'm adding a new book
-    When I select "Printed book" as "Type"
+    When I toggle "Type" to "Printed book"
     And I try to add an empty book
     Then I see a validation error for "Title"
     And I do not see a validation error for "Link"
