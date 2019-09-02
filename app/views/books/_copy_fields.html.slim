@@ -1,0 +1,7 @@
+= content_tag :div, class: "nested-fields", data: { new_record: f.object.new_record? }
+  .form-group
+    = f.association :location, label_method: :city
+    = f.input :number
+    small= link_to "Remove", "#", data: { action: "nested-form#remove_association" }
+
+  = f.hidden_field :_destroy

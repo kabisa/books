@@ -5,7 +5,16 @@
     = f.input :link, required: true
 
   div(data-book-type='PrintedBook')
-    p
-      | PrintedBook properties go here...
+    h4 Copies
+    div(data-controller='nested-form')
+      template(data-target="nested-form.template")
+        = f.fields_for :copies, Copy.new, child_index: 'NEW_RECORD' do |copy|
+          = render "copy_fields", f: copy
+
+      = f.fields_for :copies, @copies do |copy|
+        = render 'copy_fields', f: copy
+
+      div(data-target='nested-form.links')
+        = link_to "Add Copy", "#", data: { action: 'nested-form#add_association' }
 
   = f.button :submit_cancel, cancel: :back

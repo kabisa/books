@@ -50,6 +50,7 @@ Feature:
     Then I see a validation error for "Link"
 
   @javascript
+  @wip
   Scenario: Toggle book type properties
     Given I'm adding a new book
     Then I see attributes for an e-book

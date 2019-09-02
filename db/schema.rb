@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_092815) do
+ActiveRecord::Schema.define(version: 2019_09_02_082823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,22 @@ ActiveRecord::Schema.define(version: 2019_08_27_092815) do
     t.string "link", limit: 2048
   end
 
+  create_table "copies", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "location_id", null: false
+    t.integer "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_copies_on_book_id"
+    t.index ["location_id"], name: "index_copies_on_location_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "city", limit: 255
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", limit: 255
     t.string "name", limit: 100
@@ -32,4 +48,6 @@ ActiveRecord::Schema.define(version: 2019_08_27_092815) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "copies", "books"
+  add_foreign_key "copies", "locations"
 end

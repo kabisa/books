@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Location.destroy_all
+
+%w(Weert Amsterdam Eindhoven).map { |city| Location.create(city: city) }
