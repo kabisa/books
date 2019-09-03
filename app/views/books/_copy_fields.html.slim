@@ -4,8 +4,7 @@
   .col.col-sm
     = f.input :number, wrapper: :inline_form
   .col-2.col-sm.text-right.text-sm-center
-    = link_to '#', class: 'btn btn-float btn-sm shadow-none', role: :button, data: { toggle: 'tooltip', action: 'nested-form#remove_association' }, title: 'Remove copy' do
-      .material-icons
-        | clear
+    = link_to '#', class: 'btn btn-float btn-sm shadow-none', role: :button, data: { action: 'nested-form#remove_association' } do
+      = material_icon('clear', tooltipify(t('helpers.submit.remove_resource', resource: Copy.model_name.human.downcase)))
 
   = f.hidden_field :_destroy
