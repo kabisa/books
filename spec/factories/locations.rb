@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :location do
-    city { "MyString" }
+    city { "Weert" }
   end
 end
