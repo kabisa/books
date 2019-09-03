@@ -29,8 +29,8 @@ Then("I {do_or_not}see attributes for a(n) {book_type}") do |should_do, book_typ
     expect(page).send(to_have_or_not_have, have_css('[data-book-type="Ebook"]'))
   when 'printed book'
     expect(page).send(to_have_or_not_have, have_css('[data-book-type="PrintedBook"]'))
-    expect(page).send(to_have_or_not_have, have_field('Location', count: 1))
-    expect(page).send(to_have_or_not_have, have_field('Number', count: 1))
+    expect(page).send(to_have_or_not_have, have_select('Location', selected: Location.first.city, count: 1))
+    expect(page).send(to_have_or_not_have, have_field('Number', with: 1, count: 1))
   end
 end
 

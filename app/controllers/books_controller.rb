@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = authorize Ebook.new
-    @book.copies.build(location: Location.first, number: 1)
+    @book.copies.build(number: 1)
   end
 
   # GET /books/1/edit

@@ -52,7 +52,12 @@ Feature:
   @javascript
   @wip
   Scenario: Toggle book type properties
-    Given I'm adding a new book
+    Given the following locations:
+      | city     |
+      | Rome     |
+      | Florence |
+      | Sydney   |
+    And I'm adding a new book
     Then I see attributes for an e-book
     And I do not see attributes for a printed book
     When I toggle "Type" to "Printed book"

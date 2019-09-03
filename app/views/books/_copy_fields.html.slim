@@ -1,6 +1,6 @@
 .nested-fields.form-row(data-new-record="#{f.object.new_record?}")
   .col-12.col-sm-9
-    = f.association :location, label_method: :city, wrapper: :inline_form
+    = f.association :location, label_method: :city, include_blank: false, wrapper: :inline_form
   .col.col-sm
     = f.input :number, wrapper: :inline_form
   .col-2.col-sm.text-right.text-sm-center

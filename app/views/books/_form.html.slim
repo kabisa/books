@@ -8,7 +8,7 @@
   div(data-book-type='PrintedBook')
     div(data-controller='nested-form')
       template(data-target='nested-form.template')
-        = f.fields_for :copies, Copy.new, child_index: 'NEW_RECORD' do |copy|
+        = f.fields_for :copies, Copy.new(number: 1), child_index: 'NEW_RECORD' do |copy|
           = render 'copy_fields', f: copy
 
       .form-group.row
