@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = authorize Ebook.new
-    @copies = [Copy.new(book: @book, location: Location.first, number: 1)]
+    @book.copies.build(location: Location.first, number: 1)
   end
 
   # GET /books/1/edit
@@ -27,7 +27,6 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = authorize book_class.new(book_params)
-    @copies = @book.copies
 
     respond_to do |format|
       if @book.save

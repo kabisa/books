@@ -22,7 +22,10 @@ $(document).on('turbolinks:load', function() {
   $(
     '.floating-label .custom-select, .floating-label .form-control',
   ).floatinglabel();
-  $('[data-toggle="tooltip"]').tooltip();
+  $('body').tooltip({
+    selector: '[data-toggle="tooltip"]',
+    container: 'body',
+  });
 });
 
 import 'controllers';

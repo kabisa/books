@@ -1,7 +1,11 @@
-= content_tag :div, class: "nested-fields", data: { new_record: f.object.new_record? }
-  .form-group
-    = f.association :location, label_method: :city
-    = f.input :number
-    small= link_to "Remove", "#", data: { action: "nested-form#remove_association" }
+.nested-fields.form-row(data-new-record="#{f.object.new_record?}")
+  .col-12.col-sm-9
+    = f.association :location, label_method: :city, wrapper: :inline_form
+  .col.col-sm
+    = f.input :number, wrapper: :inline_form
+  .col-2.col-sm.text-right.text-sm-center
+    = link_to '#', class: 'btn btn-float btn-sm shadow-none', role: :button, data: { toggle: 'tooltip', action: 'nested-form#remove_association' }, title: 'Remove copy' do
+      .material-icons
+        | clear
 
   = f.hidden_field :_destroy

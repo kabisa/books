@@ -1,3 +1,5 @@
+// Inspired by https://github.com/gorails-screencasts/dynamic-nested-forms-with-stimulusjs
+//
 // Visit The Stimulus Handbook for more details
 // https://stimulusjs.org/handbook/introduction
 //

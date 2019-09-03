@@ -1,20 +1,23 @@
 = simple_form_for(@book.becomes(Book), data: { controller: 'book-form' }) do |f|
   = f.input :title, autofocus: true
   = f.input :type, as: :toggle_buttons, collection: BookType.types.to_sym, input_html: { data: { target: 'book-form.type' }}, label_html: { data: { action: 'click->book-form#toggleTypeProperties' }}
+
   div(data-book-type='Ebook')
     = f.input :link, required: true
 
   div(data-book-type='PrintedBook')
-    h4 Copies
     div(data-controller='nested-form')
-      template(data-target="nested-form.template")
+      template(data-target='nested-form.template')
         = f.fields_for :copies, Copy.new, child_index: 'NEW_RECORD' do |copy|
-          = render "copy_fields", f: copy
+          = render 'copy_fields', f: copy
 
-      = f.fields_for :copies, @copies do |copy|
-        = render 'copy_fields', f: copy
+      .form-group.row
+        = f.label :copies, class: 'col-md-2 col-xl-1 col-form-label'
+        .col-md.col-lg-5
+          = f.fields_for :copies, @book.copies do |copy|
+            = render 'copy_fields', f: copy
 
-      div(data-target='nested-form.links')
-        = link_to "Add Copy", "#", data: { action: 'nested-form#add_association' }
+          .mt-3(data-target='nested-form.links')
+            = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
 
   = f.button :submit_cancel, cancel: :back
