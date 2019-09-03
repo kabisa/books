@@ -3,6 +3,13 @@ Feature:
   I can add a book
   So I can contribute to our books collection
 
+  Background:
+    Given the following locations:
+      | city     |
+      | Rome     |
+      | Florence |
+      | Sydney   |
+
   Scenario: Add first book
     Given I signed in as a Kabisaan
     When I click the "add" button
@@ -15,17 +22,9 @@ Feature:
     And I fill in "Link" with "http://www.kabisa.nl/awesome_book.epub"
     And I click "Save"
     Then I am viewing the book
+    And I can download the book
     And I can edit the book
     And I am seeing the button for adding a new book
-
-  Scenario: Create an e-book
-    Given I'm adding a new book
-    When I fill in "Title" with "Awesome Book"
-    And I fill in "Link" with "http://www.kabisa.nl/awesome_book.epub"
-    And I click "Save"
-    Then I am viewing the book
-    And it's an e-book
-    And I can download the book
 
   Scenario: Create a printed book
     Given I'm adding a new book
@@ -33,8 +32,9 @@ Feature:
     And I toggle "Type" to "Printed book"
     And I click "Save"
     Then I am viewing the book
+    But I cannot download the book
     And it's a printed book
-    And I cannot download the book
+    And I am seeing the button for adding a new book
 
   Scenario: Create an invalid e-book
     Given I'm adding a new book
@@ -50,14 +50,8 @@ Feature:
     Then I see a validation error for "Link"
 
   @javascript
-  @wip
   Scenario: Toggle book type properties
-    Given the following locations:
-      | city     |
-      | Rome     |
-      | Florence |
-      | Sydney   |
-    And I'm adding a new book
+    Given I'm adding a new book
     Then I see attributes for an e-book
     And I do not see attributes for a printed book
     When I toggle "Type" to "Printed book"
