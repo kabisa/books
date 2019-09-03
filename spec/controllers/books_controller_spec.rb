@@ -61,6 +61,11 @@ RSpec.describe BooksController, type: :controller do
       do_get
       expect(assigns[:book]).to be_a(Ebook)
     end
+
+    it 'adds a location to the book' do
+      do_get
+      expect(assigns[:book]).to have(1).copy
+    end
   end
 
   xdescribe "GET #edit" do

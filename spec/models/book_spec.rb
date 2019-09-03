@@ -6,6 +6,12 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_length_of(:title).is_at_most(255) }
   end
 
+  describe 'associations' do
+    it { is_expected.to have_many(:copies).dependent(:destroy) }
+    it { is_expected.to accept_nested_attributes_for(:copies).
+         allow_destroy(true) }
+  end
+
   describe '.policy_class' do
     subject { described_class.policy_class }
 

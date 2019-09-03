@@ -97,3 +97,4 @@ RSpec.configure do |config|
 end
 
 require 'pundit/matchers'
+require 'rspec/collection_matchers'
