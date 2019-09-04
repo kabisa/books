@@ -62,6 +62,11 @@ Then("I {can_or_not}download the book") do |should_do|
   expect(page).send(to_have_or_not_have, have_link('cloud_download', href: book.link))
 end
 
+Then("I {do_or_not}see information about how many copies there are") do |should_do|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+  expect(page).send(to_have_or_not_have, have_content('copies'))
+end
+
 Then("I am viewing the book") do
   # pathname includes model name, e.g. `/ebooks/1` or `/printed_books/2`
   book          = Book.last

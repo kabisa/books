@@ -20,7 +20,6 @@ Feature:
     And it's a printed book
     And I am seeing the button for adding a new book
 
-  @wip
   @javascript
   Scenario: Create a printed book with copies on several locations
     Given I'm adding a new book
@@ -38,3 +37,8 @@ Feature:
     And I try to add an empty book
     Then I see a validation error for "Title"
     And I do not see a validation error for "Link"
+
+  Scenario: At least 1 location is needed
+  Scenario: Duplicate locations are not allowed
+  Scenario: Number less than 1 is not allowed
+  Scenario: Invalid copies are ignored when saving ebook

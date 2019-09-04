@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :copy do
     book { nil }
-    location { nil }
-    number { 1 }
+    location
+    number { 2 }
   end
 end

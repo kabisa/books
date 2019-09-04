@@ -3,4 +3,6 @@
   small= book.formatted_type
   - if book.is_a?(Ebook) && policy(book).borrow?
     p= book.download_link
+  - if book.is_a?(PrintedBook) && policy(book).borrow?
+    p= book.available_copies
 
