@@ -13,11 +13,14 @@
 
       .form-group.row
         = f.label :copies, class: 'col-md-2 col-xl-1 col-form-label'
-        .col-md.col-lg-5
+        .col-md.col-lg-5.nested-form
+          - @book.errors[:copies].each do |msg|
+            p.text-danger.mt-2= msg
+
           = f.fields_for :copies, @book.copies do |copy|
             = render 'copy_fields', f: copy
 
-          .mt-3(data-target='nested-form.links')
+          div(data-target='nested-form.links')
             = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
 
   = f.button :submit_cancel, cancel: :back

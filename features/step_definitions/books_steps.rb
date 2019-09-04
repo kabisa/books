@@ -35,6 +35,14 @@ When("I add another location") do
   end
 end
 
+
+When("I remove the first location") do
+  within('.form-group', text: 'Copies') do
+    field = all('.nested-fields').first
+    field.click_on('clear')
+  end
+end
+
 Then("I {do_or_not}see attributes for a(n) {book_type}") do |should_do, book_type|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
 
@@ -114,3 +122,9 @@ Then("I see there are {int} copies of the book") do |copies_count|
   expect(page).to have_text("#{copies_count} copies")
 end
 
+
+Then("I see a validation error that at least 1 location is required") do
+  within('form') do
+    expect(page).to have_content('At least one copy needs to be added')
+  end
+end

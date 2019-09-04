@@ -1,0 +1,6 @@
+// .nested-form contains a collection of nested fields and a 'Add' link.
+// We add some margin to the element just before this link
+// which will not be applied if the link is the only element in the container.
+.nested-form > :nth-last-child(2) {
+  @extend .mb-3;
+}

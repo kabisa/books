@@ -7,8 +7,27 @@ RSpec.describe Copy, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_numericality_of(:number).
-         is_greater_than(0).
-         only_integer }
+    context 'number' do
+      subject      { build(:copy, book: book, number: number) }
+      let(:book)   { build(:printed_book) }
+      let(:number) { 1 }
+
+      it { is_expected.to be_valid }
+
+      context 'invalid number' do
+        let(:number) { -1 }
+
+        it { is_expected.to be_invalid }
+      end
+
+      context 'for printed books' do
+        let(:book)   { build(:ebook) }
+        let(:number) { -1 }
+
+        it 'ignore invalid number for e-books' do
+          expect(subject).to be_valid
+        end
+      end
+    end
   end
 end

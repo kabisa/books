@@ -74,6 +74,11 @@ en:
             email:
               not_an_email_address: 'is not an email address'
               unauthorized: 'is not authorized to sign in'
+        book:
+          attributes:
+            copies:
+              blank: 'At least one copy needs to be added'
+
         ebook:
           attributes:
             link:

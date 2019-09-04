@@ -14,8 +14,8 @@ FactoryBot.define do
     factory :printed_book, class: PrintedBook do
       type { 'PrintedBook' }
 
-      after(:create) do |book, evaluator|
-        create(:copy, book: book)
+      after(:build) do |book, evaluator|
+        book.copies << build(:copy)
       end
     end
   end

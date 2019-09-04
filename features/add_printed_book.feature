@@ -38,7 +38,15 @@ Feature:
     Then I see a validation error for "Title"
     And I do not see a validation error for "Link"
 
-  Scenario: At least 1 location is needed
+  @javascript
+  Scenario: Create a printed book without copies
+    Given I'm adding a new book
+    When I fill in "Title" with "Awesome Book"
+    And I toggle "Type" to "Printed book"
+    And I remove the first location
+    And I click "Save"
+    Then I see a validation error that at least 1 location is required
+
   Scenario: Duplicate locations are not allowed
   Scenario: Number less than 1 is not allowed
-  Scenario: Invalid copies are ignored when saving ebook
+

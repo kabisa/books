@@ -10,12 +10,6 @@ Feature:
       | Florence |
       | Sydney   |
 
-  Scenario: Add first book
-    Given I signed in as a Kabisaan
-    When I click the "add" button
-    Then I am adding a new book
-    But I am not seeing the button for adding a new book
-
   Scenario: Create a book
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"
@@ -41,17 +35,12 @@ Feature:
     Then I see a validation error for "Link"
 
   @javascript
-  Scenario: Toggle book type properties
+  Scenario: Invalid copies are ignored when saving ebook
     Given I'm adding a new book
-    Then I see attributes for an e-book
-    And I do not see attributes for a printed book
-    When I toggle "Type" to "Printed book"
-    Then I do not see attributes for an e-book
-    But I see attributes for a printed book
-
-  Scenario: Guest cannot add a book
-    Given I did not sign in
-    When I navigate to page for adding a new book
-    Then I see an error telling me I am not unauthorized
-    And I'm back on the main page
-
+    And I fill in "Title" with "Awesome Book"
+    And I fill in "Link" with "http://www.kabisa.nl/awesome_book.epub"
+    And I toggle "Type" to "Printed book"
+    And I remove the first location
+    When I toggle "Type" to "E-book"
+    And I click "Save"
+    Then I am viewing the book
