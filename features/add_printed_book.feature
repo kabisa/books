@@ -20,6 +20,18 @@ Feature:
     And it's a printed book
     And I am seeing the button for adding a new book
 
+  @wip
+  @javascript
+  Scenario: Create a printed book with copies on several locations
+    Given I'm adding a new book
+    When I fill in "Title" with "Awesome Book"
+    And I toggle "Type" to "Printed book"
+    And I add 2 copies of the book to the location "Rome"
+    And I add another location
+    And I add 3 copies of the book to the location "Florence"
+    And I click "Save"
+    Then I see there are 5 copies of the book
+
   Scenario: Create an invalid printed book
     Given I'm adding a new book
     When I toggle "Type" to "Printed book"

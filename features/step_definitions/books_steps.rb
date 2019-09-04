@@ -21,6 +21,20 @@ When("I try to add an empty book") do
   end
 end
 
+When("I add {int} copies of the book to the location {string}") do |copies_count, location|
+  within('.form-group', text: 'Copies') do
+    field = all('.nested-fields').last
+    field.find_field('Location').select(location)
+    field.find_field('Number').fill_in with: copies_count
+  end
+end
+
+When("I add another location") do
+  within('.form-group', text: 'Copies') do
+    click_on('Add Copy')
+  end
+end
+
 Then("I {do_or_not}see attributes for a(n) {book_type}") do |should_do, book_type|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
 
@@ -41,7 +55,6 @@ end
 Then("it's an e-book") do
   expect(page).to have_content(/e-book/i)
 end
-
 
 Then("I {can_or_not}download the book") do |should_do|
   book                = Book.last
@@ -88,7 +101,11 @@ Then("I see a list of {int} {book_type}") do |items_count, type|
   end
 end
 
-
 Then("I see {int} download links") do |items_count|
   expect(page).to have_link('cloud_download', count: items_count)
 end
+
+Then("I see there are {int} copies of the book") do |copies_count|
+  expect(page).to have_text("#{copies_count} copies")
+end
+

@@ -5,5 +5,8 @@
     - if @book.is_a?(Ebook)
       p= @book.download_link
 
+    - if @book.is_a?(PrintedBook)
+      p= @book.available_copies
+
   .card-actions
     = link_to t('.edit'), edit_book_path(@book), class: 'btn btn-outline-primary', role: :button
