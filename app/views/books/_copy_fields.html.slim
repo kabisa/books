@@ -1,9 +1,9 @@
 .nested-fields.form-row(data-new-record="#{f.object.new_record?}")
   .col-12.col-sm-9
     = f.association :location, include_blank: false, wrapper: :inline_form
-  .col.col-sm
-    = f.input :number, wrapper: :inline_form
-  .col-2.col-sm.text-right.text-sm-center
+  .col.col-sm-2
+    = f.input :number, input_html: { min: 1 }, wrapper: :inline_form
+  .col-2.col-sm-1.text-right.text-sm-center
     = link_to '#', class: 'btn btn-float btn-sm shadow-none', role: :button, data: { action: 'nested-form#remove_association' } do
       = material_icon('clear', tooltipify(t('helpers.submit.remove_resource', resource: Copy.model_name.human.downcase)))
 
