@@ -131,6 +131,6 @@ end
 
 Then("I see a validation error that duplicate locations are not allowed") do
   within('form') do
-    expect(page).to have_content('has already been taken')
+    expect(page).to have_content('must be unique')
   end
 end

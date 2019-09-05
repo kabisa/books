@@ -78,11 +78,14 @@ en:
           attributes:
             copies:
               blank: 'At least one copy needs to be added'
-
         ebook:
           attributes:
             link:
               not_a_url: 'is not a url'
+        copy:
+          attributes:
+            location:
+              taken: 'must be unique'
 
   flash:
     logged_out: 'You are now logged out'
