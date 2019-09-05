@@ -29,5 +29,23 @@ RSpec.describe Copy, type: :model do
         end
       end
     end
+
+    describe 'location' do
+      subject do
+        build(:printed_book) do |book|
+          book.copies.clear
+          book.copies.build(location: rome, number: 2)
+          book.copies.build(location: rome, number: 3)
+        end
+      end
+
+      let(:florence) { create :location, city: 'Florence' }
+      let(:rome) { create :location, city: 'Rome' }
+
+      it 'does not allow duplicate locations' do
+        expect(subject).to be_invalid
+        expect(subject.errors[:'copies.location']).not_to be_empty
+      end
+    end
   end
 end

@@ -128,3 +128,9 @@ Then("I see a validation error that at least 1 location is required") do
     expect(page).to have_content('At least one copy needs to be added')
   end
 end
+
+Then("I see a validation error that duplicate locations are not allowed") do
+  within('form') do
+    expect(page).to have_content('has already been taken')
+  end
+end

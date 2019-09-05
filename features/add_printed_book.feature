@@ -47,6 +47,11 @@ Feature:
     And I click "Save"
     Then I see a validation error that at least 1 location is required
 
-  Scenario: Duplicate locations are not allowed
-  Scenario: Number less than 1 is not allowed
-
+  @javascript
+  Scenario: Create a printed book with duplicate locations
+    Given I'm adding a new book
+    When I fill in "Title" with "Awesome Book"
+    And I toggle "Type" to "Printed book"
+    And I add another location
+    And I click "Save"
+    Then I see a validation error that duplicate locations are not allowed
