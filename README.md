@@ -9,6 +9,18 @@
 A [demo version](https://thawing-badlands-71406.herokuapp.com/) is available on Heroku. 
 This version has been deployed as described [here](https://devcenter.heroku.com/articles/getting-started-with-rails5).
 
+## Installation
+
+- `git clone <repository-url>` this repository
+- `cd books`
+- `bundle install`
+- `bin/rails db:setup`
+
+## Running / Development
+
+- `bin/rails s`
+- Visit your app at [http://localhost:3000](http://localhost:3000).
+
 
 ## Technical details
 
