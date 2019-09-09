@@ -30,4 +30,10 @@ RSpec.describe PrintedBook, type: :model do
 
     it { is_expected.to eql(3) }
   end
+
+  describe '#borrowed_by?' do
+    it do
+      pending 'Continue here...'
+    end
+  end
 end

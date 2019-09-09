@@ -10,4 +10,8 @@ class PrintedBook < Book
   def borrowings_count
     borrowings.count
   end
+
+  def borrowed_by?(user)
+    borrowings.find_by(user: user)
+  end
 end

@@ -29,9 +29,11 @@ Given("I have the following {book_type}:") do |book_type, table|
   end
 end
 
-Then("I can borrow the book {string}") do |title|
+Then("I {can_or_not}borrow {string}") do |should_do, title|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+
   within('.list-group-item', text: title) do
-    expect(page).to have_button('Borrow')
+    expect(page).send(to_have_or_not_have, have_button('Borrow'))
   end
 end
 
@@ -39,6 +41,12 @@ end
 When("I borrow the book {string}") do |title|
   within('.list-group-item', text: title) do
     click_on('Borrow')
+  end
+end
+
+Then("I can return the book {string}") do |title|
+  within('.list-group-item', text: title) do
+    expect(page).to have_button('Return Book')
   end
 end
 

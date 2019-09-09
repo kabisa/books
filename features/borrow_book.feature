@@ -12,7 +12,7 @@ Feature: As a Kabisaan
       | title       | location | copies |
       | Lorem Ipsum | Rome     | 1      |
     When I choose "Books" from the navigation drawer
-    Then I can borrow the book "Lorem Ipsum"
+    Then I can borrow "Lorem Ipsum"
 
   @wip
   @javascript
@@ -27,15 +27,11 @@ Feature: As a Kabisaan
     When I choose "Books" from the navigation drawer
     And I borrow the book "Lorem Ipsum"
     Then I see the book "Lorem Ipsum" has 0 copies left
+    And I cannot borrow "Lorem Ipsum"
+    But I can return the book "Lorem Ipsum"
 
   @todo
   Scenario: Show dialog when multiple copies
-
-  @todo
-  Scenario: I cannot borrow a book twice at the same time
-
-  @todo
-  Scenario: A borrowed book can be returned
 
   @todo
   Scenario: Unable to borrow if all copies are gone
