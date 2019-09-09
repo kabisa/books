@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   get 'sign_in/:token', to: 'sessions#show', as: :token_sign_in
   delete 'sign_out', to: 'sessions#destroy'
 
+  resources :borrowings
+
   root to: 'welcome#index'
 end

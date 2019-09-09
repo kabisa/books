@@ -1,6 +1,7 @@
 class Copy < ApplicationRecord
   belongs_to :book
   belongs_to :location
+  has_many :borrowings
 
   validates :number, numericality: { greater_than: 0, only_integer: true }, if: :printed_book?
   validate :duplicate_locations_not_allowed

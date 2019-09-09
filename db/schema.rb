@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_02_082823) do
+ActiveRecord::Schema.define(version: 2019_09_09_082825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 2019_09_02_082823) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
     t.string "link", limit: 2048
+  end
+
+  create_table "borrowings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "copy_id", null: false
+    t.datetime "borrowed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["copy_id"], name: "index_borrowings_on_copy_id"
+    t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
 
   create_table "copies", force: :cascade do |t|
@@ -48,6 +58,8 @@ ActiveRecord::Schema.define(version: 2019_09_02_082823) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "borrowings", "copies"
+  add_foreign_key "borrowings", "users"
   add_foreign_key "copies", "books"
   add_foreign_key "copies", "locations"
 end

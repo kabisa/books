@@ -13,4 +13,8 @@ class BookDecorator < ApplicationDecorator
   def formatted_type
     I18n.t(object.type, scope: 'book_types')
   end
+
+  def dom_id
+    h.dom_id(object)
+  end
 end

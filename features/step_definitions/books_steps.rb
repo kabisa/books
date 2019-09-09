@@ -35,6 +35,13 @@ Then("I can borrow the book {string}") do |title|
   end
 end
 
+
+When("I borrow the book {string}") do |title|
+  within('.list-group-item', text: title) do
+    click_on('Borrow')
+  end
+end
+
 When("I try to add an empty book") do
   within('form') do
     click_on('Save')
@@ -142,6 +149,11 @@ Then("I see there are {int} copies of the book") do |copies_count|
   expect(page).to have_text("#{copies_count} copies")
 end
 
+Then("I see the book {string} has {int} copies left") do |title, copies_count|
+  within('.list-group-item', text: title) do
+    expect(page).to have_text("#{copies_count} copies")
+  end
+end
 
 Then("I see a validation error that at least 1 location is required") do
   within('form') do

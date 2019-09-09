@@ -1,9 +1,9 @@
-.list-group-item
+.list-group-item(id=dom_id(book))
   h5.mb-1= book.title
   small= book.formatted_type
   - if book.is_a?(Ebook) && policy(book).borrow?
     p= book.download_link
   - if book.is_a?(PrintedBook) && policy(book).borrow?
     p= book.available_copies
-    = button_tag 'Borrow', class: 'btn btn-outline'
+    = button_to 'Borrow', borrowings_path(book_id: book, copy_id: book.copies.first), remote: true, class: 'btn btn-outline'
 

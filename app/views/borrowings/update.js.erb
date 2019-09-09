@@ -1,0 +1,2 @@
+var el = document.getElementById('<%= @book.dom_id %>')
+el.outerHTML = '<%= j render(partial: 'books/book', object: @book) %>'
