@@ -5,20 +5,29 @@ RSpec.describe PrintedBook, type: :model do
     it { is_expected.to validate_presence_of(:copies) }
   end
 
+  describe 'associations' do
+    it { is_expected.to have_many(:borrowings).through(:copies) }
+  end
+
   describe '#copies_count' do
-    subject { instance.copies_count }
+    before { allow(instance).to receive(:copies).and_return(copies_double) }
 
-    let(:instance) do
-      create(:printed_book) do |book|
-        book.copies.clear
-        book.copies.create(location: rome, number: 2)
-        book.copies.create(location: florence, number: 3)
-      end
-    end
+    subject             { instance.copies_count }
 
-    let(:florence) { create :location, city: 'Florence' }
-    let(:rome) { create :location, city: 'Rome' }
+    let(:instance)      { build(:printed_book) }
+    let(:copies_double) { [build(:copy, number: 2), build(:copy, number: 3)] }
 
     it { is_expected.to eql(5) }
+  end
+
+  describe '#borrowings_count' do
+    before { allow(instance).to receive(:borrowings).and_return(borrowings_double) }
+
+    subject             { instance.borrowings_count }
+
+    let(:instance)      { build(:printed_book) }
+    let(:borrowings_double) { build_list(:borrowing, 3) }
+
+    it { is_expected.to eql(3) }
   end
 end
