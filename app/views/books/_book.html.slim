@@ -5,4 +5,5 @@
     p= book.download_link
   - if book.is_a?(PrintedBook) && policy(book).borrow?
     p= book.available_copies
+    = button_tag 'Borrow', class: 'btn btn-outline'
 

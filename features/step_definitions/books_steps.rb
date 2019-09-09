@@ -15,6 +15,26 @@ Given("there are {int} printed books") do |books_count|
   create_list :printed_book, books_count
 end
 
+Given("I have the following {book_type}:") do |book_type, table|
+  factory = book_type.gsub(' ', '_').to_sym
+
+  table.hashes.each do |h|
+    location = Location.find_by(city: h.delete('location'))
+    number   = h.delete('copies')
+
+    book = build(factory, h)
+    book.copies.clear
+    book.copies.build(location: location, number: number)
+    book.save
+  end
+end
+
+Then("I can borrow the book {string}") do |title|
+  within('.list-group-item', text: title) do
+    expect(page).to have_button('Borrow')
+  end
+end
+
 When("I try to add an empty book") do
   within('form') do
     click_on('Save')
