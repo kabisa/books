@@ -32,8 +32,20 @@ RSpec.describe PrintedBook, type: :model do
   end
 
   describe '#borrowed_by?' do
-    it do
-      pending 'Continue here...'
+    before         { Borrowing.create(user: user, copy: instance.copies.first) }
+    let(:instance) { create :printed_book }
+    let(:user)     { create :user }
+
+    context 'borrowing found' do
+      subject { instance.borrowed_by?(user) }
+
+      it { is_expected.to be true }
+    end
+
+    context 'borrowing not found' do
+      subject { instance.borrowed_by?(build(:user)) }
+
+      it { is_expected.to be false }
     end
   end
 end

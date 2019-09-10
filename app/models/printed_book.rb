@@ -12,6 +12,6 @@ class PrintedBook < Book
   end
 
   def borrowed_by?(user)
-    borrowings.find_by(user: user)
+    !!borrowings.find_by(user: user)
   end
 end
