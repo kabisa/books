@@ -22,8 +22,8 @@ Given("I have the following {book_type}:") do |book_type, table|
     location = Location.find_by(city: h.delete('location'))
     number   = h.delete('copies')
 
-    book = build(factory, h)
-    book.copies.clear
+    book = Book.find_by(title: h['title']) || build(factory, h)
+    book.copies.clear if book.new_record?
     book.copies.build(location: location, number: number)
     book.save
   end
@@ -41,6 +41,18 @@ end
 When("I borrow the book {string}") do |title|
   within('.list-group-item', text: title) do
     click_on('Borrow')
+  end
+end
+
+When("I choose the location {string} in the modal") do |city|
+  within('.modal form') do
+    select(city, from: 'Location')
+  end
+end
+
+When("I click {string} in the modal") do |text|
+  within('.modal form') do
+    click_on(text)
   end
 end
 
@@ -157,7 +169,7 @@ Then("I see there are {int} copies of the book") do |copies_count|
   expect(page).to have_text("#{copies_count} copies")
 end
 
-Then("I see the book {string} has {int} copies left") do |title, copies_count|
+Then("I see the book {string} has {int} copy/copies left") do |title, copies_count|
   within('.list-group-item', text: title) do
     expect(page).to have_text("#{copies_count} copies")
   end

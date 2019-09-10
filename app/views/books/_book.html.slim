@@ -6,7 +6,7 @@
   - if book.is_a?(PrintedBook) && policy(book).borrow?
     p= book.available_copies
     - if book.borrowed_by?(current_user)
-      = button_to 'Return Book', borrowings_path(book_id: book, copy_id: book.copies.first), remote: true, class: 'btn btn-outline'
+      = button_tag 'Return Book', class: 'btn btn-outline'
     - else
       = button_to 'Borrow', borrowings_path(book_id: book, copy_id: book.copies.first), remote: true, class: 'btn btn-outline'
 
