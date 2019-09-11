@@ -2,7 +2,11 @@ class Book < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   # Though `copies` is a PrintedBook attribute, we define it in the base class
   # so we can render a proper form.
-  has_many :copies, dependent: :destroy
+  has_many :copies, dependent: :destroy do
+    def borrowables
+      proxy_association.owner.copies.filter(&:'borrowable?')
+    end
+  end
   accepts_nested_attributes_for :copies, allow_destroy: true
 
   class << self

@@ -40,7 +40,9 @@ end
 
 When("I borrow the book {string}") do |title|
   within('.list-group-item', text: title) do
-    click_on('Borrow')
+    link_or_button = all('a', text: /^Borrow/i).first # Show a modal first
+    link_or_button ||= find_button('Borrow') # Only 1 location available
+    link_or_button.click
   end
 end
 
@@ -171,7 +173,7 @@ end
 
 Then("I see the book {string} has {int} copy/copies left") do |title, copies_count|
   within('.list-group-item', text: title) do
-    expect(page).to have_text("#{copies_count} copies")
+    expect(page).to have_text(/#{copies_count} cop(y|ies)/)
   end
 end
 

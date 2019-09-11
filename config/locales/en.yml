@@ -36,6 +36,8 @@ en:
       session:
         create: &sign_in 'Sign in'
         destroy: 'Log out'
+      borrowing:
+        submit: 'Borrow'
       cancel: &cancel 'Cancel'
       download: 'Download'
       remove_resource: 'Remove %{resource}'

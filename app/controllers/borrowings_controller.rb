@@ -1,8 +1,8 @@
 class BorrowingsController < ApplicationController
 
   def create
-    @book     = Book.find(params[:book_id]).decorate
-    copy      = Copy.find(params[:copy_id])
+    @book     = Book.find(params[:borrowing][:book_id]).decorate
+    copy      = Copy.find(params[:borrowing][:copy_id])
     borrowing = authorize copy.borrowings.build(user: current_user)
 
     respond_to do |format|

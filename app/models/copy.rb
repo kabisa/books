@@ -6,6 +6,11 @@ class Copy < ApplicationRecord
   validates :number, numericality: { greater_than: 0, only_integer: true }, if: :printed_book?
   validate :duplicate_locations_not_allowed
 
+  # @return true if there's still a copy that can be borrowed.
+  def borrowable?
+    borrowings.size < number
+  end
+
   private
 
   def printed_book?
@@ -15,12 +20,12 @@ class Copy < ApplicationRecord
   def duplicate_locations_not_allowed
     return unless book && printed_book?
 
-    if has_duplicate_location?
+    if duplicate_location?
       errors.add(:location, :taken)
     end
   end
 
-  def has_duplicate_location?
+  def duplicate_location?
     book.copies.group_by { |c| c.location_id }[location_id].size > 1
   end
 end
