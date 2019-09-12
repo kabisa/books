@@ -49,4 +49,30 @@ RSpec.describe Copy, type: :model do
       end
     end
   end
+
+  describe '#borrowable?' do
+    subject        { instance.borrowable?  }
+    let(:instance) { create(:copy, book: create(:book), number: 2) }
+    let(:marty)    { create :user }
+    let(:emmett)   { create :user }
+
+    context 'no copies borrowed' do
+      it { is_expected.to be(true) }
+    end
+
+    context 'some copies borrowed' do
+      before { instance.borrowings.create(user: marty) }
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'all copies borrowed' do
+      before do
+        instance.borrowings.create(user: marty)
+        instance.borrowings.create(user: emmett)
+      end
+
+      it { is_expected.to be(false) }
+    end
+  end
 end

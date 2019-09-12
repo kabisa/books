@@ -5,6 +5,8 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
+    # Optimization step, tbd.
+    # @books = Book.includes(copies: [:borrowings, :location]).decorate
     @books = Book.all.decorate
   end
 
