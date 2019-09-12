@@ -12,8 +12,11 @@ RSpec.describe BorrowingsController, type: :controller do
 
     context 'with valid params' do
       let(:valid_attributes) {
-        { book_id: book.id,
-          copy_id: copy.id }
+        {
+          borrowing:
+          { book_id: book.id,
+            copy_id: copy.id }
+        }
       }
       let(:copy) { book.copies.first }
       let(:book) { create(:printed_book) }
