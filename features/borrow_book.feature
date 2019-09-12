@@ -28,7 +28,6 @@ Feature: As a Kabisaan
     And I cannot borrow "Lorem Ipsum"
     But I can return the book "Lorem Ipsum"
 
-  @wip
   Scenario: Show dialog when multiple copies
     Given I signed in as a Kabisaan
     And the following locations:
@@ -38,7 +37,7 @@ Feature: As a Kabisaan
     And I have the following printed book:
       | title       | location | copies |
       | Lorem Ipsum | Rome     | 1      |
-      | Lorem Ipsum | Florence     | 1      |
+      | Lorem Ipsum | Florence | 1      |
     When I choose "Books" from the navigation drawer
     And I borrow the book "Lorem Ipsum"
     And I choose the location "Rome" in the modal
@@ -50,7 +49,15 @@ Feature: As a Kabisaan
   @todo
   Scenario: Unable to borrow if all copies are gone
 
-  @todo
+  @wip
   Scenario: Guests cannot borrow books
+    Given the following locations:
+      | city     |
+      | Florence |
+    And I have the following printed book:
+      | title       | location | copies |
+      | Lorem Ipsum | Florence | 1      |
+    When I choose "Books" from the navigation drawer
+    Then I cannot borrow "Lorem Ipsum"
 
   Scenario: Undo a borrow action

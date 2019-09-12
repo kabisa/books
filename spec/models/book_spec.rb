@@ -13,14 +13,13 @@ RSpec.describe Book, type: :model do
 
     context 'borrowables' do
       subject { instance.copies.borrowables }
+
+      let(:user) { create(:user) }
       let(:instance) do
         book = build(:printed_book)
         book.copies = copies
         book.save
         book
-      end
-      let(:user) do
-        create(:user)
       end
 
       context 'every copy is borrowable' do
