@@ -5,28 +5,4 @@
     p= book.download_link
   - if book.is_a?(PrintedBook) && policy(book).borrow?
     p= book.available_copies
-    - if book.borrowed_by?(current_user)
-      = button_tag 'Return Book', class: 'btn btn-outline'
-    - elsif book.copies.borrowables.none?
-      = button_tag 'Borrow', class: 'btn btn-outline', disabled: true
-    - elsif book.copies.borrowables.one?
-      = button_to 'Borrow', borrowings_path(borrowing: { book_id: book, copy_id: book.copies.borrowables.first }), remote: true, class: 'btn btn-outline'
-    - else
-      = link_to 'Borrow...', '#', class: 'btn btn-outline', role: :button, data: { toggle: 'modal', target: "##{dom_id(book, :borrow)}" }
-      / Modal
-      div.modal.fade(id=dom_id(book, :borrow) aria-hidden='true' aria-labelledby='exampleModalLabel' role='dialog' tabindex='-1')
-        .modal-dialog(role='document')
-          = simple_form_for :borrowing, url: borrowings_path, method: :post, remote: true do |f|
-            = hidden_field :borrowing, :book_id, value: book.id
-
-            .modal-content
-              .modal-header
-                h5#exampleModalLabel.modal-title
-                  | Borrow
-                  =< book.title
-              .modal-body
-                p This book is available on multiple locations.
-                = f.input :copy_id, include_blank: false, collection: book.copies.borrowables, label_method: -> (c) { c.location.city }, label: 'Location', required: false
-              .modal-footer
-                button.btn data-dismiss='modal' type='button' Cancel
-                = f.button :submit, class: 'btn-primary', data: { target: "##{dom_id(book, :borrow)}", toggle: 'modal' }
+    = book.borrow_or_return_button
