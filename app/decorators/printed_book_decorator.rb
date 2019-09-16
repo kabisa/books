@@ -16,7 +16,7 @@ class PrintedBookDecorator < BookDecorator
   def return_button
     borrowing = borrow_by(h.current_user)
 
-    h.button_to 'Return Book', borrowing, method: :delete, remote: true, class: 'btn btn-outline'
+    h.button_to I18n.t('helpers.submit.borrowing.destroy'), borrowing, method: :delete, remote: true, class: 'btn btn-outline'
   end
 
   def borrow_button

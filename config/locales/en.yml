@@ -38,6 +38,7 @@ en:
         destroy: 'Log out'
       borrowing:
         submit: 'Borrow'
+        destroy: 'Return Book'
       cancel: &cancel 'Cancel'
       download: 'Download'
       remove_resource: 'Remove %{resource}'
