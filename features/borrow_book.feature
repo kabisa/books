@@ -46,7 +46,6 @@ Feature: As a Kabisaan
     And I cannot borrow "Lorem Ipsum"
     But I can return the book "Lorem Ipsum"
 
-  @wip
   Scenario: Unable to borrow if all copies are gone
     Given I signed in as a Kabisaan
     And the following locations:
@@ -74,4 +73,5 @@ Feature: As a Kabisaan
     When I choose "Books" from the navigation drawer
     Then I cannot borrow "Lorem Ipsum"
 
+  @todo
   Scenario: Undo a borrow action
