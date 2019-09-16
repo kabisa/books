@@ -58,6 +58,10 @@ en:
         'Create a new %{subject}'
     show:
       edit: 'Edit'
+  modals:
+    borrow:
+      title: 'Borrow %{title}'
+      content: 'This book is available on multiple locations.'
   # mailers:
   sessions_mailer:
     magic_link:
