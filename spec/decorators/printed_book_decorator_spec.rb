@@ -14,7 +14,7 @@ RSpec.describe PrintedBookDecorator do
     it { is_expected.to eql('2 copies') }
   end
 
-  describe '#borrow_or_return_button', focus: true do
+  describe '#borrow_or_return_button' do
     before { allow(decorator).to receive(:'borrowed_by?').and_return(false) }
 
     subject         { decorator.borrow_or_return_button }
@@ -22,9 +22,17 @@ RSpec.describe PrintedBookDecorator do
     let(:decorator) { described_class.new(instance) }
 
     context 'user is borrowing a copy' do
-    before { allow(decorator).to receive(:'borrowed_by?').and_return(true) }
+      before do
+        allow(decorator).to receive(:'borrowed_by?').and_return(true)
+        allow(decorator).to receive(:copies).and_return(double('copies', borrowables: [1]))
+        allow(decorator).to receive(:borrow_by).and_return(borrowing)
+      end
 
-      it { is_expected.to have_css('button.btn.btn-outline', text: 'Return Book') }
+      let(:borrowing) { build_stubbed(:borrowing) }
+
+      it { is_expected.to have_css('form[method="post"][action^="/borrowings"][data-remote="true"]') }
+      it { is_expected.to have_css('form input[name="_method"][value="delete"]', visible: false) }
+      it { is_expected.to have_css('form input.btn.btn-outline[value="Return Book"]') }
     end
 
     context 'copy is not borrowable' do

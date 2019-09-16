@@ -14,7 +14,9 @@ class PrintedBookDecorator < BookDecorator
   private
 
   def return_button
-    h.button_tag('Return Book', class: 'btn btn-outline')
+    borrowing = borrow_by(h.current_user)
+
+    h.button_to 'Return Book', borrowing, method: :delete, remote: true, class: 'btn btn-outline'
   end
 
   def borrow_button

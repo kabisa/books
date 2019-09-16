@@ -15,7 +15,7 @@ Given("there are {int} printed books") do |books_count|
   create_list :printed_book, books_count
 end
 
-Given("I have the following {book_type}:") do |book_type, table|
+Given("the following {book_type}:") do |book_type, table|
   factory = book_type.gsub(' ', '_').to_sym
 
   table.hashes.each do |h|
@@ -29,6 +29,13 @@ Given("I have the following {book_type}:") do |book_type, table|
   end
 end
 
+Given("I borrowed the book {string} {int} days ago") do |title, days_ago|
+  travel_to(days_ago.days.ago) do
+    step %q(I choose "Books" from the navigation drawer)
+    step %Q(I borrow the book "#{title}")
+  end
+end
+
 Then("I {can_or_not}borrow {string}") do |should_do, title|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
 
@@ -37,12 +44,17 @@ Then("I {can_or_not}borrow {string}") do |should_do, title|
   end
 end
 
-
 When("I borrow the book {string}") do |title|
   within('.list-group-item', text: title) do
     link_or_button = all('a', text: /^Borrow/i).first # Show a modal first
     link_or_button ||= find_button('Borrow') # Only 1 location available
     link_or_button.click
+  end
+end
+
+When("I return the book {string}") do |title|
+  within('.list-group-item', text: title) do
+    click_on('Return Book')
   end
 end
 

@@ -31,6 +31,24 @@ RSpec.describe PrintedBook, type: :model do
     it { is_expected.to eql(3) }
   end
 
+  describe '#borrow_by' do
+    let!(:borrowing) { Borrowing.create(user: user, copy: instance.copies.first) }
+    let(:instance)   { create :printed_book }
+    let(:user)       { create :user }
+
+    context 'borrowing found' do
+      subject { instance.borrow_by(user) }
+
+      it { is_expected.to eql(borrowing) }
+    end
+
+    context 'borrowing not found' do
+      subject { instance.borrow_by(build(:user)) }
+
+      it { is_expected.to be_nil }
+    end
+  end
+
   describe '#borrowed_by?' do
     before         { Borrowing.create(user: user, copy: instance.copies.first) }
     let(:instance) { create :printed_book }

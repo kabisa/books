@@ -15,4 +15,18 @@ class BorrowingsController < ApplicationController
     end
   end
 
+  def destroy
+    borrowing = authorize Borrowing.find(params[:id])
+    @book = borrowing.copy.book.decorate
+
+    respond_to do |format|
+      if borrowing.destroy
+        format.js { render :update }
+      else
+        #format.html { render :new }
+        #format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 end

@@ -8,7 +8,7 @@ Feature: As a Kabisaan
     And the following locations:
       | city     |
       | Rome     |
-    And I have the following printed book:
+    And the following printed book:
       | title       | location | copies |
       | Lorem Ipsum | Rome     | 1      |
     When I choose "Books" from the navigation drawer
@@ -19,7 +19,7 @@ Feature: As a Kabisaan
     And the following locations:
       | city     |
       | Rome     |
-    And I have the following printed book:
+    And the following printed book:
       | title       | location | copies |
       | Lorem Ipsum | Rome     | 1      |
     When I choose "Books" from the navigation drawer
@@ -34,7 +34,7 @@ Feature: As a Kabisaan
       | city     |
       | Rome     |
       | Florence |
-    And I have the following printed book:
+    And the following printed book:
       | title       | location | copies |
       | Lorem Ipsum | Rome     | 1      |
       | Lorem Ipsum | Florence | 1      |
@@ -54,10 +54,10 @@ Feature: As a Kabisaan
     And the following users:
       | email          |
       | john@kabisa.nl |
-    And I have the following printed book:
+    And the following printed book:
       | title       | location | copies |
       | Lorem Ipsum | Rome     | 1      |
-    And I have the following borrowings:
+    And the following borrowings:
       | title       | location | user           |
       | Lorem Ipsum | Rome     | john@kabisa.nl |
     When I choose "Books" from the navigation drawer
@@ -67,7 +67,7 @@ Feature: As a Kabisaan
     Given the following locations:
       | city     |
       | Florence |
-    And I have the following printed book:
+    And the following printed book:
       | title       | location | copies |
       | Lorem Ipsum | Florence | 1      |
     When I choose "Books" from the navigation drawer
