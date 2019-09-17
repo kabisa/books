@@ -1,8 +1,16 @@
-.list-group-item(id=dom_id(book))
-  h5.mb-1= book.title
-  small= book.formatted_type
-  - if book.is_a?(Ebook) && policy(book).borrow?
-    p= book.download_link
-  - if book.is_a?(PrintedBook) && policy(book).borrow?
-    p= book.available_copies
-    = book.borrow_or_return_button
+.expansion-panel.list-group-item(id=dom_id(book))
+  .expansion-panel-toggler.collapsed(data-toggle='collapse', data-target="##{dom_id(book, :collapse)}")
+    .media-body
+      h5.mb-1= book.title
+      small= book.formatted_type
+      - if book.is_a?(Ebook) && policy(book).borrow?
+        p= book.download_link
+      - if book.is_a?(PrintedBook) && policy(book).borrow?
+        p= book.available_copies
+        = book.borrow_or_return_button
+    .expansion-panel-icon.ml-3.text-black-secondary
+      i.collapsed-show.material-icons keyboard_arrow_down
+      i.collapsed-hide.material-icons keyboard_arrow_up
+  .collapse(id=dom_id(book, :collapse)  data-parent='#books')
+    .expansion-panel-body
+      = book.summary

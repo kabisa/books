@@ -14,6 +14,7 @@ Feature:
     Given I'm adding a new book
     When I fill in "Title" with "Awesome Book"
     And I fill in "Link" with "http://www.kabisa.nl/awesome_book.epub"
+    And I fill in "Summary" with "Lorem ipsum dolor sit amet."
     And I click "Save"
     Then I am viewing the book
     And it's an e-book

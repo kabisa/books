@@ -1,7 +1,4 @@
-.card
-  .card-body
-    .card-title
-      = Book.model_name.human.pluralize
+h2= Book.model_name.human.pluralize
 
-  .list-group.list-group-flush
-    = render @books
+#books.list-group
+  = render @books

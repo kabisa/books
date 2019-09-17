@@ -42,5 +42,17 @@ Feature:
     Then I see a list of 5 printed books
     And I see information about how many copies there are
 
+  @wip
+  Scenario: Expand panel for more details
+    Given I signed in as a Kabisaan
+    And the following e-books:
+      | title       | link                                  | summary                      |
+      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
+      | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
+    When I choose "Books" from the navigation drawer
+    Then I do not see the summary for "Lorem Ipsum"
+    When I expand the panel for "Lorem Ipsum"
+    Then I see the summary for "Lorem Ipsum"
+
   @todo
   Scenario: Empty state

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_082825) do
+ActiveRecord::Schema.define(version: 2019_09_17_064608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_082825) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "type"
     t.string "link", limit: 2048
+    t.string "summary", limit: 2048
   end
 
   create_table "borrowings", force: :cascade do |t|

@@ -8,5 +8,8 @@
     - if @book.is_a?(PrintedBook)
       p= @book.available_copies
 
+    - if @book.summary?
+      p.card-text= @book.summary
+
   .card-actions
     = link_to t('.edit'), edit_book_path(@book), class: 'btn btn-outline-primary', role: :button

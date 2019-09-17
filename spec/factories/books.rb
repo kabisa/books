@@ -9,6 +9,7 @@ FactoryBot.define do
     factory :ebook, class: Ebook do
       type { 'Ebook' }
       link { 'http://www.kabisa.nl' }
+      summary { 'Lorem Ipsum' }
     end
 
     factory :printed_book, class: PrintedBook do

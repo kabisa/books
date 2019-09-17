@@ -15,17 +15,21 @@ Given("there are {int} printed books") do |books_count|
   create_list :printed_book, books_count
 end
 
-Given("the following {book_type}:") do |book_type, table|
-  factory = book_type.gsub(' ', '_').to_sym
-
+Given("the following printed book(s):") do |table|
   table.hashes.each do |h|
     location = Location.find_by(city: h.delete('location'))
     number   = h.delete('copies')
 
-    book = Book.find_by(title: h['title']) || build(factory, h)
+    book = Book.find_by(title: h['title']) || build(:printed_book, h)
     book.copies.clear if book.new_record?
     book.copies.build(location: location, number: number)
     book.save
+  end
+end
+
+Given("the following e-book(s):") do |table|
+  table.hashes.each do |h|
+    create(:ebook, h)
   end
 end
 
@@ -144,6 +148,7 @@ Then("I am viewing the book") do
 
   expect(current_path).to eql(expected_path)
   expect(page).to have_content(book.title)
+  expect(page).to have_content(book.summary) if book.summary?
 end
 
 Then("I am adding a new book") do
@@ -199,4 +204,18 @@ Then("I see a validation error that duplicate locations are not allowed") do
   within('form') do
     expect(page).to have_content('must be unique')
   end
+end
+
+
+Then("I {do_or_not}see the summary for {string}") do |should_do, title|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+  book = Book.find_by(title: title)
+
+  within('.list-group-item', text: title) do
+    expect(page).send(to_have_or_not_have, have_text(book.summary))
+  end
+end
+
+When("I expand the panel for {string}") do |title|
+  find('.expansion-panel', text: title).click
 end
