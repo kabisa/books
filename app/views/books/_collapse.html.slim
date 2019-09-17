@@ -1,0 +1,10 @@
+.collapse(id=dom_id(book, :collapse)  data-parent='#books' class=('show' if local_assigns[:show]))
+  .expansion-panel-body
+    - if book.is_a?(PrintedBook) && policy(book).borrow?
+      p= book.available_copies
+    = book.summary
+  .expansion-panel-footer
+    - if book.is_a?(Ebook) && policy(book).borrow?
+      = book.download_link
+    - if book.is_a?(PrintedBook) && policy(book).borrow?
+      = book.borrow_or_return_button
