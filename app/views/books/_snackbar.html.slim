@@ -1,0 +1,5 @@
+.snackbar(data-controller='snackbar' data-target='snackbar.container')
+  .snackbar-body
+    = flash.map { |type, msg| msg }.to_sentence
+  button type="button" class="text-secondary close" data-dismiss="modal" aria-label="Close" data-action='snackbar#hide'
+    span aria-hidden="true" &times;
