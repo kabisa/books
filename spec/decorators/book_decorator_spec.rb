@@ -19,10 +19,10 @@ RSpec.describe BookDecorator do
   end
 
   describe '#dom_id' do
-    subject { decorator.dom_id }
+    subject { decorator.dom_id(:lorem) }
     let(:decorator) { described_class.new(book) }
     let(:book) { build :ebook }
 
-    it { is_expected.to eql('new_ebook') }
+    it { is_expected.to eql('lorem_ebook') }
   end
 end
