@@ -42,7 +42,6 @@ Feature:
     Then I see a list of 5 printed books
     And I see information about how many copies there are
 
-  @wip
   Scenario: Expand panel for more details
     Given I signed in as a Kabisaan
     And the following e-books:
