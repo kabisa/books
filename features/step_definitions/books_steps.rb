@@ -44,11 +44,14 @@ Then("I {can_or_not}borrow {string}") do |should_do, title|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
 
   within('.list-group-item', text: title) do
-    expect(page).send(to_have_or_not_have, have_button('Borrow'))
+    expect(page).send(to_have_or_not_have, have_button('Borrow', visible: false))
   end
 end
 
 When("I borrow the book {string}") do |title|
+  # Expand first
+  find('.expansion-panel', text: title).click
+
   within('.list-group-item', text: title) do
     link_or_button = all('a', text: /^Borrow/i).first # Show a modal first
     link_or_button ||= find_button('Borrow') # Only 1 location available
@@ -57,6 +60,9 @@ When("I borrow the book {string}") do |title|
 end
 
 When("I return the book {string}") do |title|
+  # Expand first
+  find('.expansion-panel', text: title).click
+
   within('.list-group-item', text: title) do
     click_on('Return Book')
   end
@@ -132,12 +138,12 @@ end
 Then("I {can_or_not}download the book") do |should_do|
   book                = Book.last
   to_have_or_not_have = should_do ? 'to' : 'not_to'
-  expect(page).send(to_have_or_not_have, have_link('cloud_download', href: book.link))
+  expect(page).send(to_have_or_not_have, have_link('Download', href: book.link))
 end
 
 Then("I {do_or_not}see information about how many copies there are") do |should_do|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
-  expect(page).send(to_have_or_not_have, have_content('copies'))
+  expect(page).send(to_have_or_not_have, have_css(:div, text: 'copies', visible: false))
 end
 
 Then("I am viewing the book") do
@@ -181,7 +187,7 @@ Then("I see a list of {int} {book_type}") do |items_count, type|
 end
 
 Then("I see {int} download links") do |items_count|
-  expect(page).to have_link('cloud_download', count: items_count)
+  expect(page).to have_link('Download', count: items_count, visible: false)
 end
 
 Then("I see there are {int} copies of the book") do |copies_count|

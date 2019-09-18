@@ -1,5 +1,5 @@
-var el = document.getElementById('<%= dom_id(@book, :collapse) %>')
-el.outerHTML = '<%= j render(partial: 'books/collapse', object: @book, as: :book, locals: { show: true }) %>'
+var el = document.getElementById('<%= @book.dom_id(:collapse) %>')
+el.outerHTML = '<%= j render(partial: 'books/collapse', object: @book, as: :book, locals: { show: true, parent: 'books' }) %>'
 
 $('#<%= @book.dom_id %>')
   .find('.floating-label .custom-select, .floating-label .form-control')

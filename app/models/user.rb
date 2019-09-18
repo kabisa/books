@@ -9,6 +9,10 @@ class User < ApplicationRecord
     false
   end
 
+  def identified?
+    true
+  end
+
   def invalidate_token
     update!(login_token: nil, login_token_valid_until: 1.year.ago)
   end

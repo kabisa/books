@@ -1,5 +1,5 @@
-.expansion-panel.list-group-item(id=dom_id(book))
-  .expansion-panel-toggler.collapsed(data-toggle='collapse' data-target="##{dom_id(book, :collapse)}")
+.expansion-panel.list-group-item(id=book.dom_id)
+  .expansion-panel-toggler.collapsed(data-toggle='collapse' data-target="##{book.dom_id(:collapse)}")
     .media-body.row
       .col-12
         h5.mb-1= book.title
@@ -7,4 +7,4 @@
     .expansion-panel-icon.ml-3.text-black-secondary
       i.collapsed-show.material-icons keyboard_arrow_down
       i.collapsed-hide.material-icons keyboard_arrow_up
-  = render partial: 'books/collapse', object: book, as: :book
+  = render partial: 'books/collapse', object: book, as: :book, locals: { parent: parent }

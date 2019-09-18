@@ -14,7 +14,7 @@ class BookDecorator < ApplicationDecorator
     I18n.t(object.type, scope: 'book_types')
   end
 
-  def dom_id
-    h.dom_id(object)
+  def dom_id(prefix = nil)
+    h.dom_id(object, prefix)
   end
 end

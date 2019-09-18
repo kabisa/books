@@ -3,6 +3,10 @@ class NullUser
     true
   end
 
+  def identified?
+    false
+  end
+
   def id
     nil
   end
