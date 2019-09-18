@@ -5,6 +5,10 @@ class BookPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
   def create?
     identified?
   end

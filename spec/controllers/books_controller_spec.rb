@@ -119,22 +119,22 @@ RSpec.describe BooksController, type: :controller do
     context 'printed book' do
       context 'with valid params' do
         let(:valid_attributes) {
-          attributes_for(:printed_book)
+          attributes_for(:ebook)
         }
 
         let(:invalid_attributes) {
-          attributes_for(:printed_book, :invalid)
+          attributes_for(:e_book, :invalid)
         }
 
-        it 'creates a new PrintedBook' do
+        it 'creates a new Ebook' do
           expect {
             do_post(valid_attributes)
-          }.to change(PrintedBook, :count).by(1)
+          }.to change(Ebook, :count).by(1)
         end
 
         it 'redirects to the created book' do
           do_post(valid_attributes)
-          expect(response).to redirect_to(PrintedBook.last)
+          expect(response).to redirect_to(Ebook.last)
         end
       end
 
@@ -181,16 +181,16 @@ RSpec.describe BooksController, type: :controller do
     end
   end
 
-  xdescribe "DELETE #destroy" do
-    it "destroys the requested book" do
-      book = Book.create! valid_attributes
+  describe 'DELETE #destroy' do
+    let!(:book) { create :book }
+
+    it 'destroys the requested book' do
       expect {
         delete :destroy, params: {id: book.to_param}, session: valid_session
       }.to change(Book, :count).by(-1)
     end
 
-    it "redirects to the books list" do
-      book = Book.create! valid_attributes
+    it 'redirects to the books list' do
       delete :destroy, params: {id: book.to_param}, session: valid_session
       expect(response).to redirect_to(books_url)
     end

@@ -4,7 +4,6 @@ Feature:
   So the application doesn't get polluted
 
   @javascript
-  @wip
   Scenario: Delete a book
     Given I signed in as a Kabisaan
     And the following e-books:
