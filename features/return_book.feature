@@ -14,6 +14,7 @@ Feature: As a Kabisaan
     And I borrowed the book "Lorem Ipsum" 10 days ago
     When I choose "Books" from the navigation drawer
     And I return the book "Lorem Ipsum"
+    And I see feedback about returning the book "Lorem Ipsum"
     Then I see the book "Lorem Ipsum" has 1 copy left
     And I can borrow "Lorem Ipsum"
 

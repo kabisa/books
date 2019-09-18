@@ -25,6 +25,7 @@ Feature: As a Kabisaan
     When I choose "Books" from the navigation drawer
     And I borrow the book "Lorem Ipsum"
     Then I see the book "Lorem Ipsum" has 0 copies left
+    And I see feedback about borrowing the book "Lorem Ipsum"
     And I cannot borrow "Lorem Ipsum"
     But I can return the book "Lorem Ipsum"
 

@@ -40,6 +40,18 @@ Given("I borrowed the book {string} {int} days ago") do |title, days_ago|
   end
 end
 
+Then("I see feedback about borrowing the book {string}") do |title|
+  within('.snackbar') do
+    expect(page).to have_content("You're now borrowing '#{title}'.")
+  end
+end
+
+Then("I see feedback about returning the book {string}") do |title|
+  within('.snackbar') do
+    expect(page).to have_content("Thank you for returning '#{title}'.")
+  end
+end
+
 Then("I {can_or_not}borrow {string}") do |should_do, title|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
 

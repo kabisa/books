@@ -36,6 +36,11 @@ RSpec.describe BorrowingsController, type: :controller do
         do_post(valid_attributes)
         expect(assigns(:book)).to be_decorated
       end
+
+      it 'sets a flash notice' do
+        do_post(valid_attributes)
+        expect(request.flash.notice).to match(/You're now borrowing/)
+      end
     end
   end
 
@@ -64,6 +69,11 @@ RSpec.describe BorrowingsController, type: :controller do
       it 'decorates the book' do
         do_delete(borrowing.to_param)
         expect(assigns(:book)).to be_decorated
+      end
+
+      it 'sets a flash notice' do
+        do_delete(borrowing.to_param)
+        expect(request.flash.notice).to match(/Thank you for returning/)
       end
     end
   end
