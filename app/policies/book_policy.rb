@@ -6,10 +6,19 @@ class BookPolicy < ApplicationPolicy
   end
 
   def create?
-    !user.anonymous?
+    identified?
+  end
+
+  def destroy?
+    identified?
   end
 
   def borrow?
-    !user.anonymous?
+    identified?
+  end
+
+  private
+  def identified?
+    user.identified?
   end
 end

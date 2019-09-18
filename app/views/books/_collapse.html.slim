@@ -5,6 +5,8 @@
     = book.summary
   - if current_user.identified?
     .expansion-panel-footer
+      = link_to t('helpers.submit.destroy'), book, method: :delete, class: 'btn btn-outline-danger'
+
       - if book.is_a?(Ebook) && policy(book).borrow?
         = book.download_link
       - if book.is_a?(PrintedBook) && policy(book).borrow?

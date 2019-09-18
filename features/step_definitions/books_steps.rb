@@ -71,6 +71,15 @@ When("I borrow the book {string}") do |title|
   end
 end
 
+When("I delete the book {string}") do |title|
+  # Expand first
+  find('.expansion-panel', text: title).click
+
+  within('.list-group-item', text: title) do
+    click_on('Delete')
+  end
+end
+
 When("I return the book {string}") do |title|
   # Expand first
   find('.expansion-panel', text: title).click

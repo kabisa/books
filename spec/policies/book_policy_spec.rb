@@ -10,6 +10,7 @@ describe BookPolicy, type: :policy do
     it { is_expected.to permit_action(:new) }
     it { is_expected.to permit_action(:create) }
     it { is_expected.to permit_action(:borrow) }
+    it { is_expected.to permit_action(:destroy) }
   end
 
   context 'unauthorized user' do
@@ -18,6 +19,7 @@ describe BookPolicy, type: :policy do
     it { is_expected.to forbid_action(:new) }
     it { is_expected.to forbid_action(:create) }
     it { is_expected.to forbid_action(:borrow) }
+    it { is_expected.to forbid_action(:destroy) }
   end
 
 end
