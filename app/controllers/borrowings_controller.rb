@@ -21,7 +21,7 @@ class BorrowingsController < ApplicationController
     @book = borrowing.copy.book.decorate
 
     respond_to do |format|
-      if borrowing.destroy
+      if borrowing.really_destroy!
         flash.now.notice = t('.notice', title: @book.title)
         format.js { render :create }
       else

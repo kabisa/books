@@ -32,3 +32,7 @@ end
 Then("I see an error telling me I am not unauthorized") do
   expect(page).to have_text('You are not authorized to perform this operation')
 end
+
+Then("I see a snackbar with a message") do
+  expect(page).to have_css('.snackbar.show')
+end
