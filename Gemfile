@@ -31,6 +31,7 @@ gem 'slim-rails' # Provides the generator settings required for Rails 3+ to use 
 gem 'simple_form' # Forms made easy!
 gem 'draper' # Draper adds an object-oriented layer of presentation logic to your Rails apps.
 gem 'pundit' # Object oriented authorization for Rails applications
+gem 'paranoia' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3, 4, and 5, using much, much, much less code.
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

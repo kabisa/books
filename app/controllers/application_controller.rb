@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
+  protect_from_forgery with: :exception
   before_action :make_action_mailer_use_request_host_and_protocol
   after_action :verify_authorized, except: :index
 

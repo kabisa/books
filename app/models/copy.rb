@@ -6,6 +6,8 @@ class Copy < ApplicationRecord
   validates :number, numericality: { greater_than: 0, only_integer: true }, if: :printed_book?
   validate :duplicate_locations_not_allowed
 
+  acts_as_paranoid
+
   # @return true if there's still a copy that can be borrowed.
   def borrowable?
     borrowings.size < number

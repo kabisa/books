@@ -10,6 +10,7 @@ class Book < ApplicationRecord
     end
   end
   accepts_nested_attributes_for :copies, allow_destroy: true
+  acts_as_paranoid
 
   class << self
     def policy_class

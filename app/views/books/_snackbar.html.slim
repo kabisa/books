@@ -1,5 +1,10 @@
-.snackbar(data-controller='snackbar' data-target='snackbar.container')
+- message = flash.map { |type, msg| msg }.to_sentence
+
+.snackbar(data-controller='snackbar' data-target='snackbar.container' class=('snackbar-multi-line' if message.size > 75))
   .snackbar-body
-    = flash.map { |type, msg| msg }.to_sentence
-  button type="button" class="text-secondary close" data-dismiss="modal" aria-label="Close" data-action='snackbar#hide'
+    = message
+    - if local_assigns[:action]
+      span.snackbar-btn.d-inline-block.ml-4
+        =< action
+  button type="button" class="text-light close ml-2" data-dismiss="modal" aria-label="Close" data-action='snackbar#hide'
     span aria-hidden="true" &times;

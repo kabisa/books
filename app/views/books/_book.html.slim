@@ -7,4 +7,4 @@
     .expansion-panel-icon.ml-3.text-black-secondary
       i.collapsed-show.material-icons keyboard_arrow_down
       i.collapsed-hide.material-icons keyboard_arrow_up
-  = render partial: 'books/collapse', object: book, as: :book, locals: { parent: parent }
+  = render partial: 'books/collapse', object: book, as: :book, locals: { show: local_assigns[:show], parent: parent }

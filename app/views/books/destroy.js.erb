@@ -1,0 +1,8 @@
+var el        = document.getElementById('<%= @book.dom_id %>');
+var restoreEl = document.createElement('div');
+restoreEl.id  = '<%= @book.dom_id %>'
+el.replaceWith(restoreEl);
+
+var snackbar       = document.createElement('div');
+snackbar.innerHTML = '<%= j render(partial: 'books/snackbar', locals: { action: link_to('Undo', restore_book_path(@book), method: :post, remote: true) }) %>';
+document.body.appendChild(snackbar.firstChild);

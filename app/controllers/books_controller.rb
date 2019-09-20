@@ -60,8 +60,19 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      flash.now.notice = t('.notice', title: @book.title)
+      format.html { redirect_to books_url }
       format.json { head :no_content }
+      format.js { }
+    end
+  end
+
+  def restore
+    @book = authorize Book.only_deleted.find(params[:id]).restore(recursive: true).decorate
+
+    respond_to do |format|
+      flash.now.notice = t('.notice')
+      format.js { }
     end
   end
 

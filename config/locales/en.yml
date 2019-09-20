@@ -60,6 +60,10 @@ en:
         'Create a new %{subject}'
     show:
       edit: 'Edit'
+    destroy:
+      notice: "'%{title}' deleted."
+    restore:
+      notice: "Action undone."
   borrowings:
     create:
       notice: "You're now borrowing '%{title}'."

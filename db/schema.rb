@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_064608) do
+ActiveRecord::Schema.define(version: 2019_09_19_102430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2019_09_17_064608) do
     t.string "type"
     t.string "link", limit: 2048
     t.string "summary", limit: 2048
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_books_on_deleted_at"
   end
 
   create_table "borrowings", force: :cascade do |t|
@@ -30,7 +32,9 @@ ActiveRecord::Schema.define(version: 2019_09_17_064608) do
     t.datetime "borrowed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["copy_id"], name: "index_borrowings_on_copy_id"
+    t.index ["deleted_at"], name: "index_borrowings_on_deleted_at"
     t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
 
@@ -40,7 +44,9 @@ ActiveRecord::Schema.define(version: 2019_09_17_064608) do
     t.integer "number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["book_id"], name: "index_copies_on_book_id"
+    t.index ["deleted_at"], name: "index_copies_on_deleted_at"
     t.index ["location_id"], name: "index_copies_on_location_id"
   end
 

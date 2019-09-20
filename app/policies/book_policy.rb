@@ -17,6 +17,10 @@ class BookPolicy < ApplicationPolicy
     identified?
   end
 
+  def restore?
+    identified?
+  end
+
   def borrow?
     identified?
   end

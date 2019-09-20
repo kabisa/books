@@ -1,0 +1,11 @@
+var el             = document.getElementById('<%= @book.dom_id %>');
+el.outerHTML       = '<%= j render(partial: 'books/book', object: @book, locals: { parent: 'books' }) %>';
+
+var snackbar       = document.createElement('div');
+snackbar.innerHTML = '<%= j render(partial: 'books/snackbar') %>';
+document.body.appendChild(snackbar.firstChild);
+
+$('#<%= @book.dom_id %> .collapse').collapse('show')
+$('#<%= @book.dom_id %>')
+  .find('.floating-label .custom-select, .floating-label .form-control')
+  .floatinglabel();
