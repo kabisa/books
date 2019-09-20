@@ -4,3 +4,8 @@
 .nested-form > :nth-last-child(2) {
   @extend .mb-3;
 }
+
+// Label for textarea's are a bit off
+textarea.form-control:not([rows='1']) {
+  margin-top: $textfield-margin-y;
+}
