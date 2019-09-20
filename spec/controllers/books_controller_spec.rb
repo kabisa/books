@@ -196,4 +196,24 @@ RSpec.describe BooksController, type: :controller do
     end
   end
 
+  describe 'POST #restore' do
+    before { book.destroy }
+
+    let!(:book) { create :book }
+
+    def do_post(id)
+      post :restore, xhr: true, params: {id: id}, session: valid_session
+    end
+
+    it 'restores the requested book' do
+      expect {
+        do_post(book.to_param)
+      }.to change(Book, :count).by(1)
+    end
+
+    it 'sets a flash notice' do
+      do_post(book.to_param)
+      expect(request.flash.notice).to match('Action undone.')
+    end
+  end
 end

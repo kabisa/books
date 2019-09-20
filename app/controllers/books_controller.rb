@@ -63,7 +63,7 @@ class BooksController < ApplicationController
       flash.now.notice = t('.notice', title: @book.title)
       format.html { redirect_to books_url }
       format.json { head :no_content }
-      format.js { }
+      format.js
     end
   end
 
@@ -72,7 +72,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       flash.now.notice = t('.notice')
-      format.js { }
+      format.js
     end
   end
 
