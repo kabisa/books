@@ -7,6 +7,8 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_length_of(:summary).is_at_most(2048) }
   end
 
+  it { is_expected.to act_as_paranoid }
+
   describe 'associations' do
     it { is_expected.to have_many(:copies).dependent(:destroy) }
     it { is_expected.to accept_nested_attributes_for(:copies).

@@ -7,6 +7,8 @@ RSpec.describe Copy, type: :model do
     it { is_expected.to have_many(:borrowings).dependent(:destroy) }
   end
 
+  it { is_expected.to act_as_paranoid }
+
   describe 'validations' do
     context 'number' do
       subject      { build(:copy, book: book, number: number) }

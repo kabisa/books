@@ -80,6 +80,13 @@ When("I delete the book {string}") do |title|
   end
 end
 
+
+When("I undo deleting the book") do
+  within('.snackbar.show') do
+    click_on('Undo')
+  end
+end
+
 When("I return the book {string}") do |title|
   # Expand first
   find('.expansion-panel', text: title).click

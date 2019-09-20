@@ -16,5 +16,16 @@ Feature:
     Then I see a snackbar with a message
     And I see a list of 2 e-books
 
-  @todo
+  @wip
   Scenario: Undo a deletion
+    Given I signed in as a Kabisaan
+    And the following e-books:
+      | title                       | link                                  | summary                      |
+      | Lorem Ipsum                 | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
+      | Dolor Sit                   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
+      | consectetur adipiscing elit | http://kabisa.nl/consectetur.pdf      | Consectetur adipiscing elit. |
+    And I choose "Books" from the navigation drawer
+    When I delete the book "Lorem Ipsum"
+    And I undo deleting the book
+    And I see a list of 3 e-books
+

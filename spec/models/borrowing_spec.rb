@@ -5,4 +5,6 @@ RSpec.describe Borrowing, type: :model do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:copy) }
   end
+
+  it { is_expected.to act_as_paranoid }
 end
