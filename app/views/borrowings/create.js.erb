@@ -1,7 +1,7 @@
 var el             = document.getElementById('<%= @book.dom_id(:collapse) %>');
 var snackbar       = document.createElement('div');
 el.outerHTML       = '<%= j render(partial: 'books/collapse', object: @book, as: :book, locals: { show: true, parent: 'books' }) %>';
-snackbar.innerHTML = '<%= j render(partial: 'shared/snackbar') %>';
+snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
 document.body.appendChild(snackbar.firstChild);
 
 $('#<%= @book.dom_id %>')
