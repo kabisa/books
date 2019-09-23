@@ -16,7 +16,6 @@ Feature:
     Then I see a snackbar with a message
     And I see a list of 2 e-books
 
-  @wip
   Scenario: Undo a deletion
     Given I signed in as a Kabisaan
     And the following e-books:
