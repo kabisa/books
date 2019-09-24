@@ -25,9 +25,21 @@ $(document).on('turbolinks:load', function() {
   $(
     '.floating-label .custom-select, .floating-label .form-control',
   ).floatinglabel();
+
   $('body').tooltip({
     selector: '[data-toggle="tooltip"]',
     container: 'body',
+  });
+
+  $('body').popover({
+    selector: '[data-toggle="popover"]',
+    container: 'body',
+    html: true,
+    trigger: 'hover',
+  });
+
+  $('.no-collapsible').click(function(e) {
+    e.stopPropagation();
   });
 });
 
