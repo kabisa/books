@@ -17,3 +17,20 @@ ParameterType(
   use_for_snippets: false,
   transformer: -> (str) { str != 'do not' }
 )
+
+ParameterType(
+  name: 'like_or_dislike_icon',
+  regexp: /Like|like|Dislike|dislike/,
+  use_for_snippets: false,
+  transformer: -> (str) do
+    { 'like' => 'thumb_up',
+      'dislike' => 'thumb_down'}[str.downcase]
+  end
+)
+
+ParameterType(
+  name: 'likes_or_dislikes',
+  regexp: /(?:people\s)(like|dislike)/,
+  use_for_snippets: false,
+  transformer: -> (str) { str }
+)

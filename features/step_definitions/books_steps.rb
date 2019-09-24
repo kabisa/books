@@ -71,6 +71,13 @@ When("I borrow the book {string}") do |title|
   end
 end
 
+
+When("I {like_or_dislike_icon} the book {string}") do |icon, title|
+  within('.list-group-item', text: title) do
+    click_on icon
+  end
+end
+
 When("I delete the book {string}") do |title|
   # Expand first
   find('.expansion-panel', text: title).click
@@ -79,7 +86,6 @@ When("I delete the book {string}") do |title|
     click_on('Delete')
   end
 end
-
 
 When("I undo deleting the book") do
   within('.snackbar.show') do
@@ -249,6 +255,19 @@ Then("I {do_or_not}see the summary for {string}") do |should_do, title|
     expect(page).send(to_have_or_not_have, have_text(book.summary))
   end
 end
+
+Then("I see a {like_or_dislike_icon} button for the book {string}") do |icon, title|
+  within('.list-group-item', text: title) do
+    expect(page).to have_button(icon)
+  end
+end
+
+Then("I see {int} {likes_or_dislikes} the book {string}") do |int, like_or_dislike, title|
+  within('.list-group-item', text: title) do
+    expect(page).to have_css(".vote .#{like_or_dislike}", text: int)
+  end
+end
+
 
 When("I expand the panel for {string}") do |title|
   find('.expansion-panel', text: title).click
