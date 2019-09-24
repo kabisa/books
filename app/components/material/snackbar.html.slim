@@ -1,4 +1,4 @@
-.snackbar(data-controller='snackbar' data-target='snackbar.container' class=('snackbar-multi-line' if message.size > 75))
+div(data-controller='snackbar' data-target='snackbar.container' class=snackbar_class)
   .snackbar-body
     = message
     - if action
