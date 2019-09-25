@@ -8,4 +8,8 @@ class VotePolicy < ApplicationPolicy
   def create?
     !user.anonymous?
   end
+
+  def destroy?
+    !user.anonymous?
+  end
 end

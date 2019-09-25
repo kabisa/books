@@ -1,9 +1,14 @@
 .vote.no-collapsible
-  = button_to book_likes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
-    i.material-icons thumb_up
-  span.like.mx-1= book.votes.where(like: true).count
+  - if (like = book.votes.find_by(user: current_user, like: true))
+    = button_to like_path(like), method: :delete, remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
+      i.material-icons thumb_up
+    span.like.mx-1= book.votes.where(like: true).count
+  - else
+    = button_to book_likes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
+      i.material-icons thumb_up
+    span.like.mx-1= book.votes.where(like: true).count
 
-  = button_to book_dislikes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
+  = button_to book_dislikes_path(book), method: (book.votes.find_by(user: current_user, dislike: true) ? :delete : nil), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
     i.material-icons thumb_down
   span.dislike.mx-1= book.votes.where(dislike: true).count
 

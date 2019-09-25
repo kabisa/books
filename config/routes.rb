@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :books do
     post 'restore', on: :member
-    resources :likes
+    resources :likes, shallow: true
     resources :dislikes
   end
 
