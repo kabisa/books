@@ -20,12 +20,14 @@ ParameterType(
 
 ParameterType(
   name: 'like_or_dislike_icon',
-  regexp: /((un)?like|dislike)/,
+  regexp: /((un)?(like|dislike))/,
   use_for_snippets: false,
   transformer: -> (str) do
     { 'like' => 'thumb_up',
       'unlike' => 'thumb_up',
-      'dislike' => 'thumb_down'}[str.downcase]
+      'dislike' => 'thumb_down',
+      'undislike' => 'thumb_down'
+    }[str.downcase]
   end
 )
 

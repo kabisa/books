@@ -45,6 +45,11 @@ Given("I liked the book {string}") do |title|
     step %Q(I like the book "#{title}")
 end
 
+Given("I disliked the book {string}") do |title|
+    step %q(I choose "Books" from the navigation drawer)
+    step %Q(I dislike the book "#{title}")
+end
+
 Then("I see feedback about borrowing the book {string}") do |title|
   within('.snackbar') do
     expect(page).to have_content("You're now borrowing '#{title}'.")

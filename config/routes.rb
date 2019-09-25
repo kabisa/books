@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :books do
     post 'restore', on: :member
     resources :likes, shallow: true
-    resources :dislikes
+    resources :dislikes, shallow: true
   end
 
   resources :ebooks, controller: 'books', type: 'Ebook'
