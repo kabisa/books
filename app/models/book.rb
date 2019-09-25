@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :summary, length: { maximum: 2048 }
 
+  has_many :votes, dependent: :destroy
   # Though `copies` is a PrintedBook attribute, we define it in the base class
   # so we can render a proper form.
   has_many :copies, dependent: :destroy do

@@ -38,7 +38,7 @@ $(document).on('turbolinks:load', function() {
     trigger: 'hover',
   });
 
-  $('.no-collapsible').click(function(e) {
+  $('body').on('click', '.no-collapsible', function(e) {
     e.stopPropagation();
   });
 });

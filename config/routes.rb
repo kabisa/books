@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :books do
     post 'restore', on: :member
+    resources :likes
   end
 
   resources :ebooks, controller: 'books', type: 'Ebook'

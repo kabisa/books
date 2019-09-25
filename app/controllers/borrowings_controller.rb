@@ -1,5 +1,4 @@
 class BorrowingsController < ApplicationController
-
   def create
     @book     = Book.find(params[:borrowing][:book_id]).decorate
     copy      = Copy.find(params[:borrowing][:copy_id])
@@ -30,5 +29,4 @@ class BorrowingsController < ApplicationController
       end
     end
   end
-
 end
