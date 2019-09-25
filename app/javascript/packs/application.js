@@ -43,4 +43,8 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
+$(document).on('ajax:before', function() {
+  $('.tooltip').tooltip('dispose');
+});
+
 import 'controllers';

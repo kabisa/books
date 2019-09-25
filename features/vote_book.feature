@@ -12,7 +12,6 @@ Feature: As a Kabisaan
     Then I see a Like button for the book "Lorem Ipsum"
     And I see a Dislike button for the book "Lorem Ipsum"
 
-  @wip
   Scenario: Like a book
     Given I signed in as a Kabisaan
     And the following e-books:
@@ -24,6 +23,15 @@ Feature: As a Kabisaan
     And I see 0 people dislike the book "Lorem Ipsum"
 
   Scenario: Dislike a book
+    Given I signed in as a Kabisaan
+    And the following e-books:
+      | title                       | link                                  | summary                      |
+      | Lorem Ipsum                 | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
+    And I choose "Books" from the navigation drawer
+    When I dislike the book "Lorem Ipsum"
+    Then I see 0 people like the book "Lorem Ipsum"
+    And I see 1 people dislike the book "Lorem Ipsum"
+
   Scenario: Dislike a book I liked before
 
   Scenario: See number of likes and dislikes for a book
