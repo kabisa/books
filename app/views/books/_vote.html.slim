@@ -1,7 +1,7 @@
-- like_count = book.votes.where(like: true).count
-- dislike_count = book.votes.where(dislike: true).count
-- like = book.votes.find_by(user: current_user, like: true)
-- dislike = book.votes.find_by(user: current_user, dislike: true)
+- like_count = book.likes.count
+- dislike_count = book.dislikes.count
+- like = book.likes.find_by(user: current_user)
+- dislike = book.dislikes.find_by(user: current_user)
 
 .vote.no-collapsible
   - if like

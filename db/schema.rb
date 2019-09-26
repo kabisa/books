@@ -66,13 +66,14 @@ ActiveRecord::Schema.define(version: 2019_09_25_081242) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.boolean "like"
-    t.boolean "dislike"
+    t.string "type"
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_votes_on_book_id"
+    t.index ["deleted_at"], name: "index_votes_on_deleted_at"
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 

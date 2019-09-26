@@ -1,0 +1,3 @@
+class Dislike < Vote
+
+end

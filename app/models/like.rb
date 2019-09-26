@@ -1,0 +1,3 @@
+class Like < Vote
+
+end

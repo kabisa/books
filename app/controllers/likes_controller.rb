@@ -3,11 +3,15 @@ class LikesController < ApplicationController
   before_action :set_vote, only: [:destroy]
 
   def create
-    @vote = authorize @book.votes.find_or_initialize_by(user: current_user)
-    @vote.like = true
-    @vote.dislike = nil
+    Vote.transaction do
+      if (dislike = @book.dislikes.find_by(user: current_user))
+        authorize dislike.really_destroy!
+      end
 
-    if @vote.save
+      @vote = authorize @book.likes.create(user: current_user)
+    end
+
+    if @vote.valid?
       respond_to do |format|
         flash.now.notice = t('.notice')
         format.js
@@ -16,9 +20,9 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @book = authorize @vote.book.decorate
+    authorize @vote.really_destroy!
+    @book = @vote.book.decorate
 
-    @vote.destroy
     respond_to do |format|
       flash.now.notice = t('.notice')
       format.js
