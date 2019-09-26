@@ -5,14 +5,6 @@
         .col-12
           h5.mb-1= book.title
           small= book.formatted_type
-
-      .xvote.text-right style=("min-width: 90px;")
-        | 83.3%
-        div(data-toggle='popover' data-content='<div><i class="material-icons">thumb_up</i>5<i class="material-icons">thumb_down</i>1</div>')
-          small 6 likes
-          .progress
-            .progress-bar aria-valuemax="100" aria-valuemin="0" aria-valuenow="83" role="progressbar" style=("width: 83%;")
-
       = render partial: 'books/vote', object: book, as: :book
 
     .expansion-panel-icon.ml-3.text-black-secondary

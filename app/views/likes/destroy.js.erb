@@ -1,5 +1,0 @@
-var el             = document.getElementById('<%= @book.dom_id %>').getElementsByClassName('vote')[0];
-var snackbar       = document.createElement('div');
-el.outerHTML       = '<%= j render(partial: 'books/vote', object: @book, as: :book) %>';
-snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
-document.body.appendChild(snackbar.firstChild);

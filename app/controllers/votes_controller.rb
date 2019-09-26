@@ -1,14 +1,14 @@
-class DislikesController < ApplicationController
+class VotesController < ApplicationController
   before_action :set_book, only: [:create]
   before_action :set_vote, only: [:destroy]
 
   def create
     Vote.transaction do
-      if (like = @book.likes.find_by(user: current_user))
-        authorize like.really_destroy!
+      if (dislike = votes[:previous].find_by(user: current_user))
+        authorize dislike.really_destroy!
       end
 
-      @vote = authorize @book.dislikes.create(user: current_user)
+      @vote = authorize votes[:current].create(user: current_user)
     end
 
     if @vote.valid?
@@ -38,4 +38,17 @@ class DislikesController < ApplicationController
   def set_book
     @book = Book.find(params[:book_id]).decorate
   end
+
+  def votes
+    case params[:type]
+    when 'Like'
+      { previous: dislikes,
+        current: likes }
+    when 'Dislike'
+      { previous: likes,
+        current: dislikes }
+    end
+  end
+
+  delegate :likes, :dislikes, to: :@book
 end
