@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2019_09_25_081242) do
     t.string "link", limit: 2048
     t.string "summary", limit: 2048
     t.datetime "deleted_at"
+    t.integer "likes_count", default: 0
+    t.integer "dislikes_count", default: 0
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
   end
 

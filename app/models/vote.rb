@@ -1,6 +1,5 @@
 class Vote < ApplicationRecord
   belongs_to :user
-  belongs_to :book
 
   acts_as_paranoid
 

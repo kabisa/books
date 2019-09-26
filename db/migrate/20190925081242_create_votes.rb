@@ -8,5 +8,8 @@ class CreateVotes < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_column :books, :likes_count, :integer, default: 0
+    add_column :books, :dislikes_count, :integer, default: 0
   end
 end
