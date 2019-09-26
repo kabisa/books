@@ -68,8 +68,8 @@ Feature:
       | title       | link                                  |
       | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub |
     And the following votes:
-      | title       | liked by                          | disliked by        |
-      | Lorem Ipsum | marty@kabisa.nl; emmett@kabisa.nl | lorraine@kabisa.nl |
+      | title       | liked by                         | disliked by        |
+      | Lorem Ipsum | marty@kabisa.nl emmett@kabisa.nl | lorraine@kabisa.nl |
     When I choose "Books" from the navigation drawer
     Then I see 2 people like the book "Lorem Ipsum"
     And I see 1 people dislike the book "Lorem Ipsum"

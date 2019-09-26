@@ -266,9 +266,11 @@ Then("I {do_or_not}see the summary for {string}") do |should_do, title|
   end
 end
 
-Then("I see a {like_or_dislike_icon} button for the book {string}") do |icon, title|
+Then("I {do_or_not}see a {like_or_dislike_icon} button for the book {string}") do |should_do, icon, title|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+
   within('.list-group-item', text: title) do
-    expect(page).to have_button(icon)
+    expect(page).send(to_have_or_not_have, have_button(icon))
   end
 end
 
