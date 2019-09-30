@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+# See https://github.com/voormedia/rails-erd/issues/322
+if Rails.env.development?
+  RailsERD.load_tasks
+
+  # TMP Fix for Rails 6.
+  Rake::Task["erd:load_models"].clear
+
+  namespace :erd do
+    task :load_models do
+      say "Loading application environment..."
+      Rake::Task[:environment].invoke
+
+      say "Loading code in search of Active Record models..."
+      Zeitwerk::Loader.eager_load_all
+    end
+  end
+end

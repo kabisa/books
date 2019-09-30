@@ -79,6 +79,7 @@ GEM
       xpath (~> 3.2)
     childprocess (2.0.0)
       rake (< 13.0)
+    choice (0.2.0)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     cucumber (3.1.2)
@@ -177,6 +178,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    railroady (1.5.3)
     rails (6.0.0)
       actioncable (= 6.0.0)
       actionmailbox (= 6.0.0)
@@ -199,6 +201,11 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
+    rails-erd (1.6.0)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.2.0)
       loofah (~> 2.2, >= 2.2.2)
     railties (6.0.0)
@@ -233,6 +240,7 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.2)
+    ruby-graphviz (1.2.4)
     ruby_dep (1.5.0)
     ruby_http_client (3.3.0)
     rubyzip (1.2.3)
@@ -325,8 +333,10 @@ DEPENDENCIES
   puma
   pundit
   pundit-matchers
+  railroady
   rails (~> 6.0.0)
   rails-controller-testing
+  rails-erd
   rspec-collection_matchers
   rspec-rails (~> 3.8)
   sass-rails

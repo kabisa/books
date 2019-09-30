@@ -1,0 +1,8 @@
+attributes:
+  - content
+  - inheritance
+filename: 'docs/erd'
+filetype: svg
+inheritance: true
+notation: bachman
+title: Class Diagram Books
