@@ -56,8 +56,6 @@ Feature:
   @todo
   Scenario: Empty state
 
-
-  @wip
   Scenario: View vote info
     Given the following users:
       | email              |
