@@ -3,23 +3,35 @@
 - like = book.likes.find_by(user: current_user)
 - dislike = book.dislikes.find_by(user: current_user)
 
-.vote.no-collapsible
-  - if like
-    = button_to like_path(like), method: :delete, remote: true, class: 'btn btn-float btn-sm shadow-none text-secondary', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
-      i.material-icons thumb_up
-    span.like.text-secondary.mx-1= like_count
-  - else
-    = button_to book_likes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
-      i.material-icons thumb_up
-    span.like.mx-1= like_count
+.vote
+  - if current_user.identified?
+    .no-collapsible
+      - if like
+        = button_to like_path(like), method: :delete, remote: true, class: 'btn btn-float btn-sm shadow-none text-secondary', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
+          i.material-icons thumb_up
+        span.like.text-secondary.mx-1= like_count
+      - else
+        = button_to book_likes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
+          i.material-icons thumb_up
+        span.like.mx-1= like_count
 
-  - if dislike
-    = button_to dislike_path(dislike), method: :delete, remote: true, class: 'btn btn-float btn-sm shadow-none text-secondary', form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
-      i.material-icons thumb_down
-    span.dislike.text-secondary.mx-1= dislike_count
-  - else
-    = button_to book_dislikes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
-      i.material-icons thumb_down
-    span.dislike.mx-1= dislike_count
+      - if dislike
+        = button_to dislike_path(dislike), method: :delete, remote: true, class: 'btn btn-float btn-sm shadow-none text-secondary', form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
+          i.material-icons thumb_down
+        span.dislike.text-secondary.mx-1= dislike_count
+      - else
+        = button_to book_dislikes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
+          i.material-icons thumb_down
+        span.dislike.mx-1= dislike_count
+    = render(VoteBar, like_count: like_count, dislike_count: dislike_count, has_voted: (like || dislike))
 
-  = render(VoteBar, like_count: like_count, dislike_count: dislike_count, has_voted: (like || dislike))
+  - else
+      .text-right style=("min-width: 90px;")
+        = "#{(100*like_count/(like_count + dislike_count))}%"
+        - popover = '<div><i class="material-icons mx-2">thumb_up</i>5<i class="material-icons text-muted mx-2">thumb_down</i>1</div>'
+        div(data-toggle='popover' data-content=popover)
+          small= "#{like_count} likes"
+          .progress.mt-1
+            .progress-bar aria-valuemax=book.votes.count aria-valuemin="0" aria-valuenow=like_count role="progressbar" style=("width: #{book.votes.none? ? 0 : 100*like_count/book.votes.count}%;")
+
+

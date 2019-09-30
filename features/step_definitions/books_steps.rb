@@ -280,6 +280,11 @@ Then("I see {int} {likes_or_dislikes} the book {string}") do |int, like_or_disli
   end
 end
 
+Then("I see {string} for the book {string}") do |text, title|
+  within('.list-group-item', text: title) do
+    expect(page).to have_content(text)
+  end
+end
 
 When("I expand the panel for {string}") do |title|
   find('.expansion-panel', text: title).click

@@ -71,8 +71,8 @@ Feature:
       | title       | liked by                         | disliked by        |
       | Lorem Ipsum | marty@kabisa.nl emmett@kabisa.nl | lorraine@kabisa.nl |
     When I choose "Books" from the navigation drawer
-    Then I see 2 people like the book "Lorem Ipsum"
-    And I see 1 people dislike the book "Lorem Ipsum"
+    Then I see "2 likes" for the book "Lorem Ipsum"
+    And I see "66%" for the book "Lorem Ipsum"
     But I do not see a like button for the book "Lorem Ipsum"
     And I do not see a dislike button for the book "Lorem Ipsum"
 
