@@ -22,7 +22,6 @@ describe VoteBar do
     let(:options) { { like_count: 0, dislike_count: 0 } }
 
     it { is_expected.to have_css('.progress[title="0/0"][data-toggle="tooltip"]') }
-
     it { is_expected.to have_css('.progress-bar[aria-valuemax="0"][aria-valuemin="0"][aria-valuenow="0"]') }
     it { is_expected.to have_css('.progress-bar[style="width: 0%;"]') }
     it { is_expected.to have_css('.progress-bar.bg-dark') }

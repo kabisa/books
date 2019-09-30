@@ -14,15 +14,7 @@ class VoteBar < ActionView::Component::Base
     like_count + dislike_count
   end
 
-  def width
-    return 0 if vote_count.zero?
-
-    100*like_count/vote_count
-  end
-
-  def progressbar_class
-    progressbar_class = %w(progress-bar)
-    progressbar_class << (has_voted ? 'bg-secondary' : 'bg-dark')
-    progressbar_class
+  def background
+    has_voted ? 'secondary' : 'dark'
   end
 end

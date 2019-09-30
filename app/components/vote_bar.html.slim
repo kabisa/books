@@ -1,2 +1,1 @@
-.progress(title="#{like_count}/#{dislike_count}" data-toggle="tooltip")
-  div(class=progressbar_class aria-valuemax=vote_count aria-valuemin="0" aria-valuenow=like_count role="progressbar" style="width: #{width}%;")
+= render(Material::Progress, value: { now: like_count, max: vote_count }, background: background, html: { title: "#{like_count}/#{dislike_count}",  data: { toggle: 'tooltip' }})
