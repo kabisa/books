@@ -30,11 +30,11 @@ Since I never used [Material Design](https://material.io/) before, I thought thi
 
 ### Class diagram
 
-A diagram of the models is available [here](docs/erd.svg).  
+![erd.svg](docs/erd.svg)
+
 To update the diagram, run the following command:
 
 `bin/rails erd`
-
 
 ### SendGrid
 
