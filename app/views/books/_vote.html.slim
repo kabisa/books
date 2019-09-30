@@ -31,7 +31,4 @@
         - popover = '<div><i class="material-icons mx-2">thumb_up</i>5<i class="material-icons text-muted mx-2">thumb_down</i>1</div>'
         div(data-toggle='popover' data-content=popover)
           small= "#{like_count} likes"
-          .progress.mt-1
-            .progress-bar aria-valuemax=book.votes.count aria-valuemin="0" aria-valuenow=like_count role="progressbar" style=("width: #{book.votes.none? ? 0 : 100*like_count/book.votes.count}%;")
-
-
+          .mt-1= render(Material::Progress, value: { now: like_count, max: book.votes.count })
