@@ -6,23 +6,7 @@
 .vote
   - if current_user.identified?
     .no-collapsible
-      - if like
-        = button_to like_path(like), method: :delete, remote: true, class: 'btn btn-float btn-sm shadow-none text-secondary', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
-          i.material-icons thumb_up
-        span.like.text-secondary.mx-1= like_count
-      - else
-        = button_to book_likes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
-          i.material-icons thumb_up
-        span.like.mx-1= like_count
-
-      - if dislike
-        = button_to dislike_path(dislike), method: :delete, remote: true, class: 'btn btn-float btn-sm shadow-none text-secondary', form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
-          i.material-icons thumb_down
-        span.dislike.text-secondary.mx-1= dislike_count
-      - else
-        = button_to book_dislikes_path(book), remote: true, class: 'btn btn-float btn-sm shadow-none', form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
-          i.material-icons thumb_down
-        span.dislike.mx-1= dislike_count
+      = book.vote_buttons
     .mt-1= render(VoteBar, like_count: like_count, dislike_count: dislike_count, has_voted: (like || dislike))
 
   - else

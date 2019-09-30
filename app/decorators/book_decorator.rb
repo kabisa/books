@@ -18,7 +18,24 @@ class BookDecorator < ApplicationDecorator
     h.dom_id(object, prefix)
   end
 
+  def vote_buttons
+    options = {
+      book: object,
+      like_count: likes.size,
+      dislike_count: dislikes.size,
+      like: likes.find_by(user: h.current_user),
+      dislike: dislikes.find_by(user: h.current_user)
+    }
+
+    h.render(BookComponents::VoteButtons, options)
+  end
+
   def vote_stats
-    h.render(BookComponents::VoteStats, like_count: likes.count, dislike_count: dislikes.count)
+    options = {
+      like_count: likes.count,
+      dislike_count: dislikes.count
+    }
+
+    h.render(BookComponents::VoteStats, options)
   end
 end
