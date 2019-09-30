@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Material::Progress do
   subject       { Capybara.string html }
-  let(:html)    {  render_inline(Material::Progress, options) }
+  let(:html)    {  render_inline(described_class, options) }
   let(:options) { { value: value } }
   let(:value)   { { now: 3, min: 0, max: 4 } }
 

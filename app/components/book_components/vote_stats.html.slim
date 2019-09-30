@@ -1,0 +1,5 @@
+  = "#{percentage}%"
+  div(data-toggle='popover' data-content=popover)
+    small= "#{like_count} likes"
+    .mt-1= render(Material::Progress, value: { now: like_count, max: total_count })
+

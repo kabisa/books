@@ -17,4 +17,8 @@ class BookDecorator < ApplicationDecorator
   def dom_id(prefix = nil)
     h.dom_id(object, prefix)
   end
+
+  def vote_stats
+    h.render(BookComponents::VoteStats, like_count: likes.count, dislike_count: dislikes.count)
+  end
 end
