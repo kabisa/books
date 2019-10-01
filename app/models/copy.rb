@@ -7,6 +7,7 @@ class Copy < ApplicationRecord
   validate :duplicate_locations_not_allowed
 
   acts_as_paranoid
+  delegate :to_s, to: :book
 
   # @return true if there's still a copy that can be borrowed.
   def borrowable?

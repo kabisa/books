@@ -17,6 +17,10 @@ class User < ApplicationRecord
     update!(login_token: nil, login_token_valid_until: 1.year.ago)
   end
 
+  def to_s
+    email.inspect
+  end
+
   def self.valid_with_token(token)
     where(login_token: token)
       .where('login_token_valid_until > ?', Time.now).first

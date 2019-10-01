@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'rspec-collection_matchers'
   gem 'factory_bot_rails' # factory_bot_rails provides integration between factory_bot and rails 4.2 or newer
+  gem 'faker' # easily generate fake data: names, addresses, phone numbers, etc.
 end
 
 group :development do

@@ -28,4 +28,8 @@ class Book < ApplicationRecord
   def to_partial_path
     'books/book'
   end
+
+  def to_s
+    title.inspect
+  end
 end
