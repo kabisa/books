@@ -2,7 +2,7 @@
   .expansion-panel-body
     - if book.is_a?(PrintedBook) && policy(book).borrow?
       p= book.available_copies
-    = book.summary
+    = simple_format book.summary
   - if current_user.identified?
     .expansion-panel-footer
       = link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'btn btn-outline-danger'

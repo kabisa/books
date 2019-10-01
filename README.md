@@ -22,6 +22,12 @@ This version has been deployed as described [here](https://devcenter.heroku.com/
 - Visit your app at [http://localhost:3000](http://localhost:3000).
 
 
+### Populate the database
+
+The project comes with a `seed.rb` which you can use to populate your development environment:
+
+`bin/rails db:seed [USERS_COUNT=n] [BOOKS_COUNT=m]`
+
 ## Technical details
 
 ### Daemonite's Material UI

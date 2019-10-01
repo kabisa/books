@@ -12,6 +12,7 @@ FactoryBot.define do
 
     trait :random do
       email { "#{Faker::Name.unique.first_name.downcase}@kabisa.nl" }
+      login_token { Faker::Crypto.unique.md5 }
     end
   end
 

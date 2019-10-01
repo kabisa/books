@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :book do
     title { 'MyString' }
-    summary { Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 10) }
+    summary { Array.new(rand(6)) { Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 5) }.join("\n") }
 
     trait :invalid do
       title { '' }
@@ -12,8 +12,8 @@ FactoryBot.define do
       link { 'http://www.kabisa.nl' }
 
       trait :random do
-        title { Faker::Book.unique.title }
-        link { Faker::Internet.unique.url }
+        title { Faker::Book.title }
+        link { Faker::Internet.url }
       end
     end
 
@@ -25,7 +25,7 @@ FactoryBot.define do
       end
 
       trait :random do
-        title { Faker::Book.unique.title }
+        title { Faker::Book.title }
       end
     end
   end

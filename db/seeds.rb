@@ -6,41 +6,51 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Book.with_deleted.each(&:really_destroy!)
+# bin/rails db:seed USERS_COUNT=10 BOOKS_COUNT=100
+
+say("Truncate database.")
+books = Book.with_deleted
+say("Deleting #{books.count} books.")
+books.each(&:really_destroy!)
+
+say("Deleting users.")
 User.destroy_all
+say("Deleting locations.")
 Location.destroy_all
 
 %w(Weert Amsterdam Eindhoven).map { |city| Location.create(city: city) }
+say("Created #{Location.count} locations.")
 
 if Rails.env.development?
   include FactoryBot::Syntax::Methods
 
-  USER_COUNT = 50
-  EBOOKS_COUNT = 20#0
-  PRINTED_BOOKS_COUNT = 20#0
-
-  STDOUT.puts "What's your email address?"
-  email = STDIN.gets.strip.downcase
-  User.create!(email: email)
+  USER_COUNT = ENV.fetch('USERS_COUNT', 50).to_i
+  BOOKS_COUNT = ENV.fetch('BOOKS_COUNT', 200).to_i
+  EBOOKS_COUNT = BOOKS_COUNT/2
+  PRINTED_BOOKS_COUNT = BOOKS_COUNT/2
 
   create_list(:user, USER_COUNT, :random)
-  say("Created #{USER_COUNT} users.")
+  STDOUT.puts "What's your email address?"
+  email = STDIN.gets.strip.downcase
+  current_user = User.find_or_create_by!(attributes_for(:user, :random).merge(email: email))
 
-  EBOOKS_COUNT.times do
-    create(:ebook, :random)
-  end
-  say("Created #{EBOOKS_COUNT} e-books.")
+  say("Created #{User.count} users.")
+
+  create_list(:ebook, EBOOKS_COUNT, :random)
+  say("Created #{Ebook.count} e-books.")
 
   PRINTED_BOOKS_COUNT.times do
     book = build(:printed_book, :random)
     book.copies.clear
+
     Location.all.each do |location|
       book.copies.build(location: location, number: rand(5))
     end
+
     book.save
   end
 
-  say("Created #{PRINTED_BOOKS_COUNT} printed books.")
+  say("Created #{PrintedBook.count} printed books.")
 
   PrintedBook.all.each do |book|
     count = rand(book.copies.count)
@@ -49,7 +59,7 @@ if Rails.env.development?
 
     copies.each_with_index do |copy, i|
       borrower = borrowers[i]
-      say("#{borrower} borrows #{copy}")
+      say("#{borrower} borrows #{copy}.")
       copy.borrowings.create(user: borrower)
     end
   end
@@ -59,10 +69,15 @@ if Rails.env.development?
 
     Book.all.sample(rand(Book.count)).in_groups(2, false) do |group|
       group.each do |book|
+        say("#{user} #{votes} #{book}")
         book.send(votes).create(user: user)
       end
 
       votes = :dislikes
     end
   end
+
+  include Rails.application.routes.url_helpers
+  url = token_sign_in_url(current_user.login_token, host: 'localhost:3000')
+  say "Start a Rails server and navigate to #{url}."
 end
