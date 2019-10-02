@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_081242) do
+ActiveRecord::Schema.define(version: 2019_10_02_075116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_081242) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
+    t.integer "borrowings_count", default: 0
     t.index ["book_id"], name: "index_copies_on_book_id"
     t.index ["deleted_at"], name: "index_copies_on_deleted_at"
     t.index ["location_id"], name: "index_copies_on_location_id"
