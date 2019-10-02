@@ -40,6 +40,7 @@ en:
       borrowing:
         submit: 'Borrow'
         destroy: 'Return Book'
+      edit: 'Edit'
       cancel: &cancel 'Cancel'
       download: 'Download'
       remove_resource: 'Remove %{resource}'

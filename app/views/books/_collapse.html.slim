@@ -6,6 +6,7 @@
   - if current_user.identified?
     .expansion-panel-footer
       = link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'btn btn-outline'
+      = link_to t('helpers.submit.edit'), edit_book_path(book), class: 'btn btn-outline'
 
       - if book.is_a?(Ebook) && policy(book).borrow?
         = book.download_link
