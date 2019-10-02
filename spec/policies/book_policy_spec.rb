@@ -9,6 +9,7 @@ describe BookPolicy, type: :policy do
 
     it { is_expected.to permit_action(:new) }
     it { is_expected.to permit_action(:create) }
+    it { is_expected.to permit_action(:update) }
     it { is_expected.to permit_action(:borrow) }
     it { is_expected.to permit_action(:destroy) }
     it { is_expected.to permit_action(:show) }
@@ -19,6 +20,7 @@ describe BookPolicy, type: :policy do
 
     it { is_expected.to forbid_action(:new) }
     it { is_expected.to forbid_action(:create) }
+    it { is_expected.to forbid_action(:update) }
     it { is_expected.to forbid_action(:borrow) }
     it { is_expected.to forbid_action(:destroy) }
     it { is_expected.to permit_action(:show) }

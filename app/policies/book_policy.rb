@@ -13,6 +13,10 @@ class BookPolicy < ApplicationPolicy
     identified?
   end
 
+  def update?
+    identified?
+  end
+
   def destroy?
     identified?
   end
