@@ -10,7 +10,7 @@ describe VoteBar do
 
   it { is_expected.to have_css('.progress-bar[aria-valuemax="100"][aria-valuemin="0"][aria-valuenow="75"]') }
   it { is_expected.to have_css('.progress-bar[style="width: 75%;"]') }
-  it { is_expected.to have_css('.progress-bar.bg-secondary') }
+  it { is_expected.to have_css('.progress-bar.bg-primary') }
 
   context 'not voted yet' do
     let(:options) { { like_count: 75, dislike_count: 25, has_voted: false } }

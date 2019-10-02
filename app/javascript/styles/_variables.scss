@@ -1,6 +1,7 @@
 @import '~daemonite-material/assets/scss/colors';
 
-// See https://www.materialpalette.com for inspiration.
+// See https://www.materialpalette.com/blue/deep-orange
+// for an impression and more inspiration.
 
 $primary: (
   color: $material-color-blue-500,
@@ -13,3 +14,7 @@ $secondary: (
   dark: $material-color-deep-orange-a400,
   light: $material-color-deep-orange-a100,
 );
+
+$textfield-border-color-focus: map-get($primary, color);
+$floating-label-color-focus: $textfield-border-color-focus;
+$form-feedback-valid-color: $black-primary;

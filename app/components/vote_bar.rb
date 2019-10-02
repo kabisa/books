@@ -15,6 +15,6 @@ class VoteBar < ActionView::Component::Base
   end
 
   def background
-    has_voted ? 'secondary' : 'dark'
+    has_voted ? 'primary' : 'dark'
   end
 end
