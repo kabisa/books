@@ -54,6 +54,7 @@ group :development do
   gem 'letter_opener' # When mail is sent from your application, Letter Opener will open a preview in the browser instead of sending.
   gem 'rails-erd'
   gem 'railroady'
+  gem 'bullet'
 end
 
 group :test do
