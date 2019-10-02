@@ -305,6 +305,12 @@ Then("I see {string} for the book {string}") do |text, title|
   end
 end
 
+Then("I can not change to type of the book") do
+  within('form') do
+    expect(page).not_to have_css('input[name="book[type]"]')
+  end
+end
+
 When("I expand the panel for {string}") do |title|
   find('.expansion-panel', text: title).click
 end
