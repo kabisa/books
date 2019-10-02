@@ -33,6 +33,7 @@ en:
   helpers:
     submit:
       create: Save
+      update: Save
       destroy: Delete
       session:
         create: &sign_in 'Sign in'

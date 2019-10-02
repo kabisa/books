@@ -185,13 +185,22 @@ Then("I {can_or_not}download the book") do |should_do|
   expect(page).send(to_have_or_not_have, have_link('Download', href: book.link))
 end
 
-Then("I {can_or_not}edit the book {string}") do |should_do, title|
+Then("I {can_or_not}edit {string}") do |should_do, title|
   # Expand first
   find('.expansion-panel', text: title).click
   to_have_or_not_have = should_do ? 'to' : 'not_to'
 
   within('.list-group-item', text: title) do
     expect(page).send(to_have_or_not_have, have_link('Edit'))
+  end
+end
+
+When("I edit the book {string}") do |title|
+  # Expand first
+  find('.expansion-panel', text: title).click
+
+  within('.list-group-item', text: title) do
+    click_on('Edit')
   end
 end
 
