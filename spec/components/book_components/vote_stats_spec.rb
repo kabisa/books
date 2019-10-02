@@ -9,5 +9,5 @@ describe BookComponents::VoteStats do
   it { is_expected.to have_css('div', text: '3 likes') }
   it { is_expected.to have_css('div[data-toggle="popover"][data-content*="thumb_up"][data-content*="3"]') }
   it { is_expected.to have_css('div[data-toggle="popover"][data-content*="thumb_down"][data-content*="1"]') }
-  it { is_expected.to have_css('.progress') }
+  it { is_expected.to have_css('.progress .progress-bar.bg-primary') }
 end
