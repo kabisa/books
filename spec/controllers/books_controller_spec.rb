@@ -18,14 +18,23 @@ RSpec.describe BooksController, type: :controller do
   let(:valid_session)      { { user_id: current_user.id } }
 
   describe 'GET #index' do
-    it 'returns a success response' do
+    def do_get
       get :index, session: valid_session
+    end
+
+    it 'returns a success response' do
+      do_get
       expect(response).to be_successful
     end
 
     it 'decorates the collection' do
-      get :index, session: valid_session
+      do_get
       expect(assigns(:books)).to be_decorated
+    end
+
+    it 'avoids N+1 queries' do
+      expect(Book).to receive(:includes).with(copies: [:location]).and_call_original
+      do_get
     end
   end
 
