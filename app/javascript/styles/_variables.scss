@@ -1,0 +1,15 @@
+@import '~daemonite-material/assets/scss/colors';
+
+// See https://www.materialpalette.com for inspiration.
+
+$primary: (
+  color: $material-color-blue-500,
+  dark: $material-color-blue-700,
+  light: $material-color-blue-100,
+);
+
+$secondary: (
+  color: $material-color-deep-orange-a200,
+  dark: $material-color-deep-orange-a400,
+  light: $material-color-deep-orange-a100,
+);
