@@ -24,7 +24,6 @@ class VotesController < ApplicationController
     @book = @vote.book.decorate
 
     respond_to do |format|
-      flash.now.notice = t('.notice')
       format.js
     end
   end

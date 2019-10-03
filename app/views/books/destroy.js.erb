@@ -4,5 +4,5 @@ restoreEl.id  = '<%= @book.dom_id %>'
 el.replaceWith(restoreEl);
 
 var snackbar       = document.createElement('div');
-snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash, action: link_to('Undo', restore_book_path(@book), method: :post, remote: true)) %>';
+snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash, action: link_to(t('helpers.submit.undo'), restore_book_path(@book), method: :post, remote: true)) %>';
 document.body.appendChild(snackbar.firstChild);

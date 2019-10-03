@@ -44,6 +44,7 @@ en:
       edit: 'Edit'
       cancel: &cancel 'Cancel'
       download: 'Download'
+      undo: 'Undo'
       remove_resource: 'Remove %{resource}'
   # pages
   application:
@@ -71,6 +72,9 @@ en:
       notice: "You're now borrowing '%{title}'."
     destroy:
       notice: "Thank you for returning '%{title}'."
+  votes:
+    create:
+      notice: "Your vote has been registered."
   modals:
     borrow:
       title: 'Borrow %{title}'
