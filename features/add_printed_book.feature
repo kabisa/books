@@ -16,7 +16,6 @@ Feature:
     And I toggle "Type" to "Printed book"
     And I click "Save"
     Then I am viewing the book
-    But I cannot download the book
     And it's a printed book
     And I am seeing the button for adding a new book
 

@@ -18,7 +18,6 @@ Feature:
     And I click "Save"
     Then I am viewing the book
     And it's an e-book
-    And I can download the book
     And I can edit the book
     And I am seeing the button for adding a new book
 

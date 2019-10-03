@@ -1,15 +1,13 @@
 .card
-  .card-body
+  .card-header
     h1.card-title.mb-1= @book.title
     small= @book.formatted_type
-    - if @book.is_a?(Ebook)
-      p= @book.download_link
-
+  .card-body
     - if @book.is_a?(PrintedBook)
       p= @book.available_copies
 
     - if @book.summary?
-      p.card-text= @book.summary
+      = simple_format @book.summary, class: 'card-text'
 
-  .card-actions
+  .card-footer
     = link_to t('.edit'), edit_book_path(@book), class: 'btn btn-outline-primary', role: :button

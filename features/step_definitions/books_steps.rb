@@ -179,12 +179,6 @@ Then("it's an e-book") do
   expect(page).to have_content(/e-book/i)
 end
 
-Then("I {can_or_not}download the book") do |should_do|
-  book                = Book.last
-  to_have_or_not_have = should_do ? 'to' : 'not_to'
-  expect(page).send(to_have_or_not_have, have_link('Download', href: book.link))
-end
-
 Then("I {can_or_not}edit {string}") do |should_do, title|
   # Expand first
   find('.expansion-panel', text: title).click
@@ -206,7 +200,7 @@ end
 
 Then("I {do_or_not}see information about how many copies there are") do |should_do|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
-  expect(page).send(to_have_or_not_have, have_css(:div, text: 'copies', visible: false))
+  expect(page).send(to_have_or_not_have, have_css('div', text: 'copies', visible: false))
 end
 
 Then("I am viewing the book") do
