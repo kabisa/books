@@ -77,9 +77,10 @@ RSpec.describe BooksController, type: :controller do
     end
   end
 
-  xdescribe "GET #edit" do
+  describe "GET #edit" do
+    let!(:book) { create :book }
+
     it "returns a success response" do
-      book = Book.create! valid_attributes
       get :edit, params: {id: book.to_param}, session: valid_session
       expect(response).to be_successful
     end
@@ -161,30 +162,30 @@ RSpec.describe BooksController, type: :controller do
     end
   end
 
-  xdescribe "PUT #update" do
+  describe "PUT #update" do
+    let!(:book) { create :book }
+
+    def do_put(attributes)
+      put :update, params: {id: book.to_param, book: attributes}, session: valid_session
+    end
+
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) { attributes_for(:book) }
 
       it "updates the requested book" do
-        book = Book.create! valid_attributes
-        put :update, params: {id: book.to_param, book: new_attributes}, session: valid_session
+        do_put(new_attributes)
         book.reload
-        skip("Add assertions for updated state")
       end
 
       it "redirects to the book" do
-        book = Book.create! valid_attributes
-        put :update, params: {id: book.to_param, book: valid_attributes}, session: valid_session
+        do_put(new_attributes)
         expect(response).to redirect_to(book)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        book = Book.create! valid_attributes
-        put :update, params: {id: book.to_param, book: invalid_attributes}, session: valid_session
+        do_put(invalid_attributes)
         expect(response).to be_successful
       end
     end
