@@ -1,6 +1,6 @@
 - parent = 'books'
 
-h2= Book.model_name.human.pluralize
+= render(SearchForm, q: @q)
 
 .list-group(id=parent)
   = render partial: 'book', collection: @books, locals: { parent: parent }
