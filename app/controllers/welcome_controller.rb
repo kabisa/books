@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @q = Book.ransack(params[:q])
-
+    @q = ransack_params
   end
 end

@@ -231,7 +231,7 @@ Then("I can edit the book") do
   expect(page).to have_link('Edit')
 end
 
-Then("I see a list of {int} books") do |items_count|
+Then("I see a list of {int} book(s)") do |items_count|
   within('.list-group') do
     expect(page).to have_css('.list-group-item', count: items_count)
   end

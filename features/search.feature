@@ -6,18 +6,28 @@ Feature:
     When I open the application
     Then I can search
 
-  @wip
   Scenario: Search on the book page
-    Given I open the application
     When I choose "Books" from the navigation drawer
     Then I can search
 
-  @todo
   Scenario: Search for keyword in title
+    Given the following e-books:
+      | title       | link                                  | summary                      |
+      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
+      | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
+    When I open the application
+    And I search for "ipsum"
+    Then I see a list of 1 book
 
-
-  @todo
+  @wip
   Scenario: Search for keyword in summary
+    Given the following e-books:
+      | title       | link                                  | summary                      |
+      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
+      | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
+    When I open the application
+    And I search for "dolor sit"
+    Then I see a list of 2 books
 
   @todo
   Scenario: Highlight keywords

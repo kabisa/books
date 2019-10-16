@@ -22,6 +22,10 @@ RSpec.describe BooksController, type: :controller do
       get :index, session: valid_session
     end
 
+    let(:search_double) do
+      Ransack::Search.new(Book, nil)
+    end
+
     it 'returns a success response' do
       do_get
       expect(response).to be_successful
@@ -32,9 +36,20 @@ RSpec.describe BooksController, type: :controller do
       expect(assigns(:books)).to be_decorated
     end
 
-    it 'avoids N+1 queries' do
-      expect(Book).to receive(:includes).with(copies: [:location]).and_call_original
+    it 'ransacks the Book model' do
+      expect(Book).to receive(:ransack).and_call_original
       do_get
+    end
+
+    it 'avoids N+1 queries' do
+      allow(Book).to receive(:ransack).and_return(search_double)
+      expect(search_double.result).to receive(:includes).with(copies: [:location]).and_call_original
+      do_get
+    end
+
+    it 'assigns a `q` variable' do
+      do_get
+      expect(assigns[:q]).to be_a(Ransack::Search)
     end
   end
 
