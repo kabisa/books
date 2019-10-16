@@ -1,3 +1,7 @@
+= search_form_for @q do |f|
+  = f.search_field :title_or_summary_cont
+  = f.submit
+
 - 10.times do
   .jumbotron.jumbotron-fluid.mb-5.px-lg-3.doc-jumbotron
     .container

@@ -5,7 +5,8 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.includes(copies: [:location]).decorate
+    @q = Book.ransack(params[:q])
+    @books = @q.result.includes(copies: [:location]).decorate
   end
 
   # GET /books/1
