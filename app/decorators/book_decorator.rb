@@ -14,6 +14,14 @@ class BookDecorator < ApplicationDecorator
     I18n.t(object.type, scope: 'book_types')
   end
 
+  def title_highlighted_with_search
+    h.highlight(title, title_or_summary_cont)
+  end
+
+  def summary_highlighted_with_search
+    h.highlight(h.simple_format(summary), title_or_summary_cont)
+  end
+
   def dom_id(prefix = nil)
     h.dom_id(object, prefix)
   end
@@ -37,5 +45,11 @@ class BookDecorator < ApplicationDecorator
     }
 
     h.render(BookComponents::VoteStats, options)
+  end
+
+  private
+
+  def title_or_summary_cont
+    h.params[:q]&.fetch(:title_or_summary_cont)
   end
 end

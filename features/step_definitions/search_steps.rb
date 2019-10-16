@@ -10,3 +10,8 @@ When("I search for {string}") do |q|
   end
 end
 
+Then("I see {string} is highlighted for the book {string}") do |q, title|
+  within('.list-group-item', text: title) do
+    expect(page).to have_css('mark', text: q)
+  end
+end

@@ -3,7 +3,7 @@
     .media-body.d-flex.w-100.justify-content-between
       .row
         .col-12
-          h5.mb-1= book.title
+          h5.mb-1= book.title_highlighted_with_search
           small= book.formatted_type
       = render partial: 'books/vote', object: book, as: :book
 
