@@ -1,7 +1,7 @@
 .search-form.card.mb-5
   .card-body.pb-0
     = search_form_for q, html: { autocomplete: :off } do |f|
-      = f.search_field :title_or_summary_cont, autofocus: true, placeholder: 'Search within title and summary', class: 'form-control form-control-lg'
+      = f.search_field :title_or_summary_cont, autofocus: true, placeholder: t('search_form.placeholders.title_or_summary_cont'), class: 'form-control form-control-lg'
       .action-buttons.d-flex.justify-content-center
         = f.button class: 'extended-fab btn btn-primary btn-lg' do
           => material_icon(:search)

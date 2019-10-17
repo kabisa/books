@@ -86,6 +86,12 @@ en:
       body: 'Someone (hopefully you) has requested access to %{app_name}. Follow the link to open the application.'
       signature: 'The %{app_name} Team'
 
+  # components:
+  search_form:
+    placeholders:
+      title_or_summary_cont: 'Search within title and summary'
+
+
   activerecord:
     attributes:
       user:
