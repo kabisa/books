@@ -1,0 +1,9 @@
+// Some additional styling to create an extended FAB,
+// see also https://material.io/components/buttons-floating-action-button/#extended-fab
+// This classname is usually added to a button that is already
+// styled as described in http://daemonite.github.io/material/docs/4.1/components/buttons/
+.extended-fab {
+  border-radius: 20px;
+  box-shadow: map-get($btn-float-elevation-shadow, shadow);
+  padding-right: 1.25rem;
+}
