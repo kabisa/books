@@ -1,6 +1,6 @@
-- parent = 'books'
-
 = render(SearchForm, q: @q)
 
-.list-group(id=parent)
-  = render partial: 'book', collection: @books, locals: { parent: parent }
+- if @books.any?
+  = render(partial: 'results', object: @books, layout: 'results_layout', locals: { parent: 'books' })
+- else
+  = render('no_results')

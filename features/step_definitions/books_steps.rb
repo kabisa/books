@@ -232,8 +232,12 @@ Then("I can edit the book") do
 end
 
 Then("I see a list of {int} book(s)") do |items_count|
-  within('.list-group') do
-    expect(page).to have_css('.list-group-item', count: items_count)
+  if items_count.nonzero?
+    within('.list-group') do
+      expect(page).to have_css('.list-group-item', count: items_count)
+    end
+  else
+    expect(page).not_to have_css('.list-group')
   end
 end
 

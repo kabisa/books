@@ -67,6 +67,9 @@ en:
       notice: "'%{title}' deleted."
     restore:
       notice: "Action undone."
+    no_results:
+      no_results: 'No books found.'
+      clear_all: 'Clear all filters'
   borrowings:
     create:
       notice: "You're now borrowing '%{title}'."

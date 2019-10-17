@@ -1,0 +1,4 @@
+.text-center.py-5
+  p.text-muted= material_icon(:book)
+  p= t('.no_results')
+  = link_to t('.clear_all'), books_path, class: 'btn btn-primary', role: :button
