@@ -1,3 +1,14 @@
+// Minimal expected markup:
+//
+// <div data-controller="range-slider">
+//   <div class="zero-likes">...</div>
+//   <div class="other-likes">
+//     <span data-target="range-slider.value">42</span>
+//     <a data-action="range-slider#reset" href="#">Clear</a>
+//   </div>
+//   <input data-target="range-slider.range" data-action="input->range-slider#updateValue" type="range">
+// </div>
+
 import {Controller} from 'stimulus';
 
 export default class extends Controller {
@@ -8,7 +19,9 @@ export default class extends Controller {
   }
 
   updateValue() {
-    this.valueTarget.innerHTML = this.value;
+    this.valueTargets.forEach((e) => {
+      e.innerHTML = this.value;
+    });
 
     this.hideAllLikesNodes();
 
@@ -29,8 +42,8 @@ export default class extends Controller {
   }
 
   hideAllLikesNodes() {
-    this.hideOtherLikesNodes();
     this.hideZeroLikesNodes();
+    this.hideOtherLikesNodes();
   }
 
   showZeroLikesNodes() {
@@ -58,11 +71,13 @@ export default class extends Controller {
   }
 
   show(el) {
-    el.style.display = 'block';
+    //el.style.display = 'block';
+    el.classList.remove('d-none');
   }
 
   hide(el) {
-    el.style.display = 'none';
+    //el.style.display = 'none';
+    el.classList.add('d-none');
   }
 
   get value() {

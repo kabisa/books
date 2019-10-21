@@ -3,17 +3,30 @@
     = search_form_for q, html: { autocomplete: :off } do |f|
       .form-group
         = f.search_field :title_or_summary_cont, autofocus: true, placeholder: t('search_form.placeholders.title_or_summary_cont'), class: 'form-control form-control-lg'
-      .form-group(data-controller='range-slider')
-        = f.label :likes_count_gteq, t('activerecord.attributes.book.likes_count')
-        .zero-likes
-          = t('search_form.likes.zero')
-        .other-likes.text-primary
-          .d-flex.justify-content-between
+      .d-flex.justify-content-end
+        #dropdownLikes.dropdown(data-controller='dropdown range-slider')
+          a.other-likes.btn.btn-outline-primary.btn-sm.dropdown-toggle(aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" data-offset="0,10" data-boundary="dropdownLikes")
+            = t('search_form.likes.other')
+            span<(data-target='range-slider.value')
+          a.zero-likes.btn.btn-outline.btn-sm.dropdown-toggle(aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button" data-offset="0,10" data-boundary="dropdownLikes")
+            | Likes
+          .dropdown-menu.dropdown-menu-right.p-3(aria-labelledby="dropdownLikes" style="width: 300px;")
+            button.close(aria-label="Close" type="button" data-action='dropdown#close')
+              span aria-hidden="true"  &times;
+
             div
-              = t('search_form.likes.other')
-              span<(data-target='range-slider.value')
-            div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: 'range-slider#reset' }
-        = f.range_field :likes_count_gteq, class: 'custom-range', data: { target: 'range-slider.range', action: 'input->range-slider#updateValue' }
+              h4= t('activerecord.attributes.book.likes_count')
+              .zero-likes
+                = t('search_form.likes.zero')
+              .other-likes.text-primary
+                .d-flex.justify-content-between
+                  div
+                    = t('search_form.likes.other')
+                    span<(data-target='range-slider.value')
+                  div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: 'range-slider#reset' }
+              = f.range_field :likes_count_gteq, class: 'custom-range', data: { target: 'range-slider.range', action: 'input->range-slider#updateValue input->dropdown#updatePosition' }
+
+
       .action-buttons.d-flex.justify-content-center
         = f.button class: 'extended-fab btn btn-primary btn-lg' do
           => material_icon(:search)
