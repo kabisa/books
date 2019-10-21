@@ -46,6 +46,19 @@ Feature:
   @todo
   Scenario: Search for available books (Kabisa only)
 
-  @todo
+  @wip
+  @javascript
   Scenario: Search for 'good' books
-
+    Given the following users:
+      | email              |
+      | marty@kabisa.nl    |
+      | emmett@kabisa.nl   |
+      | lorraine@kabisa.nl |
+      | george@kabisa.nl   |
+      | biff@kabisa.nl     |
+    And the following votes:
+      | title       | liked by                                                         |
+      | Lorem Ipsum | marty@kabisa.nl emmett@kabisa.nl george@kabisa.nl biff@kabisa.nl |
+    When I open the application
+    And I search for books with at least 4 likes
+    Then I see a list of 1 book
