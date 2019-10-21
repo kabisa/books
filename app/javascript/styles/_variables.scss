@@ -18,3 +18,4 @@ $secondary: (
 $textfield-border-color-focus: map-get($primary, color);
 $floating-label-color-focus: $textfield-border-color-focus;
 $form-feedback-valid-color: $black-primary;
+$slider-thumb-bg: map-get($primary, color);

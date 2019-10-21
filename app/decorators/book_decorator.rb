@@ -40,8 +40,8 @@ class BookDecorator < ApplicationDecorator
 
   def vote_stats
     options = {
-      like_count: likes.count,
-      dislike_count: dislikes.count
+      like_count: likes.size,
+      dislike_count: dislikes.size
     }
 
     h.render(BookComponents::VoteStats, options)

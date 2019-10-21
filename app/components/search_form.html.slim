@@ -1,7 +1,19 @@
 .search-form.card.mb-5
   .card-body.pb-0
     = search_form_for q, html: { autocomplete: :off } do |f|
-      = f.search_field :title_or_summary_cont, autofocus: true, placeholder: t('search_form.placeholders.title_or_summary_cont'), class: 'form-control form-control-lg'
+      .form-group
+        = f.search_field :title_or_summary_cont, autofocus: true, placeholder: t('search_form.placeholders.title_or_summary_cont'), class: 'form-control form-control-lg'
+      .form-group(data-controller='range-slider')
+        = f.label :likes_count_gteq, t('activerecord.attributes.book.likes_count')
+        .zero-likes
+          = t('search_form.likes.zero')
+        .other-likes.text-primary
+          .d-flex.justify-content-between
+            div
+              = t('search_form.likes.other')
+              span<(data-target='range-slider.value')
+            div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: 'range-slider#reset' }
+        = f.range_field :likes_count_gteq, class: 'custom-range', data: { target: 'range-slider.range', action: 'input->range-slider#updateValue' }
       .action-buttons.d-flex.justify-content-center
         = f.button class: 'extended-fab btn btn-primary btn-lg' do
           => material_icon(:search)

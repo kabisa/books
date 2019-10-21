@@ -91,6 +91,10 @@ en:
 
   # components:
   search_form:
+    clear: 'Clear'
+    likes:
+      zero: 'Any'
+      other: 'At least' # no. of likes is rendered in the component
     placeholders:
       title_or_summary_cont: 'Search within title and summary'
 
@@ -99,6 +103,8 @@ en:
     attributes:
       user:
         email: 'Email'
+      book:
+        likes_count: 'Likes'
     errors:
       models:
         user:
