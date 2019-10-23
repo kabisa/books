@@ -46,7 +46,6 @@ Feature:
   @todo
   Scenario: Search for available books (Kabisa only)
 
-  @wip
   @javascript
   Scenario: Search for 'good' books
     Given the following users:

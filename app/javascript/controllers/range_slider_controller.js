@@ -42,8 +42,9 @@ export default class extends Controller {
   }
 
   hideAllLikesNodes() {
-    this.hideZeroLikesNodes();
-    this.hideOtherLikesNodes();
+    this.allLikesNodes.forEach((el) => {
+      this.hide(el);
+    });
   }
 
   showZeroLikesNodes() {
@@ -55,18 +56,6 @@ export default class extends Controller {
   showOtherLikeNodes() {
     this.otherLikesNodes.forEach((el) => {
       this.show(el);
-    });
-  }
-
-  hideZeroLikesNodes() {
-    this.zeroLikesNodes.forEach((el) => {
-      this.hide(el);
-    });
-  }
-
-  hideOtherLikesNodes() {
-    this.otherLikesNodes.forEach((el) => {
-      this.hide(el);
     });
   }
 
@@ -90,5 +79,9 @@ export default class extends Controller {
 
   get otherLikesNodes() {
     return this.element.querySelectorAll('.other-likes');
+  }
+
+  get allLikesNodes() {
+    return this.element.querySelectorAll('.zero-likes, .other-likes');
   }
 }
