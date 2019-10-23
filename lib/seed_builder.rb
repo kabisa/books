@@ -1,7 +1,7 @@
 # This class is used by `db/seeds.rb` and makes it easier
 # to understand to process in the seed.
 class SeedBuilder
-  include FactoryBot::Syntax::Methods
+  include FactoryBot::Syntax::Methods if defined?(FactoryBot)
   include Rails.application.routes.url_helpers
 
   attr_reader :user_count, :books_count, :current_user
