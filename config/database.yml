@@ -78,11 +78,15 @@ test: &test
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
+production: &production
   <<: *default
   database: books_production
   username: books
   password: <%= ENV['BOOKS_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *production
+  database: books_staging
 
 cucumber:
   <<: *test
