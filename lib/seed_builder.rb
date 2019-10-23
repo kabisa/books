@@ -116,5 +116,9 @@ class SeedBuilder
     say("Created #{PrintedBook.count} printed books.")
   end
 
+  def say(message)
+    puts message
+  end
+
   alias :printed_books_count :ebooks_count
 end
