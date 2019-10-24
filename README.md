@@ -4,11 +4,6 @@
 
 ...
 
-## Demo
-
-A [demo version](https://thawing-badlands-71406.herokuapp.com/) is available on Heroku. 
-This version has been deployed as described [here](https://devcenter.heroku.com/articles/getting-started-with-rails5).
-
 ## Installation
 
 - `git clone <repository-url>` this repository
@@ -45,3 +40,7 @@ To update the diagram, run the following command:
 ### SendGrid
 
 The production version of this application uses [SendGrid](http://sendgrid.com) for sending mails.
+
+## Deployment
+
+The application is hosted by Heroku ([staging](https://thawing-badlands-71406.herokuapp.com) and [production](https://books.kabisa.nl)). Instruction about the deployment process can be found [here](https://devcenter.heroku.com/articles/getting-started-with-rails5).
