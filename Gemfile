@@ -34,6 +34,8 @@ gem 'pundit' # Object oriented authorization for Rails applications
 gem 'paranoia' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3, 4, and 5, using much, much, much less code.
 gem 'actionview-component' # View components for Rails, intended for upstreaming in Rails 6.1
 gem 'ransack' # Object-based searching.
+# acts-as-taggable-on is not yet compatible w/ Rails 6+. Until then use a customized version.
+gem 'acts-as-taggable-on', github: 'mkilling/acts-as-taggable-on',branch: 'support-rails-6' # With ActsAsTaggableOn, you can tag a single model on several contexts, such as skills, interests, and awards. It also provides other advanced functionality
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

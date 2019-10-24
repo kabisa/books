@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/mkilling/acts-as-taggable-on.git
+  revision: c00c13f33370d9989bf579cac2e03e171ba38f66
+  branch: support-rails-6
+  specs:
+    acts-as-taggable-on (6.5.0)
+      activerecord (>= 5.0, < 6.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -330,6 +338,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionview-component
+  acts-as-taggable-on!
   bootsnap (>= 1.4.2)
   bullet
   byebug
