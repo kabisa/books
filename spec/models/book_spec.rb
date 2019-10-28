@@ -13,6 +13,20 @@ RSpec.describe Book, type: :model do
     let(:instance) { build :book }
 
     it { expect(instance).to respond_to(:tag_list) }
+
+    describe '#tag_list=' do
+      it 'denormalizes when value is a JSON string' do
+        instance.tag_list = [{ value: 'dolor' }, { value: 'sit' }].to_json
+
+        expect(instance.tag_list).to include('sit', 'dolor')
+      end
+
+      it 'let\'s `acts_as_taggable` handle it otherwise' do
+        instance.tag_list = %w(dolor sit)
+
+        expect(instance.tag_list).to include('sit', 'dolor')
+      end
+    end
   end
 
   describe 'associations' do
