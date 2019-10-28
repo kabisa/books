@@ -65,4 +65,13 @@ RSpec.describe BookDecorator do
       it { is_expected.to eql('<p>Lorem<br>Ipsum</p>') }
     end
   end
+
+  describe '#formatted_tag_list' do
+    subject { Capybara.string decorator.formatted_tag_list }
+
+    let(:book) { build :ebook, tag_list: 'lorem, ipsum' }
+
+    it { is_expected.to have_css('small.text-muted i.material-icons', text: 'label') }
+    it { is_expected.to have_css('small.text-muted', text: book.tag_list.to_s) }
+  end
 end

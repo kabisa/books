@@ -47,6 +47,14 @@ class BookDecorator < ApplicationDecorator
     h.render(BookComponents::VoteStats, options)
   end
 
+  def formatted_tag_list
+    h.content_tag(:small, class: 'text-muted') do
+      h.concat h.material_icon('label')
+      h.concat ' '
+      h.concat tag_list
+    end
+  end
+
   private
 
   def title_or_summary_cont

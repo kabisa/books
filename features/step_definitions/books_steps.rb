@@ -70,6 +70,17 @@ Then("I {can_or_not}borrow {string}") do |should_do, title|
   end
 end
 
+
+When("I add the tags {string}") do |text|
+  tags = text.split(/\s*,\s*/)
+
+  tags.each do |tag|
+    el = find('.tagify__input')
+    el.set("#{tag}\n")
+    el.send_keys(:enter)
+  end
+end
+
 When("I borrow the book {string}") do |title|
   # Expand first
   find('.expansion-panel', text: title).click
@@ -212,6 +223,7 @@ Then("I am viewing the book") do
   expect(current_path).to eql(expected_path)
   expect(page).to have_content(book.title)
   expect(page).to have_content(book.summary) if book.summary?
+  expect(page).to have_content(book.tag_list.to_s)
 end
 
 Then("I am adding a new book") do

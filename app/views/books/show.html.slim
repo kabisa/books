@@ -6,8 +6,14 @@
     - if @book.is_a?(PrintedBook)
       p= @book.available_copies
 
+    - if @book.tag_list.any?
+      p= @book.tag_list
+
     - if @book.summary?
       = simple_format @book.summary, class: 'card-text'
+
+
+
 
   .card-footer
     = link_to t('.edit'), edit_book_path(@book), class: 'btn btn-outline-primary', role: :button

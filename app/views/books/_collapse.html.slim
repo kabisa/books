@@ -1,8 +1,13 @@
 .collapse(id=book.dom_id(:collapse)  data-parent="##{parent}" class=('show' if local_assigns[:show]))
   .expansion-panel-body
+
     - if book.is_a?(PrintedBook) && policy(book).borrow?
       p= book.available_copies
     = book.summary_highlighted_with_search
+
+    - if book.tag_list.any?
+      p= book.formatted_tag_list
+
   - if current_user.identified?
     .expansion-panel-footer
       = link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'btn btn-outline'
