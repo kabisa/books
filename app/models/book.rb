@@ -33,4 +33,13 @@ class Book < ApplicationRecord
   def to_s
     title.inspect
   end
+
+  def tag_list=(value)
+    begin
+      arr = JSON.parse(value).map { |h| h['value'] }
+      super(arr)
+    rescue
+      super
+    end
+  end
 end

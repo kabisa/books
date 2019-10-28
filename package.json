@@ -6,6 +6,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "^4.0.7",
+    "@yaireo/tagify": "^2.31.2",
     "bootstrap": "^4.3.1",
     "daemonite-material": "^4.1.1",
     "jquery": "^3.4.1",

@@ -1,0 +1,27 @@
+@import '~@yaireo/tagify/src/tagify';
+
+tags {
+  &.tagify {
+    padding: {
+      bottom: 0;
+      top: 0;
+    }
+  }
+}
+
+.tagify__input {
+  display: inline-block;
+  margin: 0;
+}
+
+.tagify__tag {
+  &:hover:not([readonly]) div::before {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .close.material-icons {
+    font-size: 24px;
+  }
+}
