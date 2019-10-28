@@ -9,6 +9,12 @@ RSpec.describe Book, type: :model do
 
   it { is_expected.to act_as_paranoid }
 
+  describe 'acts_as_taggable' do
+    let(:instance) { build :book }
+
+    it { expect(instance).to respond_to(:tag_list) }
+  end
+
   describe 'associations' do
     it { is_expected.to have_many(:votes).dependent(:destroy) }
     it { is_expected.to have_many(:likes).dependent(:destroy) }
