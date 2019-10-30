@@ -7,7 +7,7 @@
       p= @book.available_copies
 
     - if @book.tag_list.any?
-      p= @book.tag_list
+      p= @book.formatted_tag_list
 
     - if @book.summary?
       = simple_format @book.summary, class: 'card-text'
