@@ -14,7 +14,7 @@ module Search
     alias :f :builder
 
     def likes_count
-      q.likes_count_gteq
+      q.likes_count_gteq || 0
     end
 
     def dom_id

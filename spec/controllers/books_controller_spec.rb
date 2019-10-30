@@ -43,7 +43,7 @@ RSpec.describe BooksController, type: :controller do
 
     it 'avoids N+1 queries' do
       allow(Book).to receive(:ransack).and_return(search_double)
-      expect(search_double.result).to receive(:includes).with(copies: [:location]).and_call_original
+      expect(search_double.result).to receive(:includes).with(:taggings, copies: [:location]).and_call_original
       do_get
     end
 

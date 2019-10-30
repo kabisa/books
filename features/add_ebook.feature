@@ -10,7 +10,6 @@ Feature:
       | Florence |
       | Sydney   |
 
-  @wip
   @javascript
   Scenario: Create a book
     Given I'm adding a new book
