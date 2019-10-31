@@ -60,12 +60,10 @@ export default class extends Controller {
   }
 
   show(el) {
-    //el.style.display = 'block';
     el.classList.remove('d-none');
   }
 
   hide(el) {
-    //el.style.display = 'none';
     el.classList.add('d-none');
   }
 

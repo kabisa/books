@@ -95,6 +95,8 @@ en:
     likes:
       zero: 'Any'
       other: 'At least' # no. of likes is rendered in the component
+    tags:
+      select_all: 'Select all tags'
     placeholders:
       title_or_summary_cont: 'Search within title and summary'
 

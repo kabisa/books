@@ -4,4 +4,9 @@
   .action-buttons {
     transform: translateY(50%);
   }
+
+  .tags {
+    max-height: 20rem;
+    overflow-y: auto;
+  }
 }

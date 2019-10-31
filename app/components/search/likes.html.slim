@@ -1,4 +1,4 @@
-.dropdown(id=dom_id data-controller='dropdown range-slider')
+.dropdown.ml-1(id=dom_id data-controller='dropdown range-slider')
   = dropdown_button(:other) do
     = t('search_form.likes.other')
     span<(data-target='range-slider.value')
@@ -18,5 +18,5 @@
               = t('search_form.likes.other')
               span<(data-target='range-slider.value')
             div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: 'range-slider#reset' }
-      = f.range_field :likes_count_gteq, class: 'custom-range', data: { target: 'range-slider.range', action: 'input->range-slider#updateValue input->dropdown#updatePosition' }
+      = f.range_field :likes_count_gteq, class: 'custom-range', data: { target: 'range-slider.range', action: 'input->range-slider#updateValue' }
 

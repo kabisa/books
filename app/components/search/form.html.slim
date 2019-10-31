@@ -3,7 +3,10 @@
     = search_form_for q, html: { autocomplete: :off } do |f|
       .form-group
         = f.search_field :title_or_summary_cont, autofocus: true, placeholder: t('search_form.placeholders.title_or_summary_cont'), class: 'form-control form-control-lg'
+
+
       .d-flex.justify-content-end
+        = render(Search::Tags, q: q, builder: f)
         = render(Search::Likes, q: q, builder: f)
 
       .action-buttons.d-flex.justify-content-center

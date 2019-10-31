@@ -15,7 +15,10 @@ $secondary: (
   light: $material-color-deep-orange-a100,
 );
 
-$textfield-border-color-focus: map-get($primary, color);
-$floating-label-color-focus: $textfield-border-color-focus;
+$theme-color-primary: map-get($primary, color);
+
+$floating-label-color-focus: $theme-color-primary;
 $form-feedback-valid-color: $black-primary;
-$slider-thumb-bg: map-get($primary, color);
+$selection-control-color-active: $theme-color-primary;
+$slider-thumb-bg: $theme-color-primary;
+$textfield-border-color-focus: $theme-color-primary;

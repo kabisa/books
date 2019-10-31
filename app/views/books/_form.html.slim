@@ -29,6 +29,6 @@
 
   = f.input :summary, as: :text
 
-  = f.input :tag_list, input_html: { value: @book.tag_list.to_s, data: { controller: 'chip-input', whitelist: ActsAsTaggableOn::Tag.for_context(:tags).map(&:to_s).join(',') }}
+  = f.input :tag_list, input_html: { value: @book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
 
   = f.button :submit_cancel, cancel: :back
