@@ -4,9 +4,11 @@ Feature:
 
   Background:
     Given the following e-books:
-      | title       | link                                  | summary                      |
-      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
-      | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
+      | title                  | link                                  | summary                         | tag_list              |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           |
+      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit.    | software              |
+      | Consectetur Adipiscing | http://kabisa.nl/consectetur/         | Sed convallis metus eget felis. | unknown               |
+      | Morbi ullamcorper      | http://kabisa.nl/morbi/               | Duis aliquam nulla felis.       | programming, software |
 
   Scenario: Search on the home page
     When I open the application
@@ -41,7 +43,7 @@ Feature:
     Given I open the application
     And I search for "foo bar"
     When I click "Clear all filters"
-    Then I see a list of 2 books
+    Then I see a list of 4 books
 
   @todo
   Scenario: Search for available books (Kabisa only)
@@ -61,3 +63,12 @@ Feature:
     When I open the application
     And I search for books with at least 4 likes
     Then I see a list of 1 book
+
+  @javascript
+  Scenario: Search for tagged books
+    And the following votes:
+      | title       | liked by                                                         |
+      | Lorem Ipsum | marty@kabisa.nl emmett@kabisa.nl george@kabisa.nl biff@kabisa.nl |
+    When I open the application
+    And I search for books tagged with "software, programming"
+    Then I see a list of 3 books

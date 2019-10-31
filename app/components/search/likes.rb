@@ -45,7 +45,7 @@ module Search
         class_names << 'btn-outline-primary'
       end
 
-      content_tag(:a, class: class_names, href: '#', role: :button, aria: { expanded: false, haspopup: true }, data: { toggle: :dropdown, offset: '0,10', boundary: dom_id }) do
+      content_tag(:a, class: class_names, href: '#', role: :button, aria: { expanded: false, haspopup: true }, data: { toggle: :dropdown, offset: '0,10', boundary: dom_id, flip: false }) do
         yield
       end
     end

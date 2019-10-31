@@ -23,6 +23,23 @@ When("I search for books with at least {int} likes") do |likes_count|
   end
 end
 
+
+When("I search for books tagged with {string}") do |text|
+  within('form.book_search') do
+    click_on('Tags')
+
+    tags = text.split(/\s*,\s*/)
+
+    within('.tags') do
+      tags.each do |tag|
+        find('label', text: tag).click
+      end
+    end
+
+    click_on('Search')
+  end
+end
+
 Then("I see {string} is highlighted for the book {string}") do |q, title|
   within('.list-group-item', text: title) do
     expect(page).to have_css('mark', text: q)
