@@ -63,6 +63,7 @@ Feature:
     When I open the application
     And I search for books with at least 4 likes
     Then I see a list of 1 book
+    And I see the search form displaying "At least 4"
 
   @javascript
   Scenario: Search for tagged books
@@ -72,3 +73,4 @@ Feature:
     When I open the application
     And I search for books tagged with "software, programming"
     Then I see a list of 3 books
+    And I see the search form displaying "programming"
