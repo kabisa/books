@@ -70,6 +70,13 @@ Then("I {can_or_not}borrow {string}") do |should_do, title|
   end
 end
 
+Then("I {can_or_not}view the details for {string}") do |should_do, title|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+
+  within('.list-group-item', text: title) do
+    expect(page).send(to_have_or_not_have, have_link('View Details'))
+  end
+end
 
 When("I add the tags {string}") do |text|
   tags = text.split(/\s*,\s*/)

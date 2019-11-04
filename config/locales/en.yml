@@ -45,6 +45,7 @@ en:
       cancel: &cancel 'Cancel'
       download: 'Download'
       undo: 'Undo'
+      show: 'View Details'
       remove_resource: 'Remove %{resource}'
   # pages
   application:
