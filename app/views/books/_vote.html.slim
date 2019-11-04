@@ -3,7 +3,7 @@
 - like = book.likes.find_by(user: current_user)
 - dislike = book.dislikes.find_by(user: current_user)
 
-.vote
+.vote.text-center
   - if current_user.identified?
     .no-collapsible
       = book.vote_buttons

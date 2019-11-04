@@ -17,7 +17,7 @@ heroku run rake db:migrate --remote staging
 Deploy `master`:
 
 ```
-git push staging master
+git push production master
 ```
 
 Run rake:

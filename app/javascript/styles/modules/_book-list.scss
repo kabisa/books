@@ -1,0 +1,14 @@
+.list-group.books .expansion-panel {
+  .view-details {
+    @include transition-standard(all);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.show {
+    .view-details {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
