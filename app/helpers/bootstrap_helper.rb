@@ -17,4 +17,12 @@ module BootstrapHelper
       title: title
     }
   end
+
+  # Renders a close icon
+  # @see http://daemonite.github.io/material/docs/4.1/utilities/close-icon/
+  def close_icon
+    tag.button(class: 'close', type: :button, aria: { label: 'Close' }) do
+      tag.span('×', aria: { hidden: true })
+    end
+  end
 end
