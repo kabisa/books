@@ -1,8 +1,8 @@
 // Minimal expected markup:
 //
 // <div data-controller="range-slider">
-//   <div class="zero-likes">...</div>
-//   <div class="other-likes">
+//   <div class="zero-items">...</div>
+//   <div class="other-items">
 //     <span data-target="range-slider.value">42</span>
 //     <a data-action="range-slider#reset" href="#">Clear</a>
 //   </div>
@@ -11,26 +11,34 @@
 
 import {Controller} from 'stimulus';
 
+const ACTIVE_CLASSNAME = 'btn-outline-primary';
+const INACTIVE_CLASSNAME = 'btn-outline';
+const ZERO_ITEMS_CLASSNAME = 'zero-items';
+const OTHER_ITEMS_CLASSNAME = 'other-items';
+
 export default class extends Controller {
-  static targets = ['range', 'value'];
+  static targets = ['range', 'value', 'label', 'dropdownToggle'];
 
   connect() {
     this.updateValue();
+    this.updateButton();
+  }
+
+  initialize() {
+    this.initialButtonText = this.dropdownToggleTarget.innerHTML;
   }
 
   updateValue() {
-    this.valueTargets.forEach((e) => {
-      e.innerHTML = this.value;
-    });
+    this.valueTarget.innerHTML = this.value;
 
-    this.hideAllLikesNodes();
+    this.hideAllItemsNodes();
 
     switch (this.value) {
       case 0:
-        this.showZeroLikesNodes();
+        this.showZeroItemsNodes();
         break;
       default:
-        this.showOtherLikeNodes();
+        this.showOtherItemsNodes();
         break;
     }
   }
@@ -41,20 +49,20 @@ export default class extends Controller {
     this.updateValue();
   }
 
-  hideAllLikesNodes() {
-    this.allLikesNodes.forEach((el) => {
+  hideAllItemsNodes() {
+    this.allItemsNodes.forEach((el) => {
       this.hide(el);
     });
   }
 
-  showZeroLikesNodes() {
-    this.zeroLikesNodes.forEach((el) => {
+  showZeroItemsNodes() {
+    this.zeroItemsNodes.forEach((el) => {
       this.show(el);
     });
   }
 
-  showOtherLikeNodes() {
-    this.otherLikesNodes.forEach((el) => {
+  showOtherItemsNodes() {
+    this.otherItemsNodes.forEach((el) => {
       this.show(el);
     });
   }
@@ -67,19 +75,46 @@ export default class extends Controller {
     el.classList.add('d-none');
   }
 
+  updateButton() {
+    if (this.value !== 0) {
+      this.showAsActive();
+    } else {
+      this.showAsInactive();
+    }
+  }
+
+  showAsActive() {
+    const label = this.labelTarget.innerText;
+
+    this.setButtonText(label);
+    this.dropdownToggleTarget.classList.add(ACTIVE_CLASSNAME);
+    this.dropdownToggleTarget.classList.remove(INACTIVE_CLASSNAME);
+  }
+
+  showAsInactive() {
+    this.setButtonText(this.initialButtonText);
+    this.dropdownToggleTarget.classList.remove(ACTIVE_CLASSNAME);
+    this.dropdownToggleTarget.classList.add(INACTIVE_CLASSNAME);
+  }
+
+  setButtonText(value) {
+    this.dropdownToggleTarget.innerHTML = value;
+  }
   get value() {
     return parseInt(this.rangeTarget.value);
   }
 
-  get zeroLikesNodes() {
-    return this.element.querySelectorAll('.zero-likes');
+  get zeroItemsNodes() {
+    return this.element.querySelectorAll(`.${ZERO_ITEMS_CLASSNAME}`);
   }
 
-  get otherLikesNodes() {
-    return this.element.querySelectorAll('.other-likes');
+  get otherItemsNodes() {
+    return this.element.querySelectorAll(`.${OTHER_ITEMS_CLASSNAME}`);
   }
 
-  get allLikesNodes() {
-    return this.element.querySelectorAll('.zero-likes, .other-likes');
+  get allItemsNodes() {
+    return this.element.querySelectorAll(
+      `.${ZERO_ITEMS_CLASSNAME}, .${OTHER_ITEMS_CLASSNAME}`,
+    );
   }
 }

@@ -50,7 +50,7 @@ describe Search::Likes do
     it { is_expected.to have_css('a[data-action="range-slider#reset"]') }
 
     it do
-      expect(builder_double).to receive(:range_field).with(anything, hash_including(data: { target: 'range-slider.range', action: 'input->range-slider#updateValue input->dropdown#updatePosition' }))
+      expect(builder_double).to receive(:range_field).with(anything, hash_including(data: { target: 'range-slider.range', action: 'input->range-slider#updateValue' }))
       subject
     end
   end

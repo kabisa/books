@@ -6,8 +6,8 @@
 
 
       .d-flex.justify-content-end
-        = render(Search::Tags, q: q, builder: f)
-        = render(Search::Likes, q: q, builder: f)
+        = render(Search::Filter::Tags, q: q, builder: f)
+        = render(Search::Filter::Likes, q: q, builder: f)
 
       .action-buttons.d-flex.justify-content-center
         = f.button class: 'extended-fab btn btn-primary btn-lg' do

@@ -5,10 +5,14 @@
 // To get inspired, see https://shime.sh/testing-stimulus
 import {Controller} from 'stimulus';
 
+const ACTIVE_CLASSNAME = 'btn-outline-primary';
+const INACTIVE_CLASSNAME = 'btn-outline';
+
 export default class extends Controller {
-  static targets = ['selectAll', 'value', 'buttonText'];
+  static targets = ['selectAll', 'value', 'dropdownToggle'];
 
   initialize() {
+    this.initialButtonText = this.dropdownToggleTarget.innerHTML;
     this.updateSwitch();
     this.updateButton();
   }
@@ -24,17 +28,14 @@ export default class extends Controller {
   }
 
   updateButton() {
-    this.hideAllTagsNodes();
-
     if (this.valueTargets.some((e) => e.checked)) {
-      this.showOtherTagsNodes();
-      this.updateButtonText();
+      this.showAsActive();
     } else {
-      this.showZeroTagsNodes();
+      this.showAsInactive();
     }
   }
 
-  updateButtonText() {
+  showAsActive() {
     const ids = this.valueTargets.filter((e) => e.checked).map((e) => e.value);
     const firstId = ids[0];
     let label = this.element.querySelector(
@@ -45,48 +46,18 @@ export default class extends Controller {
       label = `${label} +${ids.length - 1}`;
     }
 
-    this.buttonTextTarget.innerHTML = label;
+    this.setButtonText(label);
+    this.dropdownToggleTarget.classList.add(ACTIVE_CLASSNAME);
+    this.dropdownToggleTarget.classList.remove(INACTIVE_CLASSNAME);
   }
 
-  hideAllTagsNodes() {
-    this.allTagsNodes.forEach((el) => {
-      this.hide(el);
-    });
+  showAsInactive() {
+    this.setButtonText(this.initialButtonText);
+    this.dropdownToggleTarget.classList.remove(ACTIVE_CLASSNAME);
+    this.dropdownToggleTarget.classList.add(INACTIVE_CLASSNAME);
   }
 
-  showZeroTagsNodes() {
-    this.zeroTagsNodes.forEach((el) => {
-      this.show(el);
-    });
-  }
-
-  showOtherTagsNodes() {
-    this.otherTagsNodes.forEach((el) => {
-      this.show(el);
-    });
-  }
-
-  show(el) {
-    el.classList.remove('d-none');
-  }
-
-  hide(el) {
-    el.classList.add('d-none');
-  }
-
-  get value() {
-    return parseInt(this.rangeTarget.value);
-  }
-
-  get zeroTagsNodes() {
-    return this.element.querySelectorAll('.zero-tags');
-  }
-
-  get otherTagsNodes() {
-    return this.element.querySelectorAll('.other-tags');
-  }
-
-  get allTagsNodes() {
-    return this.element.querySelectorAll('.zero-tags, .other-tags');
+  setButtonText(value) {
+    this.dropdownToggleTarget.innerHTML = value;
   }
 }
