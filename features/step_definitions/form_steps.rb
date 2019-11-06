@@ -14,7 +14,7 @@ When("I toggle {string} to {string}") do |name, value|
   end
 end
 
-Then("I {do_or_not}see a validation error for {string}") do |should_do, label|
+Then("I {do_or_not}see a validation error (for ){string}") do |should_do, label|
   within('form') do
     to_have_or_not_have = should_do ? 'to' : 'not_to'
     expect(page).send(to_have_or_not_have, have_css('.form-group.form-group-invalid', text: label))

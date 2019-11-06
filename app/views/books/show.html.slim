@@ -20,9 +20,9 @@
 
     ul.list-group.list-group-flush
       li.list-group-item.border-0.new-comment
-        = simple_form_for([@book.becomes(Book), @comment]) do |f|
-          = f.input :body
-          = f.button :submit, 'Comment'
+        = simple_form_for([@book.becomes(Book), @comment], wrapper: :vertical_form) do |f|
+          = f.input :body, label: false
+          = f.button :submit
 
       - @book.comments.each do |comment|
         li.list-group-item.border-0

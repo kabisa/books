@@ -18,6 +18,9 @@ en:
     options:
       book:
         type: *book_types
+    placeholders:
+      comment:
+        body: 'Add a comment...'
     # Examples
     # labels:
     #   defaults:

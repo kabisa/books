@@ -27,7 +27,7 @@ Feature:
     And I signed in as a Kabisaan
     And I am viewing the details for "Lorem Ipsum"
     When I comment with ""
-    Then I see a validation error for "Body"
+    Then I see a validation error "Comment can't be blank"
     And I see 0 comments
 
   @todo
