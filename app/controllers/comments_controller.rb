@@ -1,11 +1,15 @@
 class CommentsController < ApplicationController
-  before_action :set_book, only: [:create]
+  before_action :set_book, only: [:index, :create]
+
+  def index
+    redirect_to @book
+  end
 
   def create
     @comment = authorize Comment.new(comment_params)
 
     if @comment.save
-      redirect_to @book
+      redirect_to @book, notice: t('.notice')
     else
       render 'books/show'
     end
