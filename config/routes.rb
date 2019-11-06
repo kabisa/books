@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     post 'restore', on: :member
     resources :likes,    shallow: true, controller: 'votes', type: 'Like',    only: %i(create destroy)
     resources :dislikes, shallow: true, controller: 'votes', type: 'Dislike', only: %i(create destroy)
+
+    resources :comments,    shallow: true,                                    only: %i(create destroy)
   end
 
   resources :ebooks, controller: 'books', type: 'Ebook'

@@ -1,4 +1,9 @@
-Then("I see {int} comments") do |comments_count|
+Then("I see {int} comment(s)") do |comments_count|
   expect(page).to have_content(/#{comments_count} Comments?/)
-  expect(page).to have_css('.comments li', count: comments_count)
+  expect(page).to have_css('.comments li:not(.new-comment)', count: comments_count)
+end
+
+When("I comment with {string}") do |body|
+  fill_in('Body', with: body)
+  click_on('Comment')
 end

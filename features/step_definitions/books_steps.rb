@@ -28,7 +28,7 @@ Given("the following printed book(s):") do |table|
 end
 
 Given("the following e-book(s):") do |table|
-  table.map_column!('comments_count') { |c| c.to_i }
+  table.map_column!('comments_count', false) { |c| c.to_i }
 
   table.hashes.each do |h|
     create(:ebook, h)

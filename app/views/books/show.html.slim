@@ -17,7 +17,13 @@
       h2.card-subtitle
         => @book.comments.size
         | Comments
+
     ul.list-group.list-group-flush
+      li.list-group-item.border-0.new-comment
+        = simple_form_for([@book.becomes(Book), @comment]) do |f|
+          = f.input :body
+          = f.button :submit, 'Comment'
+
       - @book.comments.each do |comment|
         li.list-group-item.border-0
           = comment.body
