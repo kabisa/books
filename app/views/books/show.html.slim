@@ -12,11 +12,15 @@
     - if @book.tag_list.any?
       p= @book.formatted_tag_list
 
-    .comments
-      ul.list-group.list-group-flush
-        - @book.comments.each do |comment|
-          li.list-group-item
-            = comment.body
+  .comments.mb-3
+    .card-header.border-0.pb-0
+      h2.card-subtitle
+        => @book.comments.size
+        | Comments
+    ul.list-group.list-group-flush
+      - @book.comments.each do |comment|
+        li.list-group-item.border-0
+          = comment.body
 
   - if current_user.identified?
     .card-footer
