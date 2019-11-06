@@ -69,6 +69,11 @@ RSpec.describe BooksController, type: :controller do
       do_get
       expect(assigns(:book)).to be_decorated
     end
+
+    it 'assigns a `comment` variable' do
+      do_get
+      expect(assigns[:comment]).to be_a(Comment)
+    end
   end
 
   describe 'GET #new' do

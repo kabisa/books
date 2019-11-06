@@ -20,7 +20,6 @@ Feature:
     When I comment with "This is an awesome book"
     Then I see 1 comment
 
-  @wip
   Scenario: Create invalid comment
     Given the following e-books:
       | title                  | link                                  |
@@ -31,6 +30,9 @@ Feature:
     Then I see a validation error for "Body"
     And I see 0 comments
 
+  @todo
   Scenario: Remove my comment
+  @todo
   Scenario: Sort comments
+  @todo
   Scenario: Highlight my comment(s)
