@@ -4,6 +4,14 @@ FactoryBot.define do
     summary { 'Lorem Ipsum' }
     tag_list { %w(Lorem Ipsum) }
 
+    transient do
+      comments_count { 0 }
+    end
+
+    after(:create) do |book, evaluator|
+      create_list(:comment, evaluator.comments_count, book: book)
+    end
+
     trait :invalid do
       title { '' }
     end

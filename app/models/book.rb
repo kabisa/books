@@ -5,6 +5,7 @@ class Book < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # Though `copies` is a PrintedBook attribute, we define it in the base class
   # so we can render a proper form.

@@ -33,6 +33,7 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_many(:votes).dependent(:destroy) }
     it { is_expected.to have_many(:likes).dependent(:destroy) }
     it { is_expected.to have_many(:dislikes).dependent(:destroy) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
     it { is_expected.to have_many(:copies).dependent(:destroy) }
     it { is_expected.to accept_nested_attributes_for(:copies).
          allow_destroy(true) }

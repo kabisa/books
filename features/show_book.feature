@@ -5,8 +5,8 @@ Feature:
 
   Background:
     Given the following e-books:
-      | title                  | link                                  | summary                         | tag_list              |
-      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           |
+      | title                  | link                                  |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
 
   Scenario: Don't see the 'View Details' link
     When I choose "Books" from the navigation drawer

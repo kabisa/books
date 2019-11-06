@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_083235) do
+ActiveRecord::Schema.define(version: 2019_11_06_084941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 2019_10_24_083235) do
     t.index ["copy_id"], name: "index_borrowings_on_copy_id"
     t.index ["deleted_at"], name: "index_borrowings_on_deleted_at"
     t.index ["user_id"], name: "index_borrowings_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "body", limit: 1024
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_comments_on_book_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "copies", force: :cascade do |t|
@@ -109,6 +119,8 @@ ActiveRecord::Schema.define(version: 2019_10_24_083235) do
 
   add_foreign_key "borrowings", "copies"
   add_foreign_key "borrowings", "users"
+  add_foreign_key "comments", "books"
+  add_foreign_key "comments", "users"
   add_foreign_key "copies", "books"
   add_foreign_key "copies", "locations"
   add_foreign_key "taggings", "tags"

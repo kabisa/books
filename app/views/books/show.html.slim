@@ -12,6 +12,12 @@
     - if @book.tag_list.any?
       p= @book.formatted_tag_list
 
+    .comments
+      ul.list-group.list-group-flush
+        - @book.comments.each do |comment|
+          li.list-group-item
+            = comment.body
+
   - if current_user.identified?
     .card-footer
       = link_to t('.edit'), edit_book_path(@book), class: 'btn btn-outline-primary', role: :button

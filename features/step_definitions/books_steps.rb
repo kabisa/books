@@ -28,6 +28,8 @@ Given("the following printed book(s):") do |table|
 end
 
 Given("the following e-book(s):") do |table|
+  table.map_column!('comments_count') { |c| c.to_i }
+
   table.hashes.each do |h|
     create(:ebook, h)
   end
@@ -86,6 +88,13 @@ When("I add the tags {string}") do |text|
     el.set("#{tag}\n")
     el.send_keys(:enter)
   end
+end
+
+
+When("I am viewing the details for {string}") do |title|
+  step %q(I choose "Books" from the navigation drawer)
+  step %Q(I expand the panel for "#{title}")
+  step %q(I click "View Details")
 end
 
 When("I borrow the book {string}") do |title|
