@@ -74,4 +74,29 @@ RSpec.describe BookDecorator do
     it { is_expected.to have_css('small.text-muted i.material-icons', text: 'label') }
     it { is_expected.to have_css('small.text-muted', text: book.tag_list.to_s) }
   end
+
+  describe '#number_of_comments' do
+    before     { allow(book).to receive(:comments).and_return(comments_stub) }
+
+    subject    { decorator.number_of_comments }
+    let(:book) { build :ebook }
+
+    context 'no comments' do
+      let(:comments_stub) { [] }
+
+      it { is_expected.to eql('0 Comments') }
+    end
+
+    context 'one comments' do
+      let(:comments_stub) { %w(one) }
+
+      it { is_expected.to eql('1 Comment') }
+    end
+
+    context 'other comments' do
+      let(:comments_stub) { %w(one two) }
+
+      it { is_expected.to eql('2 Comments') }
+    end
+  end
 end

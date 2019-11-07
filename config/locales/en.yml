@@ -139,3 +139,4 @@ en:
   flash:
     logged_out: 'You are now logged out'
     not_authorized: 'You are not authorized to perform this operation'
+  time_ago: '%{time} ago'

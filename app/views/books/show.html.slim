@@ -15,8 +15,7 @@
   .comments.mb-3
     .card-header.border-0.pb-0
       h2.card-subtitle
-        => @book.comments.size
-        | Comments
+        = @book.number_of_comments
 
     ul.list-group.list-group-flush
       li.list-group-item.border-0.new-comment
@@ -26,6 +25,11 @@
 
       - @book.comments.each do |comment|
         li.list-group-item.border-0
+          div
+            small
+              strong=> current_user
+              span.text-black-secondary
+                = t(:time_ago, time: time_ago_in_words(comment.created_at))
           = comment.body
 
   - if current_user.identified?

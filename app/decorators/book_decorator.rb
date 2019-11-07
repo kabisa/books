@@ -55,6 +55,13 @@ class BookDecorator < ApplicationDecorator
     end
   end
 
+  def number_of_comments
+    [
+      comments.size,
+      Comment.model_name.human.pluralize(comments.size)
+    ].join(' ')
+  end
+
   private
 
   def title_or_summary_cont

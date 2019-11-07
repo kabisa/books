@@ -36,3 +36,5 @@ Feature:
   Scenario: Sort comments
   @todo
   Scenario: Highlight my comment(s)
+  @todo
+  Scenario: Guest cannot add comments
