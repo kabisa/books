@@ -14,7 +14,7 @@ builder = SeedBuilder.new
 builder.truncate
 builder.create_locations
 
-if Rails.env.development?
+if Rails.env.development? || Rails.env.staging?
   builder.create_users
   builder.create_books
   builder.borrow_books
