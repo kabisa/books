@@ -37,8 +37,17 @@ Feature:
     When I am viewing the details for "Lorem Ipsum"
     Then I cannot add a comment
 
-  @todo
+  @wip
   Scenario: Remove my comment
+    Given the following e-books:
+      | title                  | link                                  |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
+    And I signed in as a Kabisaan
+    And I am viewing the details for "Lorem Ipsum"
+    And I comment with "This is an awesome book"
+    When I delete the comment "This is an awesome book"
+    Then I see 0 comments
+
   @todo
   Scenario: Sort comments
   @todo

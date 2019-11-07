@@ -9,6 +9,12 @@ When("I comment with {string}") do |body|
 end
 
 
+When("I delete the comment {string}") do |body|
+  within('.comments li', text: body) do
+    find('button', text: 'delete', visible: false).click
+  end
+end
+
 Then("I {can_or_not}add a comment") do |should_do|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
   within('.comments') do

@@ -6,10 +6,10 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    !user.anonymous?
+    user.identified?
   end
 
   def destroy?
-    !user.anonymous?
+    user == record.user
   end
 end

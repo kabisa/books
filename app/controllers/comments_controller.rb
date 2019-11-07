@@ -15,6 +15,15 @@ class CommentsController < ApplicationController
     end
   end
 
+
+  def destroy
+    @comment = authorize Comment.find(params[:id])
+    @book = @comment.book
+    @comment.destroy
+
+    redirect_to @book, notice: t('.notice')
+  end
+
   private
 
     def set_book

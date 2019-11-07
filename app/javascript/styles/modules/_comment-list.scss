@@ -1,0 +1,13 @@
+.comments {
+  li:hover {
+    .delete-comment {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  .delete-comment {
+    @include transition-standard(all);
+    opacity: 0;
+    visibility: hidden;
+  }
+}

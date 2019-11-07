@@ -8,6 +8,6 @@
       li.list-group-item.border-0.new-comment
         = simple_form_for([book.becomes(Book), new_comment], wrapper: :vertical_form) do |f|
           = f.input :body, label: false
-          = f.button :submit
+          = f.button :submit, class: 'btn btn-outline'
 
     = render partial: 'books/comment', collection: book.comments

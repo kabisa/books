@@ -1,8 +1,13 @@
-  li.list-group-item.border-0
+  li.list-group-item.border-0.d-flex.justify-content-between.align-items-baseline
     div
-      small
-        strong=> comment.user.email
-        span.text-black-secondary
-          = comment.formatted_created_at
-    = comment.body
+      div
+        small
+          strong(class=('badge badge-pill badge-light' if comment.user == current_user))= comment.user.email
+          span.text-black-secondary=< comment.formatted_created_at
+      = comment.body
+
+    - if policy(comment).destroy?
+      .delete-comment
+        = button_to comment, method: :delete, class: 'btn btn-float btn-sm shadow-none' do
+          = material_icon('delete', tooltipify(t('helpers.submit.remove_resource', resource: Comment.model_name.human.downcase)))
 
