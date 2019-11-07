@@ -3,6 +3,15 @@ require 'rails_helper'
 RSpec.describe BookDecorator do
   let(:decorator)   { described_class.new(book) }
 
+  describe 'decorates_association' do
+    let(:book) { create :ebook, comments_count: 1 }
+
+    it do
+      expect(decorator.comments.first).to be_decorated
+    end
+
+  end
+
   describe '#formatted_type' do
     subject { decorator.formatted_type }
 
@@ -76,25 +85,23 @@ RSpec.describe BookDecorator do
   end
 
   describe '#number_of_comments' do
-    before     { allow(book).to receive(:comments).and_return(comments_stub) }
-
     subject    { decorator.number_of_comments }
-    let(:book) { build :ebook }
+    let(:book) { create :ebook, comments_count: comments_count }
 
     context 'no comments' do
-      let(:comments_stub) { [] }
+      let(:comments_count) { 0 }
 
       it { is_expected.to eql('0 Comments') }
     end
 
     context 'one comments' do
-      let(:comments_stub) { %w(one) }
+      let(:comments_count) { 1 }
 
       it { is_expected.to eql('1 Comment') }
     end
 
     context 'other comments' do
-      let(:comments_stub) { %w(one two) }
+      let(:comments_count) { 2 }
 
       it { is_expected.to eql('2 Comments') }
     end

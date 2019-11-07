@@ -12,25 +12,7 @@
     - if @book.tag_list.any?
       p= @book.formatted_tag_list
 
-  .comments.mb-3
-    .card-header.border-0.pb-0
-      h2.card-subtitle
-        = @book.number_of_comments
-
-    ul.list-group.list-group-flush
-      li.list-group-item.border-0.new-comment
-        = simple_form_for([@book.becomes(Book), @comment], wrapper: :vertical_form) do |f|
-          = f.input :body, label: false
-          = f.button :submit
-
-      - @book.comments.each do |comment|
-        li.list-group-item.border-0
-          div
-            small
-              strong=> current_user
-              span.text-black-secondary
-                = t(:time_ago, time: time_ago_in_words(comment.created_at))
-          = comment.body
+  = render partial: 'books/comments', locals: { book: @book, new_comment: @comment }
 
   - if current_user.identified?
     .card-footer
