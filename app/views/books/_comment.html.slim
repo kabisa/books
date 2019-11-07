@@ -1,7 +1,7 @@
   li.list-group-item.border-0
     div
       small
-        strong=> current_user
+        strong=> comment.user.email
         span.text-black-secondary
           = comment.formatted_created_at
     = comment.body

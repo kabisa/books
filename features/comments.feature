@@ -30,11 +30,16 @@ Feature:
     Then I see a validation error "Comment can't be blank"
     And I see 0 comments
 
+  Scenario: Guest cannot add comments
+    Given the following e-books:
+      | title                  | link                                  |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
+    When I am viewing the details for "Lorem Ipsum"
+    Then I cannot add a comment
+
   @todo
   Scenario: Remove my comment
   @todo
   Scenario: Sort comments
   @todo
   Scenario: Highlight my comment(s)
-  @todo
-  Scenario: Guest cannot add comments

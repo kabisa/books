@@ -4,9 +4,10 @@
       = book.number_of_comments
 
   ul.list-group.list-group-flush
-    li.list-group-item.border-0.new-comment
-      = simple_form_for([book.becomes(Book), new_comment], wrapper: :vertical_form) do |f|
-        = f.input :body, label: false
-        = f.button :submit
+    - if policy(Comment).new?
+      li.list-group-item.border-0.new-comment
+        = simple_form_for([book.becomes(Book), new_comment], wrapper: :vertical_form) do |f|
+          = f.input :body, label: false
+          = f.button :submit
 
     = render partial: 'books/comment', collection: book.comments
