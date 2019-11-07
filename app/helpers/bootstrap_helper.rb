@@ -18,6 +18,20 @@ module BootstrapHelper
     }
   end
 
+  # Minimal set of classnames needed to create
+  # a small round button.
+  # Often used with an icon as button value.
+  # @param [String|Array<String>] extra classnames that are added to the output
+  # @return [String] classnames
+  # @example
+  #   small_round_button #=> 'btn-float btn btn-sm shadow-none'
+  #   small_round_button('my-1 text-primary') #=> 'btn-float btn btn-sm shadow-none my-1 text-primary'
+  #   small_round_button(%(my-1 text-primary)) #=> 'btn-float btn btn-sm shadow-none my-1 text-primary'
+  def small_round_button(classnames=nil)
+    default_classnames = %w(btn-float btn btn-sm shadow-none)
+    (default_classnames + Array(classnames)).join(' ')
+  end
+
   # Renders a close icon
   # @see http://daemonite.github.io/material/docs/4.1/utilities/close-icon/
   def close_icon(options = {})

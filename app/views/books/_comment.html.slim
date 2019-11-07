@@ -8,6 +8,6 @@
 
     - if policy(comment).destroy?
       .delete-comment
-        = button_to comment, method: :delete, class: 'btn btn-float btn-sm shadow-none' do
+        = button_to comment, method: :delete, class: small_round_button do
           = material_icon('delete', tooltipify(t('helpers.submit.remove_resource', resource: Comment.model_name.human.downcase)))
 
