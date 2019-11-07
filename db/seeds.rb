@@ -7,6 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # bin/rails db:seed USERS_COUNT=10 BOOKS_COUNT=100
+#
+# This seed only runs on development or if FORCE=true is added:
+#
+# bin/rails db:seed USERS_COUNT=10 BOOKS_COUNT=100 FORCE=true
 require 'seed_builder'
 
 builder = SeedBuilder.new
@@ -14,7 +18,7 @@ builder = SeedBuilder.new
 builder.truncate
 builder.create_locations
 
-if Rails.env.development? || Rails.env.staging?
+if Rails.env.development? || ENV['FORCE']
   builder.create_users
   builder.create_books
   builder.borrow_books
