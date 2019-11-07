@@ -63,6 +63,15 @@ class SeedBuilder
     end
   end
 
+  def comment_on_books
+    User.all.reload.each do |user|
+      Book.all.sample(rand(Book.count)).each do |book|
+        say("#{user} comments on #{book}")
+        create(:comment, :random, book: book, user: user)
+      end
+    end
+  end
+
   def sign_in_url
     url = token_sign_in_url(current_user.login_token, host: 'localhost:3000')
     say "Start a Rails server and navigate to #{url}."

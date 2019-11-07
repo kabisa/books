@@ -19,5 +19,6 @@ if Rails.env.development?
   builder.create_books
   builder.borrow_books
   builder.vote_books
+  builder.comment_on_books
   builder.sign_in_url
 end
