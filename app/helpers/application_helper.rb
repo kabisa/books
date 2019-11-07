@@ -8,7 +8,7 @@ module ApplicationHelper
     return if current_page?(controller: 'books', action: 'new')
 
     content_tag(:div, class: 'fab-add') do
-      link_to(new_book_path, class: 'btn btn-float btn-secondary', role: :button) do
+      link_to(new_book_path, class: fab_class('btn-secondary'), role: :button) do
         content_tag(:i, 'add', class: 'material-icons')
       end
     end

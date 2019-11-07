@@ -19,17 +19,31 @@ module BootstrapHelper
   end
 
   # Minimal set of classnames needed to create
+  # a floating action button.
+  # Often used with an icon as button value.
+  # @param [String|Array<String>] extra classnames that are added to the output
+  # @return [String] classnames
+  # @example
+  #   fab_class #=> 'btn-float btn'
+  #   fab_class('my-1 text-primary') #=> 'btn-float btn my-1 text-primary'
+  #   fab_class(%(my-1 text-primary)) #=> 'btn-float btn my-1 text-primary'
+  def fab_class(classnames=nil)
+    default_classnames = %w(btn-float btn)
+    join_classnames(default_classnames, classnames)
+  end
+
+  # Minimal set of classnames needed to create
   # a small round button.
   # Often used with an icon as button value.
   # @param [String|Array<String>] extra classnames that are added to the output
   # @return [String] classnames
   # @example
-  #   small_round_button #=> 'btn-float btn btn-sm shadow-none'
-  #   small_round_button('my-1 text-primary') #=> 'btn-float btn btn-sm shadow-none my-1 text-primary'
-  #   small_round_button(%(my-1 text-primary)) #=> 'btn-float btn btn-sm shadow-none my-1 text-primary'
-  def small_round_button(classnames=nil)
-    default_classnames = %w(btn-float btn btn-sm shadow-none)
-    (default_classnames + Array(classnames)).join(' ')
+  #   sm_rnd_btn_class #=> 'btn-float btn btn-sm shadow-none'
+  #   sm_rnd_btn_class('my-1 text-primary') #=> 'btn-float btn btn-sm shadow-none my-1 text-primary'
+  #   sm_rnd_btn_class(%(my-1 text-primary)) #=> 'btn-float btn btn-sm shadow-none my-1 text-primary'
+  def sm_rnd_btn_class(classnames=nil)
+    default_classnames = Array(fab_class(%w(btn-sm shadow-none)))
+    join_classnames(default_classnames, classnames)
   end
 
   # Renders a close icon
@@ -41,4 +55,11 @@ module BootstrapHelper
       tag.span('×', aria: { hidden: true })
     end
   end
+
+  private
+
+  def join_classnames(default_classnames, classnames)
+    (Array(default_classnames) + Array(classnames)).join(' ')
+  end
+
 end
