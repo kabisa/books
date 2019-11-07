@@ -10,4 +10,4 @@
           = f.input :body, label: false
           = f.button :submit, class: 'btn btn-outline'
 
-    = render partial: 'books/comment', collection: book.comments
+    = render partial: 'books/comment', collection: book.comments.order(created_at: :desc)

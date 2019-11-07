@@ -80,7 +80,9 @@ en:
       notice: "Thank you for returning '%{title}'."
   comments:
     create:
-      notice: "Your comment was saved."
+      notice: "Your comment has been saved."
+    destroy:
+      notice: "Your comment has been deleted."
   votes:
     create:
       notice: "Your vote has been registered."

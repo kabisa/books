@@ -93,4 +93,32 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
+  describe 'DELETE #destroy' do
+    def do_delete
+      delete :destroy, params: {id: comment.to_param}, session: valid_session
+    end
+
+    let!(:comment) { create(:comment, book: book, user: current_user) }
+
+    it 'destroys the requested comment' do
+      expect {
+        do_delete
+      }.to change(Comment, :count).by(-1)
+    end
+
+    it 'assigns the book' do
+      do_delete
+      expect(assigns[:book]).to eql(book)
+    end
+
+    it 'sets the flash notice' do
+      do_delete
+      expect(request.flash.notice).not_to be_empty
+    end
+
+    it 'redirect to /books/:book_id' do
+      do_delete
+      expect(response).to redirect_to(book)
+    end
+  end
 end
