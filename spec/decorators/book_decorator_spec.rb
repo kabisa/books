@@ -106,4 +106,12 @@ RSpec.describe BookDecorator do
       it { is_expected.to eql('2 Comments') }
     end
   end
+
+  describe '#number_of_comments_icon' do
+    subject    { Capybara.string decorator.number_of_comments_icon }
+    let(:book) { create :ebook, comments_count: 5 }
+
+    it { is_expected.to have_css('i.material-icons',text: 'mode_comment') }
+    it { is_expected.to have_content('5') }
+  end
 end

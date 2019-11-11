@@ -49,7 +49,7 @@ class BookDecorator < ApplicationDecorator
   end
 
   def formatted_tag_list
-    h.content_tag(:small, class: 'text-muted') do
+    h.tag.small(class: 'text-muted') do
       h.concat h.material_icon('label')
       h.concat ' '
       h.concat tag_list
@@ -58,17 +58,23 @@ class BookDecorator < ApplicationDecorator
 
   def number_of_comments
     [
-      comments_count,
+      comments_count,  # (1)
       Comment.model_name.human.pluralize(comments_count)
     ].join(' ')
   end
 
+  # Return an icon and a number and shows a tooltip
+  # @example
+  # book.number_of_comments_icon
+  # # => <span data-toggle="tooltip" title="17 Comments">
+  #        <i class="material-icons">mode_comment</i> 17
+  #      </span>
   def number_of_comments_icon
     h.tag.span(
       h.safe_join(
         [
           h.material_icon('mode_comment'),
-          comments_count
+          comments_count # (1)
         ], ' '),
         h.tooltipify(number_of_comments))
 
@@ -80,3 +86,5 @@ class BookDecorator < ApplicationDecorator
     h.params[:q]&.fetch(:title_or_summary_cont)
   end
 end
+
+# (1) Using `comments.size` will not use counter cache. We could also have used `model.comments.size`.
