@@ -1,5 +1,7 @@
 module Material
   class Snackbar < ActionView::Component::Base
+    include BootstrapHelper
+
     def initialize(flash:, action: nil)
       @flash = flash
       @action = action

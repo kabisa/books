@@ -10,13 +10,14 @@ RSpec.describe BootstrapHelper, type: :helper do
       subject       { helper.close_icon(options) }
       let(:options) do
         {
+          class: 'lorem',
           data: {
             action: 'controller#action'
           }
         }
       end
 
-      it { is_expected.to have_css('button.close[data-action="controller#action"]') }
+      it { is_expected.to have_css('button.lorem.close[data-action="controller#action"]') }
     end
   end
 end

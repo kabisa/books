@@ -1,8 +1,8 @@
-div(data-controller='snackbar' data-target='snackbar.container' class=snackbar_class)
-  .snackbar-body
-    = message
-    - if action
-      span.snackbar-btn.d-inline-block.ml-4
-        =< action
-  button type="button" class="text-light close ml-2" data-dismiss="modal" aria-label="Close" data-action='snackbar#hide'
-    span aria-hidden="true" &times;
+- if message.present?
+  div(data-controller='snackbar' data-target='snackbar.container' class=snackbar_class)
+    .snackbar-body
+      = message
+      - if action
+        span.snackbar-btn.d-inline-block.ml-4
+          =< action
+    = close_icon(class: 'text-light ml-2', data: { action: 'snackbar#hide' })

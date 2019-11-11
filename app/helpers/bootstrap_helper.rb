@@ -5,6 +5,10 @@ module BootstrapHelper
     Bootstrap::Alert.new(options, self).render
   end
 
+  def bs_snackbar
+    render(Material::Snackbar, flash: flash)
+  end
+
   # @param icon [String] For all available icons, please refer to Material icons library (https://material.io/resources/icons/)
   def material_icon(icon, options={})
     options.deep_merge!({ class: 'material-icons' })
@@ -49,7 +53,17 @@ module BootstrapHelper
   # Renders a close icon
   # @see http://daemonite.github.io/material/docs/4.1/utilities/close-icon/
   def close_icon(options = {})
-    options.deep_merge!(class: 'close', type: :button, aria: { label: 'Close' })
+    default_options = {
+      class: 'close',
+      type: :button,
+      aria: {
+        label: 'Close'
+      }
+    }
+    # Deep merge and join values
+    options.deep_merge!(default_options) do |key, this_val, other_val|
+      [this_val, other_val].join(' ').strip
+    end
 
     tag.button(options) do
       tag.span('×', aria: { hidden: true })
