@@ -16,7 +16,7 @@ html
     = render partial: 'navdrawer'
 
     .container
-      = bs_flash(dismissible: true)
       = yield
 
   = floating_action_button
+  = bs_snackbar
