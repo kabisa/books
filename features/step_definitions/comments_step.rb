@@ -24,3 +24,7 @@ Then("I {can_or_not}add a comment") do |should_do|
   end
 end
 
+
+Then("I see {int} comments for the book {string}") do |int, title|
+  step %Q(I see "mode_comment #{int}" for the book "#{title}")
+end

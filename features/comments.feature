@@ -47,11 +47,10 @@ Feature:
     When I delete the comment "This is an awesome book"
     Then I see 0 comments
 
-  @wip
   Scenario: See number of comments
     Given the following e-books:
       | title                  | link                                  | comments_count |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | 3 |
       | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | 5 |
     When I choose "Books" from the navigation drawer
-    Then I see "3 Comments" for the book "Lorem Ipsum"
+    Then I see 3 comments for the book "Lorem Ipsum"

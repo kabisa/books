@@ -8,6 +8,8 @@
     - if book.tag_list.any?
       p= book.formatted_tag_list
 
+    p= book.number_of_comments
+
   - if current_user.identified?
     .expansion-panel-footer
       = link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'btn btn-outline-danger'

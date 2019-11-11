@@ -58,8 +58,8 @@ class BookDecorator < ApplicationDecorator
 
   def number_of_comments
     [
-      comments.size,
-      Comment.model_name.human.pluralize(comments.size)
+      comments_count,
+      Comment.model_name.human.pluralize(comments_count)
     ].join(' ')
   end
 
@@ -68,7 +68,7 @@ class BookDecorator < ApplicationDecorator
       h.safe_join(
         [
           h.material_icon('mode_comment'),
-          comments.size
+          comments_count
         ], ' '),
         h.tooltipify(number_of_comments))
 
