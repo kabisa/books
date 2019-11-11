@@ -21,6 +21,14 @@ class CommentsController < ApplicationController
     @book    = @comment.book
 
     @comment.destroy
+    flash[:notice] = t('.notice')
+    flash[:action] = helpers.link_to(t('helpers.submit.undo'), restore_comment_path(@comment), method: :post, remote: true)
+    redirect_to @book
+  end
+
+  def restore
+    @comment = authorize Comment.only_deleted.find(params[:id]).restore
+    @book    = @comment.book
     redirect_to @book, notice: t('.notice')
   end
 

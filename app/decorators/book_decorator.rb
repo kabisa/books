@@ -23,10 +23,6 @@ class BookDecorator < ApplicationDecorator
     h.highlight(h.simple_format(summary), title_or_summary_cont)
   end
 
-  def dom_id(prefix = nil)
-    h.dom_id(object, prefix)
-  end
-
   def vote_buttons
     options = {
       book: object,

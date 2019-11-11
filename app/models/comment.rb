@@ -5,4 +5,6 @@ class Comment < ApplicationRecord
 
   belongs_to :user
   belongs_to :book, counter_cache: true
+
+  acts_as_paranoid
 end

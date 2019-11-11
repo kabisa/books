@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
+  it { is_expected.to act_as_paranoid }
+
   describe 'default_scope' do
     it 'applies a default scope to collections' do
       # TODO: test `includes(:user)`

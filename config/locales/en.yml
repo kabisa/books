@@ -83,6 +83,8 @@ en:
       notice: "Your comment has been saved."
     destroy:
       notice: "Your comment has been deleted."
+    restore:
+      notice: "Your comment has been restored."
   votes:
     create:
       notice: "Your vote has been registered."

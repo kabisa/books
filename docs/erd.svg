@@ -47,18 +47,20 @@
 </g>
 <!-- m_Comment -->
 <g id="node5" class="node"><title>m_Comment</title>
-<path fill="none" stroke="black" d="M754,-105.5C754,-105.5 874,-105.5 874,-105.5 880,-105.5 886,-111.5 886,-117.5 886,-117.5 886,-135.5 886,-135.5 886,-141.5 880,-147.5 874,-147.5 874,-147.5 754,-147.5 754,-147.5 748,-147.5 742,-141.5 742,-135.5 742,-135.5 742,-117.5 742,-117.5 742,-111.5 748,-105.5 754,-105.5"/>
-<text text-anchor="start" x="788.16" y="-134.2" font-family="Arial BoldMT" font-size="11.00">Comment</text>
-<polyline fill="none" stroke="black" points="742,-128.5 886,-128.5 "/>
-<text text-anchor="start" x="749" y="-115" font-family="ArialMT" font-size="10.00">body </text>
-<text text-anchor="start" x="773.463" y="-115" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string (1024) ∗</text>
+<path fill="none" stroke="black" d="M754,-99C754,-99 874,-99 874,-99 880,-99 886,-105 886,-111 886,-111 886,-142 886,-142 886,-148 880,-154 874,-154 874,-154 754,-154 754,-154 748,-154 742,-148 742,-142 742,-142 742,-111 742,-111 742,-105 748,-99 754,-99"/>
+<text text-anchor="start" x="788.16" y="-140.7" font-family="Arial BoldMT" font-size="11.00">Comment</text>
+<polyline fill="none" stroke="black" points="742,-135 886,-135 "/>
+<text text-anchor="start" x="749" y="-122" font-family="ArialMT" font-size="10.00">body </text>
+<text text-anchor="start" x="773.463" y="-122" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string (1024) ∗</text>
+<text text-anchor="start" x="749" y="-109" font-family="ArialMT" font-size="10.00">deleted_at </text>
+<text text-anchor="start" x="798.487" y="-109" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">datetime</text>
 </g>
 <!-- m_Book&#45;&gt;m_Comment -->
 <g id="edge8" class="edge"><title>m_Book&#45;&gt;m_Comment</title>
-<path fill="none" stroke="black" d="M816.863,-192.151C816.342,-180.387 815.826,-168.748 815.38,-158.656"/>
+<path fill="none" stroke="black" d="M816.866,-192.234C816.453,-182.907 816.044,-173.658 815.669,-165.193"/>
 <ellipse fill="none" stroke="black" cx="816.982" cy="-194.837" rx="2.4" ry="2.4"/>
-<ellipse fill="black" stroke="black" cx="814.996" cy="-150.003" rx="2.4" ry="2.4"/>
-<polygon fill="black" stroke="black" points="817.466,-158.302 815.103,-152.4 813.27,-158.488 817.466,-158.302"/>
+<ellipse fill="black" stroke="black" cx="815.289" cy="-156.601" rx="2.4" ry="2.4"/>
+<polygon fill="black" stroke="black" points="817.758,-164.9 815.395,-158.999 813.562,-165.086 817.758,-164.9"/>
 </g>
 <!-- m_Copy -->
 <g id="node6" class="node"><title>m_Copy</title>
@@ -202,10 +204,10 @@
 </g>
 <!-- m_User&#45;&gt;m_Comment -->
 <g id="edge11" class="edge"><title>m_User&#45;&gt;m_Comment</title>
-<path fill="none" stroke="black" d="M695.634,-220.209C723.086,-198.707 755.517,-173.306 779.484,-154.534"/>
+<path fill="none" stroke="black" d="M695.555,-220.27C720.028,-201.103 748.469,-178.826 771.347,-160.907"/>
 <ellipse fill="none" stroke="black" cx="693.393" cy="-221.964" rx="2.40002" ry="2.40002"/>
-<ellipse fill="black" stroke="black" cx="786.338" cy="-149.166" rx="2.40001" ry="2.40001"/>
-<polygon fill="black" stroke="black" points="781.02,-155.999 784.448,-150.646 778.43,-152.692 781.02,-155.999"/>
+<ellipse fill="black" stroke="black" cx="778.252" cy="-155.499" rx="2.40001" ry="2.40001"/>
+<polygon fill="black" stroke="black" points="772.934,-162.332 776.363,-156.979 770.344,-159.025 772.934,-162.332"/>
 </g>
 <!-- m_User&#45;&gt;m_Vote -->
 <g id="edge12" class="edge"><title>m_User&#45;&gt;m_Vote</title>

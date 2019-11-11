@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     resources :likes,    shallow: true, controller: 'votes', type: 'Like',    only: %i(create destroy)
     resources :dislikes, shallow: true, controller: 'votes', type: 'Dislike', only: %i(create destroy)
 
-    resources :comments, shallow: true,                                       only: %i(index create destroy)
+    resources :comments, shallow: true,                                       only: %i(index create destroy) do
+      post 'restore', on: :member
+    end
   end
 
   resources :ebooks, controller: 'books', type: 'Ebook'

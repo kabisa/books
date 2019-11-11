@@ -3,8 +3,8 @@ module Material
     include BootstrapHelper
 
     def initialize(flash:, action: nil)
-      @flash = flash
-      @action = action
+      self.action = action || flash[:action]
+      self.flash = flash
     end
 
     def snackbar_class
@@ -16,6 +16,15 @@ module Material
     private
 
     attr_reader :flash, :action
+
+    def action=(value)
+      @action = value&.html_safe
+    end
+
+    def flash=(value)
+      value.delete(:action)
+      @flash = value
+    end
 
     def message
       flash.map { |type, msg| msg }.to_sentence
