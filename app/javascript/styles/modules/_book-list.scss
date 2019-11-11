@@ -1,14 +1,13 @@
-.list-group.books .expansion-panel {
-  .view-details {
-    @include transition-standard(all);
-    opacity: 0;
-    visibility: hidden;
+.expansion-panel-toggler {
+  &:not(.collapsed) {
+    .on-collapsed {
+      display: none;
+    }
   }
 
-  &.show {
-    .view-details {
-      opacity: 1;
-      visibility: visible;
+  &.collapsed {
+    .on-expanded {
+      display: none;
     }
   }
 }

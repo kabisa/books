@@ -10,8 +10,10 @@ end
 
 
 When("I delete the comment {string}") do |body|
+  find('.comments li', text: body).hover
+
   within('.comments li', text: body) do
-    find('button', text: 'delete', visible: false).click
+    find('button', text: 'delete').click
   end
 end
 

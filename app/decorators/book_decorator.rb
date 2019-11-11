@@ -63,6 +63,17 @@ class BookDecorator < ApplicationDecorator
     ].join(' ')
   end
 
+  def number_of_comments_icon
+    h.tag.span(
+      h.safe_join(
+        [
+          h.material_icon('mode_comment'),
+          comments.size
+        ], ' '),
+        h.tooltipify(number_of_comments))
+
+  end
+
   private
 
   def title_or_summary_cont

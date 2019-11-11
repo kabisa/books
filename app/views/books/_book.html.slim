@@ -1,13 +1,22 @@
 .expansion-panel.list-group-item(id=book.dom_id)
   .expansion-panel-toggler.collapsed(data-toggle='collapse' data-target="##{book.dom_id(:collapse)}")
-    .media-body.row.align-items-center
-      .col-lg-7.col-xl-8
-        h5.mb-1= book.title_highlighted_with_search
-        small= book.formatted_type
-      .col-sm-6.col-lg-2
-        .view-details= link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
-      .col-sm-6.col-lg-3.col-xl-2
-        = render partial: 'books/vote', object: book, as: :book
+    .media-body
+      .on-collapsed.row.align-items-center
+        .col-lg-7.col-xl-8
+          h5.mb-1= book.title_highlighted_with_search
+          small= book.formatted_type
+        .col-sm-6.col-lg-2
+          = book.number_of_comments_icon
+        .col-sm-6.col-lg-3.col-xl-2
+          = render partial: 'books/vote', object: book, as: :book
+      .on-expanded.row.align-items-center
+        .col-lg-7.col-xl-8
+          h5.mb-1= book.title_highlighted_with_search
+          small= book.formatted_type
+        .col-sm-6.col-lg-2
+          = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
+        .col-sm-6.col-lg-3.col-xl-2
+          = render partial: 'books/vote', object: book, as: :book
 
     .expansion-panel-icon.ml-3.text-black-secondary
       i.collapsed-show.material-icons keyboard_arrow_down
