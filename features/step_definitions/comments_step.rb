@@ -8,7 +8,6 @@ When("I comment with {string}") do |body|
   click_on('Comment')
 end
 
-
 When("I delete the comment {string}") do |body|
   find('.comments li', text: body).hover
 

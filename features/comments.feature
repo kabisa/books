@@ -54,3 +54,14 @@ Feature:
       | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | 5 |
     When I choose "Books" from the navigation drawer
     Then I see 3 comments for the book "Lorem Ipsum"
+
+  Scenario: Undo a deletion
+    Given the following e-books:
+      | title                  | link                                  |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
+    And I signed in as a Kabisaan
+    And I am viewing the details for "Lorem Ipsum"
+    And I comment with "This is an awesome book"
+    When I delete the comment "This is an awesome book"
+    And I undo deleting the comment
+    Then I see 1 comment

@@ -124,7 +124,7 @@ When("I delete the book {string}") do |title|
   end
 end
 
-When("I undo deleting the book") do
+When("I undo deleting the book/comment") do
   within('.snackbar.show') do
     click_on('Undo')
   end

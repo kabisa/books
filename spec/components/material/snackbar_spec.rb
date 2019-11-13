@@ -9,7 +9,7 @@ describe Material::Snackbar do
 
   it { is_expected.to have_css('.snackbar[data-controller="snackbar"][data-target="snackbar.container"]') }
   it { is_expected.to have_css('.snackbar .snackbar-body', text: content) }
-  it { is_expected.to have_css('button[data-dismiss="modal"][data-action="snackbar#hide"]') }
+  it { is_expected.to have_css('button[data-action="snackbar#hide"]') }
 
   context 'with action' do
     let(:options) { { flash: flash, action: 'action' } }
