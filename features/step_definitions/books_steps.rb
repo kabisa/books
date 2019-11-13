@@ -29,9 +29,11 @@ end
 
 Given("the following e-book(s):") do |table|
   table.map_column!('comments_count', false) { |c| c.to_i }
+  table.map_column!('created_at', false) { |c| Chronic.parse(c) }
 
   table.hashes.each do |h|
-    create(:ebook, h)
+    time = h.delete('created_at') || Time.current
+    travel_to(time) { create(:ebook, h) }
   end
 end
 

@@ -91,6 +91,7 @@ GEM
     childprocess (2.0.0)
       rake (< 13.0)
     choice (0.2.0)
+    chronic (0.10.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     cucumber (3.1.2)
@@ -343,6 +344,7 @@ DEPENDENCIES
   bullet
   byebug
   capybara (>= 2.15)
+  chronic
   cucumber-rails
   database_cleaner
   draper

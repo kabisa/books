@@ -9,8 +9,5 @@ class CommentDecorator < ApplicationDecorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
-  def formatted_created_at
-    I18n.t(:time_ago, time: h.time_ago_in_words(created_at))
-  end
 
 end

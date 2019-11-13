@@ -9,4 +9,8 @@ class ApplicationDecorator < Draper::Decorator
     h.dom_id(object, prefix)
   end
 
+  def formatted_created_at
+    I18n.t(:time_ago, time: h.time_ago_in_words(created_at))
+  end
+
 end

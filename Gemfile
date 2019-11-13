@@ -72,6 +72,7 @@ group :test do
   gem 'rails-controller-testing' # Extracting `assigns` and `assert_template` from ActionDispatch.
   gem 'shoulda-matchers'
   gem 'pundit-matchers'
+  gem 'chronic' # Chronic is a natural language date/time parser written in pure Ruby
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
