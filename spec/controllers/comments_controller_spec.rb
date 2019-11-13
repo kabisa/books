@@ -142,6 +142,11 @@ RSpec.describe CommentsController, type: :controller do
       expect(assigns[:book]).to eql(comment.book)
     end
 
+    it 'redirect to /books/:book_id' do
+      do_post(comment.to_param)
+      expect(response).to redirect_to(book_path(book, anchor: "comment_#{comment.id}"))
+    end
+
     it 'sets a flash notice' do
       do_post(comment.to_param)
       expect(request.flash.notice).to match('Your comment has been restored.')

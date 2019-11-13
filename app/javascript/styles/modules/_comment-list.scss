@@ -1,8 +1,17 @@
 .comments {
-  li:hover {
-    .delete-comment {
-      visibility: visible;
-      opacity: 1;
+  li {
+    .anchor {
+      display: block;
+      position: relative;
+      top: -1 * $body-padding-y;
+      visibility: hidden;
+    }
+
+    &:hover {
+      .delete-comment {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
   .delete-comment {

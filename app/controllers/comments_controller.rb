@@ -27,9 +27,9 @@ class CommentsController < ApplicationController
   end
 
   def restore
-    @comment = authorize Comment.only_deleted.find(params[:id]).restore
+    @comment = authorize Comment.only_deleted.find(params[:id]).restore.decorate
     @book    = @comment.book
-    redirect_to @book, notice: t('.notice')
+    redirect_to book_path(@book, anchor: @comment.dom_id), notice: t('.notice')
   end
 
   private
