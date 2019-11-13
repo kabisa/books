@@ -121,4 +121,30 @@ RSpec.describe CommentsController, type: :controller do
       expect(response).to redirect_to(book)
     end
   end
+
+  describe 'POST #restore' do
+    before { comment.destroy }
+
+    let!(:comment) { create(:comment, book: book, user: current_user) }
+
+    def do_post(id)
+      post :restore, params: {id: id}, session: valid_session
+    end
+
+    it 'restores the requested comment' do
+      expect {
+        do_post(comment.to_param)
+      }.to change(Comment, :count).by(1)
+    end
+
+    it 'assigns the comment\'s book' do
+      do_post(comment.to_param)
+      expect(assigns[:book]).to eql(comment.book)
+    end
+
+    it 'sets a flash notice' do
+      do_post(comment.to_param)
+      expect(request.flash.notice).to match('Your comment has been restored.')
+    end
+  end
 end
