@@ -1,7 +1,16 @@
 .card
-  .card-header
-    h1.card-title.mb-1= @book.title
-    small= @book.formatted_type
+  .card-header.d-flex.justify-content-between.align-items-baseline
+    div
+      h1.card-title.mb-1= @book.title
+      small= @book.formatted_type
+
+    - if policy(@book).edit?
+      .dropdown
+        button(class=sm_rnd_btn_class aria={ expanded: false, haspopup: true } data-toggle='dropdown' type='button')
+          = material_icon('more_vert', tooltipify(t('helpers.options')))
+        .dropdown-menu.dropdown-menu-right
+          = link_to t('.edit'), edit_book_path(@book), class: 'dropdown-item'
+
   .card-body
     - if @book.is_a?(PrintedBook)
       p= @book.available_copies
@@ -13,7 +22,3 @@
       p= @book.formatted_tag_list
 
   = render partial: 'books/comments', locals: { book: @book, new_comment: @comment }
-
-  - if current_user.identified?
-    .card-footer
-      = link_to t('.edit'), edit_book_path(@book), class: 'btn btn-outline-primary', role: :button

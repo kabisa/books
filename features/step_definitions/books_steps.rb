@@ -258,6 +258,7 @@ Then(/I am( not)? seeing the button for adding a new book/) do |negate|
 end
 
 Then("I can edit the book") do
+  click_on('more_vert')
   expect(page).to have_link('Edit')
 end
 
