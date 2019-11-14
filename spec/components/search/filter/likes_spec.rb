@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-describe Search::Likes do
-  before               { allow_any_instance_of(Search::Likes).to receive(:dom_id).and_return(42) }
+describe Search::Filter::Likes do
+  before               { allow_any_instance_of(Search::Filter::Likes).to receive(:dom_id).and_return(42) }
 
   subject              { Capybara.string html }
-  let(:html)           { render_inline(Search::Likes, options) }
+  let(:html)           { render_inline(Search::Filter::Likes, options) }
   let(:options)        { { q: search_double, builder: builder_double } }
   let(:search_double)  { Ransack::Search.new(Book, params) }
   let(:builder_double) { double('builder').as_null_object }
   let(:params)         { { likes_count_gteq: 5 } }
 
   describe 'container' do
-    it { is_expected.to have_css('#42.dropdown') }
+    it { is_expected.to have_css('.dropdown') }
   end
 
   describe 'dropdown buttons' do

@@ -15,10 +15,6 @@ module Search
         q.likes_count_gteq || 0
       end
 
-      def dom_id
-        [model_name.singular, object_id].join('-')
-      end
-
       def zero_items_classnames
         class_names = %w(zero-items)
         class_names << 'd-none' if likes_count.nonzero?
