@@ -88,6 +88,12 @@ en:
   votes:
     create:
       notice: "Your vote has been registered."
+  welcome:
+    index:
+      title: 'Suggested for you'
+      latest_comment: 'Latest comment'
+      recently_added: 'Recently added'
+      most_liked_book: 'Most-liked book'
   modals:
     borrow:
       title: 'Borrow %{title}'

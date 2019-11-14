@@ -1,36 +1,15 @@
 = render(Search::Form, q: @q)
 
-h2 Suggested for you
+h2= t('.title')
 
 .suggestions.card-deck
-  = link_to @last_commented_on, class: 'card text-body' do
-    = image_tag('book_01.jpg', class: 'card-img-top img-fluid')
-    .card-img-overlay.text-white
-      h3.card-title= @last_commented_on.title
-      h4.card-subtitle.mb-2 Latest comment
-    .card-body
-      blockquote.blockquote.mb-0
-        p= truncate @last_commented_on.comments.last.body, length: 120
-        footer.blockquote-footer= @last_commented_on.comments.last.user.email
-    .card-footer.text-muted
-      = @last_commented_on.formatted_created_at
+  = render('suggestion', book: @last_commented_on, title: t('.latest_comment'), image: 'book_01.jpg') do |book|
+    blockquote.blockquote.mb-0
+      = simple_format truncate(book.comments.last.body, length: 120)
+      footer.blockquote-footer= book.comments.last.user.email
 
-  = link_to @recently_added, class: 'card text-body' do
-    = image_tag('book_02.jpg', class: 'card-img-top img-fluid')
-    .card-img-overlay.text-white
-      h3.card-title= @recently_added.title
-      h4.card-subtitle.mb-2 Recently added
-    .card-body
-      = simple_format truncate(@recently_added.summary, length: 240), class: 'card-text'
-    .card-footer.text-muted
-      = @recently_added.formatted_created_at
+  = render('suggestion', book: @recently_added, title: t('.recently_added'), image: 'book_02.jpg') do |book|
+    = simple_format truncate(book.summary, length: 240), class: 'card-text'
 
-  = link_to @most_likes, class: 'card text-body' do
-    = image_tag('book_03.jpg', class: 'card-img-top img-fluid')
-    .card-img-overlay.text-white
-      h3.card-title= @most_likes.title
-      h4.card-subtitle.mb-2 Most-liked book
-    .card-body
-      = simple_format truncate(@most_likes.summary, length: 240), class: 'card-text'
-    .card-footer.text-muted
-      = @most_likes.formatted_created_at
+  = render('suggestion', book: @most_likes, title: t('.most_liked_book'), image: 'book_03.jpg') do |book|
+    = simple_format truncate(book.summary, length: 240), class: 'card-text'
