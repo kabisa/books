@@ -63,8 +63,10 @@ en:
       body: "We've emailed a special link to %{email}. Click the link to confirm your address and get started."
   books:
     new:
-      title:
-        'Create a new %{subject}'
+      title: 'Create a new %{subject}'
+      cancel: 'Cancel book creation'
+    edit:
+      cancel: 'Cancel book changes'
     show:
       edit: 'Edit'
     destroy:

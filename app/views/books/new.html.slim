@@ -1,5 +1,9 @@
 .card
-  .card-body
-    h1.card-title= t('.title', subject: Book.model_name.human.downcase)
+  .card-header.d-flex.justify-content-between.align-items-baseline
+    div
+      h1.card-title= t('.title', subject: Book.model_name.human.downcase)
 
+    = link_to :back, class: sm_rnd_btn_class do
+      = material_icon('close', tooltipify(t('.cancel')))
+  .card-body
     = render 'form'
