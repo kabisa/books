@@ -114,4 +114,48 @@ RSpec.describe BookDecorator do
     it { is_expected.to have_css('i.material-icons',text: 'mode_comment') }
     it { is_expected.to have_content('5') }
   end
+
+  describe '#truncated_summary' do
+    subject    { decorator.truncated_summary }
+    let(:book) { create :ebook, summary: summary }
+    let(:summary) do
+      <<~SUMMARY
+        Bla
+        #{"Bla " * 50}
+        #{"Bla " * 100}
+        #{"Bla " * 150}
+        Bla
+      SUMMARY
+    end
+
+    it { expect(subject.size).to eql(240) }
+    it { is_expected.to have_content('...') }
+  end
+
+  describe '#truncated_summary_html' do
+    subject    { Capybara.string decorator.truncated_summary_html }
+    let(:book) { create :ebook, summary: summary }
+    let(:summary) do
+      <<~SUMMARY
+        Bla
+        #{"Bla " * 50}
+        #{"Bla " * 100}
+        #{"Bla " * 150}
+        Bla
+      SUMMARY
+    end
+
+    it { expect(subject.text.size).to eql(240) }
+    it { is_expected.to have_css('p') }
+    it { is_expected.to have_css('br', count: 2) }
+    it { is_expected.to have_content('...') }
+
+    describe 'with options passed' do
+      subject       { Capybara.string decorator.truncated_summary_html(options) }
+      let(:options) { { class: 'lorem' } }
+
+      it { is_expected.to have_css('p.lorem') }
+
+    end
+  end
 end

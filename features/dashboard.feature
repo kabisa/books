@@ -2,7 +2,6 @@ Feature: Dashboard
   As a user
   I want quick access to interesting books
 
-  @wip
   Scenario: Enough books
     Given the following users:
       | email              |
@@ -29,9 +28,16 @@ Feature: Dashboard
     And I see the book "Dolor Sit" suggested as "Recently added"
     And I see the book "Morbi ullamcorper" suggested as "Most-liked book"
 
-  @todo
   Scenario: No books
+    When I open the application
+    Then I don't see any suggestions
 
-  @todo
   Scenario: 1 book
+    Given the following e-books:
+      | title                  | link                                  |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
+    When I open the application
+    Then I don't see a book suggested as "Latest comment"
+    And I see the book "Lorem Ipsum" suggested as "Recently added"
+    And I see the book "Lorem Ipsum" suggested as "Most-liked book"
 

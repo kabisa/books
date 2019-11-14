@@ -76,6 +76,14 @@ class BookDecorator < ApplicationDecorator
 
   end
 
+  def truncated_summary
+    h.truncate(summary, length: 240)
+  end
+
+  def truncated_summary_html(options={})
+    h.simple_format(truncated_summary, options)
+  end
+
   private
 
   def title_or_summary_cont

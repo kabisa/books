@@ -1,11 +1,12 @@
-= link_to book, class: 'card text-body' do
-  = image_tag(image, class: 'card-img-top img-fluid')
-  .card-img-overlay.text-white
-    h3.card-title= book.title
-    h4.card-subtitle.mb-2= title
-  .card-body
-    = yield book
-  .card-footer.text-muted
-    = book.formatted_created_at
+- if book
+  = link_to book, class: 'card text-body' do
+    = image_tag(image, class: 'card-img-top img-fluid')
+    .card-img-overlay.text-white
+      h3.card-title= book.title
+      h4.card-subtitle.mb-2= title
+    .card-body
+      = yield book
+    .card-footer.text-muted
+      = book.formatted_created_at
 
 

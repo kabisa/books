@@ -1,15 +1,16 @@
 = render(Search::Form, q: @q)
 
-h2= t('.title')
+- if @suggestions.any?
+  h2= t('.title')
 
-.suggestions.card-deck
-  = render('suggestion', book: @suggestions.last_commented_on, title: t('.latest_comment'), image: 'book_01.jpg') do |book|
-    blockquote.blockquote.mb-0
-      = simple_format truncate(book.comments.last.body, length: 120)
-      footer.blockquote-footer= book.comments.last.user.email
+  .suggestions.card-deck
+    = render('suggestion', book: @suggestions.last_commented_on, title: t('.latest_comment'), image: 'book_01.jpg') do |book|
+      blockquote.blockquote.mb-0
+        = book.comments.last.truncated_body_html
+        footer.blockquote-footer= book.comments.last.user.email
 
-  = render('suggestion', book: @suggestions.recently_added, title: t('.recently_added'), image: 'book_02.jpg') do |book|
-    = simple_format truncate(book.summary, length: 240), class: 'card-text'
+    = render('suggestion', book: @suggestions.recently_added, title: t('.recently_added'), image: 'book_02.jpg') do |book|
+      = book.truncated_summary_html(class: 'card-text')
 
-  = render('suggestion', book: @suggestions.most_likes, title: t('.most_liked_book'), image: 'book_03.jpg') do |book|
-    = simple_format truncate(book.summary, length: 240), class: 'card-text'
+    = render('suggestion', book: @suggestions.most_likes, title: t('.most_liked_book'), image: 'book_03.jpg') do |book|
+      = book.truncated_summary_html(class: 'card-text')

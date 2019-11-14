@@ -10,4 +10,11 @@ class CommentDecorator < ApplicationDecorator
   #     end
   #   end
 
+  def truncated_body
+    h.truncate(body, length: 120)
+  end
+
+  def truncated_body_html
+    h.simple_format(truncated_body)
+  end
 end
