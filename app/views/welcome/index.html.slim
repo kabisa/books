@@ -2,12 +2,13 @@
 
 h2 Suggested for you
 
-.card-deck
+.suggestions.card-deck
   = link_to @last_commented_on, class: 'card text-body' do
-    .card-header Latest comment
-    = image_tag('book_01.jpg', height: 200, class: 'card-img-top img-fluid')
+    = image_tag('book_01.jpg', class: 'card-img-top img-fluid')
+    .card-img-overlay.text-white
+      h3.card-title= @last_commented_on.title
+      h4.card-subtitle.mb-2 Latest comment
     .card-body
-      h5.card-title= @last_commented_on.title
       blockquote.blockquote.mb-0
         p= truncate @last_commented_on.comments.last.body, length: 120
         footer.blockquote-footer= @last_commented_on.comments.last.user.email
@@ -15,19 +16,21 @@ h2 Suggested for you
       = @last_commented_on.formatted_created_at
 
   = link_to @recently_added, class: 'card text-body' do
-    .card-header Recently added
-    = image_tag('book_02.jpg', height: 200, class: 'card-img-top img-fluid')
+    = image_tag('book_02.jpg', class: 'card-img-top img-fluid')
+    .card-img-overlay.text-white
+      h3.card-title= @recently_added.title
+      h4.card-subtitle.mb-2 Recently added
     .card-body
-      h5.card-title= @recently_added.title
       = simple_format truncate(@recently_added.summary, length: 240), class: 'card-text'
     .card-footer.text-muted
       = @recently_added.formatted_created_at
 
   = link_to @most_likes, class: 'card text-body' do
-    .card-header Most-liked book
-    = image_tag('book_03.jpg', height: 200, class: 'card-img-top img-fluid')
+    = image_tag('book_03.jpg', class: 'card-img-top img-fluid')
+    .card-img-overlay.text-white
+      h3.card-title= @most_likes.title
+      h4.card-subtitle.mb-2 Most-liked book
     .card-body
-      h5.card-title= @most_likes.title
       = simple_format truncate(@most_likes.summary, length: 240), class: 'card-text'
     .card-footer.text-muted
       = @most_likes.formatted_created_at
