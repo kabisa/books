@@ -1,6 +1,6 @@
-- content_for :header do
+- content_for(:header) do
   h1.card-title.mb-1= @book.title_was
   small= @book.formatted_type
 
-= render partial: 'card', locals: { book: @book }
+= render partial: 'form', locals: { book: @book }, layout: 'form_layout'
 
