@@ -18,6 +18,7 @@ Feature: Show more
     Given there are 25 books
     And I choose "Books" from the navigation drawer
     When I click "More books"
+    And I wait for 1 second
     When I click "More books"
     Then I see a list of 25 book
     And there are no more books to be shown

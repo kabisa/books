@@ -2,6 +2,11 @@ When("I click (the ){string}( button)") do |locator|
   click_link_or_button locator
 end
 
+
+When("I wait for {int} second(s)") do |n|
+  sleep n
+end
+
 Then("I'm in") do
   expect(current_path).to eql('/')
 

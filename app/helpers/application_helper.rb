@@ -13,4 +13,16 @@ module ApplicationHelper
       end
     end
   end
+
+  def show_more_link_to(scope, name, options={})
+    icon              = material_icon('keyboard_arrow_down')
+    disable_with      = safe_join([tag.div(spinner, class: 'spinner-container'), name], ' ')
+    name              = safe_join([icon, name], ' ')
+
+    options.merge!({
+      data: { disable_with: disable_with }
+    })
+
+    link_to_next_page scope, name, options
+  end
 end
