@@ -265,7 +265,7 @@ end
 Then("I see a list of {int} book(s)") do |items_count|
   if items_count.nonzero?
     within('.list-group') do
-      expect(page).to have_css('.list-group-item', count: items_count)
+      expect(page).to have_css('div.list-group-item', count: items_count)
     end
   else
     expect(page).not_to have_css('.list-group')
@@ -274,7 +274,7 @@ end
 
 Then("I see a list of {int} {book_type}") do |items_count, type|
   within('.list-group') do
-    expect(page).to have_css('.list-group-item', text: /#{type}/i, count: items_count)
+    expect(page).to have_css('div.list-group-item', text: /#{type}/i, count: items_count)
   end
 end
 

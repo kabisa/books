@@ -6,7 +6,11 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @q = ransack_params
-    @books = @q.result(distinct: true).includes(:taggings, copies: [:location]).decorate
+    @books = @q
+      .result(distinct: true)
+      .includes(:taggings, copies: [:location])
+      .page(params[:page])
+      .decorate
   end
 
   # GET /books/1
