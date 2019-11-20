@@ -8,18 +8,17 @@ Feature: Show more
     When I choose "Books" from the navigation drawer
     Then I see a list of 10 book
 
-  @wip
   Scenario: See the next 10 books
-    Given I have 25 books
-    And I open the application
-    When I click "More"
+    Given there are 25 books
+    And I choose "Books" from the navigation drawer
+    When I click "More books"
     Then I see a list of 20 book
 
-  @todo
+  @wip
   Scenario: See all books
-    Given I have 25 books
-    And I open the application
-    When I click "More"
-    And I click "More"
+    Given there are 25 books
+    And I choose "Books" from the navigation drawer
+    When I click "More books"
+    When I click "More books"
     Then I see a list of 25 book
-    But I don't see the "More" link
+    And there are no more books to be shown
