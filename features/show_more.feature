@@ -14,7 +14,6 @@ Feature: Show more
     When I click "More books"
     Then I see a list of 20 book
 
-  @wip
   Scenario: See all books
     Given there are 25 books
     And I choose "Books" from the navigation drawer

@@ -343,3 +343,10 @@ end
 When("I expand the panel for {string}") do |title|
   find('.expansion-panel', text: title).click
 end
+
+
+Then("there are no more books to be shown") do
+  within('.list-group') do
+    expect(page).not_to have_css('a.list-group-item', text: 'More books')
+  end
+end
