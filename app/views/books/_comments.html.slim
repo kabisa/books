@@ -6,7 +6,7 @@
   ul.list-group.list-group-flush
     - if policy(Comment).new?
       li.list-group-item.border-0.new-comment
-        = simple_form_for([book.becomes(Book), new_comment], wrapper: :vertical_form) do |f|
+        = simple_form_for([book.becomes(Book), new_comment], html: { autocomplete: 'off' }) do |f|
           = f.input :body, label: false
           = f.button :submit, class: 'btn btn-outline'
 
