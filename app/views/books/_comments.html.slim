@@ -7,7 +7,7 @@
     - if policy(Comment).new?
       li.list-group-item.border-0.new-comment
         = simple_form_for([book.becomes(Book), new_comment], html: { autocomplete: 'off' }) do |f|
-          = f.input :body, label: false
+          = f.input :body, label: false, required: false
           = f.button :submit, class: 'btn btn-outline'
 
     = render partial: 'books/comment', collection: book.comments.order(created_at: :desc)
