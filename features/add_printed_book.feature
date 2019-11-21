@@ -12,7 +12,7 @@ Feature:
 
   Scenario: Create a printed book
     Given I'm adding a new book
-    When I fill in "Title" with "Awesome Book"
+    When I populate the "Title" field with "Awesome Book"
     And I toggle "Type" to "Printed book"
     And I click "Save"
     Then I am viewing the book
@@ -22,7 +22,7 @@ Feature:
   @javascript
   Scenario: Create a printed book with copies on several locations
     Given I'm adding a new book
-    When I fill in "Title" with "Awesome Book"
+    When I populate the "Title" field with "Awesome Book"
     And I toggle "Type" to "Printed book"
     And I add 2 copies of the book to the location "Rome"
     And I add another location
@@ -40,7 +40,7 @@ Feature:
   @javascript
   Scenario: Create a printed book without copies
     Given I'm adding a new book
-    When I fill in "Title" with "Awesome Book"
+    When I populate the "Title" field with "Awesome Book"
     And I toggle "Type" to "Printed book"
     And I remove the first location
     And I click "Save"
@@ -49,7 +49,7 @@ Feature:
   @javascript
   Scenario: Create a printed book with duplicate locations
     Given I'm adding a new book
-    When I fill in "Title" with "Awesome Book"
+    When I populate the "Title" field with "Awesome Book"
     And I toggle "Type" to "Printed book"
     And I add another location
     And I click "Save"

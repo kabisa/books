@@ -3,14 +3,7 @@
     .card-body
       h1.card-title= t('.title')
 
-      = form_tag do
-        .form-group
-          .floating-label
-            = label_tag :email, User.human_attribute_name('email')
-            = email_field_tag :email, @user.email, class: ['form-control', @user.valid? || 'is-invalid'], autofocus: true, required: true
-            - @user.errors[:email].each do |msg|
-              .invalid-feedback= msg
-
-        => submit_tag t('helpers.submit.session.create'), class: 'btn btn-primary'
+      = simple_form_for(@user, url: sign_in_path, html: { autocomplete: :off }) do |f|
+        = f.input :email, autofocus: true, required: false
+        => f.submit t('helpers.submit.session.create'), class: 'btn btn-primary'
         = link_to t('helpers.submit.cancel'), root_path, role: :button, class: 'btn btn-outline-primary'
-

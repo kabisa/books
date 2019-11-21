@@ -25,7 +25,7 @@ Feature:
       | Lorem Ipsum | Rome     | 1      |
     When I choose "Books" from the navigation drawer
     And I edit the book "Lorem Ipsum"
-    And I fill in "Title" with "Awesome Book"
+    And I populate the "Title" field with "Awesome Book"
     And I click "Save"
     Then I am viewing the book
 

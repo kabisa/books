@@ -13,9 +13,9 @@ Feature:
   @javascript
   Scenario: Create a book
     Given I'm adding a new book
-    When I fill in "Title" with "Awesome Book"
-    And I fill in "Link" with "http://www.kabisa.nl/awesome_book.epub"
-    And I fill in "Summary" with "Lorem ipsum dolor sit amet."
+    And I populate the "Title" field with "Awesome Book"
+    And I populate the "Link" field with "http://www.kabisa.nl/awesome_book.epub"
+    And I populate the "Summary" field with "Lorem ipsum dolor sit amet."
     And I add the tags "programming, software"
     And I click "Save"
     Then I am viewing the book
@@ -31,16 +31,16 @@ Feature:
 
   Scenario: Create an e-book with an invalid link
     Given I'm adding a new book
-    When I fill in "Title" with "Awesome Book"
-    And I fill in "Link" with "this is an invalid link"
+    And I populate the "Title" field with "Awesome Book"
+    And I populate the "Link" field with "this is an invalid link"
     And I click "Save"
     Then I see a validation error for "Link"
 
   @javascript
   Scenario: Invalid copies are ignored when saving ebook
     Given I'm adding a new book
-    And I fill in "Title" with "Awesome Book"
-    And I fill in "Link" with "http://www.kabisa.nl/awesome_book.epub"
+    And I populate the "Title" field with "Awesome Book"
+    And I populate the "Link" field with "http://www.kabisa.nl/awesome_book.epub"
     And I toggle "Type" to "Printed book"
     And I remove the first location
     When I toggle "Type" to "E-book"

@@ -4,11 +4,7 @@ RSpec.describe SessionsController, type: :controller do
   render_views
 
   let(:email) { attributes_for(:user)[:email] }
-  let(:options) do
-    {
-      email: email
-    }
-  end
+  let(:options) { { user: { email: email }} }
 
   describe 'POST /sessions' do
     def do_post(params=options)

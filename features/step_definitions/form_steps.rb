@@ -1,3 +1,14 @@
+Given("I populate the {string} field with {string}") do |label, value|
+
+  label_to_placeholder_mapping = {
+    'Title' => 'book_title',
+    'Link' => 'book_link',
+    'Summary' => 'book_summary'
+  }
+
+  fill_in label_to_placeholder_mapping[label], with: value
+end
+
 Given("I fill in {string} with {string}") do |locator, value|
   fill_in locator, with: value
 end

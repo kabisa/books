@@ -2,11 +2,11 @@ class SessionsController < ApplicationController
   skip_after_action :verify_authorized
 
   def new
-    @user = NullUser.new
+    @user = User.new
   end
 
   def create
-    @email = params[:email]
+    @email = params[:user][:email]
     @user  = User.find_or_initialize_by(email: @email)
 
     if @user.update(login_token: SecureRandom.urlsafe_base64,
