@@ -19,6 +19,8 @@ en:
       book:
         type: *book_types
     placeholders:
+      book:
+        title: 'Add title'
       comment:
         body: 'Add a comment...'
     # Examples

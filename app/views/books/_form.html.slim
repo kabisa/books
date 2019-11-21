@@ -1,4 +1,4 @@
-= simple_form_for(book.becomes(Book), data: { controller: 'book-form' }) do |f|
+= simple_form_for(book.becomes(Book), html: { autocomplete: 'off' }, data: { controller: 'book-form' }) do |f|
   = f.input :title, autofocus: true
 
   - if book.new_record?

@@ -12,9 +12,12 @@ tags {
 .tagify__input {
   display: inline-block;
   margin: 0;
+  padding: 0;
 }
 
 .tagify__tag {
+  margin: 0 5px 0 0;
+
   &:hover:not([readonly]) div::before {
     top: 0;
     right: 0;
