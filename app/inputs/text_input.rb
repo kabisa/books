@@ -1,4 +1,4 @@
 require 'text_field_box'
-class StringInput < SimpleForm::Inputs::StringInput
+class TextInput < SimpleForm::Inputs::TextInput
   include TextFieldBox
 end
