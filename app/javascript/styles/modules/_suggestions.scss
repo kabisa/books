@@ -5,4 +5,17 @@
     background: linear-gradient(rgba(black, 0.5), rgba(black, 0));
     text-shadow: 0px 1px 20px rgba(0, 0, 0, 0.5);
   }
+  .figure {
+    position: relative;
+
+    &::before {
+      content: ' ';
+      background: linear-gradient(rgba(white, 0) 85%, rgba(white, 1) 95%);
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
 }

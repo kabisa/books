@@ -3,7 +3,7 @@
     .row
       .col-sm-4.col-md-3
         figure.figure
-        = image_tag book.cover_url(:thumb), class: 'figure-img img-fluid rounded'
+          = image_tag book.cover_url, class: 'figure-img img-fluid rounded'
       .col
         - if book.is_a?(PrintedBook) && policy(book).borrow?
           p= book.available_copies

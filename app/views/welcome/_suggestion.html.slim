@@ -1,6 +1,7 @@
 - if book
   = link_to book, class: 'card text-body' do
-    = image_tag(image, class: 'card-img-top img-fluid')
+    figure.figure
+      = image_tag(book.cover_url(:top_half), class: 'card-img-top figure-img img-fluid w-100')
     .card-img-overlay.text-white
       h3.card-title= book.title
       h4.card-subtitle.mb-2= title

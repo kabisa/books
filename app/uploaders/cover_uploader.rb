@@ -7,10 +7,18 @@ class CoverUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
-  process resize_to_fit: [800, 800]
+  process resize_to_limit: [400, 600] # Smaller images will not be resized. If we want to resize, then use `resize_to_fit`.
 
-  version :thumb do
-    process resize_to_fit: [200,200]
+  version :top_half do
+    process :crop
+  end
+
+  def crop
+    manipulate! do |img|
+      w = img.width
+      h = w*2/3
+      img.crop "#{w}x#{h}+0+0"
+    end
   end
 
   # Override the directory where uploaded files will be stored.
@@ -29,7 +37,11 @@ class CoverUploader < CarrierWave::Uploader::Base
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
      #"/images/fallback/" + [version_name, "default.jpg"].compact.join('_')
-     ActionController::Base.helpers.asset_path('fallback/default.png')
+     ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+   end
+
+   def size_range
+     0..2.megabytes
    end
 
   # Process files as they are uploaded:
