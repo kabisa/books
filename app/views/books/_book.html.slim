@@ -2,7 +2,9 @@
   .expansion-panel-toggler.collapsed(data-toggle='collapse' data-target="##{book.dom_id(:collapse)}")
     .media-body
       .on-collapsed.row.align-items-center
-        .col-lg-7.col-xl-8
+        .col-1
+            .text-center= image_tag book.cover_url, class: 'img-thumbnail'
+        .col-lg-6.col-xl-7
           h5.mb-1= book.title_highlighted_with_search
           small= book.formatted_type
         .col-sm-6.col-lg-2
