@@ -6,16 +6,18 @@
 
 ## Installation
 
+- Install [all requirements](https://gorails.com/setup/osx/10.15-catalina) on your machine
+- `brew install imagemagick`
 - `git clone <repository-url>` this repository
 - `cd books`
 - `bundle install`
 - `bin/rails db:setup`
 
+
 ## Running / Development
 
 - `bin/rails s`
 - Visit your app at [http://localhost:3000](http://localhost:3000).
-
 
 ### Populate the database
 
@@ -40,6 +42,10 @@ To update the diagram, run the following command:
 ### SendGrid
 
 The production version of this application uses [SendGrid](http://sendgrid.com) for sending mails.
+
+### Fallback cover image
+
+Generated using [https://dummyimage.com/200x300/212121/fafafa.png&text=No+Cover+Available](https://dummyimage.com/200x300/212121/fafafa.png&text=No+Cover+Available)
 
 ## Deployment
 

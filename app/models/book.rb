@@ -17,6 +17,7 @@ class Book < ApplicationRecord
   accepts_nested_attributes_for :copies, allow_destroy: true
   acts_as_paranoid
   acts_as_taggable
+  mount_uploader :cover, CoverUploader
 
   class << self
     def policy_class

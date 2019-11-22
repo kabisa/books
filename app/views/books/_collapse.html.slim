@@ -1,14 +1,18 @@
 .collapse(id=book.dom_id(:collapse)  data-parent="##{parent}" class=('show' if local_assigns[:show]))
   .expansion-panel-body
+    .row
+      .col-sm-4.col-md-3
+        figure.figure
+        = image_tag book.cover_url(:thumb), class: 'figure-img img-fluid rounded'
+      .col
+        - if book.is_a?(PrintedBook) && policy(book).borrow?
+          p= book.available_copies
+        = book.summary_highlighted_with_search
 
-    - if book.is_a?(PrintedBook) && policy(book).borrow?
-      p= book.available_copies
-    = book.summary_highlighted_with_search
+        - if book.tag_list.any?
+          p= book.formatted_tag_list
 
-    - if book.tag_list.any?
-      p= book.formatted_tag_list
-
-    p= book.number_of_comments
+        p= book.number_of_comments
 
   - if current_user.identified?
     .expansion-panel-footer

@@ -12,13 +12,18 @@
           = link_to t('.edit'), edit_book_path(@book), class: 'dropdown-item'
 
   .card-body
-    - if @book.is_a?(PrintedBook)
-      p= @book.available_copies
+    .row
+      .col-sm-4.col-md-3
+        figure.figure
+        = image_tag @book.cover_url(:thumb), class: 'figure-img img-fluid rounded'
+      .col
+        - if @book.is_a?(PrintedBook)
+          p= @book.available_copies
 
-    - if @book.summary?
-      = simple_format @book.summary, class: 'card-text'
+        - if @book.summary?
+          = simple_format @book.summary, class: 'card-text'
 
-    - if @book.tag_list.any?
-      p= @book.formatted_tag_list
+        - if @book.tag_list.any?
+          p= @book.formatted_tag_list
 
   = render partial: 'books/comments', locals: { book: @book, new_comment: @comment }

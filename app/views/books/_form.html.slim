@@ -1,4 +1,4 @@
-= simple_form_for(book.becomes(Book), html: { autocomplete: 'off' }, data: { controller: 'book-form' }) do |f|
+= simple_form_for(book.becomes(Book), html: { multipart: true, autocomplete: 'off' }, data: { controller: 'book-form' }) do |f|
   = f.input :title, autofocus: true
 
   - if book.new_record?
@@ -28,6 +28,7 @@
               = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
 
   = f.input :summary, as: :text
+  = f.input :cover
 
   = f.input :tag_list, input_html: { value: book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
 
