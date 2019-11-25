@@ -55,6 +55,33 @@ SimpleForm.setup do |config|
     end
   end
 
+  # This is a copy of the `custom_file` wrapper but *without* the label.
+  # @see http://daemonite.github.io/material/docs/4.1/components/forms/#file-browser
+  config.wrappers :my_custom_file, tag: 'div', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :readonly
+    b.wrapper :custom_file_wrapper, tag: 'div', class: 'custom-file' do |ba|
+      ba.use :input, class: 'custom-file-input', error_class: 'is-invalid', valid_class: 'is-valid'
+      ba.use :label, class: 'custom-file-label'
+      ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+    end
+    b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+  end
+
+  # @see http://daemonite.github.io/material/docs/4.1/material/selection-controls/#switches
+  config.wrappers :switch, tag: 'div', class: 'form-group custom-control custom-switch' do |b|
+    b.use :html5
+    b.optional :readonly
+    b.wrapper tag: 'span', class: 'custom-control-track' do; end
+    b.use :input, class: 'custom-control-input', error_class: 'is-invalid', valid_class: 'is-valid'
+    b.use :label, class: 'custom-control-label'
+    b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+    b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+  end
+
   config.wrappers :toggle_buttons, tag: :div, class: 'btn-group form-group', item_wrapper_tag: false, html: { data: { toggle: 'buttons'}, role: 'group' } do |b|
     b.use :html5
     b.optional :readonly
@@ -65,6 +92,8 @@ SimpleForm.setup do |config|
   config.default_wrapper = :vertical_form_w_text_field_boxes
 
   config.wrapper_mappings = {
+    boolean:        :switch,
+    file:           :my_custom_file,
     toggle_buttons: :toggle_buttons
   }
 end

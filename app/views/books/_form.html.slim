@@ -28,7 +28,9 @@
               = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
 
   = f.input :summary, as: :text
-  = f.input :cover
+  = f.input :cover, input_html: { accept: 'image/*', data: { controller: 'dropzone' }}
+  - if book.cover?
+    = f.input :remove_cover, as: :boolean
 
   = f.input :tag_list, input_html: { value: book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
 

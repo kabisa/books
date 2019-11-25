@@ -127,6 +127,8 @@ en:
       book:
         likes_count: 'Likes'
         tag_list: 'Tags'
+        cover: 'Cover image'
+        remove_cover: 'Remove cover image'
       comment:
         body: 'Comment'
     errors:
@@ -155,4 +157,4 @@ en:
   time_ago: '%{time} ago'
   errors:
     messages:
-      content_type_whitelist_error: "lorem Ipsum"
+      content_type_whitelist_error: 'should be an image file'
