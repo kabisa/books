@@ -1,37 +1,46 @@
 = simple_form_for(book.becomes(Book), html: { multipart: true, autocomplete: 'off' }, data: { controller: 'book-form' }) do |f|
-  = f.input :title, autofocus: true
+  .row
+    .col-md-4.col-lg-3
+      /= f.input :cover, input_html: { accept: 'image/*' }
+      - if book.cover?
+        /= f.input :remove_cover, as: :boolean
 
-  - if book.new_record?
-    = f.input :type, as: :toggle_buttons, collection: BookType.types.to_sym, input_html: { data: { target: 'book-form.type' }}, label_html: { data: { action: 'click->book-form#toggleTypeProperties' }}
+      .uploader(data={ controller: 'dropzone' })
+        | Lorem
+        img(data={ target: 'dropzone.previewImage' })
+        = f.input_field :cover, data: { target: 'dropzon.fileInput', action: 'dropzone#handleImage' }
 
-  - if book.new_record? || book.is_a?(Ebook)
-    div(data-book-type='Ebook')
-      = f.input :link, required: true
+    .col
+      = f.input :title, autofocus: true
 
-  - if book.new_record? || book.is_a?(PrintedBook)
-    div(data-book-type='PrintedBook')
-      div(data-controller='nested-form')
-        template(data-target='nested-form.template')
-          = f.fields_for :copies, Copy.new(number: 1), child_index: 'NEW_RECORD' do |copy|
-            = render 'copy_fields', f: copy
+      - if book.new_record?
+        = f.input :type, as: :toggle_buttons, collection: BookType.types.to_sym, input_html: { data: { target: 'book-form.type' }}, label_html: { data: { action: 'click->book-form#toggleTypeProperties' }}
 
-        .form-group.row
-          = f.label :copies, class: 'col-md-2 col-xl-1 col-form-label'
-          .col-md.col-lg-5.nested-form
-            - book.errors[:copies].each do |msg|
-              p.text-danger.mt-2= msg
+      - if book.new_record? || book.is_a?(Ebook)
+        div(data-book-type='Ebook')
+          = f.input :link, required: true
 
-            = f.fields_for :copies, book.copies do |copy|
-              = render 'copy_fields', f: copy
+      - if book.new_record? || book.is_a?(PrintedBook)
+        div(data-book-type='PrintedBook')
+          div(data-controller='nested-form')
+            template(data-target='nested-form.template')
+              = f.fields_for :copies, Copy.new(number: 1), child_index: 'NEW_RECORD' do |copy|
+                = render 'copy_fields', f: copy
 
-            div(data-target='nested-form.links')
-              = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
+            .form-group.row
+              = f.label :copies, class: 'col-md-2 col-xl-1 col-form-label'
+              .col-md.col-lg-5.nested-form
+                - book.errors[:copies].each do |msg|
+                  p.text-danger.mt-2= msg
 
-  = f.input :summary, as: :text
-  = f.input :cover, input_html: { accept: 'image/*', data: { controller: 'dropzone' }}
-  - if book.cover?
-    = f.input :remove_cover, as: :boolean
+                = f.fields_for :copies, book.copies do |copy|
+                  = render 'copy_fields', f: copy
 
-  = f.input :tag_list, input_html: { value: book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
+                div(data-target='nested-form.links')
+                  = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
+
+      = f.input :summary, as: :text
+
+      = f.input :tag_list, input_html: { value: book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
 
   = f.button :submit, class: 'btn btn-outline-primary'

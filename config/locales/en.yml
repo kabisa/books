@@ -128,7 +128,7 @@ en:
         likes_count: 'Likes'
         tag_list: 'Tags'
         cover: 'Cover image'
-        remove_cover: 'Remove cover image'
+        remove_cover: 'Remove'
       comment:
         body: 'Comment'
     errors:
