@@ -38,6 +38,7 @@ gem 'ransack' # Object-based searching.
 gem 'acts-as-taggable-on', github: 'mkilling/acts-as-taggable-on',branch: 'support-rails-6' # With ActsAsTaggableOn, you can tag a single model on several contexts, such as skills, interests, and awards. It also provides other advanced functionality
 gem 'kaminari'
 gem 'carrierwave', '~> 2.0'
+gem 'fog-aws'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

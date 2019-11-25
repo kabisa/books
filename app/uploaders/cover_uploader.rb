@@ -4,7 +4,7 @@ class CoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  #storage :file
   # storage :fog
 
   process resize_to_limit: [400, nil] # Smaller images will not be resized. If we want to resize, then use `resize_to_fit`.
@@ -37,8 +37,7 @@ class CoverUploader < CarrierWave::Uploader::Base
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
      #"/images/fallback/" + [version_name, "default.jpg"].compact.join('_')
-     #ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-     ActionController::Base.helpers.asset_path("fallback/default.png")
+     ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
    end
 
    def size_range

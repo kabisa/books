@@ -43,6 +43,15 @@ To update the diagram, run the following command:
 
 The production version of this application uses [SendGrid](http://sendgrid.com) for sending mails.
 
+### S3
+
+In [some environments](config/initializers/carrierwave.rb) images are uploaded to an S3 bucke using [CarrierWave](https://github.com/carrierwaveuploader/carrierwave). If you want to use this feature, make sure you have an S3 bucket created and add the required keys to the corresponding ENV variables:
+
+* `AWS_ACCESS_KEY_ID`
+* `AWS_SECRET_ACCESS_KEY`
+* `AWS_REGION`
+* `AWS_BUCKET_NAME`
+
 ### Fallback cover image
 
 Generated using [https://dummyimage.com/200x300/212121/fafafa.png&text=No+Cover+Available](https://dummyimage.com/200x300/212121/fafafa.png&text=No+Cover+Available)
