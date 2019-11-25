@@ -2,13 +2,23 @@
   .row
     .col-md-4.col-lg-3
       /= f.input :cover, input_html: { accept: 'image/*' }
-      - if book.cover?
+      /- if book.cover?
         /= f.input :remove_cover, as: :boolean
 
-      .uploader(data={ controller: 'dropzone' })
-        | Lorem
-        img(data={ target: 'dropzone.previewImage' })
-        = f.input_field :cover, data: { target: 'dropzon.fileInput', action: 'dropzone#handleImage' }
+      .form-group
+        .uploader.img-thumbnail.d-flex.align-items-center(data={ controller: 'dropzone' })
+          .uploader-overlay.d-flex.justify-content-center.align-items-center
+            = link_to '#', class: sm_rnd_btn_class('uploader-action text-light'), data: { action: 'dropzone#browse' } do
+              = material_icon('add_photo_alternate', tooltipify(t('upload', scope: [controller.controller_name, controller.action_name])))
+            = link_to '#', class: sm_rnd_btn_class('uploader-action ml-3 text-light'), data: { target: 'dropzone.removeButton', action: 'dropzone#removeImage' } do
+              = material_icon('close', tooltipify(t('remove', scope: [controller.controller_name, controller.action_name])))
+            .uploader-backdrop
+          - if book.cover?
+            = image_tag book.cover_url, class: 'img-fluid', data: { target: 'dropzone.previewImage' }
+          - else
+            img.img-fluid(data={ target: 'dropzone.previewImage' })
+          = f.input_field :cover, accept: 'image/*', data: { target: 'dropzone.fileInput', action: 'dropzone#handleImage' }
+          = f.hidden_field :remove_cover, data: { target: 'dropzone.removeCover' }
 
     .col
       = f.input :title, autofocus: true
@@ -28,7 +38,7 @@
                 = render 'copy_fields', f: copy
 
             .form-group.row
-              = f.label :copies, class: 'col-md-2 col-xl-1 col-form-label'
+              = f.label :copies, class: 'col-md-3 col-xl-2 col-form-label'
               .col-md.col-lg-5.nested-form
                 - book.errors[:copies].each do |msg|
                   p.text-danger.mt-2= msg
