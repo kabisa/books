@@ -1,37 +1,37 @@
 .dropzone-container {
-  position: relative;
   min-height: 200px;
+  position: relative;
 
   .dropzone-overlay {
+    height: 100%;
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
   }
 
   .dropzone-backdrop {
+    background: #000;
+    height: 100%;
+    left: 0;
+    opacity: 0.35;
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: black;
-    opacity: 0.35;
   }
 
-  .uploader-action {
-    z-index: 100;
+  .dropzone-action {
+    z-index: 1;
   }
 
   input[type='file'] {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    opacity: 0;
     cursor: pointer;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
   }
 }

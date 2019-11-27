@@ -1,7 +1,7 @@
 import {Controller} from 'stimulus';
 
 export default class extends Controller {
-  static targets = ['fileInput', 'previewImage', 'removeButton', 'removeCover'];
+  static targets = ['fileInput', 'previewImage', 'removeButton', 'removeImage'];
   connect() {
     if (this.previewImageTarget.src === '') {
       this.removeButtonTarget.style.display = 'none';
@@ -18,7 +18,7 @@ export default class extends Controller {
         this.previewImageTarget.setAttribute('src', event.target.result);
       };
       reader.readAsDataURL(e.target.files[0]);
-      this.removeCoverTarget.value = false;
+      this.removeImageTarget.value = false;
       this.removeButtonTarget.style.display = 'block';
     }
   }
@@ -32,7 +32,7 @@ export default class extends Controller {
     e.preventDefault();
 
     this.fileInputTarget.value = '';
-    this.removeCoverTarget.value = true;
+    this.removeImageTarget.value = true;
     this.previewImageTarget.removeAttribute('src');
     this.removeButtonTarget.style.display = 'none';
   }

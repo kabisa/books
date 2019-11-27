@@ -24,12 +24,12 @@ describe 'form' do
     end
 
     it 'has an `add` button' do
-      expect(rendered).to have_css('.dropzone-overlay a.btn-float.btn.btn-sm.shadow-none.uploader-action.text-light')
+      expect(rendered).to have_css('.dropzone-overlay a.btn-float.btn.btn-sm.shadow-none.dropzone-action.text-light')
       expect(rendered).to have_css('.dropzone-overlay a i.material-icons', text: 'add_photo_alternate')
     end
 
     it 'has an `remove` button' do
-      expect(rendered).to have_css('.dropzone-overlay a.btn-float.btn.btn-sm.shadow-none.uploader-action.text-light.ml-3')
+      expect(rendered).to have_css('.dropzone-overlay a.btn-float.btn.btn-sm.shadow-none.dropzone-action.text-light.ml-3')
       expect(rendered).to have_css('.dropzone-overlay a i.material-icons', text: 'close')
     end
 
@@ -58,6 +58,6 @@ describe 'form' do
     it { is_expected.to have_css('.dropzone-overlay a[data-action="dropzone#removeImage"][data-target="dropzone.removeButton"]', text: 'close') }
     it { is_expected.to have_css('.dropzone-container img[data-target="dropzone.previewImage"]') }
     it { is_expected.to have_css('.dropzone-container input[type="file"][data-target="dropzone.fileInput"][data-action="dropzone#handleImage"]') }
-    it { is_expected.to have_css('.dropzone-container input[type="hidden"][data-target="dropzone.removeCover"]', visible: false) }
+    it { is_expected.to have_css('.dropzone-container input[type="hidden"][data-target="dropzone.removeImage"]', visible: false) }
   end
 end

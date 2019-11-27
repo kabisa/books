@@ -62,11 +62,16 @@ en:
       title: 'Check your email!'
       body: "We've emailed a special link to %{email}. Click the link to confirm your address and get started."
   books:
-    new:
+    new: &new_book
       title: 'Create a new %{subject}'
+      remove: &remove_image 'Remove image'
+      upload: &upload_image 'Upload an image'
       cancel: 'Cancel book creation'
     edit:
+      remove: *remove_image
+      upload: *upload_image
       cancel: 'Cancel book changes'
+    create: *new_book
     show:
       edit: 'Edit'
     destroy:
