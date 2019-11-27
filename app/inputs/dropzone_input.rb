@@ -7,7 +7,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
         action: 'dropzone#handleImage'
       }
     })
-    template.content_tag(:div, class: 'uploader img-thumbnail d-flex align-items-center', data: { controller: 'dropzone' }) do
+    template.content_tag(:div, class: 'dropzone-container img-thumbnail', data: { controller: 'dropzone' }) do
       template.concat overlay
       template.concat image
       template.concat super
@@ -19,10 +19,10 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
   private
 
   def overlay
-    template.tag.div(class: 'uploader-overlay d-flex justify-content-center align-items-center') do
+    template.tag.div(class: 'dropzone-overlay d-flex justify-content-center align-items-center') do
       template.concat icon1
       template.concat icon2
-      template.concat template.tag.div(class: 'uploader-backdrop')
+      template.concat template.tag.div(class: 'dropzone-backdrop')
     end
 
   end

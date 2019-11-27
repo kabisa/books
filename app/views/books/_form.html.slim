@@ -17,7 +17,7 @@
           div(data-controller='nested-form')
             template(data-target='nested-form.template')
               = f.fields_for :copies, Copy.new(number: 1), child_index: 'NEW_RECORD' do |copy|
-                = render 'copy_fields', f: copy
+                = render 'books/copy_fields', f: copy
 
             .form-group.row
               = f.label :copies, class: 'col-md-3 col-xl-2 col-form-label'
