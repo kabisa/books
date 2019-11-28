@@ -36,4 +36,12 @@ export default class extends Controller {
     this.previewImageTarget.removeAttribute('src');
     this.removeButtonTarget.style.display = 'none';
   }
+
+  acceptDrag(e) {
+    e.preventDefault();
+  }
+
+  noop(e) {
+    e.preventDefault();
+  }
 }

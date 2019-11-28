@@ -39,7 +39,7 @@ describe 'form' do
   end
 
   it 'has an image' do
-    expect(rendered).to have_css('.dropzone-container img')
+    expect(rendered).to have_css('.dropzone-container img.img-fluid.w-100')
   end
 
   it 'has a file input' do
@@ -50,12 +50,16 @@ describe 'form' do
     expect(rendered).to have_css('.dropzone-container input[type="hidden"][name="book[remove_cover]"]', visible: false)
   end
 
+  it 'has a cache field' do
+    expect(rendered).to have_css('.dropzone-container input[type="hidden"][name="book[cover_cache]"]', visible: false)
+  end
+
   describe 'Stimulus' do
     subject { rendered }
 
     it { is_expected.to have_css('.dropzone-container[data-controller="dropzone"]') }
-    it { is_expected.to have_css('.dropzone-overlay a[data-action="dropzone#browse"]', text: 'add_photo_alternate') }
-    it { is_expected.to have_css('.dropzone-overlay a[data-action="dropzone#removeImage"][data-target="dropzone.removeButton"]', text: 'close') }
+    it { is_expected.to have_css('.dropzone-overlay a[data-action="dragover->dropzone#acceptDrag drop->dropzone#noop dropzone#browse"]', text: 'add_photo_alternate') }
+    it { is_expected.to have_css('.dropzone-overlay a[data-action="dragover->dropzone#acceptDrag drop->dropzone#noop dropzone#removeImage"][data-target="dropzone.removeButton"]', text: 'close') }
     it { is_expected.to have_css('.dropzone-container img[data-target="dropzone.previewImage"]') }
     it { is_expected.to have_css('.dropzone-container input[type="file"][data-target="dropzone.fileInput"][data-action="dropzone#handleImage"]') }
     it { is_expected.to have_css('.dropzone-container input[type="hidden"][data-target="dropzone.removeImage"]', visible: false) }

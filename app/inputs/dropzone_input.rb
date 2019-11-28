@@ -3,14 +3,15 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
     input_html_options.merge!({
       accept: 'image/*',
       data: {
-        target: "#{controller}.fileInput",
-        action: "#{controller}#handleImage"
+        target: "#{data_controller}.fileInput",
+        action: "#{data_controller}#handleImage"
       }
     })
 
-    template.tag.div(class: 'dropzone-container img-thumbnail', data: { controller: controller }) do
+    template.tag.div(class: 'dropzone-container img-thumbnail', data: { controller: data_controller }) do
       template.concat overlay
       template.concat image
+      # `@builder.input` (or `self`) renders a wrapper div we do not need.
       template.concat @builder.input_field(attribute_name, input_html_options)
       template.concat remove_image
       template.concat image_cache
@@ -19,7 +20,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
 
 
   private
-  def controller
+  def data_controller
     'dropzone'
   end
 
@@ -29,17 +30,16 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
       template.concat remove_icon
       template.concat backdrop
     end
-
   end
 
   def add_icon
-    template.link_to '#', class: template.sm_rnd_btn_class('dropzone-action text-light'), data: { action: "#{controller}#browse" } do
+    template.link_to '#', class: template.sm_rnd_btn_class('dropzone-action text-light'), data: { action: "dragover->#{data_controller}#acceptDrag drop->#{data_controller}#noop #{data_controller}#browse" } do
       template.material_icon('add_photo_alternate', template.tooltipify(I18n.t('upload', scope: [template.controller.controller_name, template.controller.action_name])))
     end
   end
 
   def remove_icon
-    template.link_to '#', class: template.sm_rnd_btn_class('dropzone-action ml-3 text-light'), data: { target: "#{controller}.removeButton", action: "#{controller}#removeImage" } do
+    template.link_to '#', class: template.sm_rnd_btn_class('dropzone-action ml-3 text-light'), data: { target: "#{data_controller}.removeButton", action: "dragover->#{data_controller}#acceptDrag drop->#{data_controller}#noop #{data_controller}#removeImage" } do
       template.material_icon('close', template.tooltipify(I18n.t('remove', scope: [template.controller.controller_name, template.controller.action_name])))
     end
   end
@@ -49,15 +49,22 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
   end
 
   def image
+    options = {
+      class: 'img-fluid w-100',
+      data: {
+        target: "#{data_controller}.previewImage"
+      }
+    }
+
     if object.send("#{attribute_name}?")
-      template.image_tag object.send("#{attribute_name}_url"), class: 'img-fluid', data: { target: "#{controller}.previewImage" }
+      template.image_tag object.send("#{attribute_name}_url"), options
     else
-      template.tag.img(class: 'img-fluid', data: { target: "#{controller}.previewImage" })
+      template.tag.img(options)
     end
   end
 
   def remove_image
-    @builder.hidden_field("remove_#{attribute_name}".to_sym, data: { target: "#{controller}.removeImage" })
+    @builder.hidden_field("remove_#{attribute_name}".to_sym, data: { target: "#{data_controller}.removeImage" })
   end
 
   # https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
