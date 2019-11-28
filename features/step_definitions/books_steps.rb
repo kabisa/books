@@ -253,7 +253,7 @@ Then("I am adding a new book") do
 end
 
 Then(/I am( not)? seeing the button for adding a new book/) do |negate|
-  have_add_button = have_link('add')
+  have_add_button = have_link('add', exact: true)
   negate ? expect(page).not_to(have_add_button) : expect(page).to(have_add_button)
 end
 

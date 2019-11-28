@@ -1,7 +1,7 @@
 .nested-fields.form-row.mb-3(data-new-record="#{f.object.new_record?}")
-  .col-12.col-sm-8
+  .col-12.col-sm-7
     = f.association :location, include_blank: false, wrapper: :inline_form_w_text_field_boxes
-  .col.col-sm-2
+  .col.col-sm-3
     = f.input :number, input_html: { min: 1 }, wrapper: :inline_form_w_text_field_boxes
   .col-2.col-sm-2.text-right.text-sm-center.pt-2
     = link_to '#', class: sm_rnd_btn_class, role: :button, data: { action: 'nested-form#remove_association' } do

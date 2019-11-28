@@ -11,8 +11,9 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
     template.tag.div(class: 'dropzone-container img-thumbnail', data: { controller: controller }) do
       template.concat overlay
       template.concat image
-      template.concat super
+      template.concat @builder.input_field(attribute_name, input_html_options)
       template.concat remove_image
+      template.concat image_cache
     end
   end
 
@@ -48,7 +49,6 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
   end
 
   def image
-    console
     if object.send("#{attribute_name}?")
       template.image_tag object.send("#{attribute_name}_url"), class: 'img-fluid', data: { target: "#{controller}.previewImage" }
     else
@@ -58,5 +58,10 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
 
   def remove_image
     @builder.hidden_field("remove_#{attribute_name}".to_sym, data: { target: "#{controller}.removeImage" })
+  end
+
+  # https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
+  def image_cache
+    @builder.hidden_field("#{attribute_name}_cache".to_sym)
   end
 end

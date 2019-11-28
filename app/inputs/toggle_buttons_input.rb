@@ -19,18 +19,18 @@ class ToggleButtonsInput < SimpleForm::Inputs::CollectionRadioButtonsInput
   end
 
   private
-    def label_options(value)
-      options = label_html_options.dup
+  def label_options(value)
+    options = label_html_options.dup
 
-      options[:class] << label_class(value)
+    options[:class] << label_class(value)
 
-      options
-    end
+    options
+  end
 
-    def label_class(value)
-      label_class = "btn btn-outline btn-sm"
-      label_class << ' active' if object[attribute_name] == value
+  def label_class(value)
+    label_class = "btn btn-outline btn-sm"
+    label_class << ' active' if object[attribute_name] == value
 
-      label_class
-    end
+    label_class
+  end
 end

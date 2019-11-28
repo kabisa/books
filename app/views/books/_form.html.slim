@@ -1,4 +1,4 @@
-= simple_form_for(book.becomes(Book), html: { multipart: true, autocomplete: 'off' }, data: { controller: 'book-form' }) do |f|
+= simple_form_for(book, as: :book, html: { multipart: true, autocomplete: 'off' }, data: { controller: 'book-form' }) do |f|
   .row
     .col-md-4.col-lg-3
       = f.input :cover, as: :dropzone
@@ -21,7 +21,7 @@
 
             .form-group.row
               = f.label :copies, class: 'col-md-3 col-xl-2 col-form-label'
-              .col-md.col-lg-5.nested-form
+              .col-md.col-lg-6.nested-form
                 - book.errors[:copies].each do |msg|
                   p.text-danger.mt-2= msg
 
