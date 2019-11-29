@@ -4,7 +4,7 @@ Given("I'm adding a new book") do
 end
 
 Given("there are {int} books") do |books_count|
-  create_list :book, books_count
+  create_list :ebook, books_count
 end
 
 Given("there are {int} e-books") do |books_count|

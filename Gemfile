@@ -43,7 +43,7 @@ gem 'fog-aws'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails', '~> 4.0.0.beta'
   gem 'rspec-collection_matchers'
   gem 'factory_bot_rails' # factory_bot_rails provides integration between factory_bot and rails 4.2 or newer
   gem 'faker' # easily generate fake data: names, addresses, phone numbers, etc.

@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
-  render_views
-
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
@@ -43,7 +41,7 @@ RSpec.describe BooksController, type: :controller do
 
     it 'avoids N+1 queries' do
       allow(Book).to receive(:ransack).and_return(search_double)
-      expect(search_double.result).to receive(:includes).with(:taggings, copies: [:location]).and_call_original
+      expect(search_double.result).to receive(:includes).with(:taggings, :writers, copies: [:location]).and_call_original
       do_get
     end
 

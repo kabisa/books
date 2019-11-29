@@ -8,7 +8,7 @@ class BooksController < ApplicationController
     @q = ransack_params
     @books = @q
       .result(distinct: true)
-      .includes(:taggings, copies: [:location])
+      .includes(:taggings, :writers, copies: [:location])
       .page(params[:page])
       .decorate
   end
