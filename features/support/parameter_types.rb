@@ -1,7 +1,10 @@
 ParameterType(
   name: 'book_type',
   regexp: /(e-book|printed book)(?:s?)/,
-  transformer: -> (type) { type }
+  transformer: -> (type) do
+    { 'e-book' => 'tablet_android',
+      'printed book' => 'menu_book' }[type]
+end
 )
 
 ParameterType(

@@ -2,7 +2,10 @@
   .card-header.d-flex.justify-content-between.align-items-baseline
     div
       h1.card-title.mb-1= @book.title
-      small= @book.formatted_type
+      - if @book.writers.any?
+        small
+          | By
+          =< @book.writer_names.to_sentence
 
     - if policy(@book).edit?
       .dropdown
@@ -16,16 +19,14 @@
       .col-sm-4.col-md-3
         figure.figure
           = image_tag @book.cover_url, class: 'figure-img img-thumbnail'
+          figcaption.figure-caption
+            = @book.formatted_type
       .col
         - if @book.is_a?(PrintedBook)
           p= @book.available_copies
 
         - if @book.summary?
           = simple_format @book.summary, class: 'card-text'
-        div
-          | By
-          =< @book.writer_names.to_sentence
-
         - if @book.tag_list.any?
           p= @book.formatted_tag_list
 

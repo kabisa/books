@@ -16,6 +16,7 @@ class SeedBuilder
     truncate_books
     truncate_users
     truncate_locations
+    truncate_writers
   end
 
   def create_locations
@@ -97,6 +98,11 @@ class SeedBuilder
   def truncate_locations
     say("Deleting locations.")
     Location.destroy_all
+  end
+
+  def truncate_writers
+    say("Deleting writers.")
+    Writer.destroy_all
   end
 
   def create_current_user

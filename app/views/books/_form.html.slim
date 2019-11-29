@@ -33,7 +33,7 @@
 
       = f.input :summary, as: :text
 
-      = f.input :writer_names, input_html: { value: book.writer_names.to_s, data: { controller: 'chip-input' }}
+      = f.input :writer_names, input_html: { value: book.writer_names.to_s, data: { controller: 'chip-input', whitelist: Writer.pluck(:name).join(',') }}
       = f.input :tag_list, input_html: { value: book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
 
   = f.button :submit, class: 'btn btn-outline-primary'

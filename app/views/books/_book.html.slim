@@ -2,22 +2,34 @@
   .expansion-panel-toggler.collapsed(data-toggle='collapse' data-target="##{book.dom_id(:collapse)}")
     .media-body
       .on-collapsed.row.align-items-center
-        .col-1
-            .text-center= image_tag book.cover_url, class: 'img-thumbnail'
-        .col-lg-6.col-xl-7
+        .col-2.col-lg-1
+          .text-center.d-inline-block.d-lg-block= image_tag book.cover_url, class: 'img-thumbnail'
+        .col-10.col-lg-5.col-xl-6
           h5.mb-1= book.title_highlighted_with_search
-          small= book.formatted_type
-        .col-sm-6.col-lg-2
+          - if book.writers.any?
+            small
+              | By
+              =< book.writer_names.to_sentence
+        .col-2.col-lg-1
+          - if book.is_a?(Ebook)
+            = material_icon('tablet_android')
+          - else
+            = material_icon('menu_book')
+
+        .col-4.col-lg-2
           = book.number_of_comments_icon
-        .col-sm-6.col-lg-3.col-xl-2
+        .col-6.col-lg-3.col-xl-2
           = render partial: 'books/vote', object: book, as: :book
       .on-expanded.row.align-items-center
-        .col-lg-7.col-xl-8
+        .col-12.col-lg-7.col-xl-8
           h5.mb-1= book.title_highlighted_with_search
-          small= book.formatted_type
-        .col-sm-6.col-lg-2
+          - if book.writers.any?
+            small
+              | By
+              =< book.writer_names.to_sentence
+        .col-6.col-lg-2
           = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
-        .col-sm-6.col-lg-3.col-xl-2
+        .col-6.col-lg-3.col-xl-2
           = render partial: 'books/vote', object: book, as: :book
 
     .expansion-panel-icon.ml-3.text-black-secondary

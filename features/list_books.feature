@@ -9,6 +9,7 @@ Feature:
     When I choose "Books" from the navigation drawer
     Then I see a list of 5 books
 
+  @wip
   Scenario: List e-books and printed books
     Given there are 3 e-books
     And there are 5 printed books

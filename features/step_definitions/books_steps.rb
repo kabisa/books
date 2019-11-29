@@ -230,7 +230,7 @@ Then("I am viewing the book") do
   expect(page).to have_content(book.title)
   expect(page).to have_content(book.summary) if book.summary?
   expect(page).to have_content(book.tag_list.to_s)
-  expect(page).to have_content("By #{book.writer_names.to_sentence}")
+  expect(page).to have_content("By #{book.writer_names.to_sentence}") if book.writers.any?
 end
 
 Then("I am adding a new book") do
@@ -261,9 +261,9 @@ Then("I see a list of {int} book(s)") do |items_count|
   end
 end
 
-Then("I see a list of {int} {book_type}") do |items_count, type|
+Then("I see a list of {int} {book_type}") do |items_count, icon|
   within('.list-group') do
-    expect(page).to have_css('div.list-group-item', text: /#{type}/i, count: items_count)
+    expect(page).to have_css('div.list-group-item .material-icons', text: icon, count: items_count, visible: false)
   end
 end
 

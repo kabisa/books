@@ -23,6 +23,7 @@ en:
         title: 'Add title'
         link: 'Add link to download location'
         summary: 'Add summary'
+        writer_names: 'Add writers'
         tag_list: 'Add tags'
       comment:
         body: 'Add a comment...'

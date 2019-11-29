@@ -45,7 +45,7 @@ class Book < ApplicationRecord
 
   def writer_names=(value)
     begin
-      @writer_names = JSON.parse(value).map { |h| h['value'] }
+      @writer_names = parse_tagify_json(value)
     rescue
       @writer_names = value.split(/,\s*/)
     end
@@ -53,7 +53,7 @@ class Book < ApplicationRecord
 
   def tag_list=(value)
     begin
-      arr = JSON.parse(value).map { |h| h['value'] }
+      arr = parse_tagify_json(value)
       super(arr)
     rescue
       super
@@ -61,6 +61,10 @@ class Book < ApplicationRecord
   end
 
   private
+
+  def parse_tagify_json(value)
+    JSON.parse(value).map { |h| h['value'] }
+  end
 
   def set_writers
     return if @writer_names.nil?
