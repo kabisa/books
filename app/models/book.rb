@@ -14,10 +14,13 @@ class Book < ApplicationRecord
       proxy_association.owner.copies.filter(&:'borrowable?')
     end
   end
+  has_and_belongs_to_many :writers
+
   accepts_nested_attributes_for :copies, allow_destroy: true
   acts_as_paranoid
   acts_as_taggable
   mount_uploader :cover, CoverUploader
+  before_validation :set_writers
 
   class << self
     def policy_class
@@ -36,12 +39,41 @@ class Book < ApplicationRecord
     title.inspect
   end
 
+  def writer_names
+    @writer_names ||= writers.map(&:name)
+  end
+
+  def writer_names=(value)
+    begin
+      @writer_names = JSON.parse(value).map { |h| h['value'] }
+    rescue
+      @writer_names = value.split
+    end
+  end
+
   def tag_list=(value)
     begin
       arr = JSON.parse(value).map { |h| h['value'] }
       super(arr)
     rescue
       super
+    end
+  end
+
+  private
+
+  def set_writers
+    return if @writer_names.blank?
+
+    self.writers = @writer_names.map do |name|
+      writer = Writer.find_or_initialize_by(name: name)
+
+      if writer.valid?
+        writer
+      else
+        errors.add(:writer_names, :invalid)
+        return nil
+      end
     end
   end
 end

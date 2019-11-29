@@ -22,6 +22,9 @@
 
         - if @book.summary?
           = simple_format @book.summary, class: 'card-text'
+        div
+          | By
+          =< @book.writer_names.to_sentence
 
         - if @book.tag_list.any?
           p= @book.formatted_tag_list

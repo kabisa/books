@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_163206) do
+ActiveRecord::Schema.define(version: 2019_11_29_080527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 2019_11_21_163206) do
     t.integer "comments_count", default: 0
     t.string "cover"
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
+  end
+
+  create_table "books_writers", id: false, force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "writer_id", null: false
   end
 
   create_table "borrowings", force: :cascade do |t|
@@ -119,6 +124,12 @@ ActiveRecord::Schema.define(version: 2019_11_21_163206) do
     t.index ["book_id"], name: "index_votes_on_book_id"
     t.index ["deleted_at"], name: "index_votes_on_deleted_at"
     t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
+  create_table "writers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "borrowings", "copies"

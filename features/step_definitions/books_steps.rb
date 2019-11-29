@@ -82,17 +82,6 @@ Then("I {can_or_not}view the details for {string}") do |should_do, title|
   end
 end
 
-When("I add the tags {string}") do |text|
-  tags = text.split(/\s*,\s*/)
-
-  tags.each do |tag|
-    el = find('.tagify__input')
-    el.set("#{tag}\n")
-    el.send_keys(:enter)
-  end
-end
-
-
 When("I am viewing the details for {string}") do |title|
   step %q(I choose "Books" from the navigation drawer)
   step %Q(I expand the panel for "#{title}")
@@ -109,7 +98,6 @@ When("I borrow the book {string}") do |title|
     link_or_button.click
   end
 end
-
 
 When("I {like_or_dislike_icon} the book {string}") do |icon, title|
   within('.list-group-item', text: title) do
@@ -242,6 +230,7 @@ Then("I am viewing the book") do
   expect(page).to have_content(book.title)
   expect(page).to have_content(book.summary) if book.summary?
   expect(page).to have_content(book.tag_list.to_s)
+  expect(page).to have_content("By #{book.writer_names.to_sentence}")
 end
 
 Then("I am adding a new book") do
