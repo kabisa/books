@@ -7,9 +7,7 @@
         .col-10.col-lg-5.col-xl-6
           h5.mb-1= book.title_highlighted_with_search
           - if book.writers.any?
-            small
-              | By
-              =< book.writer_names.to_sentence
+            small= book.written_by
         .col-2.col-lg-1
           - if book.is_a?(Ebook)
             = material_icon('tablet_android')
@@ -24,9 +22,7 @@
         .col-12.col-lg-7.col-xl-8
           h5.mb-1= book.title_highlighted_with_search
           - if book.writers.any?
-            small
-              | By
-              =< book.writer_names.to_sentence
+            small= book.written_by
         .col-6.col-lg-2
           = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
         .col-6.col-lg-3.col-xl-2

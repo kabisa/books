@@ -3,9 +3,7 @@
     div
       h1.card-title.mb-1= @book.title
       - if @book.writers.any?
-        small
-          | By
-          =< @book.writer_names.to_sentence
+        small= @book.written_by
 
     - if policy(@book).edit?
       .dropdown

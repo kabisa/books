@@ -52,6 +52,12 @@ class BookDecorator < ApplicationDecorator
     end
   end
 
+  def written_by
+    return if writers.none?
+
+    I18n.t('activerecord.attributes.book.written_by', writer_names: writer_names.to_sentence)
+  end
+
   def number_of_comments
     [
       comments_count,  # (1)

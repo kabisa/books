@@ -134,6 +134,7 @@ en:
         tag_list: 'Tags'
         cover: 'Cover image'
         remove_cover: 'Remove'
+        written_by: 'By %{writer_names}'
       comment:
         body: 'Comment'
     errors:

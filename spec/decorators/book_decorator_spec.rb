@@ -158,4 +158,19 @@ RSpec.describe BookDecorator do
 
     end
   end
+
+  describe '#written_by' do
+    subject    { decorator.written_by }
+    let(:book) { create :ebook, writers: [stephen, charles] }
+    let(:stephen) { create :writer, name: 'Stephen King' }
+    let(:charles) { create :writer, name: 'Charles Dickens' }
+
+    it { is_expected.to eql('By Stephen King and Charles Dickens') }
+
+    context 'no writers' do
+      let(:book) { create :ebook }
+
+      it { is_expected.to be_nil }
+    end
+  end
 end
