@@ -35,6 +35,7 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_many(:dislikes).dependent(:destroy) }
     it { is_expected.to have_many(:comments).dependent(:destroy) }
     it { is_expected.to have_many(:copies).dependent(:destroy) }
+    it { is_expected.to have_and_belong_to_many(:writers) }
     it { is_expected.to accept_nested_attributes_for(:copies).
          allow_destroy(true) }
 
@@ -100,6 +101,52 @@ RSpec.describe Book, type: :model do
       let(:instance) { build :printed_book }
 
       it { is_expected.to eql('books/book') }
+    end
+  end
+
+  describe '#writer_names=' do
+    let(:instance) { build :book }
+
+    context 'with stringified JSON' do
+      context 'with existing writers' do
+        let!(:writer) { create :writer }
+
+        it 'adds the writer' do
+          instance.writer_names = [{ value: writer.name }].to_json
+          instance.validate
+          expect(instance.writers.size).to be(1)
+          #expect(Writer.count).not_to change
+        end
+      end
+
+      context 'with non-existing writers' do
+        it 'adds the writer' do
+          instance.writer_names = [{ value: 'Mark Twain' }].to_json
+          instance.validate
+          expect(instance.writers.size).to be(1)
+        end
+      end
+
+      context 'with invalid names' do
+        it 'invalidates the book' do
+          instance.writer_names = [{ value: '' }].to_json
+          expect(instance).not_to be_valid
+        end
+
+        it 'adds an error to `writer_names`' do
+          instance.writer_names = [{ value: '' }].to_json
+          instance.validate
+          expect(instance.errors[:writer_names]).not_to be_empty
+        end
+      end
+    end
+
+    context 'with a strings' do
+      it 'adds the writer' do
+        instance.writer_names = 'Stephen King, Mark Twain'
+        instance.validate
+        expect(instance.writers.size).to be(2)
+      end
     end
   end
 end

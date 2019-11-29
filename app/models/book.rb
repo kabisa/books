@@ -47,7 +47,7 @@ class Book < ApplicationRecord
     begin
       @writer_names = JSON.parse(value).map { |h| h['value'] }
     rescue
-      @writer_names = value.split
+      @writer_names = value.split(/,\s*/)
     end
   end
 
@@ -63,7 +63,7 @@ class Book < ApplicationRecord
   private
 
   def set_writers
-    return if @writer_names.blank?
+    return if @writer_names.nil?
 
     self.writers = @writer_names.map do |name|
       writer = Writer.find_or_initialize_by(name: name)
