@@ -29,6 +29,19 @@ class BookPolicy < ApplicationPolicy
     identified?
   end
 
+  def permitted_attributes
+    if identified?
+      [
+        :title, :link,
+        :cover, :cover_cache, :remove_cover,
+        :summary, :writer_names, :tag_list,
+        copies_attributes: [
+          :id, :location_id, :number, :_destroy
+        ]
+      ]
+    end
+  end
+
   private
   def identified?
     user.identified?

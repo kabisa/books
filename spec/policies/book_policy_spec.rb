@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 describe BookPolicy, type: :policy do
-  subject { described_class.new(user, book) }
+  subject { policy }
+
+  let(:policy) { described_class.new(user, book) }
   let(:book) { build :book }
 
   context 'authorized user' do
@@ -13,6 +15,18 @@ describe BookPolicy, type: :policy do
     it { is_expected.to permit_action(:borrow) }
     it { is_expected.to permit_action(:destroy) }
     it { is_expected.to permit_action(:show) }
+
+    context '#permitted_attributes' do
+      subject { policy.permitted_attributes }
+
+      it { is_expected.to include(:title) }
+      it { is_expected.to include(:link) }
+      it { is_expected.to include(:cover, :cover_cache, :remove_cover) }
+      it { is_expected.to include(:summary) }
+      it { is_expected.to include(:writer_names) }
+      it { is_expected.to include(:tag_list) }
+      it { is_expected.to include(copies_attributes: [:id, :location_id, :number, :_destroy]) }
+    end
   end
 
   context 'unauthorized user' do
@@ -24,6 +38,12 @@ describe BookPolicy, type: :policy do
     it { is_expected.to forbid_action(:borrow) }
     it { is_expected.to forbid_action(:destroy) }
     it { is_expected.to permit_action(:show) }
+
+    context '#permitted_attributes' do
+      subject { policy.permitted_attributes }
+
+      it { is_expected.to be_nil }
+    end
   end
 
 end
