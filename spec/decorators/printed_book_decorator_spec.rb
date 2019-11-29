@@ -1,25 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe PrintedBookDecorator do
+  let(:decorator) { described_class.new(instance) }
+  let(:instance)  { build :printed_book }
+
   describe '#available_copies' do
     before          do
       allow(instance).to receive(:copies_count).and_return(5)
       allow(instance).to receive(:borrowings_count).and_return(3)
     end
 
-    subject         { decorator.available_copies }
-    let(:instance)  { build :printed_book }
-    let(:decorator) { described_class.new(instance) }
+    subject { decorator.available_copies }
 
     it { is_expected.to eql('2 copies') }
   end
 
   describe '#borrow_or_return_button' do
-    before { allow(decorator).to receive(:'borrowed_by?').and_return(false) }
+    before do
+      instance.save
+      allow(decorator).to receive(:'borrowed_by?').and_return(false)
+    end
 
-    subject         { decorator.borrow_or_return_button }
-    let(:instance)  { create :printed_book }
-    let(:decorator) { described_class.new(instance) }
+    subject { decorator.borrow_or_return_button }
 
     context 'user is borrowing a copy' do
       before do
@@ -92,5 +94,17 @@ RSpec.describe PrintedBookDecorator do
         end
       end
     end
+  end
+
+  describe '#formatted_type' do
+    subject { decorator.formatted_type }
+
+    it { is_expected.to eql('Printed book') }
+  end
+
+  describe '#book_type_icon' do
+    subject { Capybara.string decorator.book_type_icon }
+
+    it { is_expected.to have_css('i.material-icons[title="Printed book"][data-toggle="tooltip"]', text: 'menu_book') }
   end
 end

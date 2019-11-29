@@ -78,4 +78,8 @@ class PrintedBookDecorator < BookDecorator
   def aria_labelledby
     h.dom_id(object, :label)
   end
+
+  def icon
+    'menu_book'
+  end
 end

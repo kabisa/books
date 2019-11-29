@@ -9,10 +9,7 @@
           - if book.writers.any?
             small= book.written_by
         .col-2.col-lg-1
-          - if book.is_a?(Ebook)
-            = material_icon('tablet_android')
-          - else
-            = material_icon('menu_book')
+          = book.book_type_icon
 
         .col-4.col-lg-2
           = book.number_of_comments_icon

@@ -82,6 +82,10 @@ class BookDecorator < ApplicationDecorator
 
   end
 
+  def book_type_icon
+    h.material_icon(icon, h.tooltipify(formatted_type))
+  end
+
   def truncated_summary
     h.truncate(summary, length: 240)
   end

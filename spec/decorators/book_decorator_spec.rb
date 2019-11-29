@@ -12,22 +12,6 @@ RSpec.describe BookDecorator do
 
   end
 
-  describe '#formatted_type' do
-    subject { decorator.formatted_type }
-
-    describe 'e-book' do
-      let(:book) { build :ebook }
-
-      it { is_expected.to eql('E-book') }
-    end
-
-    describe 'printed book' do
-      let(:book) { build :printed_book }
-
-      it { is_expected.to eql('Printed book') }
-    end
-  end
-
   describe '#dom_id' do
     subject { decorator.dom_id(:lorem) }
     let(:book) { build :ebook }
