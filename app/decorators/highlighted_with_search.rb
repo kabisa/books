@@ -18,7 +18,7 @@ module HighlightedWithSearch
   private
 
   def title_or_summary_or_writers_name_cont
-    h.params[:q]&.fetch(:title_or_summary_or_writers_name_cont)
+    h.params.dig(:q, :title_or_summary_or_writers_name_cont)
   end
 
   def writer_names_highlighted_with_search
@@ -28,6 +28,7 @@ module HighlightedWithSearch
   end
 
   def writer_name_highlighted_with_search(writer_name)
-    h.highlight(writer_name, title_or_summary_or_writers_name_cont)
+    highlight = h.highlight(writer_name, title_or_summary_or_writers_name_cont)
+    h.link_to(highlight, q: { writers_name_eq: writer_name })
   end
 end

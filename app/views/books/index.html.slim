@@ -1,5 +1,7 @@
 = render(Search::Form, q: @q)
 
+/= render 'lorem'
+
 - if @books.any?
   = render(partial: 'results', object: @books, layout: 'results_layout', locals: { parent: 'books' })
 - else

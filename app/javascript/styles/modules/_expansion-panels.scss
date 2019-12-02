@@ -1,17 +1,13 @@
-.expansion-panel-toggler {
-  &:not(.collapsed) {
-    .on-collapsed {
-      display: none;
-    }
-  }
-
-  &.collapsed {
-    .on-expanded {
-      display: none;
-    }
-  }
-
+.expansion-panel {
   .img-thumbnail {
     max-height: 3rem;
+  }
+
+  &.show .collapsed-show {
+    display: none;
+  }
+
+  &:not(.show) .collapsed-hide {
+    display: none;
   }
 }

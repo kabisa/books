@@ -90,7 +90,7 @@ end
 
 When("I borrow the book {string}") do |title|
   # Expand first
-  find('.expansion-panel', text: title).click
+  step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
     link_or_button = all('a', text: /^Borrow/i).first # Show a modal first
@@ -107,7 +107,7 @@ end
 
 When("I delete the book {string}") do |title|
   # Expand first
-  find('.expansion-panel', text: title).click
+  step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
     click_on('Delete')
@@ -122,7 +122,7 @@ end
 
 When("I return the book {string}") do |title|
   # Expand first
-  find('.expansion-panel', text: title).click
+  step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
     click_on('Return Book')
@@ -198,7 +198,8 @@ end
 
 Then("I {can_or_not}edit {string}") do |should_do, title|
   # Expand first
-  find('.expansion-panel', text: title).click
+  step %Q(I expand the panel for "#{title}")
+
   to_have_or_not_have = should_do ? 'to' : 'not_to'
 
   within('.list-group-item', text: title) do
@@ -208,7 +209,7 @@ end
 
 When("I edit the book {string}") do |title|
   # Expand first
-  find('.expansion-panel', text: title).click
+  step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
     click_on('Edit')
@@ -330,7 +331,7 @@ Then("I can not change to type of the book") do
 end
 
 When("I expand the panel for {string}") do |title|
-  find('.expansion-panel', text: title).click
+  find('.expansion-panel', text: title).find('[data-toggle="collapse"]').click
 end
 
 
