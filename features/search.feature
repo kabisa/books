@@ -4,11 +4,11 @@ Feature:
 
   Background:
     Given the following e-books:
-      | title                  | link                                  | summary                         | tag_list              |
-      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           |
-      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit.    | software              |
-      | Consectetur Adipiscing | http://kabisa.nl/consectetur/         | Sed convallis metus eget felis. | unknown               |
-      | Morbi ullamcorper      | http://kabisa.nl/morbi/               | Duis aliquam nulla felis.       | programming, software |
+      | title                  | link                                  | summary                         | tag_list              | writer_names                  |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           | Stephen King, Charles Dickens |
+      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit.    | software              | Stephen Hawking               |
+      | Consectetur Adipiscing | http://kabisa.nl/consectetur/         | Sed convallis metus eget felis. | unknown               | Mark Twain, Stephen King      |
+      | Morbi ullamcorper      | http://kabisa.nl/morbi/               | Duis aliquam nulla felis.       | programming, software | Charles Dickens, Mark Twain   |
 
   Scenario: Search on the home page
     When I open the application
@@ -27,6 +27,12 @@ Feature:
     Given I open the application
     When I search for "dolor sit"
     Then I see a list of 2 books
+
+  @wip
+  Scenario: Search for writers
+    Given I open the application
+    When I search for "king"
+    Then I see a list of 3 books
 
   Scenario: Highlight keywords
     Given I open the application
@@ -74,3 +80,4 @@ Feature:
     And I search for books tagged with "software, programming"
     Then I see a list of 3 books
     And I see the search form displaying "programming"
+

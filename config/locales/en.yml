@@ -122,7 +122,7 @@ en:
     tags:
       select_all: 'Select all tags'
     placeholders:
-      title_or_summary_cont: 'Search within title and summary'
+      search_field: 'Search within title, summary or writers'
 
 
   activerecord:

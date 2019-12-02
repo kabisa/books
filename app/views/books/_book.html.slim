@@ -7,7 +7,7 @@
         .col-10.col-lg-5.col-xl-6
           h5.mb-1= book.title_highlighted_with_search
           - if book.writers.any?
-            small= book.written_by
+            small= book.written_by_highlighted_with_search
         .col-2.col-lg-1
           = book.book_type_icon
 

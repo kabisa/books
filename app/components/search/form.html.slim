@@ -3,8 +3,7 @@
     = search_form_for q, html: { autocomplete: :off } do |f|
       .form-group
         .textfield-box
-          = f.search_field :title_or_summary_cont, autofocus: true, placeholder: t('search_form.placeholders.title_or_summary_cont'), class: 'form-control'
-
+          = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control'
 
       .d-flex.justify-content-end
         = render(Search::Filter::Tags, q: q, builder: f)
