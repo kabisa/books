@@ -19,7 +19,7 @@
         .col-12.col-lg-7.col-xl-8
           h5.mb-1= book.title_highlighted_with_search
           - if book.writers.any?
-            small= book.written_by
+            small= book.written_by_highlighted_with_search
         .col-6.col-lg-2
           = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
         .col-6.col-lg-3.col-xl-2
