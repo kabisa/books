@@ -24,7 +24,7 @@ RSpec.describe BookDecorator do
     let(:params_stub) { ActionController::Parameters.new(parameters) }
 
     context 'with search param' do
-      let(:parameters) { { q: { title_or_summary_or_writers_name_cont: "lorem" } } }
+      let(:parameters) { { q: { title_or_summary_or_writers_name_cont: 'lorem' } } }
 
       it { is_expected.to eql('<mark>Lorem</mark> Ipsum') }
     end
@@ -44,7 +44,7 @@ RSpec.describe BookDecorator do
     let(:params_stub) { ActionController::Parameters.new(parameters) }
 
     context 'with search param' do
-      let(:parameters) { { q: { title_or_summary_or_writers_name_cont: "lorem" } } }
+      let(:parameters) { { q: { title_or_summary_or_writers_name_cont: 'lorem' } } }
 
       it { is_expected.to eql('<p><mark>Lorem</mark><br>Ipsum</p>') }
     end
@@ -141,8 +141,8 @@ RSpec.describe BookDecorator do
   end
 
   describe '#written_by' do
-    subject    { decorator.written_by }
-    let(:book) { create :ebook, writers: [stephen, charles] }
+    subject       { decorator.written_by }
+    let(:book)    { create :ebook, writers: [stephen, charles] }
     let(:stephen) { create :writer, name: 'Stephen King' }
     let(:charles) { create :writer, name: 'Charles Dickens' }
 
@@ -156,24 +156,27 @@ RSpec.describe BookDecorator do
   end
 
   describe '#written_by_highlighted_with_search' do
-    before { allow(h).to receive(:params).and_return(params_stub) }
+    before do
+      allow(h).to receive(:params).and_return(params_stub)
+    end
 
-    subject    { decorator.written_by_highlighted_with_search }
+    subject { decorator.written_by_highlighted_with_search }
 
-    let(:book) { create :ebook, writers: [stephen, charles] }
-    let(:stephen) { create :writer, name: 'Stephen King' }
-    let(:charles) { create :writer, name: 'Charles Dickens' }
+    let(:book)        { create :ebook, writers: [stephen, charles] }
+    let(:stephen)     { create :writer, name: 'Stephen King' }
+    let(:charles)     { create :writer, name: 'Charles Dickens' }
     let(:params_stub) { ActionController::Parameters.new(parameters) }
 
     context 'with search param' do
-      let(:parameters) { { q: { title_or_summary_or_writers_name_cont: "king" } } }
+      subject          { Capybara.string decorator.written_by_highlighted_with_search }
+      let(:parameters) { { q: { title_or_summary_or_writers_name_cont: 'king' } } }
 
-      it { is_expected.to match(/Stephen <mark>King<\/mark>/) }
+      it { is_expected.to have_css('a[href$="q%5Bwriters_name_eq%5D=Stephen+King"] mark' ,text: 'King') }
     end
 
     context 'no writers' do
-      let(:book) { create :ebook }
-      let(:parameters) { { q: { title_or_summary_or_writers_name_cont: "king" } } }
+      let(:book)       { create :ebook }
+      let(:parameters) { { q: { title_or_summary_or_writers_name_cont: 'king' } } }
 
       it { is_expected.to be_nil }
     end

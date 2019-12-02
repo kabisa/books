@@ -54,34 +54,6 @@ Given("I disliked the book {string}") do |title|
     step %Q(I dislike the book "#{title}")
 end
 
-Then("I see feedback about borrowing the book {string}") do |title|
-  within('.snackbar') do
-    expect(page).to have_content("You're now borrowing '#{title}'.")
-  end
-end
-
-Then("I see feedback about returning the book {string}") do |title|
-  within('.snackbar') do
-    expect(page).to have_content("Thank you for returning '#{title}'.")
-  end
-end
-
-Then("I {can_or_not}borrow {string}") do |should_do, title|
-  to_have_or_not_have = should_do ? 'to' : 'not_to'
-
-  within('.list-group-item', text: title) do
-    expect(page).send(to_have_or_not_have, have_button('Borrow', visible: false))
-  end
-end
-
-Then("I {can_or_not}view the details for {string}") do |should_do, title|
-  to_have_or_not_have = should_do ? 'to' : 'not_to'
-
-  within('.list-group-item', text: title) do
-    expect(page).send(to_have_or_not_have, have_link('View Details'))
-  end
-end
-
 When("I am viewing the details for {string}") do |title|
   step %q(I choose "Books" from the navigation drawer)
   step %Q(I expand the panel for "#{title}")
@@ -89,7 +61,6 @@ When("I am viewing the details for {string}") do |title|
 end
 
 When("I borrow the book {string}") do |title|
-  # Expand first
   step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
@@ -106,7 +77,6 @@ When("I {like_or_dislike_icon} the book {string}") do |icon, title|
 end
 
 When("I delete the book {string}") do |title|
-  # Expand first
   step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
@@ -121,7 +91,6 @@ When("I undo deleting the book/comment") do
 end
 
 When("I return the book {string}") do |title|
-  # Expand first
   step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
@@ -167,11 +136,56 @@ When("I add another location") do
   end
 end
 
-
 When("I remove the first location") do
   within('.form-group', text: 'Copies') do
     field = all('.nested-fields').first
     field.click_on('clear')
+  end
+end
+
+When("I edit the book {string}") do |title|
+  step %Q(I expand the panel for "#{title}")
+
+  within('.list-group-item', text: title) do
+    click_on('Edit')
+  end
+end
+
+When("I expand the panel for {string}") do |title|
+  find('.expansion-panel', text: title).find('[data-toggle="collapse"]').click
+end
+
+When("I click on the writer {string} for the book {string}") do |writer_name, title|
+  within('.list-group-item', text: title) do
+    click_on(writer_name)
+  end
+end
+
+Then("I see feedback about borrowing the book {string}") do |title|
+  within('.snackbar') do
+    expect(page).to have_content("You're now borrowing '#{title}'.")
+  end
+end
+
+Then("I see feedback about returning the book {string}") do |title|
+  within('.snackbar') do
+    expect(page).to have_content("Thank you for returning '#{title}'.")
+  end
+end
+
+Then("I {can_or_not}borrow {string}") do |should_do, title|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+
+  within('.list-group-item', text: title) do
+    expect(page).send(to_have_or_not_have, have_button('Borrow', visible: false))
+  end
+end
+
+Then("I {can_or_not}view the details for {string}") do |should_do, title|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+
+  within('.list-group-item', text: title) do
+    expect(page).send(to_have_or_not_have, have_link('View Details'))
   end
 end
 
@@ -204,15 +218,6 @@ Then("I {can_or_not}edit {string}") do |should_do, title|
 
   within('.list-group-item', text: title) do
     expect(page).send(to_have_or_not_have, have_link('Edit'))
-  end
-end
-
-When("I edit the book {string}") do |title|
-  # Expand first
-  step %Q(I expand the panel for "#{title}")
-
-  within('.list-group-item', text: title) do
-    click_on('Edit')
   end
 end
 
@@ -294,7 +299,6 @@ Then("I see a validation error that duplicate locations are not allowed") do
   end
 end
 
-
 Then("I {do_or_not}see the summary for {string}") do |should_do, title|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
   book = Book.find_by(title: title)
@@ -329,11 +333,6 @@ Then("I can not change to type of the book") do
     expect(page).not_to have_css('input[name="book[type]"]')
   end
 end
-
-When("I expand the panel for {string}") do |title|
-  find('.expansion-panel', text: title).find('[data-toggle="collapse"]').click
-end
-
 
 Then("there are no more books to be shown") do
   within('.list-group') do
