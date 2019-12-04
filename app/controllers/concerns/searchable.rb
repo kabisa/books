@@ -2,7 +2,9 @@ module Searchable
   include ActiveSupport::Concern
 
   def ransack_params
-    Book.ransack((params[:q] || {}).with_defaults(default_params))
+    q = Book.ransack((params[:q] || {}).with_defaults(default_params))
+    q.sorts = 'title' if q.sorts.empty?
+    q
   end
 
   def default_params

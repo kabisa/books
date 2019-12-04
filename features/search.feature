@@ -28,7 +28,6 @@ Feature:
     When I search for "dolor sit"
     Then I see a list of 2 books
 
-  @wip
   Scenario: Search for writers
     Given I open the application
     When I search for "king"

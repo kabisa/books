@@ -1,8 +1,12 @@
 = render(Search::Form, q: @q)
 
-/= render 'lorem'
-
 - if @books.any?
+  .dropdown
+    a#sort_dropdown.btn.btn-sm.btn-outline.dropdown-toggle(aria={ expanded: false, haspopup: true } data-toggle="dropdown" role="button" href='#')
+      | Sort by:
+    .dropdown-menu(aria-labelledby="sort_dropdown")
+      = sort_link(@q, :likes_count, 'Most-liked', default_order: :desc)
+
   = render(partial: 'results', object: @books, layout: 'results_layout', locals: { parent: 'books' })
 - else
   = render('no_results')
