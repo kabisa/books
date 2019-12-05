@@ -28,10 +28,21 @@ Feature: Sort books
     Then I see "Consectetur Adipiscing" as the first book
     And I see "Morbi ullamcorper" as the last book
 
-  @wip
   Scenario: Sort on number of likes
     When I choose "Books" from the navigation drawer
     And I sort on "Most-liked"
     And I see "Morbi ullamcorper" as the first book
     Then I see "Dolor Sit" as the last book
 
+  Scenario: Sort on title
+    When I choose "Books" from the navigation drawer
+    And I sort on "Most-liked"
+    And I sort on "Title"
+    Then I see "Consectetur Adipiscing" as the first book
+    And I see "Morbi ullamcorper" as the last book
+
+  Scenario: Sort descending on title
+    When I choose "Books" from the navigation drawer
+    And I sort on "Title"
+    And I see "Morbi ullamcorper" as the first book
+    Then I see "Consectetur Adipiscing" as the last book

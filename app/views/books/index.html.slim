@@ -8,8 +8,7 @@
       h6.dropdown-header.font-weight-normal.d-flex.justify-content-between
         span Sort by
         span= material_icon('sort')
-      = sort_link(@q, :likes_count, { default_order: :desc }, { class: 'dropdown-item d-flex flex-row-reverse justify-content-end' }) do
-        span= t('ransack.attributes.book.likes_count')
+      = sort_link(@q, :likes_count, { default_order: :desc }, { class: 'dropdown-item d-flex flex-row-reverse justify-content-end' })
       = sort_link(@q, :title, {}, { class: 'dropdown-item d-flex flex-row-reverse justify-content-end' })
 
   = render(partial: 'results', object: @books, layout: 'results_layout', locals: { parent: 'books' })
