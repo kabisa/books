@@ -1,8 +1,8 @@
 .dropdown.d-flex.justify-content-end.sort-by.mb-3
-  a#sort_dropdown.btn.btn-sm.btn-outline.dropdown-toggle(aria={ expanded: false, haspopup: true } data={ toggle: :dropdown, flip: false, offset: '0,-45' } role='button' href='#')
+  a#sort_dropdown.btn.btn-sm.btn-outline.dropdown-toggle(aria={ expanded: false, haspopup: true } data={ toggle: :dropdown } role='button' href='#')
     = t('.sort_by')
     | :
-  .dropdown-menu.dropdown-menu-right(aria-labelledby='sort_dropdown')
+  .dropdown-menu.menu.dropdown-menu-right(aria-labelledby='sort_dropdown')
     h6.dropdown-header.font-weight-normal.d-flex.justify-content-between
       span= t('.sort_by')
       span= material_icon('sort')
