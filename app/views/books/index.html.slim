@@ -1,11 +1,16 @@
 = render(Search::Form, q: @q)
 
 - if @books.any?
-  .dropdown
-    a#sort_dropdown.btn.btn-sm.btn-outline.dropdown-toggle(aria={ expanded: false, haspopup: true } data-toggle="dropdown" role="button" href='#')
+  .dropdown.d-flex.justify-content-end.sort-by.mb-3
+    a#sort_dropdown.btn.btn-sm.btn-outline.dropdown-toggle(aria={ expanded: false, haspopup: true } data={ toggle: :dropdown, flip: false, offset: '0,-45' } role="button" href='#')
       | Sort by:
-    .dropdown-menu(aria-labelledby="sort_dropdown")
-      = sort_link(@q, :likes_count, 'Most-liked', default_order: :desc)
+    .dropdown-menu.dropdown-menu-right(aria-labelledby='sort_dropdown')
+      h6.dropdown-header.font-weight-normal.d-flex.justify-content-between
+        span Sort by
+        span= material_icon('sort')
+      = sort_link(@q, :likes_count, { default_order: :desc }, { class: 'dropdown-item d-flex flex-row-reverse justify-content-end' }) do
+        span= t('ransack.attributes.book.likes_count')
+      = sort_link(@q, :title, {}, { class: 'dropdown-item d-flex flex-row-reverse justify-content-end' })
 
   = render(partial: 'results', object: @books, layout: 'results_layout', locals: { parent: 'books' })
 - else

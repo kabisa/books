@@ -1,0 +1,11 @@
+.sort-by {
+  .dropdown-toggle {
+    &::after {
+      content: 'sort';
+    }
+  }
+
+  .sort-indicator {
+    width: 2rem;
+  }
+}

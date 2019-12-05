@@ -164,3 +164,8 @@ en:
   errors:
     messages:
       content_type_whitelist_error: 'should be an image file'
+
+  ransack:
+    attributes:
+      book:
+        likes_count: 'Most-liked'
