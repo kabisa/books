@@ -25,4 +25,11 @@ module ApplicationHelper
 
     link_to_next_page scope, name, options
   end
+
+  def decorated_sort_link(search_object, attribute, *args, &block)
+    args[0] ||= {}
+    args[1] ||= {}
+    args[1].merge!({ class: 'dropdown-item d-flex flex-row-reverse justify-content-end' })
+    sort_link(search_object, attribute, *args, block)
+  end
 end

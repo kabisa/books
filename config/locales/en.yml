@@ -81,6 +81,8 @@ en:
     no_results:
       no_results: 'No books found.'
       clear_all: 'Clear all filters'
+    sort_by:
+      sort_by: 'Sort by'
   borrowings:
     create:
       notice: "You're now borrowing '%{title}'."
@@ -169,3 +171,4 @@ en:
     attributes:
       book:
         likes_count: 'Most-liked'
+        comments_count: 'Most commented'
