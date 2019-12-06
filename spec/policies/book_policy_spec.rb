@@ -25,6 +25,7 @@ describe BookPolicy, type: :policy do
       it { is_expected.to include(:summary) }
       it { is_expected.to include(:writer_names) }
       it { is_expected.to include(:tag_list) }
+      it { is_expected.to include(:num_of_pages) }
       it { is_expected.to include(copies_attributes: [:id, :location_id, :number, :_destroy]) }
     end
   end
