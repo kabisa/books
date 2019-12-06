@@ -5,6 +5,7 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_length_of(:title).is_at_most(255) }
     it { is_expected.to validate_length_of(:summary).is_at_most(2048) }
+    it { is_expected.to validate_numericality_of(:num_of_pages).allow_nil.is_greater_than(0).is_less_than(2**15) }
   end
 
   it { is_expected.to act_as_paranoid }

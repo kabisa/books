@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_133515) do
     t.integer "dislikes_count", default: 0
     t.integer "comments_count", default: 0
     t.string "cover"
-    t.integer "num_of_pages"
+    t.integer "num_of_pages", limit: 2
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
   end
 

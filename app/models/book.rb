@@ -1,8 +1,5 @@
 class Book < ApplicationRecord
-  validates :title, presence: true, length: { maximum: 255 }
-  validates :num_of_pages, numericality: { greater_than: 0 }, allow_nil: true
-  validates :summary, length: { maximum: 2048 }
-
+  # [1]
   has_many :votes, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
@@ -17,11 +14,17 @@ class Book < ApplicationRecord
   end
   has_and_belongs_to_many :writers
 
+  validates :title, presence: true, length: { maximum: 255 }
+  validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [1]
+  validates :summary, length: { maximum: 2048 }
+
+  before_validation :set_writers
+
   accepts_nested_attributes_for :copies, allow_destroy: true
+
   acts_as_paranoid
   acts_as_taggable
   mount_uploader :cover, CoverUploader
-  before_validation :set_writers
 
   class << self
     def policy_class
@@ -82,3 +85,6 @@ class Book < ApplicationRecord
     end
   end
 end
+
+# # [1] see https://github.com/rubocop-hq/rails-style-guide#macro-style-methods
+# [2] `num_of_pages` is a signed int of 2 bytes

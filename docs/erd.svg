@@ -41,7 +41,7 @@
 <text text-anchor="start" x="755" y="-259.5" font-family="ArialMT" font-size="10.00">link </text>
 <text text-anchor="start" x="772.783" y="-259.5" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string (2048)</text>
 <text text-anchor="start" x="755" y="-246.5" font-family="ArialMT" font-size="10.00">num_of_pages </text>
-<text text-anchor="start" x="823.94" y="-246.5" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">integer</text>
+<text text-anchor="start" x="823.94" y="-246.5" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">integer (2)</text>
 <text text-anchor="start" x="755" y="-233.5" font-family="ArialMT" font-size="10.00">summary </text>
 <text text-anchor="start" x="798.892" y="-233.5" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string (2048)</text>
 <text text-anchor="start" x="755" y="-220.5" font-family="ArialMT" font-size="10.00">title </text>
