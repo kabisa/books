@@ -11,7 +11,12 @@ module BootstrapHelper
 
   # @param icon [String] For all available icons, please refer to Material icons library (https://material.io/resources/icons/)
   def material_icon(icon, options={})
-    options.deep_merge!({ class: 'material-icons' })
+    default_options = { class: 'material-icons' }
+
+    options.deep_merge!(default_options) do |key, this_val, other_val|
+      [this_val, other_val].join(' ').strip
+    end
+
     content_tag(:i, icon, options)
   end
 
@@ -75,5 +80,4 @@ module BootstrapHelper
   def join_classnames(default_classnames, classnames)
     (Array(default_classnames) + Array(classnames)).join(' ')
   end
-
 end

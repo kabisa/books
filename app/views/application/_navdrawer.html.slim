@@ -7,6 +7,6 @@
     ul.navdrawer-nav
       li.nav-item
         = link_to books_path, class: 'nav-link'
-          i.material-icons.mr-3 book
+          = material_icon('library_books', class: 'mr-3')
           = Book.model_name.human.pluralize
 
