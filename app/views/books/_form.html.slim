@@ -31,9 +31,11 @@
                 div(data-target='nested-form.links')
                   = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
 
-      = f.input :num_of_pages, as: :string, wrapper: :input_group, append: 'pages'
       = f.input :summary, as: :text
       = f.input :writer_names, input_html: { value: book.writer_names.to_s, data: { controller: 'chip-input', whitelist: Writer.pluck(:name).join(',') }}
+      = f.input :num_of_pages, as: :string, wrapper: :input_group, append: 'pages'
+      div(data-controller='datepicker')
+        = f.input :published_on, as: :string, input_html: { data: { target: 'datepicker.lorem' }}
       = f.input :tag_list, input_html: { value: book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
 
   = f.button :submit, class: 'btn btn-outline-primary'

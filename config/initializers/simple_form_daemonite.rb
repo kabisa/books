@@ -116,6 +116,7 @@ SimpleForm.setup do |config|
 
   config.wrapper_mappings = {
     boolean:        :switch,
+    date:           :custom_multi_select,
     file:           :my_custom_file,
     toggle_buttons: :toggle_buttons
   }

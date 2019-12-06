@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_133515) do
+ActiveRecord::Schema.define(version: 2019_12_06_104456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_133515) do
     t.integer "comments_count", default: 0
     t.string "cover"
     t.integer "num_of_pages", limit: 2
+    t.date "published_on"
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
   end
 
