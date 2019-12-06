@@ -86,5 +86,5 @@ class Book < ApplicationRecord
   end
 end
 
-# # [1] see https://github.com/rubocop-hq/rails-style-guide#macro-style-methods
+# # [1] see https://rails.rubystyle.guide/
 # [2] `num_of_pages` is a signed int of 2 bytes

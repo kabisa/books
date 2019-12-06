@@ -16,6 +16,24 @@ RSpec.describe BookDecorator do
     it { is_expected.to eql('lorem_ebook') }
   end
 
+  describe '#type_and_pages' do
+    before { allow(decorator).to receive(:formatted_type).and_return('formatted_type') }
+    subject    { decorator.type_and_pages }
+    let(:book) { build :ebook, num_of_pages: num_of_pages }
+
+    describe 'with pages' do
+      let(:num_of_pages) { 10 }
+
+      it { is_expected.to eql('formatted_type, 10 pages') }
+    end
+
+    describe 'without pages' do
+      let(:num_of_pages) { nil }
+
+      it { is_expected.to eql('formatted_type') }
+    end
+  end
+
   describe '#title_highlighted_with_search' do
     before            { allow(h).to receive(:params).and_return(params_stub) }
 

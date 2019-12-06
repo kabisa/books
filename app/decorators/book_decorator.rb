@@ -18,10 +18,13 @@ class BookDecorator < ApplicationDecorator
   end
 
   def type_and_pages
-    arr = [formatted_type]
-    arr << I18n.t('num_of_pages', num_of_pages: num_of_pages) if num_of_pages?
+    h.safe_join [formatted_type, formatted_num_of_pages].compact, ', '
+  end
 
-    h.safe_join(arr, ', ')
+  def formatted_num_of_pages
+    return unless num_of_pages?
+
+    I18n.t('num_of_pages', num_of_pages: num_of_pages)
   end
 
   def vote_buttons
