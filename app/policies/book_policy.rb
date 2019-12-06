@@ -34,6 +34,7 @@ class BookPolicy < ApplicationPolicy
       [
         :title, :link,
         :cover, :cover_cache, :remove_cover,
+        :num_of_pages,
         :summary, :writer_names, :tag_list,
         copies_attributes: [
           :id, :location_id, :number, :_destroy

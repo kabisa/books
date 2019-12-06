@@ -11,6 +11,7 @@ Feature:
       | Sydney   |
 
   @javascript
+  @wip
   Scenario: Create a book
     Given I'm adding a new book
     And I populate the "Title" field with "Awesome Book"
@@ -18,6 +19,7 @@ Feature:
     And I populate the "Summary" field with "Lorem ipsum dolor sit amet."
     And I add the writers "Stephen King, Charles Dickens"
     And I add the tags "programming, software"
+    And I populate the "Number of pages" field with "500"
     And I click "Save"
     Then I am viewing the book
     And it's an e-book

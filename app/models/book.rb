@@ -1,5 +1,6 @@
 class Book < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
+  validates :num_of_pages, numericality: { greater_than: 0 }, allow_nil: true
   validates :summary, length: { maximum: 2048 }
 
   has_many :votes, dependent: :destroy

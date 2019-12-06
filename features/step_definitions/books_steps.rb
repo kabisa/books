@@ -234,6 +234,7 @@ Then("I am viewing the book") do
 
   expect(current_path).to eql(expected_path)
   expect(page).to have_content(book.title)
+  expect(page).to have_content("#{book.num_of_pages} pages") if book.num_of_pages?
   expect(page).to have_content(book.summary) if book.summary?
   expect(page).to have_content(book.tag_list.to_s)
   expect(page).to have_content("By #{book.writer_names.to_sentence}") if book.writers.any?

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
+
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   # vertical forms
@@ -80,6 +82,27 @@ SimpleForm.setup do |config|
     b.use :label, class: 'custom-control-label'
     b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+  end
+
+  # Input Group - custom component
+  # see example app and config at https://github.com/rafaelfranca/simple_form-bootstrap
+  config.wrappers :input_group, tag: 'div', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.optional :label
+
+    b.wrapper :input_group_tag, tag: 'div', class: 'input-group textfield-box' do |ba|
+      ba.optional :prepend
+      ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: false
+      ba.optional :append
+      ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      ba.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    end
   end
 
   config.wrappers :toggle_buttons, tag: :div, class: 'btn-group form-group', item_wrapper_tag: false, html: { data: { toggle: 'buttons'}, role: 'group' } do |b|

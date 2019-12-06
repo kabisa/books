@@ -17,6 +17,13 @@ class BookDecorator < ApplicationDecorator
     I18n.t(object.type, scope: 'book_types')
   end
 
+  def type_and_pages
+    arr = [formatted_type]
+    arr << I18n.t('num_of_pages', num_of_pages: num_of_pages) if num_of_pages?
+
+    h.safe_join(arr, ', ')
+  end
+
   def vote_buttons
     options = {
       book: object,

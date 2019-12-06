@@ -137,6 +137,7 @@ en:
         cover: 'Cover image'
         remove_cover: 'Remove'
         written_by: 'By %{writer_names}'
+        num_of_pages: 'Number of pages'
       comment:
         body: 'Comment'
     errors:
@@ -163,6 +164,7 @@ en:
     logged_out: 'You are now logged out'
     not_authorized: 'You are not authorized to perform this operation'
   time_ago: '%{time} ago'
+  num_of_pages: '%{num_of_pages} pages'
   errors:
     messages:
       content_type_whitelist_error: 'should be an image file'
