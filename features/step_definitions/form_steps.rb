@@ -4,7 +4,8 @@ Given("I populate the {string} field with {string}") do |label, value|
     'Title' => 'book_title',
     'Link' => 'book_link',
     'Summary' => 'book_summary',
-    'Number of pages' => 'book_num_of_pages'
+    'Number of pages' => 'book_num_of_pages',
+    'Publish Date' => 'book_published_on'
   }
 
   fill_in label_to_placeholder_mapping[label], with: value

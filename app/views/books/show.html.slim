@@ -18,7 +18,12 @@
         figure.figure
           = image_tag @book.cover_url, class: 'figure-img img-thumbnail'
           figcaption.figure-caption
-            = @book.type_and_pages
+            p= @book.type_and_pages
+            - if @book.published_on?
+              p
+                | Published
+                =< l(@book.published_on)
+
       .col
         - if @book.is_a?(PrintedBook)
           p= @book.available_copies

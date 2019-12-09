@@ -20,6 +20,7 @@ Feature:
     And I add the writers "Stephen King, Charles Dickens"
     And I add the tags "programming, software"
     And I populate the "Number of pages" field with "500"
+    And I populate the "Publish Date" field with "2004-12-31"
     And I click "Save"
     Then I am viewing the book
     And it's an e-book
