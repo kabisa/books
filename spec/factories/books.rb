@@ -3,6 +3,8 @@ FactoryBot.define do
     title    { 'MyString' }
     summary  { 'Lorem Ipsum' }
     tag_list { %w(Lorem Ipsum) }
+    num_of_pages { 200 }
+    published_on { Date.parse('2004-12-31') }
 
     transient do
       comments_count { 0 }
@@ -27,6 +29,8 @@ FactoryBot.define do
         link { Faker::Internet.url }
         summary { Array.new(rand(6))  { Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 5) }.join("\n") }
         tag_list { Array.new(rand(6)) { Faker::ProgrammingLanguage.name } }
+        num_of_pages { rand(500) }
+        published_on { rand(500).days.ago }
 
         transient do
           writers_count { rand(4) }
@@ -45,6 +49,8 @@ FactoryBot.define do
         title { Faker::Book.title }
         summary { Array.new(rand(6))  { Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 5) }.join("\n") }
         tag_list { Array.new(rand(6)) { Faker::ProgrammingLanguage.name } }
+        num_of_pages { rand(500) }
+        published_on { rand(500).days.ago }
 
         transient do
           writers_count { rand(4) }

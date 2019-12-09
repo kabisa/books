@@ -34,6 +34,23 @@ RSpec.describe BookDecorator do
     end
   end
 
+  describe '#formatted_published_on' do
+    subject    { decorator.formatted_published_on }
+    let(:book) { build :ebook, published_on: published_on }
+
+    describe 'published_on' do
+      let(:published_on) { Date.parse('2004-12-31') }
+
+      it { is_expected.to eql('Published 2004-12-31') }
+    end
+
+    describe 'without published_on' do
+      let(:published_on) { nil }
+
+      it { is_expected.to be_nil }
+    end
+  end
+
   describe '#title_highlighted_with_search' do
     before            { allow(h).to receive(:params).and_return(params_stub) }
 

@@ -27,6 +27,12 @@ class BookDecorator < ApplicationDecorator
     I18n.t('num_of_pages', num_of_pages: num_of_pages)
   end
 
+  def formatted_published_on
+    return unless published_on?
+
+    I18n.t('published_on', published_on: I18n.l(published_on))
+  end
+
   def vote_buttons
     options = {
       book: object,

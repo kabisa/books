@@ -14,6 +14,7 @@ export default class extends Controller {
   connect() {
     let defaultOptions = {
       ishowOtherMonths: true,
+      showOtherMonths: true,
       showRightIcon: false,
     };
 
