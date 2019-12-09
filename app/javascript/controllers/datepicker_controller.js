@@ -11,12 +11,14 @@ import {Controller} from 'stimulus';
 import 'gijgo';
 
 export default class extends Controller {
-  static targets = ['lorem'];
   connect() {
-    $(this.loremTarget).datepicker({
-      format: 'd-m-yyyy',
+    let defaultOptions = {
       ishowOtherMonths: true,
       showRightIcon: false,
-    });
+    };
+
+    let options = {...defaultOptions, ...this.element.dataset};
+
+    $(this.element).datepicker(options);
   }
 }
