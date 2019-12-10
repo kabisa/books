@@ -8,6 +8,7 @@
 // </div>
 
 import {Controller} from 'stimulus';
+import $ from 'jquery';
 import 'gijgo';
 
 export default class extends Controller {

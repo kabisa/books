@@ -1,5 +1,6 @@
 import {Controller} from 'stimulus';
 import Tagify from '@yaireo/tagify/dist/tagify';
+import $ from 'jquery';
 
 // This controller decorates the element with Tagify
 // to turn values in the element into chips.
