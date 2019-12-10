@@ -11,7 +11,6 @@ Feature:
       | Sydney   |
 
   @javascript
-  @wip
   Scenario: Create a book
     Given I'm adding a new book
     And I populate the "Title" field with "Awesome Book"

@@ -27,10 +27,6 @@ The project comes with a `seed.rb` which you can use to populate your developmen
 
 ## Technical details
 
-### Daemonite's Material UI
-
-Since I never used [Material Design](https://material.io/) before, I thought this project would make a good candidate. For this I used [Daemonite's Material UI](http://daemonite.github.io/material/), which uses Bootstrap with some customizations added to it. Instructions on how to use Daemonite's Material UI in a Rails project can be found [here](https://gist.github.com/bazzel/0226bf815c9018388ae2e7e3bc438c57).
-
 ### Class diagram
 
 ![erd.svg](docs/erd.svg)
@@ -38,6 +34,14 @@ Since I never used [Material Design](https://material.io/) before, I thought thi
 To update the diagram, run the following command:
 
 `bin/rails erd`
+
+### Daemonite's Material UI
+
+Since I never used [Material Design](https://material.io/) before, I thought this project would make a good candidate. For this I used [Daemonite's Material UI](http://daemonite.github.io/material/), which uses Bootstrap with some customizations added to it. Instructions on how to use Daemonite's Material UI in a Rails project can be found [here](https://gist.github.com/bazzel/0226bf815c9018388ae2e7e3bc438c57).
+
+### Gijgo
+
+[Gijgo](https://gijgo.com) is included for the [Datepicker](https://gijgo.com/datepicker) component. [This document](docs/datepicker.md) describes how this is integrated in this Rails project and how you can do this in your own.
 
 ### SendGrid
 

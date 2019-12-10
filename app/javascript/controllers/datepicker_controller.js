@@ -13,13 +13,13 @@ import 'gijgo';
 
 export default class extends Controller {
   connect() {
-    let defaultOptions = {
+    const defaultOptions = {
       ishowOtherMonths: true,
       showOtherMonths: true,
       showRightIcon: false,
     };
 
-    let options = {...defaultOptions, ...this.element.dataset};
+    const options = {...defaultOptions, ...this.element.dataset};
 
     $(this.element).datepicker(options);
   }
