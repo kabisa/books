@@ -20,6 +20,8 @@ class Book < ApplicationRecord
 
   scope :sort_by_num_of_pages_nulls_last_asc, -> { order('num_of_pages ASC NULLS LAST') }
   scope :sort_by_num_of_pages_nulls_last_desc, -> { order('num_of_pages DESC NULLS LAST') }
+  scope :sort_by_published_on_nulls_last_asc, -> { order('published_on ASC NULLS LAST') }
+  scope :sort_by_published_on_nulls_last_desc, -> { order('published_on DESC NULLS LAST') }
 
   before_validation :set_writers
 
