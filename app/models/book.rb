@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  include SortByNullsLast
+
   # [1]
   has_many :votes, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -18,15 +20,12 @@ class Book < ApplicationRecord
   validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [2]
   validates :summary, length: { maximum: 2048 }
 
-  scope :sort_by_num_of_pages_nulls_last_asc, -> { order('num_of_pages ASC NULLS LAST') }
-  scope :sort_by_num_of_pages_nulls_last_desc, -> { order('num_of_pages DESC NULLS LAST') }
-  scope :sort_by_published_on_nulls_last_asc, -> { order('published_on ASC NULLS LAST') }
-  scope :sort_by_published_on_nulls_last_desc, -> { order('published_on DESC NULLS LAST') }
 
   before_validation :set_writers
 
   accepts_nested_attributes_for :copies, allow_destroy: true
 
+  sort_by_nulls_last :num_of_pages, :published_on
   acts_as_paranoid
   acts_as_taggable
   mount_uploader :cover, CoverUploader
