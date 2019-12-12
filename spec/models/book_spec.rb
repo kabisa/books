@@ -83,6 +83,35 @@ RSpec.describe Book, type: :model do
     end
   end
 
+  describe 'scopes' do
+    describe '.sort_by_num_of_pages_nulls_last_*' do
+      let(:sorted_books)       { subject }
+      let!(:book_w_no_pages)   { create(:ebook, num_of_pages: nil) }
+      let!(:book_w_many_pages) { create(:ebook, num_of_pages: 1000) }
+      let!(:book_w_few_pages)  { create(:ebook, num_of_pages: 10) }
+
+      describe 'ascending' do
+        subject { described_class.sort_by_num_of_pages_nulls_last_asc }
+
+        it 'puts books with nulls last' do
+          expect(subject.first).to eql(book_w_few_pages)
+          expect(subject.second).to eql(book_w_many_pages)
+          expect(subject.third).to eql(book_w_no_pages)
+        end
+      end
+
+      describe 'descending' do
+        subject { described_class.sort_by_num_of_pages_nulls_last_desc }
+
+        it 'puts books with nulls last' do
+          expect(subject.first).to eql(book_w_many_pages)
+          expect(subject.second).to eql(book_w_few_pages)
+          expect(subject.third).to eql(book_w_no_pages)
+        end
+      end
+    end
+  end
+
   describe '.policy_class' do
     subject { described_class.policy_class }
 

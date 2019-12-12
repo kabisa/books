@@ -175,7 +175,7 @@ en:
       book:
         likes_count: 'Most-liked'
         comments_count: 'Most commented'
-        num_of_pages: 'Pages'
+        num_of_pages_nulls_last: 'Pages'
   date:
     formats:
       js:

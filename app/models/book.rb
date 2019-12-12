@@ -15,8 +15,11 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :writers
 
   validates :title, presence: true, length: { maximum: 255 }
-  validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [1]
+  validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [2]
   validates :summary, length: { maximum: 2048 }
+
+  scope :sort_by_num_of_pages_nulls_last_asc, -> { order('num_of_pages ASC NULLS LAST') }
+  scope :sort_by_num_of_pages_nulls_last_desc, -> { order('num_of_pages DESC NULLS LAST') }
 
   before_validation :set_writers
 
