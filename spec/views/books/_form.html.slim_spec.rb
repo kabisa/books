@@ -83,11 +83,11 @@ describe 'form' do
         expect(rendered).to have_css('.book_published_on input[placeholder]')
       end
       it 'transforms the max_date to a default formatted string' do
-        expect(rendered).to have_css('.book_published_on input[data-max-date="2005-06-30"]')
+        expect(rendered).to have_css('.book_published_on input[data-max="2005-06-30"]')
       end
 
       it 'sets some default data attributes' do
-        expect(rendered).to have_css('.book_published_on input[data-format="yyyy-m-d"]')
+        expect(rendered).to have_css('.book_published_on input[data-format="yyyy-mm-dd"]')
         expect(rendered).to have_css('.book_published_on input[data-controller="datepicker"]')
       end
 

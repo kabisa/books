@@ -1,22 +1,20 @@
-# This class renders a input element for showing a Gijgo datepicker
-# see https://gijgo.com/datepicker
+# This class renders a input element for showing a Daemonite datepicker
+# see https://daemonite.github.io/material/docs/4.1/material/pickers
 #
-# The input expect the Gijgo library to be installed
-# and a Stimulus controller `datepicker` which invokes
-# the Gijgo `dateicker` method provided with
+# The input expect a Stimulus controller `datepicker` which invokes
+# the `pickdate` method provided with
 # configuration options.
 #
 # See docs/datepicker.md for a guide on how to set up a project.
 #
 # @example
-# <%= f.input :published_on, as: :datepicker, input_html: { data: { max_date: 6.months.from_now }} %>
+# <%= f.input :published_on, as: :datepicker, input_html: { data: { max: 6.months.from_now }} %>
 # You can pass several config options as data attributes.
-# See https://gijgo.com/datepicker/configuration for this.
-# Make sure you underscore
+# See https://daemonite.github.io/material/docs/4.1/material/pickers/#options for this.
 class DatepickerInput < SimpleForm::Inputs::StringInput
   def input(wrapper_options)
-    transform_to_js_format(:max_date)
-    transform_to_js_format(:min_date)
+    transform_to_js_format(:max)
+    transform_to_js_format(:min)
 
     input_html_options.deep_merge!({
       data: {

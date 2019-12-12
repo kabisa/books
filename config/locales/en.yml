@@ -180,4 +180,4 @@ en:
   date:
     formats:
       js:
-        default: 'yyyy-m-d' # This is the Gijgo version of `date.formats.default`, see https://gijgo.com/datepicker/configuration/format
+        default: 'yyyy-mm-dd' # This is the Daemonite picker version of `date.formats.default`, see https://daemonite.github.io/material/docs/4.1/material/pickers/#formatting-rules

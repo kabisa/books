@@ -9,18 +9,25 @@
 
 import {Controller} from 'stimulus';
 import $ from 'jquery';
-import 'gijgo';
 
 export default class extends Controller {
   connect() {
     const defaultOptions = {
-      ishowOtherMonths: true,
-      showOtherMonths: true,
-      showRightIcon: false,
+      closeOnSelect: true,
+      ok: '',
+      cancel: '',
+      selectMonths: true,
+      selectYears: true,
     };
 
     const options = {...defaultOptions, ...this.element.dataset};
 
-    $(this.element).datepicker(options);
+    //$(this.element).pickdate(options);
+    // Workaround for 'auto close' issue, see https://github.com/Daemonite/material/issues/232
+    $(this.element)
+      .on('mousedown', function(event) {
+        event.preventDefault();
+      })
+      .pickdate(options);
   }
 }

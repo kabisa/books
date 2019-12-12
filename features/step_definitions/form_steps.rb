@@ -11,6 +11,24 @@ Given("I populate the {string} field with {string}") do |label, value|
   fill_in label_to_placeholder_mapping[label], with: value
 end
 
+Given("I select {string} in the {string} datepicker") do |value, label|
+  label_to_placeholder_mapping = {
+    'Publish Date' => 'book_published_on'
+  }
+
+  id = label_to_placeholder_mapping[label]
+
+  # We only test if the datepicker is showing...
+  find_field(id: id).click
+  expect(page).to have_css('.picker-frame')
+
+  # then we close it
+  find('.picker').click
+  # and set the value with some JS
+  # (instead of selecting the proper date via the datepicker)
+  page.execute_script("$('##{id}').val('#{value}')")
+end
+
 Given("I fill in {string} with {string}") do |locator, value|
   fill_in locator, with: value
 end
