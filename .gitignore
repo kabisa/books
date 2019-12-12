@@ -32,3 +32,4 @@ yarn-debug.log*
 .yarn-integrity
 tags
 rerun.txt
+.DS_Store

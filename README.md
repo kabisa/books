@@ -4,13 +4,17 @@
 
 ...
 
-## Installation
-
+## Prerequisites
 - Install [all requirements](https://gorails.com/setup/osx/10.15-catalina) on your machine
 - `brew install imagemagick`
+- `brew install firefox` (for running cucumber tests)
+
+## Installation
+
 - `git clone <repository-url>` this repository
 - `cd books`
 - `bundle install`
+- `yarn install`
 - `bin/rails db:setup`
 
 
