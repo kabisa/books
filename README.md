@@ -11,16 +11,20 @@
 
 ## Installation
 
-- `git clone <repository-url>` this repository
-- `cd books`
-- `bundle install`
-- `yarn install`
-- `bin/rails db:setup`
+```
+$ git clone <repository-url>
+$ cd books
+$ rbenv install `cat .ruby-version` # assuming you use rbenv.
+$ bundle install
+$ yarn install
+$ bin/rails db:setup
 
+```
 
 ## Running / Development
 
 - `bin/rails s`
+- `bin/webpack-dev-server`
 - Visit your app at [http://localhost:3000](http://localhost:3000).
 
 ### Populate the database
