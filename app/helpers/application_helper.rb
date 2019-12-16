@@ -32,4 +32,16 @@ module ApplicationHelper
     args[1].merge!({ class: 'dropdown-item d-flex flex-row-reverse justify-content-end' })
     sort_link(search_object, attribute, *args, block)
   end
+
+  def link_to_github
+    url     = 'https://github.com/kabisa/books'
+    options = tooltipify(I18n.t('view_on_github')).merge(class: 'nav-link', target: '_blank')
+
+    link_to(url, options) do
+      capture do
+        concat fa_icon('fab', 'github', class: 'mr-3')
+        concat 'GitHub'
+      end
+    end
+  end
 end

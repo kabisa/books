@@ -43,9 +43,11 @@ To update the diagram, run the following command:
 
 Since I never used [Material Design](https://material.io/) before, I thought this project would make a good candidate. For this I used [Daemonite's Material UI](http://daemonite.github.io/material/), which uses Bootstrap with some customizations added to it. Instructions on how to use Daemonite's Material UI in a Rails project can be found [here](https://gist.github.com/bazzel/0226bf815c9018388ae2e7e3bc438c57).
 
-### Gijgo
+### Font Awesome
 
-[Gijgo](https://gijgo.com) is included for the [Datepicker](https://gijgo.com/datepicker) component. [This document](docs/datepicker.md) describes how this is integrated in this Rails project and how you can do this in your own.
+Font Awesome has a gem available for including FA in a Rails project. Instead this project used `yarn` for installing the FA package, since relies on the asset pipeline.
+
+I did copy the [view helper](https://github.com/FortAwesome/font-awesome-sass#rails-helper-usage) from this gem and renamed it from `icon` to `fa_icon`
 
 ### SendGrid
 

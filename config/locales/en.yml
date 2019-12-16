@@ -166,6 +166,7 @@ en:
   time_ago: '%{time} ago'
   num_of_pages: '%{num_of_pages} pages'
   published_on: 'Published %{published_on}'
+  view_on_github: 'View the repository on GitHub'
   errors:
     messages:
       content_type_whitelist_error: 'should be an image file'
