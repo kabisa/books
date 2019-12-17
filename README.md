@@ -5,22 +5,26 @@
 ...
 
 ## Prerequisites
+
 - Install [all requirements](https://gorails.com/setup/osx/10.15-catalina) on your machine
 - `brew install imagemagick`
 - `brew install firefox` (for running cucumber tests)
 
 ## Installation
 
-- `git clone <repository-url>` this repository
-- `cd books`
-- `bundle install`
-- `yarn install`
-- `bin/rails db:setup`
-
+```
+$ git clone https://github.com/kabisa/books
+$ cd books
+$ rbenv install `cat .ruby-version` # assuming you use rbenv.
+$ bundle install
+$ yarn install
+$ bin/rails db:setup
+```
 
 ## Running / Development
 
 - `bin/rails s`
+- `bin/webpack-dev-server`
 - Visit your app at [http://localhost:3000](http://localhost:3000).
 
 ### Populate the database
@@ -57,10 +61,10 @@ The production version of this application uses [SendGrid](http://sendgrid.com) 
 
 In [some environments](config/initializers/carrierwave.rb) images are uploaded to an S3 bucke using [CarrierWave](https://github.com/carrierwaveuploader/carrierwave). If you want to use this feature, make sure you have an S3 bucket created and add the required keys to the corresponding ENV variables:
 
-* `AWS_ACCESS_KEY_ID`
-* `AWS_SECRET_ACCESS_KEY`
-* `AWS_REGION`
-* `AWS_BUCKET_NAME`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
+- `AWS_BUCKET_NAME`
 
 ### Fallback cover image
 
