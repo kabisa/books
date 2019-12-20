@@ -13,4 +13,4 @@ Feature:
     Given I open the application
     And I search for "Consectetur"
     When I click on the writer "Stephen King" for the book "Consectetur Adipiscing"
-    Then I see a list of 2 books
+    Then I should see a list of 2 books

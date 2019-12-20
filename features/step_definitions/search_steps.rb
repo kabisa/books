@@ -47,7 +47,7 @@ Then("I see {string} is highlighted for the book {string}") do |q, title|
 end
 
 Then("I see that no results are found") do
-  step %q(I see a list of 0 books)
+  step %q(I should see a list of 0 books)
   expect(page).to have_content('No books found.')
   expect(page).to have_link('Clear all filters')
 end

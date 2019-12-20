@@ -259,7 +259,7 @@ Then("I can edit the book") do
   expect(page).to have_link('Edit')
 end
 
-Then("I see a list of {int} book(s)") do |items_count|
+Then("I should see a list of {int} book(s)") do |items_count|
   if items_count.nonzero?
     within('.list-group') do
       expect(page).to have_css('div.list-group-item', count: items_count)
@@ -269,7 +269,7 @@ Then("I see a list of {int} book(s)") do |items_count|
   end
 end
 
-Then("I see a list of {int} {book_type}") do |items_count, icon|
+Then("I should see a list of {int} {book_type}") do |items_count, icon|
   within('.list-group') do
     expect(page).to have_css('div.list-group-item .material-icons', text: icon, count: items_count, visible: false)
   end
