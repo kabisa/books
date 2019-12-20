@@ -301,7 +301,7 @@ Then("I see a validation error that duplicate locations are not allowed") do
   end
 end
 
-Then("I {do_or_not}see the summary for {string}") do |should_do, title|
+Then("I {should_or_should_not}see the summary for {string}") do |should_do, title|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
   book = Book.find_by(title: title)
 

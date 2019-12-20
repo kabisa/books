@@ -49,9 +49,9 @@ Feature:
       | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
       | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
     When I choose "Books" from the navigation drawer
-    Then I do not see the summary for "Lorem Ipsum"
+    Then I should not see the summary for "Lorem Ipsum"
     When I expand the panel for "Lorem Ipsum"
-    Then I see the summary for "Lorem Ipsum"
+    Then I should see the summary for "Lorem Ipsum"
 
   @todo
   Scenario: Empty state
