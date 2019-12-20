@@ -45,13 +45,13 @@ Given("I borrowed the book {string} {int} days ago") do |title, days_ago|
 end
 
 Given("I liked the book {string}") do |title|
-    step %q(I choose "Books" from the navigation drawer)
-    step %Q(I like the book "#{title}")
+  step %q(I choose "Books" from the navigation drawer)
+  step %Q(I like the book "#{title}")
 end
 
 Given("I disliked the book {string}") do |title|
-    step %q(I choose "Books" from the navigation drawer)
-    step %Q(I dislike the book "#{title}")
+  step %q(I choose "Books" from the navigation drawer)
+  step %Q(I dislike the book "#{title}")
 end
 
 When("I am viewing the details for {string}") do |title|
@@ -261,8 +261,8 @@ end
 
 Then("I should see a list of {int} book(s)") do |items_count|
   if items_count.nonzero?
-    within('.list-group') do
-      expect(page).to have_css('div.list-group-item', count: items_count)
+    within_list_group do
+      expect(page).to have_css('.list-group-item', count: items_count)
     end
   else
     expect(page).not_to have_css('.list-group')
@@ -270,12 +270,12 @@ Then("I should see a list of {int} book(s)") do |items_count|
 end
 
 Then("I should see a list of {int} {book_type}") do |items_count, icon|
-  within('.list-group') do
+  within_list_group do
     expect(page).to have_css('div.list-group-item .material-icons', text: icon, count: items_count, visible: false)
   end
 end
 
-Then("I see {int} download links") do |items_count|
+Then("I should see {int} download links") do |items_count|
   expect(page).to have_link('Download', count: items_count, visible: false)
 end
 
@@ -337,7 +337,7 @@ Then("I can not change to type of the book") do
 end
 
 Then("there are no more books to be shown") do
-  within('.list-group') do
+  within_list_group do
     expect(page).not_to have_css('a.list-group-item', text: 'More books')
   end
 end

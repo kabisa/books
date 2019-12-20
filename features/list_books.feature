@@ -20,7 +20,7 @@ Feature:
     Given there are 3 e-books
     And there are 5 printed books
     When I choose "Books" from the navigation drawer
-    And I see 0 download links
+    And I should see 0 download links
 
   Scenario: List printed books for guests
     Given there are 5 printed books
@@ -33,7 +33,7 @@ Feature:
     And there are 3 e-books
     And there are 5 printed books
     When I choose "Books" from the navigation drawer
-    Then I see 3 download links
+    Then I should see 3 download links
 
   Scenario: List printed books authorized users
     Given I signed in as a Kabisaan
