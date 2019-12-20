@@ -221,7 +221,7 @@ Then("I {can_or_not}edit {string}") do |should_do, title|
   end
 end
 
-Then("I {do_or_not}see information about how many copies there are") do |should_do|
+Then("I {should_or_should_not}see information about how many copies there are") do |should_do|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
   expect(page).send(to_have_or_not_have, have_css('div', text: 'copies', visible: false))
 end

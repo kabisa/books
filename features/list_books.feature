@@ -26,7 +26,7 @@ Feature:
     Given there are 5 printed books
     When I choose "Books" from the navigation drawer
     Then I should see a list of 5 printed books
-    But I do not see information about how many copies there are
+    But I should not see information about how many copies there are
 
   Scenario: List e-books for authorized users
     Given I signed in as a Kabisaan
@@ -40,7 +40,7 @@ Feature:
     And there are 5 printed books
     When I choose "Books" from the navigation drawer
     Then I should see a list of 5 printed books
-    And I see information about how many copies there are
+    And I should see information about how many copies there are
 
   Scenario: Expand panel for more details
     Given I signed in as a Kabisaan
