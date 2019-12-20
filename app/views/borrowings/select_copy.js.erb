@@ -1,4 +1,4 @@
-var el = document.getElementById('<%= select_copy_id %>');
+var el = document.getElementById('<%= modal_id %>');
 el.outerHTML = '<%= j render(partial: 'select_copy_modal', locals: { book: @book }) %>';
 
 // Stimulus controller handles the rest.

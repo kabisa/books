@@ -45,7 +45,7 @@ module ApplicationHelper
     end
   end
 
-  def select_copy_id
-    'select_copy'
+  def modal_id
+    'modal'
   end
 end
