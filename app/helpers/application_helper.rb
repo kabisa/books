@@ -44,4 +44,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def select_copy_id
+    'select_copy'
+  end
 end

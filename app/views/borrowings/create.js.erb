@@ -3,7 +3,3 @@ var snackbar       = document.createElement('div');
 el.outerHTML       = '<%= j render(partial: 'books/collapse', object: @book, as: :book, locals: { show: true, parent: 'books' }) %>';
 snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
 document.body.appendChild(snackbar.firstChild);
-
-$('#<%= @book.dom_id %>')
-  .find('.floating-label .custom-select, .floating-label .form-control')
-  .floatinglabel();
