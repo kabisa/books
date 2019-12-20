@@ -152,7 +152,7 @@ When("I edit the book {string}") do |title|
 end
 
 When("I expand the panel for {string}") do |title|
-  find('.expansion-panel', text: title).find('[data-toggle="collapse"]').click
+  find('.expansion-panel', text: title).click
 end
 
 When("I click on the writer {string} for the book {string}") do |writer_name, title|
@@ -262,7 +262,7 @@ end
 Then("I should see a list of {int} book(s)") do |items_count|
   if items_count.nonzero?
     within_list_group do
-      expect(page).to have_css('.list-group-item', count: items_count)
+      expect(page).to have_css('div.list-group-item', count: items_count)
     end
   else
     expect(page).not_to have_css('.list-group')

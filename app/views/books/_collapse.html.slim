@@ -19,7 +19,7 @@
         p= book.number_of_comments
 
   - if current_user.identified?
-    .expansion-panel-footer
+    .expansion-panel-footer(data={ toggle: 'no-collapse' })
       = link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'btn btn-outline-danger'
       = link_to t('helpers.submit.edit'), edit_book_path(book), class: 'btn btn-outline'
 
