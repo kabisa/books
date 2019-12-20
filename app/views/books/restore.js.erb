@@ -6,6 +6,3 @@ snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
 document.body.appendChild(snackbar.firstChild);
 
 $('#<%= @book.dom_id %> .collapse').collapse('show')
-$('#<%= @book.dom_id %>')
-  .find('.floating-label .custom-select, .floating-label .form-control')
-  .floatinglabel();

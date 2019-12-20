@@ -16,7 +16,7 @@ class PrintedBookDecorator < BookDecorator
   def return_button
     borrowing = borrow_by(h.current_user)
 
-    h.button_to I18n.t('helpers.submit.borrowing.destroy'), borrowing, method: :delete, remote: true, class: 'btn btn-outline'
+    h.button_to I18n.t('helpers.submit.borrowing.destroy'), borrowing, method: :delete, remote: true, class: 'dropdown-item'
   end
 
   def borrow_button
@@ -30,15 +30,15 @@ class PrintedBookDecorator < BookDecorator
   end
 
   def borrow_none_button
-    h.button_tag borrow_label, class: 'btn btn-outline', disabled: true
+    h.button_tag borrow_label, class: 'dropdown-item', disabled: true
   end
 
   def borrow_one_button
-    h.button_to borrow_label, h.borrowings_path(borrowing: { book_id: object, copy_id: copies.borrowables.first }), remote: true, class: 'btn btn-outline'
+    h.button_to borrow_label, h.borrowings_path(borrowing: { book_id: object, copy_id: copies.borrowables.first }), remote: true, class: 'dropdown-item'
   end
 
   def borrow_modal_button
-    h.button_to "#{borrow_label}...", h.borrowings_path(borrowing: { book_id: object }), remote: true, class: 'btn btn-outline'
+    h.button_to "#{borrow_label}...", h.borrowings_path(borrowing: { book_id: object }), remote: true, class: 'dropdown-item'
   end
 
   def icon

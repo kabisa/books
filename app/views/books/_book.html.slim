@@ -17,17 +17,18 @@
           div(data={ toggle: 'no-collapse' })
           = render partial: 'books/vote', object: book, as: :book
 
-          /- if policy(book).edit?
-            /.ml-3.dropdown(data={ toggle: 'no-collapse' })
-              /button(class=sm_rnd_btn_class aria={ expanded: false, haspopup: true } data-toggle='dropdown' type='button')
-                /= material_icon('more_vert', tooltipify(t('helpers.options')))
-              /.dropdown-menu.menu.dropdown-menu-right
-                /= link_to t('.edit'), edit_book_path(book), class: 'dropdown-item'
-                /= link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'dropdown-item'
-                /- if book.is_a?(Ebook) && policy(book).borrow?
-                  /= book.download_link
-                /- if book.is_a?(PrintedBook) && policy(book).borrow?
-                  /= book.borrow_or_return_button
+          - if policy(book).edit?
+            .ml-3.dropdown(data={ toggle: 'no-collapse' })
+              button(class=sm_rnd_btn_class aria={ expanded: false, haspopup: true } data-toggle='dropdown' type='button')
+                = material_icon('more_vert', tooltipify(t('helpers.options')))
+              .dropdown-menu.menu.dropdown-menu-right
+                = link_to t('.edit'), edit_book_path(book), class: 'dropdown-item'
+                - if book.is_a?(Ebook) && policy(book).borrow?
+                  = book.download_link
+                - if book.is_a?(PrintedBook) && policy(book).borrow?
+                  = book.borrow_or_return_button
+                .dropdown-divider
+                = link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'dropdown-item text-danger'
 
       .row.align-items-center.collapsed-hide
         .col-12.col-lg-7

@@ -1,5 +1,7 @@
-var el             = document.getElementById('<%= @book.dom_id(:collapse) %>');
+// TODO: This view is the same as books/restore.js.erb. Can we re-use this?
+var el             = document.getElementById('<%= @book.dom_id %>');
+el.outerHTML       = '<%= j render(partial: 'books/book', object: @book, locals: { parent: 'books' }) %>';
+
 var snackbar       = document.createElement('div');
-el.outerHTML       = '<%= j render(partial: 'books/collapse', object: @book, as: :book, locals: { show: true, parent: 'books' }) %>';
 snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
 document.body.appendChild(snackbar.firstChild);

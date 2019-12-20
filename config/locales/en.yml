@@ -40,7 +40,7 @@ en:
         destroy: 'Log out'
       borrowing:
         submit: 'Borrow'
-        destroy: 'Return Book'
+        destroy: 'Return book'
       comment:
         create: 'Comment'
       edit: 'Edit'

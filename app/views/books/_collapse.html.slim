@@ -1,4 +1,4 @@
-.collapse(id=book.dom_id(:collapse)  data-parent="##{parent}" class=('show' if local_assigns[:show]))
+.collapse(id=book.dom_id(:collapse) data-parent="##{parent}" class=('show' if local_assigns[:show]))
   .expansion-panel-body
     .row
       .col-sm-4.col-md-3
@@ -17,13 +17,3 @@
           p= book.formatted_tag_list
 
         p= book.number_of_comments
-
-  - if current_user.identified?
-    .expansion-panel-footer(data={ toggle: 'no-collapse' })
-      = link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'btn btn-outline-danger'
-      = link_to t('helpers.submit.edit'), edit_book_path(book), class: 'btn btn-outline'
-
-      - if book.is_a?(Ebook) && policy(book).borrow?
-        = book.download_link
-      - if book.is_a?(PrintedBook) && policy(book).borrow?
-        = book.borrow_or_return_button
