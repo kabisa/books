@@ -26,7 +26,6 @@
     }
 
     &:hover {
-      z-index: 1;
       @extend .shadow-sm;
     }
   }
