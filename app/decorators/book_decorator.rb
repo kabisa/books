@@ -106,18 +106,21 @@ class BookDecorator < ApplicationDecorator
 
   def hamburger_menu
     h.hamburger_menu do
-      if h.policy(book).edit?
-        h.concat(h.link_to I18n.t('helpers.submit.edit'), h.edit_book_path(book), class: 'dropdown-item')
-      end
+      h.concat edit_link
+      h.concat borrow_link
+      h.concat destroy_link
+    end
+  end
 
-      if object.is_a?(Ebook) && h.policy(object).borrow?
-        h.concat(download_link)
-      end
-      if object.is_a?(PrintedBook) && h.policy(object).borrow?
-        h.concat(borrow_or_return_button)
-      end
+  def edit_link
+    if h.policy(object).edit?
+      h.link_to I18n.t('helpers.submit.edit'), h.edit_book_path(object), class: 'dropdown-item'
+    end
+  end
 
-      if h.policy(book).destroy?
+  def destroy_link
+    if h.policy(book).destroy?
+      h.capture do
         h.concat(h.tag.div(class: 'dropdown-divider'))
         h.concat(h.link_to I18n.t('helpers.submit.destroy'), object, method: :delete, remote: true, class: 'dropdown-item text-danger')
       end

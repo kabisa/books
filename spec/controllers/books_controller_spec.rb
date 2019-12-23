@@ -20,8 +20,9 @@ RSpec.describe BooksController, type: :controller do
       get :index, session: valid_session
     end
 
-    let(:search_double) do
-      Ransack::Search.new(Book, nil)
+    let(:search_spy) do
+      #Ransack::Search.new(Book, nil)
+      spy('Ransack::Search')
     end
 
     it 'returns a success response' do
@@ -40,8 +41,8 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it 'avoids N+1 queries' do
-      allow(Book).to receive(:ransack).and_return(search_double)
-      expect(search_double.result).to receive(:includes).with(:taggings, :writers, copies: [:location]).and_call_original
+      allow(Book).to receive(:ransack).and_return(search_spy)
+      expect(search_spy.result).to receive(:includes).with(:taggings, :writers, copies: [:location])
       do_get
     end
 

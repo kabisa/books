@@ -45,6 +45,12 @@ class PrintedBookDecorator < BookDecorator
     'menu_book'
   end
 
+  def borrow_link
+    if h.policy(object).borrow?
+      borrow_or_return_button
+    end
+  end
+
   private
 
   def borrow_label
