@@ -1,6 +1,16 @@
 // TODO: This view is the same as books/restore.js.erb. Can we re-use this?
-var el             = document.getElementById('<%= @book.dom_id %>');
-el.outerHTML       = '<%= j render(partial: 'books/book', object: @book, locals: { parent: 'books' }) %>';
+var elId            = '<%= @book.dom_id %>';
+var el              = document.getElementById(elId);
+var isExpanded      = el.classList.contains('show');
+var restoreEl       = document.createElement('div');
+
+restoreEl.innerHTML = '<%= j render(partial: 'books/book', object: @book, locals: { parent: 'books' }) %>';
+el.replaceWith(restoreEl.firstChild);
+
+if (isExpanded)
+  $(`#${elId}`)
+    .find('.collapse')
+    .collapse('show');
 
 var snackbar       = document.createElement('div');
 snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';

@@ -5,8 +5,7 @@
 
 .vote.text-center
   - if current_user.identified?
-    .no-collapsible
-      = book.vote_buttons
+    = book.vote_buttons
     .mt-1= render(VoteBar, like_count: like_count, dislike_count: dislike_count, has_voted: (like || dislike))
   - else
       .text-right(style="min-width: 90px;")

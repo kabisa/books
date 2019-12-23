@@ -1,8 +1,16 @@
-var el             = document.getElementById('<%= @book.dom_id %>');
-el.outerHTML       = '<%= j render(partial: 'book', object: @book, locals: { parent: 'books' }) %>';
+var elId            = '<%= @book.dom_id %>';
+var el              = document.getElementById(elId);
+var isExpanded      = el.classList.contains('show');
+var restoreEl       = document.createElement('div');
+
+restoreEl.innerHTML = '<%= j render(partial: 'book', object: @book, locals: { parent: 'books' }) %>';
+el.replaceWith(restoreEl.firstChild);
+
+if (isExpanded)
+  $(`#${elId}`)
+    .find('.collapse')
+    .collapse('show');
 
 var snackbar       = document.createElement('div');
 snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
 document.body.appendChild(snackbar.firstChild);
-
-$('#<%= @book.dom_id %> .collapse').collapse('show')

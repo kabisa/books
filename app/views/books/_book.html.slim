@@ -1,4 +1,4 @@
-.expansion-panel.list-group-item.stretchable(id=book.dom_id data={ controller: 'expansion-panel', action: 'click->expansion-panel#toggle', target: "##{book.dom_id(:collapse)}" })
+.expansion-panel.list-group-item.stretchable(id=book.dom_id class=('show' if local_assigns[:show]) data={ controller: 'expansion-panel', action: 'click->expansion-panel#toggle', target: "##{book.dom_id(:collapse)}" })
   .expansion-panel-toggler
     .media-body
       .row.align-items-center.collapsed-show
@@ -13,22 +13,9 @@
 
         .col-4.col-lg-2
           = book.number_of_comments_icon
-        .col-6.col-lg-3.d-flex.justify-content-end
-          div(data={ toggle: 'no-collapse' })
+        .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
           = render partial: 'books/vote', object: book, as: :book
-
-          - if policy(book).edit?
-            .ml-3.dropdown(data={ toggle: 'no-collapse' })
-              button(class=sm_rnd_btn_class aria={ expanded: false, haspopup: true } data-toggle='dropdown' type='button')
-                = material_icon('more_vert', tooltipify(t('helpers.options')))
-              .dropdown-menu.menu.dropdown-menu-right
-                = link_to t('.edit'), edit_book_path(book), class: 'dropdown-item'
-                - if book.is_a?(Ebook) && policy(book).borrow?
-                  = book.download_link
-                - if book.is_a?(PrintedBook) && policy(book).borrow?
-                  = book.borrow_or_return_button
-                .dropdown-divider
-                = link_to t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'dropdown-item text-danger'
+          = book.hamburger_menu
 
       .row.align-items-center.collapsed-hide
         .col-12.col-lg-7
@@ -37,15 +24,8 @@
             small= book.written_by_highlighted_with_search
         .col-6.col-lg-2(data={ toggle: 'no-collapse' })
           = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
-        .col-6.col-lg-3.d-flex.justify-content-end
-          div(data={ toggle: 'no-collapse' })
-            = render partial: 'books/vote', object: book, as: :book
-
-          /- if policy(book).edit?
-            /.ml-3.dropdown(data={ toggle: 'no-collapse' })
-              /button(class=sm_rnd_btn_class aria={ expanded: false, haspopup: true } data-toggle='dropdown' type='button')
-                /= material_icon('more_vert', tooltipify(t('helpers.options')))
-              /.dropdown-menu.dropdown-menu-right
-                /= link_to t('.edit'), edit_book_path(book), class: 'dropdown-item'
+        .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
+          = render partial: 'books/vote', object: book, as: :book
+          = book.hamburger_menu
 
   = render partial: 'books/collapse', object: book, as: :book, locals: { show: local_assigns[:show], parent: parent }

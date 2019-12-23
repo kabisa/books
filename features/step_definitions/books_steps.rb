@@ -64,6 +64,7 @@ When("I borrow the book {string}") do |title|
   step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
+    click_on('more_vert')
     link_or_button = all('a', text: /^Borrow/i).first # Show a modal first
     link_or_button ||= find_button('Borrow') # Only 1 location available
     link_or_button.click
@@ -77,9 +78,10 @@ When("I {like_or_dislike_icon} the book {string}") do |icon, title|
 end
 
 When("I delete the book {string}") do |title|
-  step %Q(I expand the panel for "#{title}")
+  #step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
+    click_on('more_vert')
     click_on('Delete')
   end
 end
@@ -91,10 +93,11 @@ When("I undo deleting the book/comment") do
 end
 
 When("I return the book {string}") do |title|
-  step %Q(I expand the panel for "#{title}")
+  #step %Q(I expand the panel for "#{title}")
 
   within('.list-group-item', text: title) do
-    click_on('Return Book')
+    click_on('more_vert')
+    click_on('Return book')
   end
 end
 
@@ -111,8 +114,11 @@ When("I click {string} in the modal") do |text|
 end
 
 Then("I can return the book {string}") do |title|
+  refresh
+
   within('.list-group-item', text: title) do
-    expect(page).to have_button('Return Book')
+    click_on('more_vert')
+    expect(page).to have_button('Return book')
   end
 end
 
@@ -144,9 +150,11 @@ When("I remove the first location") do
 end
 
 When("I edit the book {string}") do |title|
-  step %Q(I expand the panel for "#{title}")
+  #step %Q(I expand the panel for "#{title}")
+
 
   within('.list-group-item', text: title) do
+    click_on('more_vert')
     click_on('Edit')
   end
 end
@@ -212,12 +220,12 @@ end
 
 Then("I {can_or_not}edit {string}") do |should_do, title|
   # Expand first
-  step %Q(I expand the panel for "#{title}")
+  #step %Q(I expand the panel for "#{title}")
 
   to_have_or_not_have = should_do ? 'to' : 'not_to'
 
   within('.list-group-item', text: title) do
-    expect(page).send(to_have_or_not_have, have_link('Edit'))
+    expect(page).send(to_have_or_not_have, have_link('Edit', visible: false))
   end
 end
 
@@ -276,7 +284,8 @@ Then("I should see a list of {int} {book_type}") do |items_count, icon|
 end
 
 Then("I should see {int} download links") do |items_count|
-  expect(page).to have_link('Download', count: items_count, visible: false)
+  # Dropdown menu is rendered twice for every book.
+  expect(page).to have_link('Download', count: 2*items_count, visible: false)
 end
 
 Then("I see there are {int} copies of the book") do |copies_count|
@@ -285,7 +294,7 @@ end
 
 Then("I see the book {string} has {int} copy/copies left") do |title, copies_count|
   within('.list-group-item', text: title) do
-    expect(page).to have_text(/#{copies_count} cop(y|ies)/)
+    expect(page).to have_css('p', text: /#{copies_count} cop(y|ies)/, visible: false)
   end
 end
 
