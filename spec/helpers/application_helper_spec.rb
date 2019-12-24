@@ -25,4 +25,10 @@ RSpec.describe ApplicationHelper, type: :helper do
     it { is_expected.to have_css('a i.fab.fa-github') }
     it { is_expected.to have_css('a', text: 'GitHub') }
   end
+
+  describe '#hamburger_menu' do
+
+    xit 'Continue here...'
+
+  end
 end
