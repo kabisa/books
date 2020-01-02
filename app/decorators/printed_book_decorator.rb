@@ -3,6 +3,14 @@ class PrintedBookDecorator < BookDecorator
     h.pluralize(copies_count - borrowings_count, Copy.model_name.human.downcase)
   end
 
+  def link_to_borrow
+    return unless h.policy(object).borrow?
+
+    borrow_or_return_button
+  end
+
+  private
+
   def borrow_or_return_button
     if borrowed_by?(h.current_user)
       return_button
@@ -10,8 +18,6 @@ class PrintedBookDecorator < BookDecorator
       borrow_button
     end
   end
-
-  private
 
   def return_button
     borrowing = borrow_by(h.current_user)
@@ -44,14 +50,6 @@ class PrintedBookDecorator < BookDecorator
   def icon
     'menu_book'
   end
-
-  def borrow_link
-    if h.policy(object).borrow?
-      borrow_or_return_button
-    end
-  end
-
-  private
 
   def borrow_label
     I18n.t('helpers.submit.borrowing.submit')
