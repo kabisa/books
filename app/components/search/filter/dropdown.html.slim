@@ -1,6 +1,6 @@
 .dropdown.ml-1(data-controller=data_controller)
   = link_to title, '#', toggle_options
-  .dropdown-menu.dropdown-menu-right.p-3(aria-labelledby=dom_id style='width: 20rem;')
+  .dropdown-menu.dropdown-menu-right.p-3(data={ action: "click->#{data_controller}#keepOpen" } aria-labelledby=dom_id style='width: 20rem;')
     = close_icon(data: { action: "#{data_controller}#close" })
     h4= title
     = content

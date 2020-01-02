@@ -18,24 +18,34 @@ module Search
       end
 
       def toggle_options
-        default_options = {
+        default_options.deep_merge(toggle_html) do |key, this_val, other_val|
+          [this_val, other_val].join(' ').strip
+        end
+      end
+
+      def default_options
+        {
           class: 'btn btn-sm btn-outline dropdown-toggle',
           role: :button,
           id: dom_id,
           data: {
+            target: "#{data_controller}.#{toggle_target}",
             toggle: :dropdown,
             flip: false,
             boundary: dom_id,
             offset: '0,10'
           }
         }
-
-        default_options.deep_merge(toggle_html)
       end
 
       # Stimulus
       def data_controller
         'dropdown'
+      end
+
+      # This is defined as a target in the Stimulus controller.
+      def toggle_target
+        'toggle'
       end
     end
   end

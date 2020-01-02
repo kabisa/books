@@ -12,7 +12,13 @@ describe Search::Filter::Dropdown, type: :component do
 
   describe 'container' do
     it { is_expected.to have_css('.dropdown.ml-1') }
+  end
+
+  describe 'Stimulus API' do
     it { is_expected.to have_css('.dropdown[data-controller="dropdown"]') }
+    it { is_expected.to have_css('.dropdown a[data-target="dropdown.toggle"]') }
+    it { is_expected.to have_css('.dropdown-menu[data-action="click->dropdown#keepOpen"]') }
+    it { is_expected.to have_css('.close[data-action="dropdown#close"]') }
   end
 
   describe 'button' do
@@ -30,13 +36,15 @@ describe Search::Filter::Dropdown, type: :component do
         }
       end
 
-      it { is_expected.to have_css('.dropdown a[data-target="dropdown.target"]') }
+      describe 'Stimulus API' do
+        it { is_expected.to have_css('.dropdown a[data-target="dropdown.toggle dropdown.target"]') }
+      end
     end
   end
 
-  describe 'content' do
+  describe 'dropdown menu' do
     it { is_expected.to have_css('.dropdown .dropdown-menu.dropdown-menu-right[aria-labelledby]') }
-    it { is_expected.to have_css('.dropdown-menu button.close[data-action="dropdown#close"][type="button"]', text: '×') }
+    it { is_expected.to have_css('.dropdown-menu button.close[type="button"]', text: '×') }
     it { is_expected.to have_css('.dropdown-menu h4', text: title) }
     it { is_expected.to have_css('.dropdown-menu', text: content) }
   end
