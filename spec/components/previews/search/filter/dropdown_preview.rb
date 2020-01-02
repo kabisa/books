@@ -6,5 +6,5 @@ class Search::Filter::DropdownPreview < ActionView::Component::Preview
   end
 end
 
-# To preview this component, visit:
+# To view this component, visit:
 # http://localhost:3000/rails/components/search/filter/dropdown/#{method}
