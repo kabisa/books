@@ -2,18 +2,16 @@ module Search
   module Filter
     class Dropdown < ActionView::Component::Base
       include BootstrapHelper
+      validates :content, :title, presence: true
 
-      def initialize(q:, builder:, title:, toggle_html: {})
-        @q = q
-        @builder = builder
+      def initialize(title:, toggle_html: {})
         @title = title
         @toggle_html = toggle_html
       end
 
       private
 
-      attr_reader :q, :builder, :title, :toggle_html
-      alias :f :builder
+      attr_reader :title, :toggle_html
 
       def dom_id
         [model_name.singular, object_id].join('-')
@@ -33,6 +31,11 @@ module Search
         }
 
         default_options.deep_merge(toggle_html)
+      end
+
+      # Stimulus
+      def data_controller
+        'dropdown'
       end
     end
   end

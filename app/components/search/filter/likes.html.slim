@@ -1,5 +1,5 @@
 div(data-controller=data_controller)
-  = render(Search::Filter::Dropdown, q: q, builder: f, title: t('activerecord.attributes.book.likes_count'), toggle_html: { data: { target: "#{data_controller}.dropdownToggle" }}) do
+  = render(Search::Filter::Dropdown, title: t('activerecord.attributes.book.likes_count'), toggle_html: { data: { target: "#{data_controller}.dropdownToggle" }}) do
     div(class=zero_items_classnames)
       = t('search_form.likes.zero')
     div(class=other_items_classnames)

@@ -1,5 +1,5 @@
 div(data-controller=data_controller)
-  = render(Search::Filter::Dropdown, q: q, builder: f, title: t('activerecord.attributes.book.tag_list'), toggle_html: { data: { target: "#{data_controller}.dropdownToggle" }}) do
+  = render(Search::Filter::Dropdown, title: t('activerecord.attributes.book.tag_list'), toggle_html: { data: { target: "#{data_controller}.dropdownToggle" }}) do
     .custom-control.custom-switch.my-3
       = check_box_tag :select_all, 1, false, class: 'custom-control-input', data: { target: "#{data_controller}.selectAll", action: "#{data_controller}#toggle #{data_controller}#updateButton" }
       span.custom-control-track
