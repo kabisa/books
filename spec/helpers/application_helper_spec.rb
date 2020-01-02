@@ -17,7 +17,8 @@ RSpec.describe ApplicationHelper, type: :helper do
   end
 
   describe '#link_to_github' do
-    subject       { Capybara.string helper.link_to_github }
+    subject       { Capybara.string html }
+    let(:html)    { helper.link_to_github }
 
     it { is_expected.to have_css('a.nav-link') }
     it { is_expected.to have_css('a[href="https://github.com/kabisa/books"][target="_blank"]') }
@@ -27,8 +28,31 @@ RSpec.describe ApplicationHelper, type: :helper do
   end
 
   describe '#hamburger_menu' do
+    subject       { Capybara.string html }
+    let(:html)    { helper.hamburger_menu { content } }
 
-    xit 'Continue here...'
+    context 'with content' do
+      let(:content) { 'content' }
 
+      describe 'container' do
+        it { is_expected.to have_css('.ml-3.dropdown[data-toggle="no-collapse"]') }
+      end
+
+      describe 'button' do
+        it { is_expected.to have_css('.dropdown button.btn-float.btn.btn-sm.shadow-none[data-toggle="dropdown"][aria-expanded="false"][aria-haspopup="true"]') }
+        it { is_expected.to have_css('.dropdown button i.material-icons', text: 'more_vert') }
+      end
+
+      describe 'dropdown menu' do
+        it { is_expected.to have_css('.dropdown .dropdown-menu.menu.dropdown-menu-right', text: content) }
+      end
+    end
+
+    context 'without content' do
+      let(:content) { nil }
+      subject       { html }
+
+      it { is_expected.to be_nil }
+    end
   end
 end
