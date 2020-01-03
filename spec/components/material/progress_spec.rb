@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Material::Progress do
+describe Material::Progress, type: :component do
   subject       { Capybara.string html }
   let(:html)    {  render_inline(described_class, options) }
   let(:options) { { value: value } }
