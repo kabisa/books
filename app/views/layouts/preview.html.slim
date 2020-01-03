@@ -9,19 +9,23 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light
-      = link_to 'Components', '/rails/components', class: 'span navbar-brand mb-0.h1'
-      button.navbar-toggler(data-target="#navbarNavDropdown" data-toggle="collapse" type="button")
-        span.navbar-toggler-icon
-      #navbarNavDropdown.collapse.navbar-collapse
-        ul.navbar-nav
-          - ActionView::Component::Preview.all.each do |preview|
-            li.nav-item.dropdown
-              a.nav-link.dropdown-toggle(data-toggle="dropdown" href="#")
-                = preview.preview_name
-              .dropdown-menu
+    - root = '/rails/components'
+    header.navbar.navbar-dark.navbar-full.bg-primary.doc-navbar-permanent-float.fixed-top
+      = link_to 'Components', root, class: 'span navbar-brand mb-0.h1'
+    .navdrawer.navdrawer-permanent.navdrawer-permanent-float
+      .navdrawer-content
+        .card.m-3
+          nav.navdrawer-nav
+            - ActionView::Component::Preview.all.each_with_index do |preview, index|
+              - if index.nonzero?
+                .navdrawer-divider
+              p.navdrawer-subheader= preview.preview_name
+              ul.navdrawer-nav
                 - preview.examples.reject { |e| (e =~ /=$/) || preview.instance_methods(false).map(&:to_s).include?("#{e}=") }.each do |example|
-                  = link_to example.titleize, "/rails/components/#{preview.preview_name}/#{example}", class: 'dropdown-item'
+                  - path = "#{root}/#{preview.preview_name}/#{example}"
+                  - name = example.titleize
+                  li.nav-item
+                    = link_to name, path, class: 'nav-link', data: { toggle: 'tooltip' }, title: name
 
     .container
       = yield
