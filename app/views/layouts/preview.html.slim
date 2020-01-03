@@ -20,9 +20,8 @@ html
               a.nav-link.dropdown-toggle(data-toggle="dropdown" href="#")
                 = preview.preview_name
               .dropdown-menu
-                - preview.examples.reject { |e| (e =~ /=$/) || preview.instance_methods.include?("#{e}=".to_sym) }.each do |example|
-                  - path = preview.preview_name
-                  = link_to example.titleize, "/rails/components/#{path}/#{example}", class: 'dropdown-item'
+                - preview.examples.reject { |e| (e =~ /=$/) || preview.instance_methods(false).map(&:to_s).include?("#{e}=") }.each do |example|
+                  = link_to example.titleize, "/rails/components/#{preview.preview_name}/#{example}", class: 'dropdown-item'
 
-    .container.d-flex.justify-content-center
+    .container
       = yield

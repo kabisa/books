@@ -31,7 +31,3 @@ class Search::Filter::LikesPreview < ActionView::Component::Preview
     { likes_count_gteq: likes_count_gteq }
   end
 end
-
-# To view this component, visit:
-# http://localhost:3000/rails/components/search/filter/likes/with_no_likes
-# http://localhost:3000/rails/components/search/filter/likes/with_any_likes
