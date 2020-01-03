@@ -9,5 +9,20 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
+    nav.navbar.fixed-top.navbar-expand-lg.navbar-light.bg-light
+      = link_to 'Components', '/rails/components', class: 'span navbar-brand mb-0.h1'
+      button.navbar-toggler(data-target="#navbarNavDropdown" data-toggle="collapse" type="button")
+        span.navbar-toggler-icon
+      #navbarNavDropdown.collapse.navbar-collapse
+        ul.navbar-nav
+          - ActionView::Component::Preview.all.each do |preview|
+            li.nav-item.dropdown
+              a.nav-link.dropdown-toggle(data-toggle="dropdown" href="#")
+                = preview.preview_name
+              .dropdown-menu
+                - preview.examples.reject { |e| (e =~ /=$/) || preview.instance_methods.include?("#{e}=".to_sym) }.each do |example|
+                  - path = preview.preview_name
+                  = link_to example.titleize, "/rails/components/#{path}/#{example}", class: 'dropdown-item'
+
     .container.d-flex.justify-content-center
       = yield

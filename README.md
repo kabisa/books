@@ -26,6 +26,7 @@ $ bin/rails db:setup
 - `bin/rails s`
 - `bin/webpack-dev-server`
 - Visit your app at [http://localhost:3000](http://localhost:3000).
+- View the [ActionView::Components](https://github.com/github/actionview-component) at [http://localhost:3000/rails/components](http://localhost:3000/rails/components)
 
 ### Populate the database
 
