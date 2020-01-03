@@ -1,24 +1,26 @@
 class Search::Filter::LikesPreview < ActionView::Component::Preview
-  include ActionView::Helpers::FormHelper
-
   layout 'preview'
 
-  attr_accessor :likes_count_gteq, :output_buffer
+  attr_accessor :likes_count_gteq
 
   def with_no_likes
     self.likes_count_gteq = 0
-    render(Search::Filter::Likes, options)
+    render_component
   end
 
   def with_any_likes
     self.likes_count_gteq = 5
-    render(Search::Filter::Likes, options)
+    render_component
   end
 
   private
 
+  def render_component
+    render(Search::Form, options).css('[data-controller="range-slider"]')
+  end
+
   def options
-    { q: q, builder: builder }
+    { q: q }
   end
 
   def q
@@ -28,14 +30,6 @@ class Search::Filter::LikesPreview < ActionView::Component::Preview
   def params
     { likes_count_gteq: likes_count_gteq }
   end
-
-  def builder
-    form_for(q) do |f|
-      return f
-    end
-  end
-
-  def polymorphic_path(*args); end
 end
 
 # To view this component, visit:
