@@ -40,8 +40,3 @@ class Search::Filter::TagsPreview < ActionView::Component::Preview
     Book.tags_on(:tags).sort_by { |t| t.name.downcase }.first(count).map(&:id)
   end
 end
-
-# To view this component, visit:
-# http://localhost:3000/rails/components/search/filter/tags/with_nothing_checked
-# http://localhost:3000/rails/components/search/filter/tags/with_one_item_checked
-# http://localhost:3000/rails/components/search/filter/tags/with_multiple_items_checked
