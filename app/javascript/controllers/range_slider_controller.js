@@ -1,120 +1,72 @@
-// Minimal expected markup:
-//
-// <div data-controller="range-slider">
-//   <div class="zero-items">...</div>
-//   <div class="other-items">
-//     <span data-target="range-slider.value">42</span>
-//     <a data-action="range-slider#reset" href="#">Clear</a>
-//   </div>
-//   <input data-target="range-slider.range" data-action="input->range-slider#updateValue" type="range">
-// </div>
-
 import {Controller} from 'stimulus';
 
-const ACTIVE_CLASSNAME = 'btn-outline-primary';
-const INACTIVE_CLASSNAME = 'btn-outline';
-const ZERO_ITEMS_CLASSNAME = 'zero-items';
-const OTHER_ITEMS_CLASSNAME = 'other-items';
+const CLASSNAMES = {
+  active: 'btn-outline-primary',
+  inactive: 'btn-outline',
+  hide: 'd-none',
+};
 
 export default class extends Controller {
-  static targets = ['range', 'value', 'label', 'dropdownToggle'];
-
-  connect() {
-    this.updateValue();
-    this.updateButton();
-  }
+  static targets = [
+    'range',
+    'value',
+    'label',
+    'toggle',
+    'zeroItems',
+    'otherItems',
+  ];
 
   initialize() {
-    this.initialButtonText = this.dropdownToggleTarget.innerHTML;
+    this.initialButtonText = this.toggleTarget.innerHTML;
   }
 
-  updateValue() {
-    this.valueTarget.innerHTML = this.value;
+  connect() {
+    this.render();
+  }
 
-    this.hideAllItemsNodes();
-
-    switch (this.value) {
-      case 0:
-        this.showZeroItemsNodes();
-        break;
-      default:
-        this.showOtherItemsNodes();
-        break;
-    }
+  render() {
+    this.updateValueLabel();
+    this.updateVisibility();
+    this.updateButton();
   }
 
   reset(event) {
     event.preventDefault();
     this.rangeTarget.value = '0';
-    this.updateValue();
+    this.render();
   }
 
-  hideAllItemsNodes() {
-    this.allItemsNodes.forEach((el) => {
-      this.hide(el);
+  updateValueLabel() {
+    this.valueTarget.innerHTML = this.rangeValue;
+  }
+
+  updateVisibility() {
+    this.zeroItemsTargets.forEach((el) => {
+      el.classList.toggle(CLASSNAMES.hide, this.isActive);
     });
-  }
-
-  showZeroItemsNodes() {
-    this.zeroItemsNodes.forEach((el) => {
-      this.show(el);
+    this.otherItemsTargets.forEach((el) => {
+      el.classList.toggle(CLASSNAMES.hide, this.isInactive);
     });
-  }
-
-  showOtherItemsNodes() {
-    this.otherItemsNodes.forEach((el) => {
-      this.show(el);
-    });
-  }
-
-  show(el) {
-    el.classList.remove('d-none');
-  }
-
-  hide(el) {
-    el.classList.add('d-none');
   }
 
   updateButton() {
-    if (this.value !== 0) {
-      this.showAsActive();
-    } else {
-      this.showAsInactive();
-    }
+    const buttonText = this.isActive
+      ? this.labelTarget.innerText
+      : this.initialButtonText;
+    this.toggleTarget.innerHTML = buttonText;
+    this.toggleTarget.classList.toggle(CLASSNAMES.active, this.isActive);
+    this.toggleTarget.classList.toggle(CLASSNAMES.inactive, this.isInactive);
   }
 
-  showAsActive() {
-    const label = this.labelTarget.innerText;
-
-    this.setButtonText(label);
-    this.dropdownToggleTarget.classList.add(ACTIVE_CLASSNAME);
-    this.dropdownToggleTarget.classList.remove(INACTIVE_CLASSNAME);
-  }
-
-  showAsInactive() {
-    this.setButtonText(this.initialButtonText);
-    this.dropdownToggleTarget.classList.remove(ACTIVE_CLASSNAME);
-    this.dropdownToggleTarget.classList.add(INACTIVE_CLASSNAME);
-  }
-
-  setButtonText(value) {
-    this.dropdownToggleTarget.innerHTML = value;
-  }
-  get value() {
+  get rangeValue() {
     return parseInt(this.rangeTarget.value);
   }
 
-  get zeroItemsNodes() {
-    return this.element.querySelectorAll(`.${ZERO_ITEMS_CLASSNAME}`);
+  get isActive() {
+    return this.rangeValue > 0;
   }
 
-  get otherItemsNodes() {
-    return this.element.querySelectorAll(`.${OTHER_ITEMS_CLASSNAME}`);
-  }
-
-  get allItemsNodes() {
-    return this.element.querySelectorAll(
-      `.${ZERO_ITEMS_CLASSNAME}, .${OTHER_ITEMS_CLASSNAME}`,
-    );
+  get isInactive() {
+    return !this.isActive;
   }
 }
