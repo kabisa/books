@@ -14,4 +14,10 @@ export default class extends Controller {
   get $toggle() {
     return $(this.toggleTarget);
   }
+
+  reset() {
+    alert(
+      `Override the method \`reset\` in the \`${this.identifier}\` controller.`,
+    );
+  }
 }
