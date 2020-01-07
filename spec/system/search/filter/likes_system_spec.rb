@@ -9,7 +9,7 @@ RSpec.describe Search::Filter::Likes, type: :system do
     before { visit preview_path.concat('with_no_likes') }
 
     it 'has a title' do
-      expect(page).to have_css('.dropdown a:not(.btn-outline-primary)[href="#"]', text: 'LIKES')
+      expect(page).to have_css('.dropdown a.dropdown-toggle[href="#"]', text: 'LIKES')
     end
 
     it 'has content' do
@@ -24,7 +24,7 @@ RSpec.describe Search::Filter::Likes, type: :system do
       open_dropdown
       change_range_input('q_likes_count_gteq', 5)
 
-      expect(page).to have_css('.dropdown a.btn-outline-primary[href="#"]', text: 'AT LEAST 5')
+      expect(page).to have_css('.dropdown a.text-primary[href="#"]', text: 'AT LEAST 5')
       expect(page).to have_css('.dropdown-menu', text: 'At least 5')
       expect(page).to have_css('.dropdown-menu', text: 'Clear')
 
@@ -40,7 +40,7 @@ RSpec.describe Search::Filter::Likes, type: :system do
     before { visit preview_path.concat('with_any_likes') }
 
     it 'has a title' do
-      expect(page).to have_css('.dropdown a.btn-outline-primary[href="#"]', text: 'AT LEAST 5')
+      expect(page).to have_css('.dropdown a.text-primary[href="#"]', text: 'AT LEAST 5')
     end
 
     it 'has content' do
@@ -55,7 +55,7 @@ RSpec.describe Search::Filter::Likes, type: :system do
       open_dropdown
       change_range_input('q_likes_count_gteq', 0)
 
-      expect(page).to have_css('.dropdown a:not(.btn-outline-primary)[href="#"]', text: 'LIKES')
+      expect(page).to have_css('.dropdown a.dropdown-toggle[href="#"]', text: 'LIKES')
       expect(page).to have_css('.dropdown-menu', text: 'Any')
 
       expect(page).not_to have_css('.dropdown-menu', text: 'At least 5')
@@ -66,7 +66,18 @@ RSpec.describe Search::Filter::Likes, type: :system do
       open_dropdown
       click_on 'Clear'
 
-      expect(page).to have_css('.dropdown a:not(.btn-outline-primary)[href="#"]', text: 'LIKES')
+      expect(page).to have_css('.dropdown a.dropdown-toggle[href="#"]', text: 'LIKES')
+      expect(page).to have_css('.dropdown-menu', text: 'Any')
+
+      expect(page).not_to have_css('.dropdown-menu', text: 'At least 5')
+      expect(page).not_to have_css('.dropdown-menu', text: 'Clear')
+    end
+
+    it 'also resets content' do
+      find('.dropdown-toggle-split').click
+      click_on('Likes')
+
+      expect(page).to have_css('.dropdown a.dropdown-toggle[href="#"]', text: 'LIKES')
       expect(page).to have_css('.dropdown-menu', text: 'Any')
 
       expect(page).not_to have_css('.dropdown-menu', text: 'At least 5')

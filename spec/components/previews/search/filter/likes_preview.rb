@@ -16,7 +16,7 @@ class Search::Filter::LikesPreview < ActionView::Component::Preview
   private
 
   def render_component
-    render(Search::Form, options).css('[data-controller="range-slider"]')
+    render(Search::Form, options).css('[data-controller="likes"]')
   end
 
   def options

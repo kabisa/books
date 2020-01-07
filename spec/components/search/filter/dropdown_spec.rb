@@ -11,41 +11,32 @@ describe Search::Filter::Dropdown, type: :component do
   let(:content) { 'Hello World!' }
 
   describe 'container' do
-    it { is_expected.to have_css('.dropdown.ml-1') }
+    it { is_expected.to have_css('.filter-button.dropdown') }
+  end
+
+  describe 'buttons' do
+    describe 'single button' do
+      it { is_expected.to have_css('.btn-group a.btn.btn-sm.dropdown-toggle[href="#"][role="button"][data-toggle="dropdown"][data-flip="false"][data-display="static"]', text: title) }
+    end
+
+    describe 'split button' do
+      it { is_expected.to have_css('.btn-group a.btn.btn-sm.text-primary.pr-2.d-none[href="#"][role="button"][data-toggle="dropdown"][data-flip="false"][data-display="static"]', text: title) }
+      it { is_expected.to have_css('.btn-group a.btn.btn-sm.dropdown-toggle.text-primary.dropdown-toggle-split.d-none[href="#"][role="button"]', text: 'Toggle Dropdown') }
+    end
+    # Other functionality is tested by `spec/components/search/filter/dropdown_spec.rb`
+  end
+
+  describe 'dropdown menu' do
+    it { is_expected.to have_css('.dropdown .dropdown-menu.dropdown-menu-right') }
+    it { is_expected.to have_css('.dropdown-menu button.close[type="button"]', text: '×') }
+    it { is_expected.to have_css('.dropdown-menu h4', text: title) }
+    it { is_expected.to have_css('.dropdown-menu', text: content) }
   end
 
   describe 'Stimulus API' do
     it { is_expected.to have_css('.dropdown[data-controller="dropdown"]') }
-    it { is_expected.to have_css('.dropdown a[data-target="dropdown.toggle"]') }
+    it { is_expected.to have_css('.btn-group [data-target="dropdown.toggle dropdown.otherItems"]') }
     it { is_expected.to have_css('.dropdown-menu[data-action="click->dropdown#keepOpen"]') }
     it { is_expected.to have_css('.close[data-action="dropdown#close"]') }
-  end
-
-  describe 'button' do
-    it { is_expected.to have_css('.dropdown a[href="#"]', text: title) }
-    it { is_expected.to have_css('.dropdown a.btn.btn-sm.dropdown-toggle.btn-outline') }
-    it { is_expected.to have_css('.dropdown a[role="button"]') }
-    it { is_expected.to have_css('.dropdown a[id]') }
-    it { is_expected.to have_css('.dropdown a[data-toggle="dropdown"][data-flip="false"][data-boundary][data-offset="0,10"]') }
-
-    context 'with toggle_options' do
-      let(:options) do
-        {
-          title: title,
-          toggle_html: { data: { target: 'dropdown.target' }}
-        }
-      end
-
-      describe 'Stimulus API' do
-        it { is_expected.to have_css('.dropdown a[data-target="dropdown.toggle dropdown.target"]') }
-      end
-    end
-  end
-
-  describe 'dropdown menu' do
-    it { is_expected.to have_css('.dropdown .dropdown-menu.dropdown-menu-right[aria-labelledby]') }
-    it { is_expected.to have_css('.dropdown-menu button.close[type="button"]', text: '×') }
-    it { is_expected.to have_css('.dropdown-menu h4', text: title) }
-    it { is_expected.to have_css('.dropdown-menu', text: content) }
   end
 end
