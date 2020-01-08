@@ -35,10 +35,6 @@ $(document).on('turbolinks:load', function() {
     html: true,
     trigger: 'hover',
   });
-
-  $('body').on('click', '.no-collapsible', function(e) {
-    e.stopPropagation();
-  });
 });
 
 $(document).on('ajax:before', function() {

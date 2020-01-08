@@ -3,36 +3,64 @@ module Search
     class Dropdown < ActionView::Component::Base
       include BootstrapHelper
 
-      def initialize(q:, builder:, title:, toggle_html: {})
-        @q = q
-        @builder = builder
+      def initialize(data_controller: 'dropdown', title:)
+        @data_controller = data_controller
         @title = title
-        @toggle_html = toggle_html
       end
 
       private
 
-      attr_reader :q, :builder, :title, :toggle_html
-      alias :f :builder
+      attr_reader :data_controller, :title
 
-      def dom_id
-        [model_name.singular, object_id].join('-')
-      end
-
-      def toggle_options
-        default_options = {
-          class: 'btn btn-sm btn-outline dropdown-toggle',
-          role: :button,
-          id: dom_id,
+      def dropdown_options
+        {
           data: {
             toggle: :dropdown,
             flip: false,
-            boundary: dom_id,
-            offset: '0,10'
+            display: 'static'
+          }
+        }
+      end
+
+      def single_button_options
+        options = {
+          class: sm_btn_class('dropdown-toggle'),
+          role: 'button',
+          data: {
+            target: "#{data_controller}.zeroItems",
           }
         }
 
-        default_options.deep_merge(toggle_html)
+        deep_merge_and_join(options, dropdown_options)
+      end
+
+      def split_button_options
+        options = {
+          class: sm_btn_class('text-primary pr-2 d-none'),
+          role: 'button',
+          data: {
+            target: "#{data_controller}.toggle #{data_controller}.otherItems",
+          }
+        }
+
+        deep_merge_and_join(options, dropdown_options)
+      end
+
+      def dropdown_caret_options
+        {
+          class: sm_btn_class('text-primary dropdown-toggle dropdown-toggle-split d-none'),
+          role: 'button',
+          data: {
+            target: "#{data_controller}.otherItems",
+            action: "#{data_controller}#reset"
+          }
+        }
+      end
+
+      def deep_merge_and_join(h1, h2)
+        h1.deep_merge!(h2) do |key, this_val, other_val|
+          [this_val, other_val].join(' ').strip
+        end
       end
     end
   end

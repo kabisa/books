@@ -15,21 +15,13 @@ module Search
         q.likes_count_gteq || 0
       end
 
-      def zero_items_classnames
-        class_names = %w(zero-items)
-        class_names << 'd-none' if likes_count.nonzero?
-        class_names
-      end
-
-      def other_items_classnames
-        class_names = %w(other-items)
-        class_names << 'd-none' if likes_count.zero?
-        class_names
+      def title
+        I18n.t('activerecord.attributes.book.likes_count')
       end
 
       # Stimulus
       def data_controller
-        'range-slider'
+        'likes'
       end
     end
   end

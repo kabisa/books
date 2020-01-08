@@ -1,7 +1,8 @@
 class EbookDecorator < BookDecorator
+  def link_to_borrow
+    return unless h.policy(object).borrow?
 
-  def download_link
-    h.link_to I18n.t('helpers.submit.download'), object.link, class: 'btn btn-outline', role: :button, target: '_blank'
+    h.link_to I18n.t('helpers.submit.download'), object.link, class: 'dropdown-item', role: :button, target: '_blank'
   end
 
   private

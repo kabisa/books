@@ -103,6 +103,29 @@ class BookDecorator < ApplicationDecorator
   def truncated_summary_html(options={})
     h.simple_format(truncated_summary, options)
   end
+
+  def hamburger_menu
+    h.hamburger_menu do
+      h.concat link_to_edit
+      h.concat link_to_borrow
+      h.concat link_to_destroy
+    end
+  end
+
+  def link_to_edit
+    return unless h.policy(object).edit?
+
+    h.link_to I18n.t('helpers.submit.edit'), h.edit_book_path(object), class: 'dropdown-item'
+  end
+
+  def link_to_destroy
+    return unless h.policy(object).destroy?
+
+    h.capture do
+      h.concat(h.tag.div(class: 'dropdown-divider'))
+      h.concat(h.link_to I18n.t('helpers.submit.destroy'), object, method: :delete, remote: true, class: 'dropdown-item text-danger')
+    end
+  end
 end
 
 # (1) Using `comments.size` will not use counter cache. We could also have used `model.comments.size`.

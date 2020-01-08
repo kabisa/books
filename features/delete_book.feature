@@ -14,7 +14,7 @@ Feature:
     And I choose "Books" from the navigation drawer
     When I delete the book "Lorem Ipsum"
     Then I see a snackbar with a message
-    And I see a list of 2 e-books
+    And I should see a list of 2 e-books
 
   Scenario: Undo a deletion
     Given I signed in as a Kabisaan
@@ -26,5 +26,5 @@ Feature:
     And I choose "Books" from the navigation drawer
     When I delete the book "Lorem Ipsum"
     And I undo deleting the book
-    And I see a list of 3 e-books
+    And I should see a list of 3 e-books
 

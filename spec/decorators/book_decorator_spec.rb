@@ -216,4 +216,47 @@ RSpec.describe BookDecorator do
       it { is_expected.to be_nil }
     end
   end
+
+  describe '#link_to_edit' do
+    let(:html) { decorator.link_to_edit }
+    let(:book) { create :ebook }
+
+    before { allow(h).to receive(:policy).and_return(policy_stub) }
+
+    describe 'authorized user' do
+      subject           { Capybara.string html }
+      let(:policy_stub) { double('BookPolicy', edit?: true) }
+
+      it { is_expected.to have_css('a.dropdown-item[href$="edit"]', text: 'Edit') }
+    end
+
+    describe 'unauthorized user' do
+      subject           { html }
+      let(:policy_stub) { double('BookPolicy', edit?: false) }
+
+      it { is_expected.to be_nil }
+    end
+  end
+
+  describe '#link_to_destroy' do
+    let(:html) { decorator.link_to_destroy }
+    let(:book) { create :ebook }
+
+    before { allow(h).to receive(:policy).and_return(policy_stub) }
+
+    describe 'authorized user' do
+      subject           { Capybara.string html }
+      let(:policy_stub) { double('BookPolicy', destroy?: true) }
+
+      it { is_expected.to have_css('.dropdown-divider') }
+      it { is_expected.to have_css('a.dropdown-item.text-danger[data-remote="true"][data-method="delete"]', text: 'Delete') }
+    end
+
+    describe 'unauthorized user' do
+      subject           { html }
+      let(:policy_stub) { double('BookPolicy', destroy?: false) }
+
+      it { is_expected.to be_nil }
+    end
+  end
 end

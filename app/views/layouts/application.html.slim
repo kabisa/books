@@ -18,5 +18,6 @@ html
     .container
       = yield
 
-  = floating_action_button
-  = bs_snackbar
+    div(id=modal_id)
+    = floating_action_button
+    = bs_snackbar

@@ -1,18 +1,18 @@
-  - if like
-    = button_to like_path(like), method: :delete, remote: true, class: sm_rnd_btn_class('text-primary'), form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
-      = material_icon(:thumb_up)
-    span.like.text-primary.mx-1= like_count
-  - else
-    = button_to book_likes_path(book), remote: true, class: sm_rnd_btn_class, form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
-      = material_icon(:thumb_up)
-    span.like.mx-1= like_count
+- if like
+  = button_to like_path(like), method: :delete, remote: true, class: sm_rnd_btn_class('text-primary'), form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
+    = material_icon(:thumb_up)
+  span.like.text-primary.mx-1= like_count
+- else
+  = button_to book_likes_path(book), remote: true, class: sm_rnd_btn_class, form_class: 'd-inline-block', title: 'I like this', data: { toggle: :tooltip } do
+    = material_icon(:thumb_up)
+  span.like.mx-1= like_count
 
-  - if dislike
-    = button_to dislike_path(dislike), method: :delete, remote: true, class: sm_rnd_btn_class('text-primary'), form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
-      = material_icon(:thumb_down)
-    span.dislike.text-primary.mx-1= dislike_count
-  - else
-    = button_to book_dislikes_path(book), remote: true, class: sm_rnd_btn_class, form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
-      = material_icon(:thumb_down)
-    span.dislike.mx-1= dislike_count
+- if dislike
+  = button_to dislike_path(dislike), method: :delete, remote: true, class: sm_rnd_btn_class('text-primary'), form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
+    = material_icon(:thumb_down)
+  span.dislike.text-primary.mx-1= dislike_count
+- else
+  = button_to book_dislikes_path(book), remote: true, class: sm_rnd_btn_class, form_class: 'd-inline-block', title: 'I dislike this', data: { toggle: :tooltip } do
+    = material_icon(:thumb_down)
+  span.dislike.mx-1= dislike_count
 

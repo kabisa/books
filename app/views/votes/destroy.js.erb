@@ -1,2 +1,5 @@
-var el             = document.getElementById('<%= @book.dom_id %>').getElementsByClassName('vote')[0];
-el.outerHTML       = '<%= j render(partial: 'books/vote', object: @book, as: :book) %>';
+var elements = document.getElementById('<%= @book.dom_id %>').querySelectorAll('.vote');
+
+elements.forEach((el) => {
+  el.outerHTML = '<%= j render(partial: 'books/vote', object: @book, as: :book) %>';
+})

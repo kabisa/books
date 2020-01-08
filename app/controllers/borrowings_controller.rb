@@ -1,7 +1,9 @@
 class BorrowingsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :select_copy
+
   def create
     @book     = Book.find(params[:borrowing][:book_id]).decorate
-    copy      = Copy.find(params[:borrowing][:copy_id])
+    copy      = Copy.find(params.dig(:borrowing, :copy_id))
     borrowing = authorize copy.borrowings.build(user: current_user)
 
     respond_to do |format|
@@ -28,5 +30,10 @@ class BorrowingsController < ApplicationController
         #format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  private
+  def select_copy
+    render :select_copy
   end
 end

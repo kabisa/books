@@ -1,7 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
-require 'action_view/component/base'
+require 'action_view/component'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -17,5 +17,6 @@ module Books
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.app_name = 'Books'
+    config.action_view_component.preview_path = "#{Rails.root}/spec/components/previews"
   end
 end

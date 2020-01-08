@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe BookComponents::VoteStats do
+describe BookComponents::VoteStats, type: :component do
   subject       { Capybara.string html }
   let(:html)    {  render_inline(described_class, options) }
   let(:options) { { like_count: 3, dislike_count: 1 } }

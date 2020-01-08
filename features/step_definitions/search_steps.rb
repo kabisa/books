@@ -47,7 +47,7 @@ Then("I see {string} is highlighted for the book {string}") do |q, title|
 end
 
 Then("I see that no results are found") do
-  step %q(I see a list of 0 books)
+  step %q(I should see a list of 0 books)
   expect(page).to have_content('No books found.')
   expect(page).to have_link('Clear all filters')
 end
@@ -55,6 +55,6 @@ end
 
 Then("I see the search form displaying {string}") do |text|
   within('form.book_search') do
-    expect(page).to have_css('.dropdown-toggle', text: /#{text}/i)
+    expect(page).to have_css('.filter-button', text: /#{text}/i)
   end
 end

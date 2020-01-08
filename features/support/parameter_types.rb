@@ -22,6 +22,13 @@ ParameterType(
 )
 
 ParameterType(
+  name: 'should_or_should_not',
+  regexp: /((?:(?:\s*should\s*|))(not|)) ?/,
+  use_for_snippets: false,
+  transformer: -> (str) { str != 'should not' }
+)
+
+ParameterType(
   name: 'like_or_dislike_icon',
   regexp: /((un)?(like|dislike))/,
   use_for_snippets: false,

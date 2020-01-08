@@ -1,9 +1,13 @@
-var el             = document.getElementById('<%= @book.dom_id(:collapse) %>');
-var snackbar       = document.createElement('div');
-el.outerHTML       = '<%= j render(partial: 'books/collapse', object: @book, as: :book, locals: { show: true, parent: 'books' }) %>';
+// TODO: This view is the same as books/restore.js.erb. Can we re-use this?
+var el              = document.getElementById('<%= @book.dom_id %>');
+var isExpanded      = el.classList.contains('show');
+var restoreEl       = document.createElement('div');
+var collapsedHTML   = '<%= j render(partial: 'books/book', object: @book, locals: { parent: 'books' }) %>';
+var expandedHTML    = '<%= j render(partial: 'books/book', object: @book, locals: { show: true, parent: 'books' }) %>';
+var snackbar        = document.createElement('div');
+
+restoreEl.innerHTML = isExpanded ? expandedHTML : collapsedHTML;
+el.replaceWith(restoreEl.firstChild);
+
 snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
 document.body.appendChild(snackbar.firstChild);
-
-$('#<%= @book.dom_id %>')
-  .find('.floating-label .custom-select, .floating-label .form-control')
-  .floatinglabel();

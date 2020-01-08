@@ -2,16 +2,22 @@ import {Controller} from 'stimulus';
 import $ from 'jquery';
 
 export default class extends Controller {
-  connect() {
-    this.element.querySelectorAll('.dropdown-menu').forEach((el) => {
-      el.addEventListener('click', (event) => {
-        event.stopPropagation();
-      });
-    });
+  static targets = ['toggle'];
+  close() {
+    this.$toggle.dropdown('hide');
   }
 
-  close() {
-    let toggle = this.element.getElementsByClassName('dropdown-toggle')[0];
-    $(toggle).dropdown('hide');
+  keepOpen(event) {
+    event.stopPropagation();
+  }
+
+  get $toggle() {
+    return $(this.toggleTarget);
+  }
+
+  reset() {
+    alert(
+      `Override the method \`reset\` in the \`${this.identifier}\` controller.`,
+    );
   }
 }

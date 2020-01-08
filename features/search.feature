@@ -21,17 +21,17 @@ Feature:
   Scenario: Search for keyword in title
     Given I open the application
     When I search for "ipsum"
-    Then I see a list of 1 book
+    Then I should see a list of 1 book
 
   Scenario: Search for keyword in summary
     Given I open the application
     When I search for "dolor sit"
-    Then I see a list of 2 books
+    Then I should see a list of 2 books
 
   Scenario: Search for writers
     Given I open the application
     When I search for "king"
-    Then I see a list of 3 books
+    Then I should see a list of 3 books
 
   Scenario: Highlight keywords
     Given I open the application
@@ -48,7 +48,7 @@ Feature:
     Given I open the application
     And I search for "foo bar"
     When I click "Clear all filters"
-    Then I see a list of 4 books
+    Then I should see a list of 4 books
 
   @todo
   Scenario: Search for available books (Kabisa only)
@@ -67,7 +67,7 @@ Feature:
       | Lorem Ipsum | marty@kabisa.nl emmett@kabisa.nl george@kabisa.nl biff@kabisa.nl |
     When I open the application
     And I search for books with at least 4 likes
-    Then I see a list of 1 book
+    Then I should see a list of 1 book
     And I see the search form displaying "At least 4"
 
   @javascript
@@ -77,6 +77,6 @@ Feature:
       | Lorem Ipsum | marty@kabisa.nl emmett@kabisa.nl george@kabisa.nl biff@kabisa.nl |
     When I open the application
     And I search for books tagged with "software, programming"
-    Then I see a list of 3 books
+    Then I should see a list of 3 books
     And I see the search form displaying "programming"
 

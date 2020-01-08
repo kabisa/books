@@ -4,15 +4,23 @@ RSpec.describe EbookDecorator do
   let(:decorator) { described_class.new(instance) }
   let(:instance)  { build :ebook }
 
-  describe '#download_link' do
-    subject         { decorator.download_link }
+  describe '#link_to_borrow' do
+    let(:html) { decorator.link_to_borrow }
 
-    it 'is a link' do
-      expect(subject).to have_css("a[target='_blank'][href='#{instance.link}']", text: 'Download')
+    before { allow(h).to receive(:policy).and_return(policy_stub) }
+
+    describe 'authorized user' do
+      subject           { Capybara.string html }
+      let(:policy_stub) { double('BookPolicy', borrow?: true) }
+
+      it { is_expected.to have_css("a[target='_blank'][href='#{instance.link}']", text: 'Download') }
     end
 
-    it 'acts as a button' do
-      expect(subject).to have_css('a.btn[role="button"]')
+    describe 'unauthorized user' do
+      subject           { html }
+      let(:policy_stub) { double('BookPolicy', borrow?: false) }
+
+      it { is_expected.to be_nil }
     end
   end
 
@@ -23,7 +31,7 @@ RSpec.describe EbookDecorator do
   end
 
   describe '#book_type_icon' do
-    subject    { Capybara.string decorator.book_type_icon }
+    subject { Capybara.string decorator.book_type_icon }
 
     it { is_expected.to have_css('i.material-icons[title="E-book"][data-toggle="tooltip"]', text: 'tablet_android') }
   end

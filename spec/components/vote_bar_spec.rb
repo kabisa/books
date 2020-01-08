@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe VoteBar do
+describe VoteBar, type: :component do
   subject       { Capybara.string html }
   let(:html)    {  render_inline(VoteBar, options) }
   let(:options) { { like_count: 75, dislike_count: 25, has_voted: true } }

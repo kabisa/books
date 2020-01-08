@@ -1,0 +1,14 @@
+.modal.fade(id=modal_id data={ controller: 'modal' } aria={ hidden: true, labelledby: modal_id } role='dialog' tabindex=-1)
+  .modal-dialog.modal-dialog-centered(role='document')
+    .modal-content
+      = simple_form_for(:borrowing, url: borrowings_path, method: :post, remote: true, html: { autocomplete: 'off' }) do |f|
+        = hidden_field(:borrowing, :book_id, value: book.id)
+        .modal-header
+          h5.modal-title= t(:title, title: book.title, scope: %i(modals borrow))
+        .modal-body
+          p= t(:content, scope: %i(modals borrow))
+          = f.input :copy_id, include_blank: false, collection: book.copies.borrowables, label_method: -> (c) { c.location.city }, label: 'Location', required: false
+        .modal-footer
+          = link_to t('helpers.submit.cancel'), '#', class: 'btn', role: :button, data: { dismiss: 'modal' }
+          = f.button :submit, class: 'btn btn-primary', data: { target: "##{modal_id}", toggle: 'modal' }
+

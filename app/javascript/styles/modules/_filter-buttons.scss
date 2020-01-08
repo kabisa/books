@@ -1,0 +1,10 @@
+.filter-button {
+  .dropdown-toggle-split:after {
+    content: 'clear';
+  }
+  .btn-group {
+    &.show > .btn {
+      background-image: linear-gradient(to bottom, $btn-overlay, $btn-overlay);
+    }
+  }
+}

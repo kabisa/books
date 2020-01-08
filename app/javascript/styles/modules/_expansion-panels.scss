@@ -1,13 +1,32 @@
 .expansion-panel {
+  cursor: pointer;
+
   .expansion-panel-toggler .img-thumbnail {
     max-height: 3rem;
   }
 
-  &.show .collapsed-show {
-    display: none;
+  &.show {
+    @include media-breakpoint-up(sm) {
+      &.stretchable {
+        margin: {
+          left: -1 * $expansion-panel-padding-x;
+          right: -1 * $expansion-panel-padding-x;
+        }
+      }
+    }
+
+    .collapsed-show {
+      display: none;
+    }
   }
 
-  &:not(.show) .collapsed-hide {
-    display: none;
+  &:not(.show) {
+    .collapsed-hide {
+      display: none;
+    }
+
+    &:hover {
+      @extend .shadow-sm;
+    }
   }
 }

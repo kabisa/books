@@ -1,9 +1,12 @@
-.dropdown.ml-1(data-controller='dropdown')
-  = link_to title, '#', toggle_options
-  .dropdown-menu.dropdown-menu-right.p-3(aria-labelledby=dom_id style='width: 20rem;')
-    = close_icon(data: { action: 'dropdown#close' })
+.filter-button.dropdown.ml-1(data-controller=data_controller)
+  .btn-group.btn-group-fluid.border(data-target="#{data_controller}.button")
+    = link_to title, '#', single_button_options
+    = link_to title, '#', split_button_options
+    = link_to '#', dropdown_caret_options do
+      span.sr-only Toggle Dropdown
 
-    h4
-      = title
+    .dropdown-menu.dropdown-menu-right.mt-2.p-3(data={ action: "click->#{data_controller}#keepOpen" } style='width: 20rem;')
+      = close_icon(data: { action: "#{data_controller}#close" })
+      h4= title
 
-    = content
+      = content

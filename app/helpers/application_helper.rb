@@ -32,4 +32,33 @@ module ApplicationHelper
     args[1].merge!({ class: 'dropdown-item d-flex flex-row-reverse justify-content-end' })
     sort_link(search_object, attribute, *args, block)
   end
+
+  def link_to_github
+    url     = 'https://github.com/kabisa/books'
+    options = tooltipify(I18n.t('view_on_github')).merge(class: 'nav-link', target: '_blank')
+
+    link_to(url, options) do
+      capture do
+        concat fa_icon('fab', 'github', class: 'mr-3')
+        concat 'GitHub'
+      end
+    end
+  end
+
+  def modal_id
+    'modal'
+  end
+
+  def hamburger_menu(&block)
+    return if (menu_items = capture { block.call }).blank?
+
+    content_tag(:div, class: 'ml-3 dropdown', data: { toggle: 'no-collapse' }) do
+      concat(tag.button(class:sm_rnd_btn_class, aria: { expanded: false, haspopup: true }, data: { toggle: 'dropdown' }, type: 'button') do
+        material_icon('more_vert', tooltipify(t('helpers.options')))
+      end)
+      concat(content_tag(:div, class: 'dropdown-menu menu dropdown-menu-right') do
+        menu_items
+      end)
+    end
+  end
 end

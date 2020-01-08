@@ -7,40 +7,40 @@ Feature:
   Scenario: List books
     Given there are 5 e-books
     When I choose "Books" from the navigation drawer
-    Then I see a list of 5 books
+    Then I should see a list of 5 books
 
   Scenario: List e-books and printed books
     Given there are 3 e-books
     And there are 5 printed books
     When I choose "Books" from the navigation drawer
-    Then I see a list of 3 e-books
-    And I see a list of 5 printed books
+    Then I should see a list of 3 e-books
+    And I should see a list of 5 printed books
 
   Scenario: List e-books for guests
     Given there are 3 e-books
     And there are 5 printed books
     When I choose "Books" from the navigation drawer
-    And I see 0 download links
+    And I should see 0 download links
 
   Scenario: List printed books for guests
     Given there are 5 printed books
     When I choose "Books" from the navigation drawer
-    Then I see a list of 5 printed books
-    But I do not see information about how many copies there are
+    Then I should see a list of 5 printed books
+    But I should not see information about how many copies there are
 
   Scenario: List e-books for authorized users
     Given I signed in as a Kabisaan
     And there are 3 e-books
     And there are 5 printed books
     When I choose "Books" from the navigation drawer
-    Then I see 3 download links
+    Then I should see 3 download links
 
   Scenario: List printed books authorized users
     Given I signed in as a Kabisaan
     And there are 5 printed books
     When I choose "Books" from the navigation drawer
-    Then I see a list of 5 printed books
-    And I see information about how many copies there are
+    Then I should see a list of 5 printed books
+    And I should see information about how many copies there are
 
   Scenario: Expand panel for more details
     Given I signed in as a Kabisaan
@@ -49,9 +49,9 @@ Feature:
       | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
       | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
     When I choose "Books" from the navigation drawer
-    Then I do not see the summary for "Lorem Ipsum"
+    Then I should not see the summary for "Lorem Ipsum"
     When I expand the panel for "Lorem Ipsum"
-    Then I see the summary for "Lorem Ipsum"
+    Then I should see the summary for "Lorem Ipsum"
 
   @todo
   Scenario: Empty state

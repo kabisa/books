@@ -11,9 +11,13 @@ module Search
       attr_reader :q, :builder
       alias :f :builder
 
+      def title
+        I18n.t('activerecord.attributes.book.tag_list')
+      end
+
       # Stimulus
       def data_controller
-        'checkboxes'
+        'tags'
       end
     end
   end

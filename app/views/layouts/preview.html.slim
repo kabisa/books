@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta[charset="utf-8"]
+    meta[http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"]
+    meta[name="description" content=""]
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    = stylesheet_pack_tag 'styles', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body
+    - root = '/rails/components'
+    header.navbar.navbar-dark.navbar-full.bg-primary.doc-navbar-permanent-float.fixed-top
+      = link_to 'Components', root, class: 'span navbar-brand mb-0.h1'
+    .navdrawer.navdrawer-permanent.navdrawer-permanent-float
+      .navdrawer-content
+        .card.m-3
+          nav.navdrawer-nav
+            - ActionView::Component::Preview.all.each_with_index do |preview, index|
+              - if index.nonzero?
+                .navdrawer-divider
+              p.navdrawer-subheader= preview.preview_name
+              ul.navdrawer-nav
+                - preview.examples.reject { |e| (e =~ /=$/) || preview.instance_methods(false).map(&:to_s).include?("#{e}=") }.each do |example|
+                  - path = "#{root}/#{preview.preview_name}/#{example}"
+                  - name = example.titleize
+                  li.nav-item
+                    = link_to name, path, class: 'nav-link', data: { toggle: 'tooltip' }, title: name
+
+    .container
+      = yield
