@@ -1,7 +1,6 @@
 module Search
   module Filter
     class Likes < ActionView::Component::Base
-      include BootstrapHelper
       def initialize(q:, builder:)
         @q = q
         @builder = builder
@@ -11,10 +10,6 @@ module Search
 
       attr_reader :q, :builder
       alias :f :builder
-
-      def dom_id
-        [model_name.singular, object_id].join('-')
-      end
 
       def likes_count
         q.likes_count_gteq || 0

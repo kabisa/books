@@ -18,10 +18,15 @@ class Search::Filter::TagsPreview < ActionView::Component::Preview
     render_component
   end
 
+  def with_all_items_checked
+    self.tags_id_in = tag_ids
+    render_component
+  end
+
   private
 
   def render_component
-    render(Search::Form, options).css('[data-controller="checkboxes"]')
+    render(Search::Form, options).css('[data-controller="tags"]')
   end
 
   def options
@@ -36,7 +41,10 @@ class Search::Filter::TagsPreview < ActionView::Component::Preview
     { tags_id_in: tags_id_in }
   end
 
-  def tag_ids(count=1)
-    Book.tags_on(:tags).sort_by { |t| t.name.downcase }.first(count).map(&:id)
+  def tag_ids(count=nil)
+    tags = Book.tags_on(:tags).sort_by { |t| t.name.downcase }
+    tags = tags.first(count) if count
+
+    tags.map(&:id)
   end
 end

@@ -55,6 +55,6 @@ end
 
 Then("I see the search form displaying {string}") do |text|
   within('form.book_search') do
-    expect(page).to have_css('.dropdown-toggle', text: /#{text}/i)
+    expect(page).to have_css('.filter-button', text: /#{text}/i)
   end
 end
