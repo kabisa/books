@@ -21,7 +21,7 @@ module Search
       end
 
       def title
-        'Likes'
+        I18n.t('activerecord.attributes.book.likes_count')
       end
 
       # Stimulus
