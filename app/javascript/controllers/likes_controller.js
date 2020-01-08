@@ -2,10 +2,18 @@ import DropdownController from './dropdown_controller';
 
 const CLASSNAMES = {
   hide: 'd-none',
+  border: 'border-primary',
 };
 
 export default class extends DropdownController {
-  static targets = ['range', 'value', 'label', 'zeroItems', 'otherItems'];
+  static targets = [
+    'range',
+    'value',
+    'label',
+    'zeroItems',
+    'otherItems',
+    'button',
+  ];
 
   connect() {
     super.connect();
@@ -39,6 +47,7 @@ export default class extends DropdownController {
 
   updateButton() {
     this.toggleTarget.innerHTML = this.labelTarget.innerText;
+    this.buttonTarget.classList.toggle(CLASSNAMES.border, this.isActive);
   }
 
   get rangeValue() {

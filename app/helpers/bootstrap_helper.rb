@@ -55,6 +55,11 @@ module BootstrapHelper
     join_classnames(default_classnames, classnames)
   end
 
+  def sm_btn_class(classnames=nil)
+    default_classnames = %w(btn btn-sm)
+    join_classnames(default_classnames, classnames)
+  end
+
   # Renders a close icon
   # @see http://daemonite.github.io/material/docs/4.1/utilities/close-icon/
   def close_icon(options = {})

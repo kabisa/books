@@ -35,8 +35,10 @@ describe Search::Filter::Dropdown, type: :component do
 
   describe 'Stimulus API' do
     it { is_expected.to have_css('.dropdown[data-controller="dropdown"]') }
+    it { is_expected.to have_css('.btn-group .dropdown-toggle[data-target="dropdown.zeroItems"]', text: title) }
     it { is_expected.to have_css('.btn-group [data-target="dropdown.toggle dropdown.otherItems"]') }
     it { is_expected.to have_css('.dropdown-menu[data-action="click->dropdown#keepOpen"]') }
+    it { is_expected.to have_css('.dropdown-toggle-split[data-target="dropdown.otherItems"][data-action="dropdown#reset"]') }
     it { is_expected.to have_css('.close[data-action="dropdown#close"]') }
   end
 end
