@@ -15,6 +15,8 @@ describe Search::Filter::Dropdown, type: :component do
   end
 
   describe 'buttons' do
+    it { is_expected.to have_css('.btn-group.btn-group-fluid.border') }
+
     describe 'single button' do
       it { is_expected.to have_css('.btn-group a.btn.btn-sm.dropdown-toggle[href="#"][role="button"][data-toggle="dropdown"][data-flip="false"][data-display="static"]', text: title) }
     end
@@ -35,6 +37,7 @@ describe Search::Filter::Dropdown, type: :component do
 
   describe 'Stimulus API' do
     it { is_expected.to have_css('.dropdown[data-controller="dropdown"]') }
+    it { is_expected.to have_css('.btn-group[data-target="dropdown.button"]') }
     it { is_expected.to have_css('.btn-group .dropdown-toggle[data-target="dropdown.zeroItems"]', text: title) }
     it { is_expected.to have_css('.btn-group [data-target="dropdown.toggle dropdown.otherItems"]') }
     it { is_expected.to have_css('.dropdown-menu[data-action="click->dropdown#keepOpen"]') }

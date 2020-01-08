@@ -12,6 +12,10 @@ RSpec.describe Search::Filter::Likes, type: :system do
       expect(page).to have_css('.dropdown a.dropdown-toggle[href="#"]', text: 'LIKES')
     end
 
+    it 'has no colored border' do
+      expect(page).to have_css('.dropdown .btn-group.btn-group-fluid.border:not(.border-primary)')
+    end
+
     it 'has content' do
       open_dropdown
       expect(page).to have_css('.dropdown-menu', text: 'Any')
@@ -24,6 +28,7 @@ RSpec.describe Search::Filter::Likes, type: :system do
       open_dropdown
       change_range_input('q_likes_count_gteq', 5)
 
+      expect(page).to have_css('.dropdown .btn-group.btn-group-fluid.border.border-primary')
       expect(page).to have_css('.dropdown a.text-primary[href="#"]', text: 'AT LEAST 5')
       expect(page).to have_css('.dropdown-menu', text: 'At least 5')
       expect(page).to have_css('.dropdown-menu', text: 'Clear')
@@ -41,6 +46,10 @@ RSpec.describe Search::Filter::Likes, type: :system do
 
     it 'has a title' do
       expect(page).to have_css('.dropdown a.text-primary[href="#"]', text: 'AT LEAST 5')
+    end
+
+    it 'has a colored border' do
+      expect(page).to have_css('.dropdown .btn-group.btn-group-fluid.border.border-primary')
     end
 
     it 'has content' do
@@ -66,6 +75,7 @@ RSpec.describe Search::Filter::Likes, type: :system do
       open_dropdown
       click_on 'Clear'
 
+      expect(page).to have_css('.dropdown .btn-group.btn-group-fluid.border:not(.border-primary)')
       expect(page).to have_css('.dropdown a.dropdown-toggle[href="#"]', text: 'LIKES')
       expect(page).to have_css('.dropdown-menu', text: 'Any')
 
@@ -77,6 +87,7 @@ RSpec.describe Search::Filter::Likes, type: :system do
       find('.dropdown-toggle-split').click
       click_on('Likes')
 
+      expect(page).to have_css('.dropdown .btn-group.btn-group-fluid.border:not(.border-primary)')
       expect(page).to have_css('.dropdown a.dropdown-toggle[href="#"]', text: 'LIKES')
       expect(page).to have_css('.dropdown-menu', text: 'Any')
 
