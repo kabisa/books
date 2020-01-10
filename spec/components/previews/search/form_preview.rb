@@ -1,8 +1,6 @@
 class Search::FormPreview < ActionView::Component::Preview
   layout 'preview'
 
-  attr_accessor :tags_id_in, :likes_count_gteq
-
   def with_nothing_checked_and_no_likes
     self.tags_id_in = nil
     self.likes_count_gteq = 0
@@ -40,6 +38,8 @@ class Search::FormPreview < ActionView::Component::Preview
   end
 
   private
+
+  attr_accessor :tags_id_in, :likes_count_gteq
 
   def render_component
     render(Search::Form, options)

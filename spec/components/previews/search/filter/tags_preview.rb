@@ -1,8 +1,6 @@
 class Search::Filter::TagsPreview < ActionView::Component::Preview
   layout 'preview'
 
-  attr_accessor :tags_id_in
-
   def with_nothing_checked
     self.tags_id_in = nil
     render_component
@@ -24,6 +22,8 @@ class Search::Filter::TagsPreview < ActionView::Component::Preview
   end
 
   private
+
+  attr_accessor :tags_id_in
 
   def render_component
     render(Search::Form, options).css('[data-controller="tags"]')

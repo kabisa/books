@@ -2,8 +2,6 @@ class Material::SnackbarPreview < ActionView::Component::Preview
   include ActionView::Helpers::UrlHelper
   layout 'preview'
 
-  attr_accessor :notice, :action
-
   def with_a_short_message
     self.notice = Faker::Lorem.sentence
     render_component
@@ -20,6 +18,8 @@ class Material::SnackbarPreview < ActionView::Component::Preview
   end
 
   private
+
+  attr_accessor :notice, :action
 
   def render_component
     render(Material::Snackbar, options)

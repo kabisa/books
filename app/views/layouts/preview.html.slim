@@ -21,7 +21,7 @@ html
                 .navdrawer-divider
               p.navdrawer-subheader= preview.preview_name
               ul.navdrawer-nav
-                - preview.examples.reject { |e| (e =~ /=$/) || preview.instance_methods(false).map(&:to_s).include?("#{e}=") }.each do |example|
+                - preview.examples.each do |example|
                   - path = "#{root}/#{preview.preview_name}/#{example}"
                   - name = example.titleize
                   li.nav-item

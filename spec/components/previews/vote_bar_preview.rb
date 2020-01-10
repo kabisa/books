@@ -1,8 +1,6 @@
 class VoteBarPreview < ActionView::Component::Preview
   layout 'preview'
 
-  attr_accessor :has_voted
-
   def with_vote_from_user
     self.has_voted = true
     render_component
@@ -14,6 +12,8 @@ class VoteBarPreview < ActionView::Component::Preview
   end
 
   private
+
+  attr_accessor :has_voted
 
   def render_component
     render(VoteBar, options)
