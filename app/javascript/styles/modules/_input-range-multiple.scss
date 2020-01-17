@@ -1,0 +1,28 @@
+$multi-range-height: 2rem;
+
+@mixin multirange-thumb {
+  pointer-events: all;
+}
+
+input.custom-range[type='range'] {
+  display: block;
+  height: $multi-range-height;
+  margin: 0;
+  pointer-events: none;
+
+  & + input.custom-range[type='range'] {
+    margin-top: $multi-range-height * -1;
+  }
+
+  &::-webkit-slider-thumb {
+    @include multirange-thumb;
+  }
+
+  &::-moz-range-thumb {
+    @include multirange-thumb;
+  }
+
+  &::-ms-thumb {
+    @include multirange-thumb;
+  }
+}
