@@ -17,6 +17,7 @@ export default class extends DropdownController {
 
   connect() {
     super.connect();
+    this.initialToggleText = this.toggleTarget.innerHTML;
     this.render();
   }
 
@@ -28,7 +29,7 @@ export default class extends DropdownController {
 
   reset(event) {
     event.preventDefault();
-    this.rangeTarget.value = '0';
+    this.rangeTarget.value = this.lowerBound;
     this.render();
   }
 
@@ -46,8 +47,12 @@ export default class extends DropdownController {
   }
 
   updateButton() {
-    this.toggleTarget.innerHTML = this.labelTarget.innerText;
+    this.toggleTarget.innerHTML = `${this.initialToggleText}: ${this.labelTarget.innerText}`;
     this.buttonTarget.classList.toggle(CLASSNAMES.border, this.isActive);
+  }
+
+  get lowerBound() {
+    return parseInt(this.rangeTarget.getAttribute('min'));
   }
 
   get rangeValue() {
@@ -55,7 +60,7 @@ export default class extends DropdownController {
   }
 
   get isActive() {
-    return this.rangeValue > 0;
+    return this.rangeValue > this.lowerBound;
   }
 
   get isInactive() {

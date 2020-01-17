@@ -7,5 +7,5 @@
         = t('search_form.likes.other')
         span<(data-target="#{data_controller}.value")
       div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: "#{data_controller}#reset" }
-  = f.range_field :likes_count_gteq, class: 'custom-range', max: 25, data: { target: "#{data_controller}.range", action: "input->#{data_controller}#render" }
+  = f.range_field :likes_count_gteq, class: 'custom-range', min: 0, max: 25, data: { target: "#{data_controller}.range", action: "input->#{data_controller}#render" }
 

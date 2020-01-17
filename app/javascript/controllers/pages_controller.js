@@ -104,7 +104,7 @@ export default class extends DropdownController {
   }
 
   get isActive() {
-    return this.min > 0 || this.max < this.upperBound;
+    return this.min > this.lowerBound || this.max < this.upperBound;
   }
 
   get isInactive() {
