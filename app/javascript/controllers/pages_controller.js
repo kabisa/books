@@ -22,8 +22,8 @@ export default class extends DropdownController {
 
   reset(event) {
     event.preventDefault();
-    this.minTarget.value = this.numOfPagesLower;
-    this.maxTarget.value = this.numOfPagesUpper;
+    this.minTarget.value = this.lowerBound;
+    this.maxTarget.value = this.upperBound;
     this.render();
   }
 
@@ -34,16 +34,14 @@ export default class extends DropdownController {
 
     let label;
 
-    if (this.isMinSet && !this.isMaxSet) {
-      label = `Min. ${this.minValue}`;
-    }
-
-    if (!this.isMinSet && this.isMaxSet) {
+    if (this.hasMin) {
+      if (this.hasMax) {
+        label = `${this.minValue} - ${this.maxValue}`;
+      } else {
+        label = `Min. ${this.minValue}`;
+      }
+    } else {
       label = `Max. ${this.maxValue}`;
-    }
-
-    if (this.isMinSet && this.isMaxSet) {
-      label = `${this.minValue} - ${this.maxValue}`;
     }
 
     this.labelTarget.innerHTML = label;
@@ -65,6 +63,14 @@ export default class extends DropdownController {
     }
   }
 
+  get lowerBound() {
+    return parseInt(this.minTarget.getAttribute('min'));
+  }
+
+  get upperBound() {
+    return parseInt(this.maxTarget.getAttribute('max'));
+  }
+
   get minValue() {
     return parseInt(this.minTarget.value);
   }
@@ -73,24 +79,16 @@ export default class extends DropdownController {
     return parseInt(this.maxTarget.value);
   }
 
-  get isMinSet() {
-    return this.minValue > this.numOfPagesLower;
+  get hasMin() {
+    return this.minValue > this.lowerBound;
   }
 
-  get isMaxSet() {
-    return this.maxValue < this.numOfPagesUpper;
+  get hasMax() {
+    return this.maxValue < this.upperBound;
   }
 
   get isActive() {
-    return this.minValue > 0 || this.maxValue < this.numOfPagesUpper;
-  }
-
-  get numOfPagesLower() {
-    return parseInt(this.minTarget.getAttribute('min'));
-  }
-
-  get numOfPagesUpper() {
-    return parseInt(this.maxTarget.getAttribute('max'));
+    return this.minValue > 0 || this.maxValue < this.upperBound;
   }
 
   get isInactive() {
