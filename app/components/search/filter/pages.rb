@@ -17,6 +17,20 @@ module Search
         I18n.t('search_form.pages.title')
       end
 
+      def range_field(method, target)
+        options = {
+          class: 'custom-range',
+          min: 0,
+          max: num_of_pages_upper,
+          step: 25,
+          data: {
+            target: "#{data_controller}.#{target}",
+            action: "change->#{data_controller}#validate input->#{data_controller}#render"
+          }
+        }
+        f.range_field method, options
+      end
+
       def num_of_pages_upper
         BookSearch::NUM_OF_PAGES_UPPER
       end
