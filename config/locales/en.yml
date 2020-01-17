@@ -118,6 +118,8 @@ en:
   # components:
   search_form:
     clear: 'Clear'
+    pages:
+      title: 'Pages'
     likes:
       zero: 'Any'
       other: 'At least' # no. of likes is rendered in the component

@@ -1,0 +1,12 @@
+= render(Search::Filter::Dropdown, data_controller: data_controller, title: title) do
+  div(data={ target: "#{data_controller}.zeroItems" })
+    = t('search_form.likes.zero')
+  .d-none(data={ target: "#{data_controller}.otherItems" })
+    .d-flex.justify-content-between
+      .text-primary(data={ target: "#{data_controller}.label" })
+        = t('search_form.likes.other')
+        span<(data-target="#{data_controller}.value")
+      div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: "#{data_controller}#reset" }
+  = f.range_field :num_of_pages_gteq, class: 'custom-range', max: num_of_pages_upper, step: 25, data: { target: "#{data_controller}.range", action: "input->#{data_controller}#render" }
+  = f.range_field :num_of_pages_lteq, class: 'custom-range', max: num_of_pages_upper, step: 25, data: { target: "#{data_controller}.range", action: "input->#{data_controller}#render" }
+

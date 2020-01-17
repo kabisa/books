@@ -4,11 +4,11 @@ Feature:
 
   Background:
     Given the following e-books:
-      | title                  | link                                  | summary                         | tag_list              | writer_names                  |
-      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           | Stephen King, Charles Dickens |
-      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit.    | software              | Stephen Hawking               |
-      | Consectetur Adipiscing | http://kabisa.nl/consectetur/         | Sed convallis metus eget felis. | unknown               | Mark Twain, Stephen King      |
-      | Morbi ullamcorper      | http://kabisa.nl/morbi/               | Duis aliquam nulla felis.       | programming, software | Charles Dickens, Mark Twain   |
+      | title                  | link                                  | summary                         | tag_list              | writer_names                  | num_of_pages |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           | Stephen King, Charles Dickens |              |
+      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit.    | software              | Stephen Hawking               | 30           |
+      | Consectetur Adipiscing | http://kabisa.nl/consectetur/         | Sed convallis metus eget felis. | unknown               | Mark Twain, Stephen King      | 50           |
+      | Morbi ullamcorper      | http://kabisa.nl/morbi/               | Duis aliquam nulla felis.       | programming, software | Charles Dickens, Mark Twain   | 1000         |
 
   Scenario: Search on the home page
     When I open the application
@@ -18,6 +18,7 @@ Feature:
     When I choose "Books" from the navigation drawer
     Then I can search
 
+  @wip
   Scenario: Search for keyword in title
     Given I open the application
     When I search for "ipsum"
@@ -79,4 +80,11 @@ Feature:
     And I search for books tagged with "software, programming"
     Then I should see a list of 3 books
     And I see the search form displaying "programming"
+
+  @javascript
+  Scenario: Search for books with page range
+    When I open the application
+    And I search for books between 25 and 100 pages
+    Then I should see a list of 2 books
+    #And I see the search form displaying "programming"
 

@@ -40,6 +40,25 @@ When("I search for books tagged with {string}") do |text|
   end
 end
 
+When("I search for books between {int} and {int} pages") do |at_least, at_most|
+  within('form.book_search') do
+    click_on('Pages')
+
+    js = <<-JS
+      var event = new Event('input')
+      var atLeastEl = document.getElementById("q_num_of_pages_gteq")
+      atLeastEl.value = #{at_least}
+      atLeastEl.dispatchEvent(event)
+
+      var atMostEl = document.getElementById("q_num_of_pages_lteq")
+      atMostEl.value = #{at_most}
+      atMostEl.dispatchEvent(event)
+    JS
+    page.execute_script js
+    click_on('Search')
+  end
+end
+
 Then("I see {string} is highlighted for the book {string}") do |q, title|
   within('.list-group-item', text: title) do
     expect(page).to have_css('mark', text: q)

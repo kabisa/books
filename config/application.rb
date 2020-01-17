@@ -18,5 +18,7 @@ module Books
     # the framework and any gems in your application.
     config.app_name = 'Books'
     config.action_view_component.preview_path = "#{Rails.root}/spec/components/previews"
+
+    config.x.search.num_of_pages_upper = 500
   end
 end

@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Likes < ActionView::Component::Base
+    class Pages < ActionView::Component::Base
       def initialize(q:, builder:)
         @q = q
         @builder = builder
@@ -12,12 +12,16 @@ module Search
       alias :f :builder
 
       def title
-        I18n.t('activerecord.attributes.book.likes_count')
+        I18n.t('search_form.pages.title')
+      end
+
+      def num_of_pages_upper
+        Rails.configuration.x.search.num_of_pages_upper
       end
 
       # Stimulus
       def data_controller
-        'likes'
+        'pages'
       end
     end
   end
