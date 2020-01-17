@@ -1,6 +1,7 @@
+require 'book_search'
+
 class ApplicationController < ActionController::Base
   include Pundit
-  include Searchable
 
   protect_from_forgery with: :exception
   before_action :make_action_mailer_use_request_host_and_protocol

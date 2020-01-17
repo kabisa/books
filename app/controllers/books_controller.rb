@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @q = ransack_params do |q|
+    @q = BookSearch.new(params).search do |q|
       @books = q
         .result(distinct: true)
         .includes(:taggings, :writers, copies: [:location])
