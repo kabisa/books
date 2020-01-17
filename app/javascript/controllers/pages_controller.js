@@ -20,6 +20,18 @@ export default class extends DropdownController {
     this.updateButton();
   }
 
+  validate(event) {
+    if (event.currentTarget === this.minTarget && this.min >= this.max) {
+      this.minTarget.value = this.max - this.step;
+      this.render();
+    }
+
+    if (event.currentTarget === this.maxTarget && this.max <= this.min) {
+      this.maxTarget.value = this.min + this.step;
+      this.render();
+    }
+  }
+
   reset(event) {
     event.preventDefault();
     this.minTarget.value = this.lowerBound;
@@ -36,12 +48,12 @@ export default class extends DropdownController {
 
     if (this.hasMin) {
       if (this.hasMax) {
-        label = `${this.minValue} - ${this.maxValue}`;
+        label = `${this.min} - ${this.max}`;
       } else {
-        label = `Min. ${this.minValue}`;
+        label = `Min. ${this.min}`;
       }
     } else {
-      label = `Max. ${this.maxValue}`;
+      label = `Max. ${this.max}`;
     }
 
     this.labelTarget.innerHTML = label;
@@ -71,24 +83,28 @@ export default class extends DropdownController {
     return parseInt(this.maxTarget.getAttribute('max'));
   }
 
-  get minValue() {
+  get min() {
     return parseInt(this.minTarget.value);
   }
 
-  get maxValue() {
+  get max() {
     return parseInt(this.maxTarget.value);
   }
 
+  get step() {
+    return parseInt(this.maxTarget.getAttribute('step'));
+  }
+
   get hasMin() {
-    return this.minValue > this.lowerBound;
+    return this.min > this.lowerBound;
   }
 
   get hasMax() {
-    return this.maxValue < this.upperBound;
+    return this.max < this.upperBound;
   }
 
   get isActive() {
-    return this.minValue > 0 || this.maxValue < this.upperBound;
+    return this.min > 0 || this.max < this.upperBound;
   }
 
   get isInactive() {
