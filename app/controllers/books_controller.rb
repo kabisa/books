@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @q = BookSearch.new(params).search do |q|
+    @q = BookSearch.search(params) do |q|
       @books = q
         .result(distinct: true)
         .includes(:taggings, :writers, copies: [:location])

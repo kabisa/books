@@ -3,9 +3,10 @@ require 'book_search'
 
 RSpec.describe BookSearch do
   describe '#search' do
-    subject { instance.search }
+    subject { wo_block }
 
-    let(:instance) { described_class.new(ActionController::Parameters.new(params)) }
+    let(:w_block) { described_class.search(ActionController::Parameters.new(params)) { |q| return q } }
+    let(:wo_block) { described_class.search(ActionController::Parameters.new(params)) }
 
     let(:params) do
       {
@@ -27,7 +28,7 @@ RSpec.describe BookSearch do
     end
 
     describe 'with block given' do
-      subject { instance.search { |q| return q }}
+      subject { w_block }
 
       it { expect(subject.likes_count_gteq).to be_nil }
       it { expect(subject.num_of_pages_gteq).to be_nil }
@@ -44,7 +45,7 @@ RSpec.describe BookSearch do
       it { expect(subject.num_of_pages_lteq).to eql(500) }
 
       describe 'block given' do
-        subject { instance.search { |q| return q }}
+        subject { w_block }
 
         it { expect(subject.likes_count_gteq).to be_nil }
         it { expect(subject.num_of_pages_gteq).to be_nil }
@@ -68,7 +69,7 @@ RSpec.describe BookSearch do
       it { expect(subject.num_of_pages_lteq).to eql(200) }
 
       describe 'block given' do
-        subject { instance.search { |q| return q }}
+        subject { w_block }
 
         it { expect(subject.likes_count_gteq).to eql(10) }
         it { expect(subject.num_of_pages_gteq).to eql(25) }

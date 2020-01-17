@@ -6,34 +6,47 @@ const CLASSNAMES = {
 };
 
 export default class extends DropdownController {
-  static targets = [
-    'range',
-    'value',
-    'label',
-    'zeroItems',
-    'otherItems',
-    'button',
-  ];
+  static targets = ['min', 'max', 'label', 'zeroItems', 'otherItems', 'button'];
 
   connect() {
     super.connect();
+    this.initialToggleText = this.toggleTarget.innerHTML;
     this.render();
   }
 
   render() {
-    this.updateValueLabel();
+    this.updateLabel();
     this.updateVisibility();
     this.updateButton();
   }
 
   reset(event) {
     event.preventDefault();
-    this.rangeTarget.value = '0';
+    this.minTarget.value = this.numOfPagesLower;
+    this.maxTarget.value = this.numOfPagesUpper;
     this.render();
   }
 
-  updateValueLabel() {
-    this.valueTarget.innerHTML = this.rangeValue;
+  updateLabel() {
+    if (this.isInactive) {
+      return;
+    }
+
+    let label;
+
+    if (this.isMinSet && !this.isMaxSet) {
+      label = `Min. ${this.minValue}`;
+    }
+
+    if (!this.isMinSet && this.isMaxSet) {
+      label = `Max. ${this.maxValue}`;
+    }
+
+    if (this.isMinSet && this.isMaxSet) {
+      label = `${this.minValue} - ${this.maxValue}`;
+    }
+
+    this.labelTarget.innerHTML = label;
   }
 
   updateVisibility() {
@@ -46,16 +59,38 @@ export default class extends DropdownController {
   }
 
   updateButton() {
-    this.toggleTarget.innerHTML = this.labelTarget.innerText;
     this.buttonTarget.classList.toggle(CLASSNAMES.border, this.isActive);
+    if (this.isActive) {
+      this.toggleTarget.innerHTML = `${this.initialToggleText}: ${this.labelTarget.innerText}`;
+    }
   }
 
-  get rangeValue() {
-    return parseInt(this.rangeTarget.value);
+  get minValue() {
+    return parseInt(this.minTarget.value);
+  }
+
+  get maxValue() {
+    return parseInt(this.maxTarget.value);
+  }
+
+  get isMinSet() {
+    return this.minValue > this.numOfPagesLower;
+  }
+
+  get isMaxSet() {
+    return this.maxValue < this.numOfPagesUpper;
   }
 
   get isActive() {
-    return this.rangeValue > 0;
+    return this.minValue > 0 || this.maxValue < this.numOfPagesUpper;
+  }
+
+  get numOfPagesLower() {
+    return parseInt(this.minTarget.getAttribute('min'));
+  }
+
+  get numOfPagesUpper() {
+    return parseInt(this.maxTarget.getAttribute('max'));
   }
 
   get isInactive() {

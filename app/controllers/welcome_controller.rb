@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @q = BookSearch.new(params).search
+    @q = BookSearch.search(params)
 
     @suggestions = Suggestions.new
   end

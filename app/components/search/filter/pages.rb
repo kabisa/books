@@ -1,3 +1,5 @@
+require 'book_search'
+
 module Search
   module Filter
     class Pages < ActionView::Component::Base
@@ -16,7 +18,7 @@ module Search
       end
 
       def num_of_pages_upper
-        Rails.configuration.x.search.num_of_pages_upper
+        BookSearch::NUM_OF_PAGES_UPPER
       end
 
       # Stimulus
