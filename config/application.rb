@@ -18,6 +18,7 @@ module Books
     # the framework and any gems in your application.
     config.app_name = 'Books'
     config.action_view_component.preview_path = "#{Rails.root}/spec/components/previews"
+    config.active_model.i18n_customize_full_message = true
 
     config.x.search.num_of_pages_upper = 500
   end

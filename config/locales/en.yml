@@ -151,8 +151,9 @@ en:
               unauthorized: 'is not authorized to sign in'
         book:
           attributes:
-            copies:
-              blank: 'At least one copy needs to be added'
+            link:
+              format: '%{message}'
+              blank: "If you don't have any printed copies, you need to add a download link"
         ebook:
           attributes:
             link:

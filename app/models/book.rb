@@ -89,8 +89,8 @@ class Book < ApplicationRecord
   private
 
   def at_least_one_medium_is_required
-    if copies.none? && title.blank?
-      errors.add(:link, :empty)
+    if copies.none? && link.blank?
+      errors.add(:link, :blank)
     end
   end
 

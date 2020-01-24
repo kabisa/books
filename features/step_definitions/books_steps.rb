@@ -298,9 +298,9 @@ Then("I see the book {string} has {int} copy/copies left") do |title, copies_cou
   end
 end
 
-Then("I see a validation error that at least 1 location is required") do
+Then("I see a validation error that download link is required in case no copies are added") do
   within('form') do
-    expect(page).to have_content('At least one copy needs to be added')
+    expect(page).to have_content('If you don\'t have any printed copies, you need to add a download link')
   end
 end
 
