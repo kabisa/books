@@ -12,7 +12,7 @@ RSpec.describe Copy, type: :model do
   describe 'validations' do
     context 'number' do
       subject      { build(:copy, book: book, number: number) }
-      let(:book)   { build(:printed_book) }
+      let(:book)   { build(:book) }
       let(:number) { 1 }
 
       it { is_expected.to be_valid }
@@ -22,20 +22,11 @@ RSpec.describe Copy, type: :model do
 
         it { is_expected.to be_invalid }
       end
-
-      context 'for printed books' do
-        let(:book)   { build(:ebook) }
-        let(:number) { -1 }
-
-        it 'ignore invalid number for e-books' do
-          expect(subject).to be_valid
-        end
-      end
     end
 
     describe 'location' do
       subject do
-        build(:printed_book) do |book|
+        build(:book) do |book|
           book.copies.clear
           book.copies.build(location: rome, number: 2)
           book.copies.build(location: rome, number: 3)

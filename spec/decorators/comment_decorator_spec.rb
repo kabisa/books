@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CommentDecorator do
   let(:decorator) { described_class.new(comment) }
-  let(:book)      { build :ebook }
+  let(:book)      { build :book }
   let(:comment)   { create :comment, book: book }
 
   describe '#formatted_created_at' do

@@ -9,8 +9,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :ebooks, controller: 'books', type: 'Ebook'
-  resources :printed_books, controller: 'books', type: 'PrintedBook'
   resources :borrowings
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

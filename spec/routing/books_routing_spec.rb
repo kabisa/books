@@ -39,9 +39,5 @@ RSpec.describe BooksController, type: :routing do
     it do
       expect(get: books_path).to route_to('books#index')
     end
-
-    it do
-      expect(get: ebooks_path).to route_to('books#index', type: 'Ebook')
-    end
   end
 end

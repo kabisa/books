@@ -12,9 +12,31 @@ describe BookPolicy, type: :policy do
     it { is_expected.to permit_action(:new) }
     it { is_expected.to permit_action(:create) }
     it { is_expected.to permit_action(:update) }
-    it { is_expected.to permit_action(:borrow) }
     it { is_expected.to permit_action(:destroy) }
     it { is_expected.to permit_action(:show) }
+
+    context 'with a printed copy' do
+      before { allow(book).to receive(:copies).and_return([double('Copy')]) }
+
+      it { is_expected.to permit_action(:borrow) }
+    end
+
+    context 'without a printed copy' do
+      before { allow(book).to receive(:copies).and_return([]) }
+
+      it { is_expected.to forbid_action(:borrow) }
+    end
+
+    context 'with a download link' do
+
+      it { is_expected.to permit_action(:download) }
+    end
+
+    context 'without a download link' do
+      let(:book) { build :book, :printed_book }
+
+      it { is_expected.to forbid_action(:download) }
+    end
 
     context '#permitted_attributes' do
       subject { policy.permitted_attributes }

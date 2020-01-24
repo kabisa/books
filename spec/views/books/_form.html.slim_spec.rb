@@ -8,7 +8,7 @@ describe 'form' do
     end
   end
 
-  let(:book) { build :ebook }
+  let(:book) { build :book }
 
   describe 'SimpleForm components' do
     describe 'dropzone' do

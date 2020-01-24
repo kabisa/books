@@ -19,7 +19,7 @@ RSpec.describe BorrowingsController, type: :controller do
         }
       }
       let(:copy) { book.copies.first }
-      let(:book) { create(:printed_book) }
+      let(:book) { create(:book, :printed_book) }
 
       it 'creates a new Borrowing' do
         expect {
@@ -46,7 +46,7 @@ RSpec.describe BorrowingsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let(:copy)       { book.copies.first }
-    let(:book)       { create(:printed_book) }
+    let(:book)       { create(:book, :printed_book) }
 
     def do_delete(id)
       delete :destroy, xhr: true, params: {id: id}, session: valid_session

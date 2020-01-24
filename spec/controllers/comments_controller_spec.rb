@@ -4,7 +4,7 @@ RSpec.describe CommentsController, type: :controller do
   render_views
   let(:current_user)  { create :user }
   let(:valid_session) { { user_id: current_user.id } }
-  let(:book)          { create(:printed_book) }
+  let(:book)          { create(:book) }
 
   describe 'GET #index' do
     def do_get

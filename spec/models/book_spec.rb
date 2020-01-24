@@ -6,6 +6,11 @@ RSpec.describe Book, type: :model do
     it { is_expected.to validate_length_of(:title).is_at_most(255) }
     it { is_expected.to validate_length_of(:summary).is_at_most(2048) }
     it { is_expected.to validate_numericality_of(:num_of_pages).allow_nil.is_greater_than(0).is_less_than(2**15) }
+    it { is_expected.to validate_length_of(:link).is_at_most(2048) }
+
+    it do
+      expect(build(:book, link: 'invalid')).to be_invalid
+    end
   end
 
   it { is_expected.to act_as_paranoid }
@@ -39,13 +44,14 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_and_belong_to_many(:writers) }
     it { is_expected.to accept_nested_attributes_for(:copies).
          allow_destroy(true) }
+    it { is_expected.to have_many(:borrowings).through(:copies) }
 
     context 'borrowables' do
       subject { instance.copies.borrowables }
 
       let(:user) { create(:user) }
       let(:instance) do
-        book = build(:printed_book)
+        book = build(:book)
         book.copies = copies
         book.save
         book
@@ -86,9 +92,9 @@ RSpec.describe Book, type: :model do
   describe 'scopes' do
     describe '.sort_by_num_of_pages_nulls_last_*' do
       let(:sorted_books)       { subject }
-      let!(:book_wo_pages)     { create(:ebook, num_of_pages: nil) }
-      let!(:book_w_many_pages) { create(:ebook, num_of_pages: 1000) }
-      let!(:book_w_few_pages)  { create(:ebook, num_of_pages: 10) }
+      let!(:book_wo_pages)     { create(:book, num_of_pages: nil) }
+      let!(:book_w_many_pages) { create(:book, num_of_pages: 1000) }
+      let!(:book_w_few_pages)  { create(:book, num_of_pages: 10) }
 
       describe 'ascending' do
         subject { described_class.sort_by_num_of_pages_nulls_last_asc }
@@ -113,9 +119,9 @@ RSpec.describe Book, type: :model do
 
     describe '.sort_by_published_on_nulls_last_*' do
       let(:sorted_books)       { subject }
-      let!(:book_wo_date)      { create(:ebook, published_on: nil) }
-      let!(:book_w_early_date) { create(:ebook, published_on: 1000.days.ago) }
-      let!(:book_w_late_date)  { create(:ebook, published_on: 10.days.ago) }
+      let!(:book_wo_date)      { create(:book, published_on: nil) }
+      let!(:book_w_early_date) { create(:book, published_on: 1000.days.ago) }
+      let!(:book_w_late_date)  { create(:book, published_on: 10.days.ago) }
 
       describe 'ascending' do
         subject { described_class.sort_by_published_on_nulls_last_asc }
@@ -139,25 +145,61 @@ RSpec.describe Book, type: :model do
     end
   end
 
-  describe '.policy_class' do
-    subject { described_class.policy_class }
+  describe '#copies_count' do
+    before { allow(instance).to receive(:copies).and_return(copies_double) }
 
-    it { is_expected.to eql(BookPolicy) }
+    subject             { instance.copies_count }
+
+    let(:instance)      { build(:book) }
+    let(:copies_double) { [build(:copy, number: 2), build(:copy, number: 3)] }
+
+    it { is_expected.to eql(5) }
   end
 
-  describe '#to_partial_path' do
-    subject { instance.to_partial_path }
+  describe '#borrowings_count' do
+    before { allow(instance).to receive(:borrowings).and_return(borrowings_double) }
 
-    describe 'e-book' do
-      let(:instance) { build :ebook }
+    subject             { instance.borrowings_count }
 
-      it { is_expected.to eql('books/book') }
+    let(:instance)      { build(:book) }
+    let(:borrowings_double) { build_list(:borrowing, 3) }
+
+    it { is_expected.to eql(3) }
+  end
+
+  describe '#borrow_by' do
+    let!(:borrowing) { Borrowing.create(user: user, copy: instance.copies.first) }
+    let(:instance)   { create :book, :printed_book }
+    let(:user)       { create :user }
+
+    context 'borrowing found' do
+      subject { instance.borrow_by(user) }
+
+      it { is_expected.to eql(borrowing) }
     end
 
-    describe 'printed book' do
-      let(:instance) { build :printed_book }
+    context 'borrowing not found' do
+      subject { instance.borrow_by(build(:user)) }
 
-      it { is_expected.to eql('books/book') }
+      it { is_expected.to be_nil }
+    end
+  end
+
+  describe '#borrowed_by?' do
+    before         { Borrowing.create(user: user, copy: instance.copies.first) }
+    let(:instance) { create :book, :printed_book }
+    let(:user)     { create :user }
+
+    context 'borrowing found' do
+      subject { instance.borrowed_by?(user) }
+
+      it { is_expected.to be true }
+    end
+
+    context 'borrowing not found' do
+      subject { instance.borrowed_by?(build(:user)) }
+
+      it { is_expected.to be false }
     end
   end
 

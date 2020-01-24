@@ -4,22 +4,40 @@ RSpec.describe BookDecorator do
   let(:decorator) { described_class.new(book) }
 
   describe 'decorates_association' do
-    let(:book) { create :ebook, comments_count: 1 }
+    let(:book) { create :book, comments_count: 1 }
 
     it { expect(decorator.comments.first).to be_decorated }
   end
 
   describe '#dom_id' do
     subject    { decorator.dom_id(:lorem) }
-    let(:book) { build :ebook }
+    let(:book) { build :book }
 
-    it { is_expected.to eql('lorem_ebook') }
+    it { is_expected.to eql('lorem_book') }
+  end
+
+  describe '#available_copies' do
+    before do
+      allow(book).to receive(:copies_count).and_return(5)
+      allow(book).to receive(:borrowings_count).and_return(3)
+    end
+
+    subject { decorator.available_copies }
+
+    let(:book) { create :book, :printed_book }
+
+    it { is_expected.to eql('2 copies') }
+  end
+
+  xdescribe '#book_type_icon' do
+    subject { Capybara.string decorator.book_type_icon }
+
   end
 
   describe '#type_and_pages' do
     before { allow(decorator).to receive(:formatted_type).and_return('formatted_type') }
     subject    { decorator.type_and_pages }
-    let(:book) { build :ebook, num_of_pages: num_of_pages }
+    let(:book) { build :book, num_of_pages: num_of_pages }
 
     describe 'with pages' do
       let(:num_of_pages) { 10 }
@@ -36,7 +54,7 @@ RSpec.describe BookDecorator do
 
   describe '#formatted_published_on' do
     subject    { decorator.formatted_published_on }
-    let(:book) { build :ebook, published_on: published_on }
+    let(:book) { build :book, published_on: published_on }
 
     describe 'published_on' do
       let(:published_on) { Date.parse('2004-12-31') }
@@ -55,7 +73,7 @@ RSpec.describe BookDecorator do
     before            { allow(h).to receive(:params).and_return(params_stub) }
 
     subject           { decorator.title_highlighted_with_search }
-    let(:book)        { build :ebook, title: 'Lorem Ipsum' }
+    let(:book)        { build :book, title: 'Lorem Ipsum' }
     let(:params_stub) { ActionController::Parameters.new(parameters) }
 
     context 'with search param' do
@@ -75,7 +93,7 @@ RSpec.describe BookDecorator do
     before            { allow(h).to receive(:params).and_return(params_stub) }
 
     subject           { decorator.summary_highlighted_with_search.delete("\n") }
-    let(:book)        { build :ebook, summary: "Lorem\nIpsum" }
+    let(:book)        { build :book, summary: "Lorem\nIpsum" }
     let(:params_stub) { ActionController::Parameters.new(parameters) }
 
     context 'with search param' do
@@ -94,7 +112,7 @@ RSpec.describe BookDecorator do
   describe '#formatted_tag_list' do
     subject { Capybara.string decorator.formatted_tag_list }
 
-    let(:book) { build :ebook, tag_list: 'lorem, ipsum' }
+    let(:book) { build :book, tag_list: 'lorem, ipsum' }
 
     it { is_expected.to have_css('small.text-muted i.material-icons', text: 'label') }
     it { is_expected.to have_css('small.text-muted', text: book.tag_list.to_s) }
@@ -102,7 +120,7 @@ RSpec.describe BookDecorator do
 
   describe '#number_of_comments' do
     subject    { decorator.number_of_comments }
-    let(:book) { create :ebook, comments_count: comments_count }
+    let(:book) { create :book, comments_count: comments_count }
 
     context 'no comments' do
       let(:comments_count) { 0 }
@@ -125,7 +143,7 @@ RSpec.describe BookDecorator do
 
   describe '#number_of_comments_icon' do
     subject    { Capybara.string decorator.number_of_comments_icon }
-    let(:book) { create :ebook, comments_count: 5 }
+    let(:book) { create :book, comments_count: 5 }
 
     it { is_expected.to have_css('i.material-icons',text: 'mode_comment') }
     it { is_expected.to have_content('5') }
@@ -133,7 +151,7 @@ RSpec.describe BookDecorator do
 
   describe '#truncated_summary' do
     subject    { decorator.truncated_summary }
-    let(:book) { create :ebook, summary: summary }
+    let(:book) { create :book, summary: summary }
     let(:summary) do
       <<~SUMMARY
         Bla
@@ -150,7 +168,7 @@ RSpec.describe BookDecorator do
 
   describe '#truncated_summary_html' do
     subject    { Capybara.string decorator.truncated_summary_html }
-    let(:book) { create :ebook, summary: summary }
+    let(:book) { create :book, summary: summary }
     let(:summary) do
       <<~SUMMARY
         Bla
@@ -177,14 +195,14 @@ RSpec.describe BookDecorator do
 
   describe '#written_by' do
     subject       { decorator.written_by }
-    let(:book)    { create :ebook, writers: [stephen, charles] }
+    let(:book)    { create :book, writers: [stephen, charles] }
     let(:stephen) { create :writer, name: 'Stephen King' }
     let(:charles) { create :writer, name: 'Charles Dickens' }
 
     it { is_expected.to eql('By Stephen King and Charles Dickens') }
 
     context 'no writers' do
-      let(:book) { create :ebook }
+      let(:book) { create :book }
 
       it { is_expected.to be_nil }
     end
@@ -197,7 +215,7 @@ RSpec.describe BookDecorator do
 
     subject { decorator.written_by_highlighted_with_search }
 
-    let(:book)        { create :ebook, writers: [stephen, charles] }
+    let(:book)        { create :book, writers: [stephen, charles] }
     let(:stephen)     { create :writer, name: 'Stephen King' }
     let(:charles)     { create :writer, name: 'Charles Dickens' }
     let(:params_stub) { ActionController::Parameters.new(parameters) }
@@ -210,7 +228,7 @@ RSpec.describe BookDecorator do
     end
 
     context 'no writers' do
-      let(:book)       { create :ebook }
+      let(:book)       { create :book }
       let(:parameters) { { q: { title_or_summary_or_writers_name_cont: 'king' } } }
 
       it { is_expected.to be_nil }
@@ -219,7 +237,7 @@ RSpec.describe BookDecorator do
 
   describe '#link_to_edit' do
     let(:html) { decorator.link_to_edit }
-    let(:book) { create :ebook }
+    let(:book) { create :book }
 
     before { allow(h).to receive(:policy).and_return(policy_stub) }
 
@@ -238,9 +256,30 @@ RSpec.describe BookDecorator do
     end
   end
 
+  describe '#link_to_download' do
+    let(:html) { decorator.link_to_download }
+    let(:book) { create :book, :ebook }
+
+    before { allow(h).to receive(:policy).and_return(policy_stub) }
+
+    describe 'authorized user' do
+      subject           { Capybara.string html }
+      let(:policy_stub) { double('BookPolicy', download?: true) }
+
+      it { is_expected.to have_css("a[target='_blank'][href='#{book.link}']", text: 'Download') }
+    end
+
+    describe 'unauthorized user' do
+      subject           { html }
+      let(:policy_stub) { double('BookPolicy', download?: false) }
+
+      it { is_expected.to be_nil }
+    end
+  end
+
   describe '#link_to_destroy' do
     let(:html) { decorator.link_to_destroy }
-    let(:book) { create :ebook }
+    let(:book) { create :book }
 
     before { allow(h).to receive(:policy).and_return(policy_stub) }
 
@@ -255,6 +294,67 @@ RSpec.describe BookDecorator do
     describe 'unauthorized user' do
       subject           { html }
       let(:policy_stub) { double('BookPolicy', destroy?: false) }
+
+      it { is_expected.to be_nil }
+    end
+  end
+
+  describe '#link_to_borrow' do
+    before do
+      allow(h).to receive(:policy).and_return(policy_stub)
+      allow(decorator).to receive(:'borrowed_by?').and_return(false)
+    end
+
+    let(:book) { create :book }
+    let(:html) { decorator.link_to_borrow }
+
+    describe 'authorized user' do
+      subject           { Capybara.string html }
+      let(:policy_stub) { double('BookPolicy', borrow?: true) }
+
+      context 'user is borrowing a copy' do
+        before do
+          allow(decorator).to receive(:'borrowed_by?').and_return(true)
+          allow(decorator).to receive(:copies).and_return(double('copies', borrowables: [1]))
+          allow(decorator).to receive(:borrow_by).and_return(borrowing)
+        end
+
+        let(:borrowing) { build_stubbed(:borrowing) }
+
+        it { is_expected.to have_css('form[method="post"][action^="/borrowings"][data-remote="true"]') }
+        it { is_expected.to have_css('form input[name="_method"][value="delete"]', visible: false) }
+        it { is_expected.to have_css('form input.dropdown-item[value="Return book"]') }
+      end
+
+      context 'copy is not borrowable' do
+        before { allow(decorator).to receive(:copies).and_return(double('copies', borrowables: [])) }
+
+        it { is_expected.to have_css('button.dropdown-item[disabled="disabled"]', text: 'Borrow') }
+      end
+
+      context 'copy is available on one location' do
+        before { allow(decorator).to receive(:copies).and_return(double('copies', borrowables: [1])) }
+
+        it { is_expected.to have_css('form[method="post"][action^="/borrowings"][data-remote="true"]') }
+        it { is_expected.to have_css('form input.dropdown-item[value="Borrow"]') }
+      end
+
+      context 'copy is available on multiple locations' do
+        before do
+          allow(decorator).to receive(:copies).and_return(double('copies', borrowables: borrowables))
+          allow(h).to receive(:dom_id).and_return(dom_id)
+        end
+
+        let(:borrowables) { build_stubbed_list(:copy, 2) }
+        let(:dom_id)      { 'dom-id' }
+
+        it { is_expected.to have_css('form input.dropdown-item[value="Borrow..."]') }
+      end
+    end
+
+    describe 'unauthorized user' do
+      subject           { html }
+      let(:policy_stub) { double('BookPolicy', borrow?: false) }
 
       it { is_expected.to be_nil }
     end

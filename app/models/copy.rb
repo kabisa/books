@@ -23,6 +23,6 @@ class Copy < ApplicationRecord
   end
 
   def duplicate_location?
-    book.copies.group_by { |c| c.location_id }.map { |k, v| [k, v.size] }.to_h.fetch(location_id, 0) > 1
+    book&.copies&.group_by { |c| c.location_id }&.map { |k, v| [k, v.size] }.to_h.fetch(location_id, 0) > 1
   end
 end

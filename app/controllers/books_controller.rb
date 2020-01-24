@@ -22,7 +22,7 @@ class BooksController < ApplicationController
 
   # GET /books/new
   def new
-    @book = authorize Ebook.new
+    @book = authorize Book.new
     @book.copies.build(number: 1)
   end
 

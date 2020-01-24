@@ -9,7 +9,7 @@ RSpec.describe BooksController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    attributes_for(:ebook, :invalid)
+    attributes_for(:book, :invalid)
   }
 
   let(:current_user)       { create :user }
@@ -85,11 +85,6 @@ RSpec.describe BooksController, type: :controller do
       expect(response).to be_successful
     end
 
-    it 'assigns an e-book' do
-      do_get
-      expect(assigns[:book]).to be_a(Ebook)
-    end
-
     it 'adds a location to the book' do
       do_get
       expect(assigns[:book]).to have(1).copy
@@ -113,22 +108,22 @@ RSpec.describe BooksController, type: :controller do
     context 'e-book' do
       context 'with valid params' do
         let(:valid_attributes) {
-          attributes_for(:ebook)
+          attributes_for(:book)
         }
 
         let(:invalid_attributes) {
-          attributes_for(:ebook, :invalid)
+          attributes_for(:book, :invalid)
         }
 
         it 'creates a new Ebook' do
           expect {
             do_post(valid_attributes)
-          }.to change(Ebook, :count).by(1)
+          }.to change(Book, :count).by(1)
         end
 
         it 'redirects to the created book' do
           do_post(valid_attributes)
-          expect(response).to redirect_to(Ebook.last)
+          expect(response).to redirect_to(Book.last)
         end
       end
 
@@ -148,11 +143,11 @@ RSpec.describe BooksController, type: :controller do
     context 'printed book' do
       context 'with valid params' do
         let(:valid_attributes) {
-          attributes_for(:ebook)
+          attributes_for(:book)
         }
 
         let(:invalid_attributes) {
-          attributes_for(:e_book, :invalid)
+          attributes_for(:book, :invalid)
         }
 
         it 'creates a new Ebook' do
@@ -163,7 +158,7 @@ RSpec.describe BooksController, type: :controller do
 
         it 'redirects to the created book' do
           do_post(valid_attributes)
-          expect(response).to redirect_to(Ebook.last)
+          expect(response).to redirect_to(Book.last)
         end
       end
 
