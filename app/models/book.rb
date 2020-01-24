@@ -14,11 +14,13 @@ class Book < ApplicationRecord
       proxy_association.owner.copies.filter(&:'borrowable?')
     end
   end
+  has_many :borrowings, through: :copies
   has_and_belongs_to_many :writers
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [2]
   validates :summary, length: { maximum: 2048 }
+  validates :copies, presence: true # At least 1 copy is required
 
 
   before_validation :set_writers
@@ -45,6 +47,14 @@ class Book < ApplicationRecord
 
   def to_s
     title.inspect
+  end
+
+  def copies_count
+    copies.sum(&:number)
+  end
+
+  def borrowings_count
+    borrowings.count
   end
 
   def writer_names

@@ -18,7 +18,6 @@ Feature:
     When I choose "Books" from the navigation drawer
     Then I can search
 
-  @wip
   Scenario: Search for keyword in title
     Given I open the application
     When I search for "ipsum"

@@ -21,8 +21,6 @@ class Copy < ApplicationRecord
   end
 
   def duplicate_locations_not_allowed
-    return unless book && printed_book?
-
     if duplicate_location?
       errors.add(:location, :taken)
     end

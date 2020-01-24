@@ -13,12 +13,29 @@ class BookDecorator < ApplicationDecorator
   #     end
   #   end
 
+  def available_copies
+    h.pluralize(copies_count - borrowings_count, Copy.model_name.human.downcase)
+  end
+
   def formatted_type
     I18n.t(object.type, scope: 'book_types')
   end
 
   def type_and_pages
     h.safe_join [formatted_type, formatted_num_of_pages].compact, ', '
+  end
+
+  # TODO: Test
+  def media_and_pages
+    text = []
+
+    if copies.any?
+      text << I18n.t('book_types.PrintedBook')
+    end
+
+    text << formatted_num_of_pages
+
+    h.safe_join text.compact, ', '
   end
 
   def formatted_num_of_pages

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_06_104456) do
+ActiveRecord::Schema.define(version: 2020_01_24_065703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2019_12_06_104456) do
     t.string "title", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "type"
     t.string "link", limit: 2048
     t.string "summary", limit: 2048
     t.datetime "deleted_at"
@@ -78,6 +77,20 @@ ActiveRecord::Schema.define(version: 2019_12_06_104456) do
     t.string "city", limit: 255
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "media", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "location_id"
+    t.integer "copies_count"
+    t.datetime "deleted_at"
+    t.integer "borrowings_count", default: 0
+    t.string "link", limit: 2048
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_media_on_book_id"
+    t.index ["location_id"], name: "index_media_on_location_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|

@@ -1,8 +1,4 @@
 class PrintedBookDecorator < BookDecorator
-  def available_copies
-    h.pluralize(copies_count - borrowings_count, Copy.model_name.human.downcase)
-  end
-
   def link_to_borrow
     return unless h.policy(object).borrow?
 

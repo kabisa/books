@@ -7,6 +7,7 @@
 ## Prerequisites
 
 - Install [all requirements](https://gorails.com/setup/osx/10.15-catalina) on your machine
+- `brew install graphviz`
 - `brew install imagemagick`
 - `brew install firefox` (for running cucumber tests)
 

@@ -33,7 +33,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = authorize book_class.new(book_params)
+    @book = authorize Book.new(book_params)
 
     respond_to do |format|
       if @book.save
@@ -90,9 +90,5 @@ class BooksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       permitted_attributes(Book)
-    end
-
-    def book_class
-      BookType.book_class(params[:book][:type])
     end
 end

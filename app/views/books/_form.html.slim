@@ -5,9 +5,6 @@
     .col
       = f.input :title, autofocus: true
 
-      - if book.new_record?
-        = f.input :type, as: :toggle_buttons, collection: BookType.types.to_sym, input_html: { data: { target: 'book-form.type' }}, label_html: { data: { action: 'click->book-form#toggleTypeProperties' }}
-
       - if book.new_record? || book.is_a?(Ebook)
         div(data-book-type='Ebook')
           = f.input :link, required: true
