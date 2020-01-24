@@ -1,7 +1,7 @@
 en:
-  book_types: &book_types
-    Ebook: E-book
-    PrintedBook: Printed book
+  book_types:
+    e_book: E-book
+    printed_book: Printed book
   simple_form:
     "yes": 'Yes'
     "no": 'No'
@@ -15,9 +15,6 @@ en:
       default_message: "Please review the problems below:"
     buttons:
       cancel: 'Cancel'
-    options:
-      book:
-        type: *book_types
     placeholders:
       book:
         title: 'Add title'

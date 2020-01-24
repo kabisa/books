@@ -59,7 +59,7 @@ RSpec.describe Book, type: :model do
 
       context 'every copy is borrowable' do
         let(:copies) { build_list(:copy, 2) }
-        it { is_expected.to eql(copies) }
+        it           { is_expected.to eql(copies) }
       end
 
       context 'some copies are borrowable' do
@@ -91,7 +91,6 @@ RSpec.describe Book, type: :model do
 
   describe 'scopes' do
     describe '.sort_by_num_of_pages_nulls_last_*' do
-      let(:sorted_books)       { subject }
       let!(:book_wo_pages)     { create(:book, num_of_pages: nil) }
       let!(:book_w_many_pages) { create(:book, num_of_pages: 1000) }
       let!(:book_w_few_pages)  { create(:book, num_of_pages: 10) }
@@ -118,7 +117,6 @@ RSpec.describe Book, type: :model do
     end
 
     describe '.sort_by_published_on_nulls_last_*' do
-      let(:sorted_books)       { subject }
       let!(:book_wo_date)      { create(:book, published_on: nil) }
       let!(:book_w_early_date) { create(:book, published_on: 1000.days.ago) }
       let!(:book_w_late_date)  { create(:book, published_on: 10.days.ago) }
@@ -146,7 +144,7 @@ RSpec.describe Book, type: :model do
   end
 
   describe '#copies_count' do
-    before { allow(instance).to receive(:copies).and_return(copies_double) }
+    before              { allow(instance).to receive(:copies).and_return(copies_double) }
 
     subject             { instance.copies_count }
 
@@ -157,7 +155,7 @@ RSpec.describe Book, type: :model do
   end
 
   describe '#borrowings_count' do
-    before { allow(instance).to receive(:borrowings).and_return(borrowings_double) }
+    before              { allow(instance).to receive(:borrowings).and_return(borrowings_double) }
 
     subject             { instance.borrowings_count }
 
@@ -214,7 +212,6 @@ RSpec.describe Book, type: :model do
           instance.writer_names = [{ value: writer.name }].to_json
           instance.validate
           expect(instance.writers.size).to be(1)
-          #expect(Writer.count).not_to change
         end
       end
 

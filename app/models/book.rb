@@ -6,9 +6,6 @@ class Book < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
   has_many :comments, dependent: :destroy
-
-  # Though `copies` is a PrintedBook attribute, we define it in the base class
-  # so we can render a proper form.
   has_many :copies, dependent: :destroy do
     def borrowables
       proxy_association.owner.copies.filter(&:'borrowable?')
@@ -101,5 +98,5 @@ class Book < ApplicationRecord
   end
 end
 
-# # [1] see https://rails.rubystyle.guide/
+# [1] see https://rails.rubystyle.guide/
 # [2] `num_of_pages` is a signed int of 2 bytes

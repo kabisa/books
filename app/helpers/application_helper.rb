@@ -61,4 +61,8 @@ module ApplicationHelper
       end)
     end
   end
+
+  def icon_placeholder
+    material_icon('0')
+  end
 end

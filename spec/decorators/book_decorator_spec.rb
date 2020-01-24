@@ -34,21 +34,80 @@ RSpec.describe BookDecorator do
 
   end
 
-  describe '#type_and_pages' do
-    before { allow(decorator).to receive(:formatted_type).and_return('formatted_type') }
-    subject    { decorator.type_and_pages }
-    let(:book) { build :book, num_of_pages: num_of_pages }
+  describe '#media_and_pages' do
+    subject { decorator.media_and_pages }
 
     describe 'with pages' do
       let(:num_of_pages) { 10 }
 
-      it { is_expected.to eql('formatted_type, 10 pages') }
+      describe 'with link' do
+        let(:book) { build :book, :ebook, num_of_pages: num_of_pages }
+
+        it { is_expected.to eql('E-book, 10 pages') }
+      end
+
+      describe 'with printed copies' do
+        let(:book) { build :book, :printed_book, link: nil, num_of_pages: num_of_pages }
+
+        it { is_expected.to eql('Printed book, 10 pages') }
+      end
+
+      describe 'with link and printed copies' do
+        let(:book) { build :book, :printed_book, :ebook, num_of_pages: num_of_pages }
+
+        it { is_expected.to eql('Printed book, E-book, 10 pages') }
+      end
     end
 
     describe 'without pages' do
       let(:num_of_pages) { nil }
 
-      it { is_expected.to eql('formatted_type') }
+      describe 'with link' do
+        let(:book) { build :book, :ebook, num_of_pages: num_of_pages }
+
+        it { is_expected.to eql('E-book') }
+      end
+
+      describe 'with printed copies' do
+        let(:book) { build :book, :printed_book, link: nil, num_of_pages: num_of_pages }
+
+        it { is_expected.to eql('Printed book') }
+      end
+
+      describe 'with link and printed copies' do
+        let(:book) { build :book, :printed_book, :ebook, num_of_pages: num_of_pages }
+
+        it { is_expected.to eql('Printed book, E-book') }
+      end
+    end
+  end
+
+  describe '#media_and_pages' do
+    let(:html) { decorator.book_type_icon }
+    subject { Capybara.string html }
+
+    describe 'with link' do
+      let(:book) { build :book, :ebook }
+
+      it { is_expected.to have_css('i.material-icons', text: '0') }
+      it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
+
+      it { is_expected.to have_css('i.material-icons:not([title]) + i.material-icons[title]') }
+    end
+
+    describe 'with printed copies' do
+      let(:book) { build :book, :printed_book, link: nil }
+
+      it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
+      it { is_expected.to have_css('i.material-icons', text: '0') }
+      it { is_expected.to have_css('i.material-icons[title] + i.material-icons:not([title])') }
+    end
+
+    describe 'with link and printed copies' do
+      let(:book) { build :book, :printed_book, :ebook }
+
+      it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
+      it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
     end
   end
 

@@ -17,30 +17,23 @@ class BookDecorator < ApplicationDecorator
     h.pluralize(copies_count - borrowings_count, Copy.model_name.human.downcase)
   end
 
-  def formatted_type
-    return 'Lorem'
-    #I18n.t(object.type, scope: 'book_types')
-  end
-
-  def type_and_pages
-    h.safe_join [formatted_type, formatted_num_of_pages].compact, ', '
-  end
-
-  # TODO: Test
   def media_and_pages
-    text = []
+    h.safe_join [
+      printed_book_text,
+      ebook_text,
+      formatted_num_of_pages].compact, ', '
+  end
 
-    if copies.any?
-      text << I18n.t('book_types.PrintedBook')
-    end
+  def printed_book_text
+    return if copies.empty?
 
-    if link?
-      text << I18n.t('book_types.Ebook')
-    end
+    I18n.t('book_types.printed_book')
+  end
 
-    text << formatted_num_of_pages
+  def ebook_text
+    return unless link?
 
-    h.safe_join text.compact, ', '
+    I18n.t('book_types.e_book')
   end
 
   def formatted_num_of_pages
@@ -115,17 +108,23 @@ class BookDecorator < ApplicationDecorator
   end
 
   def book_type_icon
-    text = []
+    h.safe_join [printed_book_icon, ebook_icon]
+  end
 
-    if link?
-      text << h.material_icon('tablet_android', h.tooltipify(formatted_type))
-    end
-
+  def printed_book_icon
     if copies.any?
-      text << h.material_icon('menu_book', h.tooltipify(formatted_type))
+      h.material_icon('menu_book', h.tooltipify(printed_book_text))
+    else
+      h.icon_placeholder
     end
+  end
 
-    h.safe_join text.compact
+  def ebook_icon
+    if link?
+      h.material_icon('tablet_android', h.tooltipify(ebook_text))
+    else
+      h.icon_placeholder
+    end
   end
 
   def truncated_summary
