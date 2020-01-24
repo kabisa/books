@@ -4,7 +4,7 @@ Feature: As a Kabisaan
   So others can choose wisely
 
   Background:
-    Given the following e-books:
+    Given the following books:
       | title                       | link                                  | summary                      |
       | Lorem Ipsum                 | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
     And I signed in as a Kabisaan

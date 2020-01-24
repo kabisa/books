@@ -4,7 +4,7 @@ Feature:
   I want to see details of a specific book
 
   Background:
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
 

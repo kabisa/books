@@ -4,7 +4,7 @@ Feature: Sort books
   I want to see the books sorted by title
 
   Background:
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
       | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        |

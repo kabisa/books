@@ -4,7 +4,7 @@ Feature:
 
   @javascript
   Scenario: Show all books for a specific writer
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |  writer_names                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |  Stephen King, Charles Dickens |
       | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        |  Stephen Hawking               |

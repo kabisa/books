@@ -35,7 +35,7 @@ Feature:
     And I do not see a validation error for "Link"
 
   @javascript
-  Scenario: Create a book without printed copies
+  Scenario: Create a book without a download link or printed copy
     Given I'm adding a new book
     When I populate the "Title" field with "Awesome Book"
     And I remove the first location

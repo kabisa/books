@@ -26,13 +26,6 @@ Feature:
     And I can edit the book
     And I am seeing the button for adding a new book
 
-  Scenario: Create a book without a download link or printed copy
-    Given I'm adding a new book
-    And I remove the first location
-    When I try to add an empty book
-    Then I see a validation error for "Title"
-    And I see a validation error for "Link"
-
   Scenario: Create a book with an invalid download link
     Given I'm adding a new book
     And I populate the "Title" field with "Awesome Book"

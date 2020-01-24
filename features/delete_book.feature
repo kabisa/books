@@ -6,7 +6,7 @@ Feature:
 
   Scenario: Delete a book
     Given I signed in as a Kabisaan
-    And the following e-books:
+    And the following books:
       | title                       | link                                  | summary                      |
       | Lorem Ipsum                 | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
       | Dolor Sit                   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
@@ -18,7 +18,7 @@ Feature:
 
   Scenario: Undo a deletion
     Given I signed in as a Kabisaan
-    And the following e-books:
+    And the following books:
       | title                       | link                                  | summary                      |
       | Lorem Ipsum                 | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
       | Dolor Sit                   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |

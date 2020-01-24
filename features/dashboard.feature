@@ -8,7 +8,7 @@ Feature: Dashboard
       | marty@kabisa.nl    |
       | emmett@kabisa.nl   |
       | lorraine@kabisa.nl |
-    And the following e-books:
+    And the following books:
       | title                  | link                                  | comments_count | created_at  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | 5              | 10 days ago |
       | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | 4              | 1 day ago   |
@@ -33,7 +33,7 @@ Feature: Dashboard
     Then I don't see any suggestions
 
   Scenario: 1 book
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
     When I open the application

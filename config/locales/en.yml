@@ -154,10 +154,8 @@ en:
             link:
               format: '%{message}'
               blank: "If you don't have any printed copies, you need to add a download link"
-        ebook:
-          attributes:
-            link:
-              not_a_url: 'is not a url'
+              not_a_url: 'Link is not a url'
+
         copy:
           attributes:
             location:

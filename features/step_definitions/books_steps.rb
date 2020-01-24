@@ -15,18 +15,6 @@ Given("there are {int} books with a printed copy") do |books_count|
   create_list :book, books_count, :printed_book
 end
 
-Given("the following printed book(s):") do |table|
-  table.hashes.each do |h|
-    location = Location.find_by(city: h.delete('location'))
-    number   = h.delete('copies')
-
-    book = Book.find_by(title: h['title']) || build(:printed_book, h)
-    book.copies.clear if book.new_record?
-    book.copies.build(location: location, number: number)
-    book.save
-  end
-end
-
 Given("the following book(s):") do |table|
   table.map_column!('comments_count', false) { |c| c.to_i }
   table.map_column!('created_at', false) { |c| Chronic.parse(c) }
@@ -348,12 +336,6 @@ end
 Then("I see {string} for the book {string}") do |text, title|
   within('.list-group-item', text: title) do
     expect(page).to have_content(text)
-  end
-end
-
-Then("I can not change to type of the book") do
-  within('form') do
-    expect(page).not_to have_css('input[name="book[type]"]')
   end
 end
 

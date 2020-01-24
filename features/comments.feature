@@ -4,15 +4,15 @@ Feature:
   I can add a comment to a specific book
 
   Scenario: View comments for a specific book
-    Given the following e-books:
-      | title                  | link                                  | comments_count |
-      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | 3 |
-      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | 5 |
+    Given the following books:
+      | title       | link                                  | comments_count |
+      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | 3              |
+      | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | 5              |
     When I am viewing the details for "Lorem Ipsum"
     Then I see 3 comments
 
   Scenario: Add comment
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
     And I signed in as a Kabisaan
@@ -21,7 +21,7 @@ Feature:
     Then I see 1 comment
 
   Scenario: Create invalid comment
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
     And I signed in as a Kabisaan
@@ -31,14 +31,14 @@ Feature:
     And I see 0 comments
 
   Scenario: Guest cannot add comments
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
     When I am viewing the details for "Lorem Ipsum"
     Then I cannot add a comment
 
   Scenario: Remove my comment
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
     And I signed in as a Kabisaan
@@ -48,15 +48,15 @@ Feature:
     Then I see 0 comments
 
   Scenario: See number of comments
-    Given the following e-books:
-      | title                  | link                                  | comments_count |
-      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | 3 |
-      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | 5 |
+    Given the following books:
+      | title       | link                                  | comments_count |
+      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | 3              |
+      | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | 5              |
     When I choose "Books" from the navigation drawer
     Then I see 3 comments for the book "Lorem Ipsum"
 
   Scenario: Undo a deletion
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub |
     And I signed in as a Kabisaan
