@@ -21,8 +21,7 @@ class Book < ApplicationRecord
   validates :link, length: { maximum: 2048 }, url: true
   validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [2]
   validates :summary, length: { maximum: 2048 }
-  validates :copies, presence: true # At least 1 copy is required
-
+  validate :at_least_one_medium_is_required
 
   before_validation :set_writers
 
@@ -79,7 +78,21 @@ class Book < ApplicationRecord
     end
   end
 
+  def borrow_by(user)
+    borrowings.find_by(user: user)
+  end
+
+  def borrowed_by?(user)
+    !!borrow_by(user)
+  end
+
   private
+
+  def at_least_one_medium_is_required
+    if copies.none? && title.blank?
+      errors.add(:link, :empty)
+    end
+  end
 
   def parse_tagify_json(value)
     JSON.parse(value).map { |h| h['value'] }

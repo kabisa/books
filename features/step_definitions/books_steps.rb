@@ -4,15 +4,15 @@ Given("I'm adding a new book") do
 end
 
 Given("there are {int} books") do |books_count|
-  create_list :ebook, books_count
+  create_list :book, books_count
 end
 
-Given("there are {int} e-books") do |books_count|
-  create_list :ebook, books_count
+Given("there are {int} books with a download link") do |books_count|
+  create_list :book, books_count, :ebook
 end
 
-Given("there are {int} printed books") do |books_count|
-  create_list :printed_book, books_count
+Given("there are {int} books with a printed copy") do |books_count|
+  create_list :book, books_count, :printed_book
 end
 
 Given("the following printed book(s):") do |table|
@@ -27,13 +27,13 @@ Given("the following printed book(s):") do |table|
   end
 end
 
-Given("the following e-book(s):") do |table|
+Given("the following book(s):") do |table|
   table.map_column!('comments_count', false) { |c| c.to_i }
   table.map_column!('created_at', false) { |c| Chronic.parse(c) }
 
   table.hashes.each do |h|
     time = h.delete('created_at') || Time.current
-    travel_to(time) { create(:ebook, h) }
+    travel_to(time) { create(:book, h) }
   end
 end
 

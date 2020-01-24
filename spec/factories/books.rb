@@ -3,12 +3,20 @@ FactoryBot.define do
     title    { 'MyString' }
     summary  { 'Lorem Ipsum' }
     tag_list { %w(Lorem Ipsum) }
+    link { 'http://www.kabisa.nl' }
     num_of_pages { 200 }
     published_on { Date.parse('2004-12-31') }
 
     transient do
       comments_count { 0 }
       writers_count  { 0 }
+      copies_count { 0 }
+    end
+
+    after(:build) do |book, evaluator|
+      evaluator.copies_count.times do |n|
+        book.copies << build(:copy)
+      end
     end
 
     after(:create) do |book, evaluator|
@@ -20,8 +28,7 @@ FactoryBot.define do
       title { '' }
     end
 
-    factory :ebook, class: Ebook do
-      type { 'Ebook' }
+    trait :ebook do
       link { 'http://www.kabisa.nl' }
 
       trait :random do
@@ -38,11 +45,11 @@ FactoryBot.define do
       end
     end
 
-    factory :printed_book, class: PrintedBook do
-      type { 'PrintedBook' }
+    trait :printed_book do
+      link { '' }
 
-      after(:build) do |book, evaluator|
-        book.copies << build(:copy)
+      transient do
+        copies_count { 1 }
       end
 
       trait :random do

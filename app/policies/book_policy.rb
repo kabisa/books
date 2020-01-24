@@ -25,8 +25,12 @@ class BookPolicy < ApplicationPolicy
     identified?
   end
 
+  def download?
+    identified? && record.link?
+  end
+
   def borrow?
-    identified?
+    identified? && record.copies.any?
   end
 
   def permitted_attributes

@@ -18,7 +18,8 @@ class BookDecorator < ApplicationDecorator
   end
 
   def formatted_type
-    I18n.t(object.type, scope: 'book_types')
+    return 'Lorem'
+    #I18n.t(object.type, scope: 'book_types')
   end
 
   def type_and_pages
@@ -114,7 +115,17 @@ class BookDecorator < ApplicationDecorator
   end
 
   def book_type_icon
-    h.material_icon(icon, h.tooltipify(formatted_type))
+    text = []
+
+    if link?
+      text << h.material_icon('tablet_android', h.tooltipify(formatted_type))
+    end
+
+    if copies.any?
+      text << h.material_icon('menu_book', h.tooltipify(formatted_type))
+    end
+
+    h.safe_join text.compact
   end
 
   def truncated_summary
@@ -128,6 +139,7 @@ class BookDecorator < ApplicationDecorator
   def hamburger_menu
     h.hamburger_menu do
       h.concat link_to_edit
+      h.concat link_to_download
       h.concat link_to_borrow
       h.concat link_to_destroy
     end
@@ -139,6 +151,18 @@ class BookDecorator < ApplicationDecorator
     h.link_to I18n.t('helpers.submit.edit'), h.edit_book_path(object), class: 'dropdown-item'
   end
 
+  def link_to_download
+    return unless h.policy(object).download?
+
+    h.link_to I18n.t('helpers.submit.download'), object.link, class: 'dropdown-item', role: :button, target: '_blank'
+  end
+
+  def link_to_borrow
+    return unless h.policy(object).borrow?
+
+    borrow_or_return_button
+  end
+
   def link_to_destroy
     return unless h.policy(object).destroy?
 
@@ -146,6 +170,48 @@ class BookDecorator < ApplicationDecorator
       h.concat(h.tag.div(class: 'dropdown-divider'))
       h.concat(h.link_to I18n.t('helpers.submit.destroy'), object, method: :delete, remote: true, class: 'dropdown-item text-danger')
     end
+  end
+
+  private
+
+  def borrow_or_return_button
+    if borrowed_by?(h.current_user)
+      return_button
+    else
+      borrow_button
+    end
+  end
+
+  def return_button
+    borrowing = borrow_by(h.current_user)
+
+    h.button_to I18n.t('helpers.submit.borrowing.destroy'), borrowing, method: :delete, remote: true, class: 'dropdown-item'
+  end
+
+  def borrow_button
+    if copies.borrowables.none?
+      borrow_none_button
+    elsif copies.borrowables.one?
+      borrow_one_button
+    else
+      borrow_modal_button
+    end
+  end
+
+  def borrow_none_button
+    h.button_tag borrow_label, class: 'dropdown-item', disabled: true
+  end
+
+  def borrow_one_button
+    h.button_to borrow_label, h.borrowings_path(borrowing: { book_id: object, copy_id: copies.borrowables.first }), remote: true, class: 'dropdown-item'
+  end
+
+  def borrow_modal_button
+    h.button_to "#{borrow_label}...", h.borrowings_path(borrowing: { book_id: object }), remote: true, class: 'dropdown-item'
+  end
+
+  def borrow_label
+    I18n.t('helpers.submit.borrowing.submit')
   end
 end
 

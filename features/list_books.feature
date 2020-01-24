@@ -5,46 +5,46 @@ Feature:
   so I can decide which one to read next
 
   Scenario: List books
-    Given there are 5 e-books
+    Given there are 5 books
     When I choose "Books" from the navigation drawer
     Then I should see a list of 5 books
 
   Scenario: List e-books and printed books
-    Given there are 3 e-books
-    And there are 5 printed books
+    Given there are 3 books with a download link
+    And there are 5 books with a printed copy
     When I choose "Books" from the navigation drawer
     Then I should see a list of 3 e-books
     And I should see a list of 5 printed books
 
   Scenario: List e-books for guests
-    Given there are 3 e-books
-    And there are 5 printed books
+    Given there are 3 books with a download link
+    And there are 5 books with a printed copy
     When I choose "Books" from the navigation drawer
     And I should see 0 download links
 
   Scenario: List printed books for guests
-    Given there are 5 printed books
+    Given there are 5 books with a printed copy
     When I choose "Books" from the navigation drawer
     Then I should see a list of 5 printed books
     But I should not see information about how many copies there are
 
   Scenario: List e-books for authorized users
     Given I signed in as a Kabisaan
-    And there are 3 e-books
-    And there are 5 printed books
+    And there are 3 books with a download link
+    And there are 5 books with a printed copy
     When I choose "Books" from the navigation drawer
     Then I should see 3 download links
 
   Scenario: List printed books authorized users
     Given I signed in as a Kabisaan
-    And there are 5 printed books
+    And there are 5 books with a printed copy
     When I choose "Books" from the navigation drawer
     Then I should see a list of 5 printed books
     And I should see information about how many copies there are
 
   Scenario: Expand panel for more details
     Given I signed in as a Kabisaan
-    And the following e-books:
+    And the following books:
       | title       | link                                  | summary                      |
       | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.  |
       | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit. |
@@ -56,13 +56,14 @@ Feature:
   @todo
   Scenario: Empty state
 
+  @wip
   Scenario: View vote info
     Given the following users:
       | email              |
       | marty@kabisa.nl    |
       | emmett@kabisa.nl   |
       | lorraine@kabisa.nl |
-    And the following e-books:
+    And the following books:
       | title       | link                                  |
       | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub |
     And the following votes:

@@ -3,7 +3,7 @@ Feature:
   I want to search for books
 
   Background:
-    Given the following e-books:
+    Given the following books:
       | title                  | link                                  | summary                         | tag_list              | writer_names                  | num_of_pages |
       | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           | Stephen King, Charles Dickens |              |
       | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit.    | software              | Stephen Hawking               | 30           |

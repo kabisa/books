@@ -1,3 +1,4 @@
+@javascript
 Feature:
   As a Kabisaan
   I can add a book
@@ -10,7 +11,6 @@ Feature:
       | Florence |
       | Sydney   |
 
-  @javascript
   Scenario: Create a book with a download link
     Given I'm adding a new book
     And I populate the "Title" field with "Awesome Book"
@@ -26,8 +26,9 @@ Feature:
     And I can edit the book
     And I am seeing the button for adding a new book
 
-  Scenario: Create a book without a download link
+  Scenario: Create a book without a download link or printed copy
     Given I'm adding a new book
+    And I remove the first location
     When I try to add an empty book
     Then I see a validation error for "Title"
     And I see a validation error for "Link"
@@ -39,7 +40,6 @@ Feature:
     And I click "Save"
     Then I see a validation error for "Link"
 
-  @javascript
   Scenario: Create a book with a download link but no printed copies
     Given I'm adding a new book
     And I populate the "Title" field with "Awesome Book"
