@@ -35,7 +35,6 @@ Feature:
     And I do not see a validation error for "Link"
 
   @javascript
-  @wip
   Scenario: Create a book without printed copies
     Given I'm adding a new book
     When I populate the "Title" field with "Awesome Book"

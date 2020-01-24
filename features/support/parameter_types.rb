@@ -1,10 +1,16 @@
 ParameterType(
+  name: 'book',
+  regexp: /(?:book\s\")(.*)(?:\")/,
+  transformer: -> (title) { Book.find_by(title: title) }
+)
+
+ParameterType(
   name: 'book_type',
   regexp: /(e-book|printed book)(?:s?)/,
   transformer: -> (type) do
     { 'e-book' => 'tablet_android',
       'printed book' => 'menu_book' }[type]
-end
+  end
 )
 
 ParameterType(

@@ -8,9 +8,12 @@ Feature: As a Kabisaan
     And the following locations:
       | city     |
       | Rome     |
-    And the following printed book:
-      | title       | location | copies |
-      | Lorem Ipsum | Rome     | 1      |
+    And the following book:
+      | title       |
+      | Lorem Ipsum |
+    And the book "Lorem Ipsum" is available at the following locations:
+      | location | copies |
+      | Rome     | 1      |
     When I choose "Books" from the navigation drawer
     Then I can borrow "Lorem Ipsum"
 
@@ -19,9 +22,12 @@ Feature: As a Kabisaan
     And the following locations:
       | city     |
       | Rome     |
-    And the following printed book:
-      | title       | location | copies |
-      | Lorem Ipsum | Rome     | 1      |
+    And the following book:
+      | title       |
+      | Lorem Ipsum |
+    And the book "Lorem Ipsum" is available at the following locations:
+      | location | copies |
+      | Rome     | 1      |
     When I choose "Books" from the navigation drawer
     And I borrow the book "Lorem Ipsum"
     Then I see the book "Lorem Ipsum" has 0 copies left
@@ -35,10 +41,13 @@ Feature: As a Kabisaan
       | city     |
       | Rome     |
       | Florence |
-    And the following printed book:
-      | title       | location | copies |
-      | Lorem Ipsum | Rome     | 1      |
-      | Lorem Ipsum | Florence | 1      |
+    And the following book:
+      | title       |
+      | Lorem Ipsum |
+    And the book "Lorem Ipsum" is available at the following locations:
+      | location | copies |
+      | Rome     | 1      |
+      | Florence | 1      |
     When I choose "Books" from the navigation drawer
     And I borrow the book "Lorem Ipsum"
     And I choose the location "Rome" in the modal
@@ -55,9 +64,12 @@ Feature: As a Kabisaan
     And the following users:
       | email          |
       | john@kabisa.nl |
-    And the following printed book:
-      | title       | location | copies |
-      | Lorem Ipsum | Rome     | 1      |
+    And the following book:
+      | title       |
+      | Lorem Ipsum |
+    And the book "Lorem Ipsum" is available at the following locations:
+      | location | copies |
+      | Rome     | 1      |
     And the following borrowings:
       | title       | location | user           |
       | Lorem Ipsum | Rome     | john@kabisa.nl |
@@ -68,9 +80,12 @@ Feature: As a Kabisaan
     Given the following locations:
       | city     |
       | Florence |
-    And the following printed book:
-      | title       | location | copies |
-      | Lorem Ipsum | Florence | 1      |
+    And the following book:
+      | title       |
+      | Lorem Ipsum |
+    And the book "Lorem Ipsum" is available at the following locations:
+      | location | copies |
+      | Florence | 1      |
     When I choose "Books" from the navigation drawer
     Then I cannot borrow "Lorem Ipsum"
 

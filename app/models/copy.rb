@@ -3,7 +3,7 @@ class Copy < ApplicationRecord
   belongs_to :location
   has_many :borrowings, dependent: :destroy
 
-  validates :number, numericality: { greater_than: 0, only_integer: true }, if: :printed_book?
+  validates :number, numericality: { greater_than: 0, only_integer: true }
   validate :duplicate_locations_not_allowed
 
   acts_as_paranoid
@@ -16,10 +16,6 @@ class Copy < ApplicationRecord
 
   private
 
-  def printed_book?
-    book.is_a?(PrintedBook)
-  end
-
   def duplicate_locations_not_allowed
     if duplicate_location?
       errors.add(:location, :taken)
@@ -27,6 +23,6 @@ class Copy < ApplicationRecord
   end
 
   def duplicate_location?
-    book.copies.group_by { |c| c.location_id }[location_id].size > 1
+    book.copies.group_by { |c| c.location_id }.map { |k, v| [k, v.size] }.to_h.fetch(location_id, 0) > 1
   end
 end

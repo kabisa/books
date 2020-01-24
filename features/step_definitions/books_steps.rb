@@ -37,6 +37,18 @@ Given("the following book(s):") do |table|
   end
 end
 
+Given("the {book} is available at the following locations:") do |book, table|
+  book.copies.clear
+
+  table.hashes.each do |h|
+    location = Location.find_by(city: h.delete('location'))
+    number   = h.delete('copies')
+    book.copies << build(:copy, location: location, number: number)
+  end
+
+  book.save
+end
+
 Given("I borrowed the book {string} {int} days ago") do |title, days_ago|
   travel_to(days_ago.days.ago) do
     step %q(I choose "Books" from the navigation drawer)
