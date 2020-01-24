@@ -16,15 +16,6 @@ Feature:
     Then I am adding a new book
     But I am not seeing the button for adding a new book
 
-  @javascript
-  Scenario: Toggle book type properties
-    Given I'm adding a new book
-    Then I see attributes for an e-book
-    And I do not see attributes for a printed book
-    When I toggle "Type" to "Printed book"
-    Then I do not see attributes for an e-book
-    But I see attributes for a printed book
-
   Scenario: Guest cannot add a book
     Given I did not sign in
     When I navigate to page for adding a new book

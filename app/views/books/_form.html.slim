@@ -5,28 +5,24 @@
     .col
       = f.input :title, autofocus: true
 
-      - if book.new_record? || book.is_a?(Ebook)
-        div(data-book-type='Ebook')
-          = f.input :link, required: true
+      div(data-controller='nested-form')
+        template(data-target='nested-form.template')
+          = f.fields_for :copies, Copy.new(number: 1), child_index: 'NEW_RECORD' do |copy|
+            = render 'books/copy_fields', f: copy
 
-      - if book.new_record? || book.is_a?(PrintedBook)
-        div(data-book-type='PrintedBook')
-          div(data-controller='nested-form')
-            template(data-target='nested-form.template')
-              = f.fields_for :copies, Copy.new(number: 1), child_index: 'NEW_RECORD' do |copy|
-                = render 'books/copy_fields', f: copy
+        .form-group.row
+          = f.label :copies, class: 'col-md-3 col-xl-2 col-form-label'
+          .col-md.col-lg-6.nested-form
+            - book.errors[:copies].each do |msg|
+              p.text-danger.mt-2= msg
 
-            .form-group.row
-              = f.label :copies, class: 'col-md-3 col-xl-2 col-form-label'
-              .col-md.col-lg-6.nested-form
-                - book.errors[:copies].each do |msg|
-                  p.text-danger.mt-2= msg
+            = f.fields_for :copies, book.copies do |copy|
+              = render 'copy_fields', f: copy
 
-                = f.fields_for :copies, book.copies do |copy|
-                  = render 'copy_fields', f: copy
+            div(data-target='nested-form.links')
+              = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
 
-                div(data-target='nested-form.links')
-                  = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
+      = f.input :link
 
       = f.input :summary, as: :text
       = f.input :writer_names, input_html: { value: book.writer_names.to_s, data: { controller: 'chip-input', whitelist: Writer.pluck(:name).join(',') }}

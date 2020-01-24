@@ -18,6 +18,7 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :writers
 
   validates :title, presence: true, length: { maximum: 255 }
+  validates :link, length: { maximum: 2048 }, url: true
   validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [2]
   validates :summary, length: { maximum: 2048 }
   validates :copies, presence: true # At least 1 copy is required

@@ -33,6 +33,10 @@ class BookDecorator < ApplicationDecorator
       text << I18n.t('book_types.PrintedBook')
     end
 
+    if link?
+      text << I18n.t('book_types.Ebook')
+    end
+
     text << formatted_num_of_pages
 
     h.safe_join text.compact, ', '

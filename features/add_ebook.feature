@@ -11,7 +11,7 @@ Feature:
       | Sydney   |
 
   @javascript
-  Scenario: Create a book
+  Scenario: Create a book with a download link
     Given I'm adding a new book
     And I populate the "Title" field with "Awesome Book"
     And I populate the "Link" field with "http://www.kabisa.nl/awesome_book.epub"
@@ -26,13 +26,13 @@ Feature:
     And I can edit the book
     And I am seeing the button for adding a new book
 
-  Scenario: Create an invalid e-book
+  Scenario: Create a book without a download link
     Given I'm adding a new book
     When I try to add an empty book
     Then I see a validation error for "Title"
     And I see a validation error for "Link"
 
-  Scenario: Create an e-book with an invalid link
+  Scenario: Create a book with an invalid download link
     Given I'm adding a new book
     And I populate the "Title" field with "Awesome Book"
     And I populate the "Link" field with "this is an invalid link"
@@ -40,12 +40,10 @@ Feature:
     Then I see a validation error for "Link"
 
   @javascript
-  Scenario: Invalid copies are ignored when saving ebook
+  Scenario: Create a book with a download link but no printed copies
     Given I'm adding a new book
     And I populate the "Title" field with "Awesome Book"
     And I populate the "Link" field with "http://www.kabisa.nl/awesome_book.epub"
-    And I toggle "Type" to "Printed book"
     And I remove the first location
-    When I toggle "Type" to "E-book"
     And I click "Save"
     Then I am viewing the book
