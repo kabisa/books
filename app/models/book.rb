@@ -29,7 +29,7 @@ class Book < ApplicationRecord
   acts_as_taggable
   mount_uploader :cover, CoverUploader
 
-  ransacker :published_years_ago, formatter: -> (v) { v.to_i.year.ago } do |parent|
+  ransacker :published_years_ago, formatter: -> (v) { v.to_i.year.ago }, type: :integer do |parent|
     parent.table[:published_on]
   end
 

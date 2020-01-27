@@ -53,15 +53,29 @@ class BookSearch
     if params.dig(:q, :num_of_pages_lteq)&.to_i == num_of_pages_upper
       params[:q].delete(:num_of_pages_lteq)
     end
+
+    if params.dig(:q, :published_years_ago_lteq)&.to_i == 0
+      params[:q].delete(:published_years_ago_lteq)
+    end
+
+    if params.dig(:q, :published_years_ago_gteq)&.to_i == published_years_ago_upper
+      params[:q].delete(:published_years_ago_gteq)
+    end
   end
 
   def revert_params
     q.likes_count_gteq ||= 0
     q.num_of_pages_lteq ||= num_of_pages_upper
     q.num_of_pages_gteq ||= 0
+    q.published_years_ago_lteq ||= 0
+    q.published_years_ago_gteq ||= published_years_ago_upper
   end
 
   def num_of_pages_upper
     NUM_OF_PAGES_UPPER
+  end
+
+  def published_years_ago_upper
+    PUBLISHED_YEARS_AGO_UPPER
   end
 end
