@@ -20,6 +20,8 @@ class Book < ApplicationRecord
   validates :summary, length: { maximum: 2048 }
   validate :at_least_one_medium_is_required
 
+  #validates :copies, presence: { if: -> { link.blank? }}
+
   before_validation :set_writers
 
   accepts_nested_attributes_for :copies, allow_destroy: true
@@ -73,7 +75,13 @@ class Book < ApplicationRecord
   private
 
   def at_least_one_medium_is_required
-    if copies.none? && link.blank?
+    # At this in the validation process a book still has copies,
+    # so `copies.empty?` is `false`.
+    # Instead we can use the `marked_for_destruction?` attribute
+    # to check if the user has removed all copies.
+    # See also: https://boonedocks.net/blog/2011/01/29/Rails-validations-with-accepts_nested_attributes_for-and-_destroy.html
+    if copies.all?(&:marked_for_destruction?) && link.blank?
+      self.copies = Copy.none
       errors.add(:link, :blank)
     end
   end

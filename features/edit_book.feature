@@ -29,7 +29,6 @@ Feature:
     And I click "Save"
     Then I am viewing the book
 
-  @wip
   Scenario: Edit a book without a download link or printed copy
     Given I signed in as a Kabisaan
     And the following locations:
