@@ -59,6 +59,27 @@ When("I search for books between {int} and {int} pages") do |at_least, at_most|
   end
 end
 
+
+When("I search for books that were published between {int} and {int} years ago") do |at_least, at_most|
+  within('form.book_search') do
+    click_on('Publication')
+
+    js = <<-JS
+      var event = new Event('input')
+      var atLeastEl = document.getElementById("q_published_years_ago_lteq")
+      atLeastEl.value = #{at_least}
+      atLeastEl.dispatchEvent(event)
+
+      var atMostEl = document.getElementById("q_published_years_ago_gteq")
+      atMostEl.value = #{at_most}
+      atMostEl.dispatchEvent(event)
+    JS
+    page.execute_script js
+    find('.dropdown-menu.show').click_on('×')
+    click_on('Search')
+  end
+end
+
 Then("I see {string} is highlighted for the book {string}") do |q, title|
   within('.list-group-item', text: title) do
     expect(page).to have_css('mark', text: q)

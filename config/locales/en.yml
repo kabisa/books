@@ -118,6 +118,8 @@ en:
   # components:
   search_form:
     clear: 'Clear'
+    publication:
+      title: 'Publication'
     pages:
       title: 'Pages'
     likes:

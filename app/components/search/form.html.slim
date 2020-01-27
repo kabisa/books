@@ -6,6 +6,7 @@
           = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control'
 
       .d-flex.justify-content-end
+        = render(Search::Filter::Publication, q: q, builder: f)
         = render(Search::Filter::Pages, q: q, builder: f)
         = render(Search::Filter::Tags, q: q, builder: f)
         = render(Search::Filter::Likes, q: q, builder: f)

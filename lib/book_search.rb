@@ -14,6 +14,7 @@
 # is specified. In this case we sort on the `title` field.
 class BookSearch
   NUM_OF_PAGES_UPPER = Rails.configuration.x.search.num_of_pages_upper
+  PUBLISHED_YEARS_AGO_UPPER = Rails.configuration.x.search.published_years_ago_upper
 
   def self.search(params, &block)
     new(params).search(&block)

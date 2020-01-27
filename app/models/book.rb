@@ -20,8 +20,6 @@ class Book < ApplicationRecord
   validates :summary, length: { maximum: 2048 }
   validate :at_least_one_medium_is_required
 
-  #validates :copies, presence: { if: -> { link.blank? }}
-
   before_validation :set_writers
 
   accepts_nested_attributes_for :copies, allow_destroy: true
@@ -30,6 +28,10 @@ class Book < ApplicationRecord
   acts_as_paranoid
   acts_as_taggable
   mount_uploader :cover, CoverUploader
+
+  ransacker :published_years_ago, formatter: -> (v) { v.to_i.year.ago } do |parent|
+    parent.table[:published_on]
+  end
 
   def to_s
     title.inspect

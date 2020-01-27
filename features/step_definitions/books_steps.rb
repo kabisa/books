@@ -17,7 +17,8 @@ end
 
 Given("the following book(s):") do |table|
   table.map_column!('comments_count', false) { |c| c.to_i }
-  table.map_column!('created_at', false) { |c| Chronic.parse(c) }
+  table.map_column!('created_at', false)     { |c| Chronic.parse(c) }
+  table.map_column!('published_on', false)   { |p| Chronic.parse(p) }
 
   table.hashes.each do |h|
     time = h.delete('created_at') || Time.current

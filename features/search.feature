@@ -4,11 +4,11 @@ Feature:
 
   Background:
     Given the following books:
-      | title                  | link                                  | summary                         | tag_list              | writer_names                  | num_of_pages |
-      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           | Stephen King, Charles Dickens |              |
-      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit.    | software              | Stephen Hawking               | 30           |
-      | Consectetur Adipiscing | http://kabisa.nl/consectetur/         | Sed convallis metus eget felis. | unknown               | Mark Twain, Stephen King      | 50           |
-      | Morbi ullamcorper      | http://kabisa.nl/morbi/               | Duis aliquam nulla felis.       | programming, software | Charles Dickens, Mark Twain   | 1000         |
+      | title                  | link                                  | summary                         | tag_list              | writer_names                  | num_of_pages | published_on |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Lorem ipsum dolor sit amet.     | programming           | Stephen King, Charles Dickens |              |              |
+      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        | Consectetur adipiscing elit.    | software              | Stephen Hawking               | 30           | 2 years ago  |
+      | Consectetur Adipiscing | http://kabisa.nl/consectetur/         | Sed convallis metus eget felis. | unknown               | Mark Twain, Stephen King      | 50           | 3 years ago  |
+      | Morbi ullamcorper      | http://kabisa.nl/morbi/               | Duis aliquam nulla felis.       | programming, software | Charles Dickens, Mark Twain   | 1000         | 10 years ago |
 
   Scenario: Search on the home page
     When I open the application
@@ -87,3 +87,8 @@ Feature:
     Then I should see a list of 2 books
     #And I see the search form displaying "programming"
 
+  @javascript
+  Scenario: Search for books published in a certain period of time
+    When I open the application
+    And I search for books that were published between 1 and 5 years ago
+    Then I should see a list of 2 books

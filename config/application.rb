@@ -21,5 +21,6 @@ module Books
     config.active_model.i18n_customize_full_message = true
 
     config.x.search.num_of_pages_upper = 500
+    config.x.search.published_years_ago_upper = 10
   end
 end

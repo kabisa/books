@@ -1,0 +1,10 @@
+= render(Search::Filter::Dropdown, data_controller: data_controller, title: title) do
+  div(data={ target: "#{data_controller}.zeroItems" })
+    = t('search_form.likes.zero')
+  .d-none(data={ target: "#{data_controller}.otherItems" })
+    .d-flex.justify-content-between
+      .text-primary(data={ target: "#{data_controller}.label" })
+      div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: "#{data_controller}#reset" }
+  = range_field :published_years_ago_lteq, 'min'
+  = range_field :published_years_ago_gteq, 'max'
+
