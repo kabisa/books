@@ -18,7 +18,6 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
     end
   end
 
-
   private
   def data_controller
     'dropzone'

@@ -18,6 +18,9 @@ en:
     placeholders:
       comment:
         body: 'Add a comment...'
+    labels:
+      borrowing:
+        copy_id: 'Location'
     # Examples
     # labels:
     #   defaults:

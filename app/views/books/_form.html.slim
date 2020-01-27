@@ -1,7 +1,7 @@
 = simple_form_for(book, as: :book, html: { multipart: true, autocomplete: 'off' }, data: { controller: 'book-form' }) do |f|
   .row
     .col-md-4.col-lg-3
-      = f.input :cover, as: :dropzone
+      = f.input :cover, as: :dropzone, label: false
     .col
       = f.input :title, autofocus: true
 
@@ -23,7 +23,6 @@
               = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
 
       = f.input :link
-
       = f.input :summary, as: :text
       = f.input :writer_names, input_html: { value: book.writer_names.to_s, data: { controller: 'chip-input', whitelist: Writer.pluck(:name).join(',') }}
       = f.input :num_of_pages, as: :string, wrapper: :input_group, append: 'pages'

@@ -8,6 +8,9 @@ export default class extends Controller {
   }
 
   showModal() {
+    $(this.element)
+      .find('.floating-label .custom-select, .floating-label .form-control')
+      .floatinglabel();
     $(this.element).modal('show');
   }
 
