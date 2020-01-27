@@ -134,12 +134,14 @@ en:
       user:
         email: 'Email'
       book:
+        link: 'Download location'
         likes_count: 'Likes'
         tag_list: 'Tags'
         cover: 'Cover image'
         remove_cover: 'Remove'
         written_by: 'By %{writer_names}'
         num_of_pages: 'Number of pages'
+        writer_names: 'Written by'
       comment:
         body: 'Comment'
     errors:
