@@ -79,8 +79,8 @@ describe 'form' do
         expect(rendered).to have_css('.datepicker.form-group.book_published_on .textfield-box input.form-control.string')
       end
 
-      it 'has a placeholder' do
-        expect(rendered).to have_css('.book_published_on input[placeholder]')
+      it 'has a label' do
+        expect(rendered).to have_css('label[for="book_published_on"]')
       end
       it 'transforms the max_date to a default formatted string' do
         expect(rendered).to have_css('.book_published_on input[data-max="2005-06-30"]')

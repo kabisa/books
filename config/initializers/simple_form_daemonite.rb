@@ -8,7 +8,7 @@ SimpleForm.setup do |config|
   #
   # Custom wrapper to support floating label text fields
   # See http://daemonite.github.io/material/docs/4.1/material/text-fields/#floating-label-text-fields.
-  config.wrappers :vertical_form_w_floating_label, tag: 'div', class: 'form-group floating-label', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+  config.wrappers :vertical_form_w_floating_label, tag: 'div', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -16,10 +16,12 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label
-    b.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
-    b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
-    b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    b.wrapper tag: :div, class: 'floating-label' do |c|
+      c.use :label
+      c.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
+      c.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      c.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    end
   end
 
   # Custom wrapper to support text field boxes
@@ -34,6 +36,24 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.wrapper tag: :div, class: 'textfield-box' do |c|
       c.optional :label
+      c.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: false
+      c.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      c.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    end
+  end
+
+  # Custom wrapper to support text field boxes
+  # See https://daemonite.github.io/material/docs/4.1/material/text-fields/#with-floating-labels
+  config.wrappers :vertical_form_w_text_field_boxes_w_floating_label, tag: 'div', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.optional :maxlength
+    b.optional :minlength
+    b.optional :pattern
+    b.optional :min_max
+    b.optional :readonly
+    b.wrapper tag: :div, class: 'floating-label textfield-box' do |c|
+      c.use :label
       c.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: false
       c.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
       c.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
@@ -94,14 +114,14 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.optional :label
 
-    b.wrapper :input_group_tag, tag: 'div', class: 'input-group textfield-box' do |ba|
-      ba.optional :prepend
-      ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: false
-      ba.optional :append
-      ba.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
-      ba.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
+    b.wrapper :input_group_tag, tag: 'div', class: 'input-group floating-label textfield-box' do |c|
+      c.optional :prepend
+      c.use :label
+      c.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: false
+      c.optional :append
+      c.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+      c.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
     end
   end
 
@@ -112,7 +132,7 @@ SimpleForm.setup do |config|
   end
 
   # The default wrapper to be used by the FormBuilder.
-  config.default_wrapper = :vertical_form_w_text_field_boxes
+  config.default_wrapper = :vertical_form_w_text_field_boxes_w_floating_label
 
   config.wrapper_mappings = {
     boolean:        :switch,

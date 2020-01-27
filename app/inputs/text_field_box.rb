@@ -7,7 +7,7 @@
 # @see http://daemonite.github.io/material/docs/4.1/material/text-fields/#text-field-boxes
 module TextFieldBox
   def input(wrapper_options)
-    ensure_placeholder
+    #ensure_placeholder
     decorate_w_required
     swap_hint_w_error
 
@@ -17,7 +17,7 @@ module TextFieldBox
   private
   def decorate_w_required
     if @required
-      append_required_mark
+      #append_required_mark
       prepend_required_text
     end
   end

@@ -16,14 +16,6 @@ en:
     buttons:
       cancel: 'Cancel'
     placeholders:
-      book:
-        title: 'Add title'
-        link: 'Add link to download location'
-        num_of_pages: 'Add number of pages'
-        published_on: 'Add date published'
-        summary: 'Add summary'
-        writer_names: 'Add writers'
-        tag_list: 'Add tags'
       comment:
         body: 'Add a comment...'
     # Examples
