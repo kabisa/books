@@ -105,73 +105,36 @@ RSpec.describe BooksController, type: :controller do
       post :create, params: {book: attributes}, session: valid_session
     end
 
-    context 'e-book' do
-      context 'with valid params' do
-        let(:valid_attributes) {
-          attributes_for(:book)
-        }
+    context 'with valid params' do
+      let(:valid_attributes) {
+        attributes_for(:book)
+      }
 
-        let(:invalid_attributes) {
-          attributes_for(:book, :invalid)
-        }
+      let(:invalid_attributes) {
+        attributes_for(:book, :invalid)
+      }
 
-        it 'creates a new Ebook' do
-          expect {
-            do_post(valid_attributes)
-          }.to change(Book, :count).by(1)
-        end
-
-        it 'redirects to the created book' do
+      it 'creates a new Ebook' do
+        expect {
           do_post(valid_attributes)
-          expect(response).to redirect_to(Book.last)
-        end
+        }.to change(Book, :count).by(1)
       end
 
-      context 'with invalid params' do
-        it "returns a success response (i.e. to display the 'new' template)" do
-          do_post(invalid_attributes)
-          expect(response).to be_successful
-        end
-
-        it 'renders the new template' do
-          do_post(invalid_attributes)
-          expect(response).to render_template(:new)
-        end
+      it 'redirects to the created book' do
+        do_post(valid_attributes)
+        expect(response).to redirect_to(Book.last)
       end
     end
 
-    context 'printed book' do
-      context 'with valid params' do
-        let(:valid_attributes) {
-          attributes_for(:book)
-        }
-
-        let(:invalid_attributes) {
-          attributes_for(:book, :invalid)
-        }
-
-        it 'creates a new Ebook' do
-          expect {
-            do_post(valid_attributes)
-          }.to change(Ebook, :count).by(1)
-        end
-
-        it 'redirects to the created book' do
-          do_post(valid_attributes)
-          expect(response).to redirect_to(Book.last)
-        end
+    context 'with invalid params' do
+      it "returns a success response (i.e. to display the 'new' template)" do
+        do_post(invalid_attributes)
+        expect(response).to be_successful
       end
 
-      context 'with invalid params' do
-        it "returns a success response (i.e. to display the 'new' template)" do
-          do_post(invalid_attributes)
-          expect(response).to be_successful
-        end
-
-        it 'renders the new template' do
-          do_post(invalid_attributes)
-          expect(response).to render_template(:new)
-        end
+      it 'renders the new template' do
+        do_post(invalid_attributes)
+        expect(response).to render_template(:new)
       end
     end
   end
