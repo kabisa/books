@@ -22,7 +22,14 @@ Given("the following book(s):") do |table|
 
   table.hashes.each do |h|
     time = h.delete('created_at') || Time.current
-    travel_to(time) { create(:book, h) }
+
+    travel_to(time) do
+      if h['link'].blank?
+        create(:book, :printed_book, h)
+      else
+        create(:book, h)
+      end
+    end
   end
 end
 
@@ -235,9 +242,7 @@ Then("I {should_or_should_not}see information about how many copies there are") 
   expect(page).send(to_have_or_not_have, have_css('div', text: 'copies', visible: false))
 end
 
-Then("I am viewing the book") do
-  # pathname includes model name, e.g. `/ebooks/1` or `/printed_books/2`
-  book          = Book.last
+Then("I am viewing the {book}") do |book|
   route         = book.model_name.singular_route_key
   expected_path = send("#{route}_path", book)
 
@@ -287,6 +292,11 @@ end
 Then("I should see {int} download links") do |items_count|
   # Dropdown menu is rendered twice for every book.
   expect(page).to have_link('Download', count: 2*items_count, visible: false)
+end
+
+Then("I {should_or_should_not}see a download link") do |should_do|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+  expect(page).send(to_have_or_not_have, have_css('.dropdown .dropdown-menu', text: 'Download', visible: false))
 end
 
 Then("I see there are {int} copies of the book") do |copies_count|

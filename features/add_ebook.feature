@@ -21,7 +21,7 @@ Feature:
     And I populate the "Number of pages" field with "500"
     And I select "2004-12-31" in the "Publish Date" datepicker
     And I click "Save"
-    Then I am viewing the book
+    Then I am viewing the book "Awesome Book"
     And it's an e-book
     And I can edit the book
     And I am seeing the button for adding a new book
@@ -39,4 +39,4 @@ Feature:
     And I populate the "Link" field with "http://www.kabisa.nl/awesome_book.epub"
     And I remove the first location
     And I click "Save"
-    Then I am viewing the book
+    Then I am viewing the book "Awesome Book"

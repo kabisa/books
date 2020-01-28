@@ -27,7 +27,7 @@ Feature:
     And I edit the book "Lorem Ipsum"
     And I populate the "Title" field with "Awesome Book"
     And I click "Save"
-    Then I am viewing the book
+    Then I am viewing the book "Awesome Book"
 
   Scenario: Edit a book without a download link or printed copy
     Given I signed in as a Kabisaan

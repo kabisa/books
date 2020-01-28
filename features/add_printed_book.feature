@@ -14,7 +14,7 @@ Feature:
     Given I'm adding a new book
     When I populate the "Title" field with "Awesome Book"
     And I click "Save"
-    Then I am viewing the book
+    Then I am viewing the book "Awesome Book"
     And it's a printed book
     And I am seeing the button for adding a new book
 
