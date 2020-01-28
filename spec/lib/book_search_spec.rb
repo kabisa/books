@@ -13,18 +13,18 @@ RSpec.describe BookSearch do
         q: {
           likes_count_gteq: '0',
           num_of_pages_gteq:  '0',
-          num_of_pages_lteq: '500',
+          num_of_pages_lteq: '525',
           published_years_ago_lteq: '0',
-          published_years_ago_gteq: '10'
+          published_years_ago_gteq: '11'
         }
       }
     end
 
     it { expect(subject.likes_count_gteq).to eql(0) }
     it { expect(subject.num_of_pages_gteq).to eql(0) }
-    it { expect(subject.num_of_pages_lteq).to eql(500) }
+    it { expect(subject.num_of_pages_lteq).to eql(525) }
     it { expect(subject.published_years_ago_lteq).to eql(0) }
-    it { expect(subject.published_years_ago_gteq).to eql(10) }
+    it { expect(subject.published_years_ago_gteq).to eql(11) }
 
     it { is_expected.to be_a(Ransack::Search) }
     it do
@@ -48,9 +48,9 @@ RSpec.describe BookSearch do
 
       it { expect(subject.likes_count_gteq).to eql(0) }
       it { expect(subject.num_of_pages_gteq).to eql(0) }
-      it { expect(subject.num_of_pages_lteq).to eql(500) }
+      it { expect(subject.num_of_pages_lteq).to eql(525) }
       it { expect(subject.published_years_ago_lteq).to eql(0) }
-      it { expect(subject.published_years_ago_gteq).to eql(10) }
+      it { expect(subject.published_years_ago_gteq).to eql(11) }
 
       describe 'block given' do
         subject { w_block }

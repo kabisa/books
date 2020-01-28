@@ -20,7 +20,7 @@ module Books
     config.action_view_component.preview_path = "#{Rails.root}/spec/components/previews"
     config.active_model.i18n_customize_full_message = true
 
-    config.x.search.num_of_pages_upper = 500
+    config.x.search.num_of_pages_upper = 525
     config.x.search.published_years_ago_upper = 11
   end
 end

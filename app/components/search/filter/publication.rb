@@ -3,6 +3,8 @@ require 'book_search'
 module Search
   module Filter
     class Publication < ActionView::Component::Base
+      PUBLISHED_YEARS_AGO_UPPER = BookSearch::PUBLISHED_YEARS_AGO_UPPER
+
       def initialize(q:, builder:)
         @q = q
         @builder = builder
@@ -32,7 +34,7 @@ module Search
       end
 
       def published_years_ago_upper
-        BookSearch::PUBLISHED_YEARS_AGO_UPPER
+        PUBLISHED_YEARS_AGO_UPPER
       end
 
       # Stimulus

@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe Search::Filter::Likes, type: :component do
-  before               { allow_any_instance_of(Search::Filter::Likes).to receive(:dom_id).and_return(42) }
-
   subject              { Capybara.string html }
   let(:html)           { render_inline(Search::Filter::Likes, options) }
   let(:options)        { { q: search_double, builder: builder_double } }

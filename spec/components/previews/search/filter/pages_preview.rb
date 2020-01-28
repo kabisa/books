@@ -3,13 +3,13 @@ class Search::Filter::PagesPreview < ActionView::Component::Preview
 
   def with_no_pages
     self.num_of_pages_gteq = 0
-    self.num_of_pages_lteq = 500
+    self.num_of_pages_lteq = 525
     render_component
   end
 
   def with_min_pages
     self.num_of_pages_gteq = 100
-    self.num_of_pages_lteq = 500
+    self.num_of_pages_lteq = 525
     render_component
   end
 
