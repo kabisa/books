@@ -53,7 +53,7 @@ module ApplicationHelper
     return if (menu_items = capture { block.call }).blank?
 
     content_tag(:div, class: 'ml-3 dropdown', data: { toggle: 'no-collapse' }) do
-      concat(tag.button(class:sm_rnd_btn_class, aria: { expanded: false, haspopup: true }, data: { toggle: 'dropdown' }, type: 'button') do
+      concat(tag.button(class: sm_rnd_btn_class, aria: { expanded: false, haspopup: true }, data: { toggle: 'dropdown' }, type: 'button') do
         material_icon('more_vert', tooltipify(t('helpers.options')))
       end)
       concat(content_tag(:ul, class: 'dropdown-menu menu dropdown-menu-right') do

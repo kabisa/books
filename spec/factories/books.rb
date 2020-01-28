@@ -15,7 +15,7 @@ FactoryBot.define do
 
     after(:build) do |book, evaluator|
       evaluator.copies_count.times do |n|
-        book.copies << build(:copy)
+        book.copies << build(:copy, location: create(:location))
       end
     end
 

@@ -136,12 +136,12 @@ class BookDecorator < ApplicationDecorator
   end
 
   def hamburger_menu
-    h.hamburger_menu do
-      h.concat link_to_edit
-      h.concat link_to_download
-      h.concat link_to_borrow
-      h.concat link_to_destroy
-    end
+    options = {
+      book: self,
+      user: h.current_user
+    }
+
+    h.render(BookComponents::HamburgerMenu, options)
   end
 
   def link_to_edit
@@ -154,76 +154,6 @@ class BookDecorator < ApplicationDecorator
     return unless h.policy(object).download?
 
     h.tag.li(h.link_to I18n.t('helpers.submit.download'), object.link, class: 'dropdown-item', role: :button, target: '_blank')
-  end
-
-  def link_to_borrow
-    return unless h.policy(object).borrow?
-
-    borrow_or_return_button
-  end
-
-  def link_to_destroy
-    return unless h.policy(object).destroy?
-
-    h.capture do
-      h.concat(h.tag.li(class: 'dropdown-divider'))
-      h.concat(h.tag.li(h.link_to I18n.t('helpers.submit.destroy'), object, method: :delete, remote: true, class: 'dropdown-item text-danger'))
-    end
-  end
-
-  private
-
-  def borrow_or_return_button
-    if borrowed_by?(h.current_user)
-      return_button
-    else
-      borrow_button
-    end
-  end
-
-  def return_button
-    borrowing = borrow_by(h.current_user)
-
-    h.tag.li(h.button_to I18n.t('helpers.submit.borrowing.destroy'), borrowing, method: :delete, remote: true, class: 'dropdown-item')
-  end
-
-  def borrow_button
-    if copies.borrowables.none?
-      borrow_none_button
-    elsif copies.borrowables.one?
-      borrow_one_button
-    else
-      borrow_submenu
-    end
-  end
-
-  def borrow_none_button
-    h.tag.li(h.button_tag borrow_label, class: 'dropdown-item', disabled: true)
-  end
-
-  def borrow_one_button
-    h.tag.li(h.button_to borrow_label, h.borrowings_path(borrowing: { book_id: object, copy_id: copies.borrowables.first }), remote: true, class: 'dropdown-item')
-  end
-
-  def borrow_label
-    I18n.t('helpers.submit.borrowing.submit')
-  end
-
-  def borrow_submenu
-    content = h.capture do
-      h.concat(h.tag.span(borrow_label, class: 'dropdown-item dropdown-toggle'))
-      h.concat(h.tag.ul(submenu_items, class: 'dropdown-menu'))
-    end
-
-    h.tag.li(content, class: 'dropdown-submenu')
-  end
-
-  def submenu_items
-    h.capture do
-      copies.borrowables.each do |c|
-        h.concat(h.tag.li(h.button_to c.location.to_label, h.borrowings_path(borrowing: { book_id: object, copy_id: c }), remote: true, class: 'dropdown-item'))
-      end
-    end
   end
 end
 

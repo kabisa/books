@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :location do
-    city { "Weert" }
+    city { Faker::Address.unique.city }
   end
 end

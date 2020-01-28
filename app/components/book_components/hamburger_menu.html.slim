@@ -1,0 +1,22 @@
+= hamburger_menu do
+  - if edit?
+    li= link_to I18n.t('helpers.submit.edit'), edit_book_path(book), class: 'dropdown-item'
+  - if download?
+    li= link_to I18n.t('helpers.submit.download'), book.link, class: 'dropdown-item', role: :button, target: '_blank'
+  - if borrow?
+    - if book.borrowed_by?(user)
+      li= button_to I18n.t('helpers.submit.borrowing.destroy'), borrowing, method: :delete, remote: true, class: 'dropdown-item'
+    - elsif book.copies.borrowables.none?
+      li.dropdown-item.disabled= borrow_label
+    - elsif book.copies.borrowables.one?
+      li= button_to borrow_label, borrowings_path(borrowing: { book_id: book, copy_id: book.copies.borrowables.first }), remote: true, class: 'dropdown-item'
+    - else
+      li.dropdown-submenu
+        .dropdown-item.dropdown-toggle= borrow_label
+        ul.dropdown-menu
+          - book.copies.borrowables.each do |c|
+            li= button_to c.location.to_label, borrowings_path(borrowing: { book_id: book, copy_id: c }), remote: true, class: 'dropdown-item'
+  - if destroy?
+    li.dropdown-divider
+    li= link_to I18n.t('helpers.submit.destroy'), book, method: :delete, remote: true, class: 'dropdown-item text-danger'
+
