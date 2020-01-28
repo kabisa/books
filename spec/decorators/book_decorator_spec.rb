@@ -401,13 +401,12 @@ RSpec.describe BookDecorator do
       context 'copy is available on multiple locations' do
         before do
           allow(decorator).to receive(:copies).and_return(double('copies', borrowables: borrowables))
-          allow(h).to receive(:dom_id).and_return(dom_id)
         end
 
         let(:borrowables) { build_stubbed_list(:copy, 2) }
-        let(:dom_id)      { 'dom-id' }
 
-        it { is_expected.to have_css('form input.dropdown-item[value="Borrow..."]') }
+        it { is_expected.to have_css('li.dropdown-submenu span.dropdown-item.dropdown-toggle', text: 'Borrow') }
+        it { is_expected.to have_css('li.dropdown-submenu ul.dropdown-menu li', count: 2) }
       end
     end
 

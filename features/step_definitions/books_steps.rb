@@ -45,13 +45,6 @@ Given("the {book} is available at the following locations:") do |book, table|
   book.save
 end
 
-Given("I borrowed the book {string} {int} days ago") do |title, days_ago|
-  travel_to(days_ago.days.ago) do
-    step %q(I choose "Books" from the navigation drawer)
-    step %Q(I borrow the book "#{title}")
-  end
-end
-
 Given("I liked the book {string}") do |title|
   step %q(I choose "Books" from the navigation drawer)
   step %Q(I like the book "#{title}")
@@ -66,17 +59,6 @@ When("I am viewing the details for {string}") do |title|
   step %q(I choose "Books" from the navigation drawer)
   step %Q(I expand the panel for "#{title}")
   step %q(I click "View Details")
-end
-
-When("I borrow the book {string}") do |title|
-  step %Q(I expand the panel for "#{title}")
-
-  within('.list-group-item', text: title) do
-    click_on('more_vert')
-    link_or_button = all('a', text: /^Borrow/i).first # Show a modal first
-    link_or_button ||= find_button('Borrow') # Only 1 location available
-    link_or_button.click
-  end
 end
 
 When("I {like_or_dislike_icon} the book {string}") do |icon, title|
@@ -174,26 +156,6 @@ end
 When("I click on the writer {string} for the book {string}") do |writer_name, title|
   within('.list-group-item', text: title) do
     click_on(writer_name)
-  end
-end
-
-Then("I see feedback about borrowing the book {string}") do |title|
-  within('.snackbar') do
-    expect(page).to have_content("You're now borrowing '#{title}'.")
-  end
-end
-
-Then("I see feedback about returning the book {string}") do |title|
-  within('.snackbar') do
-    expect(page).to have_content("Thank you for returning '#{title}'.")
-  end
-end
-
-Then("I {can_or_not}borrow {string}") do |should_do, title|
-  to_have_or_not_have = should_do ? 'to' : 'not_to'
-
-  within('.list-group-item', text: title) do
-    expect(page).send(to_have_or_not_have, have_button('Borrow', visible: false))
   end
 end
 

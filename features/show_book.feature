@@ -46,7 +46,6 @@ Feature:
     Then I am viewing the book "Lorem Ipsum"
     And I should see a download link
 
-  @wip
   Scenario: View details for a printed book
     Given I signed in as a Kabisaan
     And I choose "Books" from the navigation drawer

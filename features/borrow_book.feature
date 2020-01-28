@@ -35,7 +35,7 @@ Feature: As a Kabisaan
     And I cannot borrow "Lorem Ipsum"
     But I can return the book "Lorem Ipsum"
 
-  Scenario: Show dialog when multiple copies
+  Scenario: Show submenu when multiple copies
     Given I signed in as a Kabisaan
     And the following locations:
       | city     |
@@ -49,9 +49,7 @@ Feature: As a Kabisaan
       | Rome     | 1      |
       | Florence | 1      |
     When I choose "Books" from the navigation drawer
-    And I borrow the book "Lorem Ipsum"
-    And I choose the location "Rome" in the modal
-    And I click "Borrow" in the modal
+    And I borrow the book "Lorem Ipsum" from "Rome"
     Then I see the book "Lorem Ipsum" has 1 copy left
     And I cannot borrow "Lorem Ipsum"
     But I can return the book "Lorem Ipsum"
