@@ -1,0 +1,18 @@
+// Since Bootstrap has no support for submenu styling...
+.dropdown-submenu {
+  position: relative;
+
+  .dropdown-toggle::after {
+    content: 'arrow_right';
+    vertical-align: middle;
+  }
+
+  &:hover > .dropdown-menu {
+    display: block;
+  }
+
+  > .dropdown-menu {
+    left: 100%;
+    top: 0;
+  }
+}

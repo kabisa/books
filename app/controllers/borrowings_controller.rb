@@ -1,6 +1,4 @@
 class BorrowingsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :select_copy
-
   def create
     @book     = Book.find(params[:borrowing][:book_id]).decorate
     copy      = Copy.find(params.dig(:borrowing, :copy_id))

@@ -194,7 +194,6 @@ class BookDecorator < ApplicationDecorator
       borrow_one_button
     else
       borrow_submenu
-      #borrow_modal_button
     end
   end
 
@@ -204,10 +203,6 @@ class BookDecorator < ApplicationDecorator
 
   def borrow_one_button
     h.tag.li(h.button_to borrow_label, h.borrowings_path(borrowing: { book_id: object, copy_id: copies.borrowables.first }), remote: true, class: 'dropdown-item')
-  end
-
-  def borrow_modal_button
-    h.button_to "#{borrow_label}...", h.borrowings_path(borrowing: { book_id: object }), remote: true, class: 'dropdown-item'
   end
 
   def borrow_label
