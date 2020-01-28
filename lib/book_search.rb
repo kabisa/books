@@ -42,24 +42,16 @@ class BookSearch
   attr_accessor :q
 
   def remove_params
-    if params.dig(:q, :likes_count_gteq)&.to_i == 0
-      params[:q].delete(:likes_count_gteq)
-    end
+    remove_param(:likes_count_gteq, 0)
+    remove_param(:num_of_pages_gteq, 0)
+    remove_param(:num_of_pages_lteq, num_of_pages_upper)
+    remove_param(:published_years_ago_lteq, 0)
+    remove_param(:published_years_ago_gteq, published_years_ago_upper)
+  end
 
-    if params.dig(:q, :num_of_pages_gteq)&.to_i == 0
-      params[:q].delete(:num_of_pages_gteq)
-    end
-
-    if params.dig(:q, :num_of_pages_lteq)&.to_i == num_of_pages_upper
-      params[:q].delete(:num_of_pages_lteq)
-    end
-
-    if params.dig(:q, :published_years_ago_lteq)&.to_i == 0
-      params[:q].delete(:published_years_ago_lteq)
-    end
-
-    if params.dig(:q, :published_years_ago_gteq)&.to_i == published_years_ago_upper
-      params[:q].delete(:published_years_ago_gteq)
+  def remove_param(key, value)
+    if params.dig(:q, key)&.to_i == value
+      params[:q].delete(key)
     end
   end
 

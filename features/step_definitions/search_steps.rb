@@ -19,6 +19,7 @@ When("I search for books with at least {int} likes") do |likes_count|
       element.dispatchEvent(event)
     JS
     page.execute_script js
+    find('.dropdown-menu.show').click_on('×')
     click_on('Search')
   end
 end
@@ -36,6 +37,7 @@ When("I search for books tagged with {string}") do |text|
       end
     end
 
+    find('.dropdown-menu.show').click_on('×')
     click_on('Search')
   end
 end
@@ -55,6 +57,7 @@ When("I search for books between {int} and {int} pages") do |at_least, at_most|
       atMostEl.dispatchEvent(event)
     JS
     page.execute_script js
+    find('.dropdown-menu.show').click_on('×')
     click_on('Search')
   end
 end

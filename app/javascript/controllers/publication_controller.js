@@ -48,12 +48,12 @@ export default class extends DropdownController {
 
     if (this.hasMin) {
       if (this.hasMax) {
-        label = `${this.min} - ${this.max}`;
+        label = `Published ${this.min} - ${this.max} yr. ago`;
       } else {
-        label = `Min. ${this.min}`;
+        label = `Older than ${this.min} yr.`;
       }
     } else {
-      label = `Max. ${this.max}`;
+      label = `Newer than ${this.max} yr.`;
     }
 
     this.labelTarget.innerHTML = label;
@@ -71,7 +71,7 @@ export default class extends DropdownController {
   updateButton() {
     this.buttonTarget.classList.toggle(CLASSNAMES.border, this.isActive);
     if (this.isActive) {
-      this.toggleTarget.innerHTML = `${this.initialToggleText}: ${this.labelTarget.innerText}`;
+      this.toggleTarget.innerHTML = this.labelTarget.innerText;
     }
   }
 
