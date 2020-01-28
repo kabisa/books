@@ -3,6 +3,10 @@ module BookComponents
     include BootstrapHelper
     include ApplicationHelper
 
+    delegate :edit?, :download?, :borrow?, :destroy?, to: :policy
+    delegate :copies, to: :book
+    delegate :borrowables, to: :copies
+
     def initialize(book:, user:)
       @book = book
       @user = user
@@ -16,28 +20,16 @@ module BookComponents
       Pundit.policy(user, book)
     end
 
-    def edit?
-      policy.edit?
-    end
-
-    def download?
-      policy.download?
-    end
-
-    def borrow?
-      policy.borrow?
-    end
-
-    def destroy?
-      policy.destroy?
-    end
-
     def borrowing
       book.borrow_by(user)
     end
 
     def borrow_label
       I18n.t('helpers.submit.borrowing.submit')
+    end
+
+    def item_class
+      'dropdown-item'
     end
   end
 end
