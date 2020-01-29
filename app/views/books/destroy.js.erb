@@ -10,5 +10,5 @@ if (isExpanded)
 el.replaceWith(restoreEl);
 
 var snackbar       = document.createElement('div');
-snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash, action: link_to(t('helpers.submit.undo'), restore_book_path(@book), method: :post, remote: true)) %>';
+snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
 document.body.appendChild(snackbar.firstChild);

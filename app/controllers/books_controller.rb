@@ -65,10 +65,18 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      flash.now.notice = t('.notice', title: @book.title)
-      format.html { redirect_to books_url }
+      notice = t('.notice', title: @book.title)
+      action = helpers.link_to(t('helpers.submit.undo'), restore_book_path(@book), method: :post, remote: true)
+
+      format.html do
+        flash[:action] = action
+        redirect_to books_url, notice: notice
+      end
       format.json { head :no_content }
-      format.js
+      format.js do
+        flash.now[:action] = action
+        flash.now.notice = notice
+      end
     end
   end
 

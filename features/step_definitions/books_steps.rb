@@ -67,12 +67,14 @@ When("I {like_or_dislike_icon} the book {string}") do |icon, title|
   end
 end
 
-When("I delete the book {string}") do |title|
-  #step %Q(I expand the panel for "#{title}")
+When("I delete the book") do
+  click_on('more_vert')
+  click_on('Delete')
+end
 
+When("I delete the book {string}") do |title|
   within('.list-group-item', text: title) do
-    click_on('more_vert')
-    click_on('Delete')
+    step %q(I delete the book)
   end
 end
 

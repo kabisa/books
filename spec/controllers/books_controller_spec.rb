@@ -171,15 +171,38 @@ RSpec.describe BooksController, type: :controller do
   describe 'DELETE #destroy' do
     let!(:book) { create :book }
 
+    def do_delete(id, xhr: true)
+      delete :destroy, xhr: xhr, params: {id: id}, session: valid_session
+    end
+
     it 'destroys the requested book' do
       expect {
-        delete :destroy, params: {id: book.to_param}, session: valid_session
+        do_delete(book.to_param)
       }.to change(Book, :count).by(-1)
     end
 
-    it 'redirects to the books list' do
-      delete :destroy, params: {id: book.to_param}, session: valid_session
-      expect(response).to redirect_to(books_url)
+    context 'synchronous' do
+      it 'sets a flash notice' do
+        do_delete(book.to_param, xhr: false)
+        expect(request.flash.notice).to match(/deleted/)
+      end
+
+      it 'redirects to the books list' do
+        do_delete(book.to_param, xhr: false)
+        expect(response).to redirect_to(books_url)
+      end
+    end
+
+    context 'asynchronous' do
+      it 'sets a flash notice' do
+        do_delete(book.to_param)
+        expect(request.flash.notice).to match(/deleted/)
+      end
+
+      it 'renders destroy' do
+        do_delete(book.to_param)
+        expect(response).to render_template(:destroy)
+      end
     end
   end
 
