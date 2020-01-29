@@ -52,4 +52,5 @@ Feature:
     When I expand the panel for "Dolor Sit"
     And I click "View Details"
     Then I am viewing the book "Dolor Sit"
+    And I should see a borrow button
     But I should not see a download link

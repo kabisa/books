@@ -87,5 +87,25 @@ Feature: As a Kabisaan
     When I choose "Books" from the navigation drawer
     Then I cannot borrow "Lorem Ipsum"
 
+  Scenario: Borrow a book from the show page
+    Given I signed in as a Kabisaan
+    And the following locations:
+      | city     |
+      | Rome     |
+    And the following book:
+      | title       |
+      | Lorem Ipsum |
+    And the book "Lorem Ipsum" is available at the following locations:
+      | location | copies |
+      | Rome     | 1      |
+    When I choose "Books" from the navigation drawer
+    And I expand the panel for "Lorem Ipsum"
+    And I click "View Details"
+    And I borrow the book
+    Then I see the book has 0 copies left
+    And I see feedback about borrowing the book "Lorem Ipsum"
+    And I should not see a borrow button
+    But I should see a return button
+
   @todo
   Scenario: Undo a borrow action

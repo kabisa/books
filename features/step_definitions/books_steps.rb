@@ -82,15 +82,6 @@ When("I undo deleting the book/comment") do
   end
 end
 
-When("I return the book {string}") do |title|
-  #step %Q(I expand the panel for "#{title}")
-
-  within('.list-group-item', text: title) do
-    click_on('more_vert')
-    click_on('Return book')
-  end
-end
-
 When("I choose the location {string} in the modal") do |city|
   within('.modal form') do
     select(city, from: 'Location')
@@ -100,15 +91,6 @@ end
 When("I click {string} in the modal") do |text|
   within('.modal form') do
     click_on(text)
-  end
-end
-
-Then("I can return the book {string}") do |title|
-  refresh
-
-  within('.list-group-item', text: title) do
-    click_on('more_vert')
-    expect(page).to have_button('Return book')
   end
 end
 
@@ -267,8 +249,12 @@ end
 
 Then("I see the book {string} has {int} copy/copies left") do |title, copies_count|
   within('.list-group-item', text: title) do
-    expect(page).to have_css('p', text: /#{copies_count} cop(y|ies)/, visible: false)
+    step %Q(I see the book has #{copies_count} copies left)
   end
+end
+
+Then("I see the book has {int} copy/copies left") do |copies_count|
+  expect(page).to have_css('p', text: /#{copies_count} cop(y|ies)/, visible: false)
 end
 
 Then("I see a validation error that download link is required in case no copies are added") do

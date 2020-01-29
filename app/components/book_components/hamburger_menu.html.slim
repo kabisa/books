@@ -5,18 +5,18 @@
     li= link_to I18n.t('helpers.submit.download'), book.link, class: item_class, role: :button, target: '_blank'
   - if borrow?
     - if book.borrowed_by?(user)
-      li= button_to I18n.t('helpers.submit.borrowing.destroy'), borrowing, method: :delete, remote: true, class: item_class
+      li= button_to I18n.t('helpers.submit.borrowing.destroy'), borrowing, method: :delete, remote: remote, class: item_class
     - elsif borrowables.none?
       li(class="#{item_class} disabled")= borrow_label
     - elsif borrowables.one?
-      li= button_to borrow_label, borrowings_path(borrowing: { book_id: book, copy_id: borrowables.first }), remote: true, class: item_class
+      li= button_to borrow_label, borrowings_path(borrowing: { book_id: book, copy_id: borrowables.first }), remote: remote, class: item_class
     - else
       li.dropdown-submenu
         div(class="#{item_class} dropdown-toggle")= borrow_label
         ul.dropdown-menu
           - borrowables.each do |c|
-            li= button_to c.location.to_label, borrowings_path(borrowing: { book_id: book, copy_id: c }), remote: true, class: item_class
+            li= button_to c.location.to_label, borrowings_path(borrowing: { book_id: book, copy_id: c }), remote: remote, class: item_class
   - if destroy?
     li.dropdown-divider
-    li= link_to I18n.t('helpers.submit.destroy'), book, method: :delete, remote: true, class: "#{item_class} text-danger"
+    li= link_to I18n.t('helpers.submit.destroy'), book, method: :delete, remote: remote, class: "#{item_class} text-danger"
 

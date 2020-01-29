@@ -6,8 +6,13 @@ class BorrowingsController < ApplicationController
 
     respond_to do |format|
       if borrowing.save
-        flash.now.notice = t('.notice', title: @book.title)
-        format.js { render :create }
+        notice = t('.notice', title: @book.title)
+        format.html { redirect_to @book, notice: notice }
+
+        format.js do
+          flash.now.notice = notice
+          render :create
+        end
       else
         #format.html { render :new }
         #format.json { render json: @book.errors, status: :unprocessable_entity }
@@ -21,8 +26,13 @@ class BorrowingsController < ApplicationController
 
     respond_to do |format|
       if borrowing.really_destroy!
-        flash.now.notice = t('.notice', title: @book.title)
-        format.js { render :create }
+        notice = t('.notice', title: @book.title)
+        format.html { redirect_to @book, notice: notice }
+
+        format.js do
+          flash.now.notice = notice
+          render :create
+        end
       else
         #format.html { render :new }
         #format.json { render json: @book.errors, status: :unprocessable_entity }

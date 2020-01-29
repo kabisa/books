@@ -3,8 +3,9 @@ require 'rails_helper'
 describe BookComponents::HamburgerMenu, type: :component do
   subject       { Capybara.string html }
   let(:html)    {  render_inline(described_class, options) }
-  let(:options) { { book: book, user: user } }
+  let(:options) { { book: book, user: user, remote: remote } }
   let(:book)    { create(:book) }
+  let(:remote)  { true }
 
   describe 'with a guest user' do
     let(:user) { build(:guest) }
@@ -19,7 +20,17 @@ describe BookComponents::HamburgerMenu, type: :component do
     it { is_expected.to have_css('.dropdown ul.dropdown-menu') }
     it { is_expected.to have_css(".dropdown-menu li a.dropdown-item[href='/books/#{book.id}/edit']", text: 'Edit') }
     it { is_expected.to have_css('.dropdown-menu li.dropdown-divider') }
-    it { is_expected.to have_css(".dropdown-menu li a.dropdown-item.text-danger[data-remote='true'][data-method='delete'][href='/books/#{book.id}']", text: 'Delete') }
+    it { is_expected.to have_css(".dropdown-menu li a.dropdown-item.text-danger[data-method='delete'][href='/books/#{book.id}']", text: 'Delete') }
+
+    context 'with synchronous calls' do
+      let(:remote)  { false }
+      it { is_expected.to have_no_css(".dropdown-item[data-remote='true']", text: 'Delete') }
+    end
+
+    context 'with asynchronous calls' do
+      let(:remote)  { true }
+      it { is_expected.to have_css(".dropdown-item[data-remote='true']", text: 'Delete') }
+    end
 
     describe 'with an ebook' do
       let(:book)    { create(:book, :ebook, copies_count: 0) }
@@ -33,7 +44,17 @@ describe BookComponents::HamburgerMenu, type: :component do
 
       describe 'borrowable on one location' do
         it { is_expected.not_to have_css('.dropdown-menu li', text: 'Download') }
-        it { is_expected.to have_css('.dropdown-menu li form[method="post"][action^="/borrowings"][data-remote="true"] input[type="submit"][value="Borrow"]') }
+        it { is_expected.to have_css('.dropdown-menu li form[method="post"][action^="/borrowings"] input[type="submit"][value="Borrow"]') }
+
+        context 'with synchronous calls' do
+          let(:remote)  { false }
+          it { is_expected.to have_no_css('form[data-remote="true"] input[type="submit"][value="Borrow"]') }
+        end
+
+        context 'with asynchronous calls' do
+          let(:remote)  { true }
+          it { is_expected.to have_css('form[data-remote="true"] input[type="submit"][value="Borrow"]') }
+        end
       end
 
       describe 'borrowable on multiple locations' do
@@ -42,7 +63,17 @@ describe BookComponents::HamburgerMenu, type: :component do
         it { is_expected.not_to have_css('.dropdown-menu li', text: 'Download') }
         it { is_expected.to have_css('.dropdown-menu li.dropdown-submenu') }
         it { is_expected.to have_css('.dropdown-submenu .dropdown-item', text: 'Borrow') }
-        it { is_expected.to have_css('.dropdown-submenu ul.dropdown-menu li form[method="post"][action^="/borrowings"][data-remote="true"]', count: 2) }
+        it { is_expected.to have_css('.dropdown-submenu ul.dropdown-menu li form[method="post"][action^="/borrowings"]', count: 2) }
+
+        context 'with synchronous calls' do
+          let(:remote)  { false }
+          it { is_expected.to have_no_css('.dropdown-submenu ul.dropdown-menu li form[data-remote="true"]') }
+        end
+
+        context 'with asynchronous calls' do
+          let(:remote)  { true }
+          it { is_expected.to have_css('.dropdown-submenu ul.dropdown-menu li form[data-remote="true"]', count: 2) }
+        end
       end
 
       describe 'borrowed by the user' do
@@ -53,6 +84,16 @@ describe BookComponents::HamburgerMenu, type: :component do
         it { is_expected.not_to have_css('.dropdown-menu li', text: 'Download') }
         it { is_expected.to have_css('.dropdown-menu li form input[name="_method"][value="delete"]', visible: false) }
         it { is_expected.to have_css('.dropdown-menu li form input.dropdown-item[value="Return book"]') }
+
+        context 'with synchronous calls' do
+          let(:remote)  { false }
+          it { is_expected.to have_no_css('.dropdown-menu li form[data-remote="true"]') }
+        end
+
+        context 'with asynchronous calls' do
+          let(:remote)  { true }
+          it { is_expected.to have_css('.dropdown-menu li form[data-remote="true"]') }
+        end
       end
 
       describe 'borrowed by another user' do

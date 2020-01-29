@@ -5,9 +5,7 @@
       - if @book.writers.any?
         small= @book.written_by
 
-    = hamburger_menu do
-      = @book.link_to_edit
-      = @book.link_to_download
+    = @book.hamburger_menu(remote: false)
 
   .card-body
     .row
