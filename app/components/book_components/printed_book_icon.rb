@@ -24,9 +24,9 @@ module BookComponents
       tooltip = [book.printed_book_text]
 
       if borrowed_by_user?
-        tooltip << I18n.t('you_are_currently_borrowing')
+        tooltip << unsentence_case(I18n.t('you_are_currently_borrowing'))
       elsif !available_copies?
-        tooltip << I18n.t('no_copies_available')
+        tooltip << unsentence_case(I18n.t('no_copies_available'))
       end
 
       safe_join tooltip, ', '
@@ -46,6 +46,11 @@ module BookComponents
 
     def available_copies?
       @available_copies ||= book.available_copies.nonzero?
+    end
+
+    def unsentence_case(text)
+      text[0] = text[0].downcase
+      text
     end
   end
 end

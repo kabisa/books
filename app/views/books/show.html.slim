@@ -20,6 +20,8 @@
       .col
         p= @book.formatted_available_copies
 
+        = @book.currently_borrowing_alert
+
         - if @book.summary?
           = simple_format @book.summary, class: 'card-text'
         - if @book.tag_list.any?

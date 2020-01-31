@@ -140,6 +140,12 @@ class BookDecorator < ApplicationDecorator
 
     h.render(BookComponents::HamburgerMenu, options)
   end
+
+  def currently_borrowing_alert
+    if borrowed_by?(h.current_user)
+      h.tag.div(I18n.t('you_are_currently_borrowing'), class: 'alert alert-info')
+    end
+  end
 end
 
 # (1) Using `comments.size` will not use counter cache. We could also have used `model.comments.size`.

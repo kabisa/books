@@ -31,7 +31,7 @@ describe BookComponents::PrintedBookIcon, type: :component do
         book.copies.first.borrowings.create(user: user)
       end
 
-      it { is_expected.to have_css('i.material-icons.text-primary[title="Printed book, you are currently borrowing a copy"]', text: 'menu_book') }
+      it { is_expected.to have_css('i.material-icons.text-primary[title="Printed book, you are currently borrowing a copy."]', text: 'menu_book') }
     end
   end
 

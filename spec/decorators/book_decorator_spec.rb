@@ -324,4 +324,26 @@ RSpec.describe BookDecorator do
       it { is_expected.to be_nil }
     end
   end
+
+  describe '#currently_borrowing_alert' do
+    before     { allow(h).to receive(:current_user).and_return(user) }
+
+    let(:html) { decorator.currently_borrowing_alert }
+    let(:book) { create :book, :printed_book }
+    let(:user) { create :user }
+
+    context 'user is borrowing' do
+      before  { Borrowing.create(user: user, copy: book.copies.first) }
+
+      subject { Capybara.string html }
+
+      it      { is_expected.to have_css('.alert.alert-info', text: 'You are currently borrowing a copy.') }
+    end
+
+    context 'user is not borrowing' do
+      subject { html }
+
+      it      { is_expected.to be_nil }
+    end
+  end
 end

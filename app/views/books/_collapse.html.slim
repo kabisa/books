@@ -11,6 +11,8 @@
       .col
         - if policy(book).borrow?
           p= book.formatted_available_copies
+
+        = book.currently_borrowing_alert
         = book.summary_highlighted_with_search
 
         - if book.tag_list.any?
