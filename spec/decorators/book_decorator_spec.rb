@@ -293,46 +293,4 @@ RSpec.describe BookDecorator do
       it { is_expected.to be_nil }
     end
   end
-
-  describe '#link_to_edit' do
-    let(:html) { decorator.link_to_edit }
-    let(:book) { create :book }
-
-    before { allow(h).to receive(:policy).and_return(policy_stub) }
-
-    describe 'authorized user' do
-      subject           { Capybara.string html }
-      let(:policy_stub) { double('BookPolicy', edit?: true) }
-
-      it { is_expected.to have_css('a.dropdown-item[href$="edit"]', text: 'Edit') }
-    end
-
-    describe 'unauthorized user' do
-      subject           { html }
-      let(:policy_stub) { double('BookPolicy', edit?: false) }
-
-      it { is_expected.to be_nil }
-    end
-  end
-
-  describe '#link_to_download' do
-    let(:html) { decorator.link_to_download }
-    let(:book) { create :book, :ebook }
-
-    before { allow(h).to receive(:policy).and_return(policy_stub) }
-
-    describe 'authorized user' do
-      subject           { Capybara.string html }
-      let(:policy_stub) { double('BookPolicy', download?: true) }
-
-      it { is_expected.to have_css("a[target='_blank'][href='#{book.link}']", text: 'Download') }
-    end
-
-    describe 'unauthorized user' do
-      subject           { html }
-      let(:policy_stub) { double('BookPolicy', download?: false) }
-
-      it { is_expected.to be_nil }
-    end
-  end
 end
