@@ -2,6 +2,9 @@ class Book < ApplicationRecord
   include SortByNullsLast
 
   # [1]
+  #
+  # associations:
+  #
   has_many :votes, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :dislikes, dependent: :destroy
@@ -14,6 +17,8 @@ class Book < ApplicationRecord
   has_many :borrowings, through: :copies
   has_and_belongs_to_many :writers
 
+  # validations:
+  #
   validates :title, presence: true, length: { maximum: 255 }
   validates :link, length: { maximum: 2048 }, url: true
   validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [2]
@@ -24,7 +29,15 @@ class Book < ApplicationRecord
 
   accepts_nested_attributes_for :copies, allow_destroy: true
 
+  # scopes:
+  #
+  # `complement_with` extends the collection returned by the current
+  # scope with the collection that satifies `opts`.
+  # This allows you to add specific items to a complex query that
+  # contains `joins`, `order` or other operations.
+  scope :complement_with, ->(opts) { self.or(unscope(:where).rewhere(opts)) }
   sort_by_nulls_last :num_of_pages, :published_on
+
   acts_as_paranoid
   acts_as_taggable
   mount_uploader :cover, CoverUploader

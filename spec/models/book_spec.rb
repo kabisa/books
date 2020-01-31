@@ -1,40 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
-  describe 'validations' do
-    it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_length_of(:title).is_at_most(255) }
-    it { is_expected.to validate_length_of(:summary).is_at_most(2048) }
-    it { is_expected.to validate_numericality_of(:num_of_pages).allow_nil.is_greater_than(0).is_less_than(2**15) }
-    it { is_expected.to validate_length_of(:link).is_at_most(2048) }
-
-    it do
-      expect(build(:book, link: 'invalid')).to be_invalid
-    end
-  end
-
-  it { is_expected.to act_as_paranoid }
-
-  describe 'acts_as_taggable' do
-    let(:instance) { build :book }
-
-    it { expect(instance).to respond_to(:tag_list) }
-
-    describe '#tag_list=' do
-      it 'denormalizes when value is a JSON string' do
-        instance.tag_list = [{ value: 'dolor' }, { value: 'sit' }].to_json
-
-        expect(instance.tag_list).to include('sit', 'dolor')
-      end
-
-      it 'let\'s `acts_as_taggable` handle it otherwise' do
-        instance.tag_list = %w(dolor sit)
-
-        expect(instance.tag_list).to include('sit', 'dolor')
-      end
-    end
-  end
-
   describe 'associations' do
     it { is_expected.to have_many(:votes).dependent(:destroy) }
     it { is_expected.to have_many(:likes).dependent(:destroy) }
@@ -89,7 +55,55 @@ RSpec.describe Book, type: :model do
     end
   end
 
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_length_of(:title).is_at_most(255) }
+    it { is_expected.to validate_length_of(:summary).is_at_most(2048) }
+    it { is_expected.to validate_numericality_of(:num_of_pages).allow_nil.is_greater_than(0).is_less_than(2**15) }
+    it { is_expected.to validate_length_of(:link).is_at_most(2048) }
+
+    it do
+      expect(build(:book, link: 'invalid')).to be_invalid
+    end
+  end
+
+  it { is_expected.to act_as_paranoid }
+
+  describe 'acts_as_taggable' do
+    let(:instance) { build :book }
+
+    it { expect(instance).to respond_to(:tag_list) }
+
+    describe '#tag_list=' do
+      it 'denormalizes when value is a JSON string' do
+        instance.tag_list = [{ value: 'dolor' }, { value: 'sit' }].to_json
+
+        expect(instance.tag_list).to include('sit', 'dolor')
+      end
+
+      it 'let\'s `acts_as_taggable` handle it otherwise' do
+        instance.tag_list = %w(dolor sit)
+
+        expect(instance.tag_list).to include('sit', 'dolor')
+      end
+    end
+  end
+
   describe 'scopes' do
+    describe '.complement_with' do
+      let!(:book_lorem)     { create(:book, title: 'Lorem', num_of_pages: 10) }
+      let!(:book_ipsum)     { create(:book, title: 'Ipsum', num_of_pages: 1000) }
+      let!(:book_dolor)     { create(:book, title: 'Dolor', num_of_pages: 500) }
+      let(:active_relation) { described_class.where(num_of_pages: (500..)).order(:title).includes(:copies) }
+
+      subject { active_relation.complement_with(title: 'Lorem') }
+
+      it do
+        expect(active_relation).not_to include(book_lorem)
+        expect(subject).to include(book_lorem)
+      end
+    end
+
     describe '.sort_by_num_of_pages_nulls_last_*' do
       let!(:book_wo_pages)     { create(:book, num_of_pages: nil) }
       let!(:book_w_many_pages) { create(:book, num_of_pages: 1000) }

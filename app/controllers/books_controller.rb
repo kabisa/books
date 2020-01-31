@@ -7,13 +7,8 @@ class BooksController < ApplicationController
   def index
     @q = BookSearch.search(params) do |q|
       @books = q.result(distinct: true)
-
-      if params[:restorable_id]
-        restorable_books = @books.unscope(:where).rewhere(id: params[:restorable_id])
-        @books = @books.or(restorable_books)
-      end
-
-      @books = @books.includes(:taggings, :writers, copies: [:location])
+        .complement_with(id: params[:restorable_id])
+        .includes(:taggings, :writers, copies: [:location])
         .page(params[:page])
         .decorate
     end
