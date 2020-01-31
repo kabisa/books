@@ -9,29 +9,37 @@ describe BookComponents::PrintedBookIcon, type: :component do
   describe 'with a printed book' do
     let(:book) { create(:book, :printed_book, link: nil, copies_count: 1) }
 
+    describe 'with a guest user' do
+      let(:user) { build(:guest) }
 
-    describe 'with available copies' do
-      it { is_expected.to have_css('i.material-icons:not(.text-muted)[title="Printed book"]', text: 'menu_book') }
+      it { is_expected.not_to have_css('i') }
     end
 
-    describe 'without avaiable copies' do
-      before do
-        copy = book.copies.first
+    describe 'with a Kabisa user' do
 
-        copy.number.times do
-          copy.borrowings.create(user: create(:user))
+      describe 'with available copies' do
+        it { is_expected.to have_css('i.material-icons:not(.text-muted)[title="Printed book"]', text: 'menu_book') }
+      end
+
+      describe 'without avaiable copies' do
+        before do
+          copy = book.copies.first
+
+          copy.number.times do
+            copy.borrowings.create(user: create(:user))
+          end
         end
+
+        it { is_expected.to have_css('i.material-icons.text-muted[title="Printed book, no copies available"]', text: 'menu_book') }
       end
 
-      it { is_expected.to have_css('i.material-icons.text-muted[title="Printed book, no copies available"]', text: 'menu_book') }
-    end
+      describe 'borrowed by the user' do
+        before do
+          book.copies.first.borrowings.create(user: user)
+        end
 
-    describe 'borrowed by the user' do
-      before do
-        book.copies.first.borrowings.create(user: user)
+        it { is_expected.to have_css('i.material-icons.text-primary[title="Printed book, you are currently borrowing a copy."]', text: 'menu_book') }
       end
-
-      it { is_expected.to have_css('i.material-icons.text-primary[title="Printed book, you are currently borrowing a copy."]', text: 'menu_book') }
     end
   end
 

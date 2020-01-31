@@ -45,6 +45,8 @@ class BookDecorator < ApplicationDecorator
   end
 
   def ebook_icon
+    return unless h.current_user.identified?
+
     if link?
       h.material_icon('tablet_android', h.tooltipify(ebook_text))
     else

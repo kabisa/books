@@ -18,7 +18,8 @@
               p.mb-0= @book.formatted_published_on
 
       .col
-        p= @book.formatted_available_copies
+        - if policy(@book).borrow?
+          p= @book.formatted_available_copies
 
         = @book.currently_borrowing_alert
 

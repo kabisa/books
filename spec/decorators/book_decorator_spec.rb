@@ -91,31 +91,47 @@ RSpec.describe BookDecorator do
   end
 
   describe '#book_type_icon' do
-    let(:html) { decorator.book_type_icon }
+    before do
+      allow(h).to receive(:current_user).and_return(user)
+    end
+
     subject { Capybara.string html }
 
-    describe 'with link' do
-      let(:book) { build :book, :ebook }
+    let(:html) { decorator.book_type_icon }
 
-      it { is_expected.to have_css('i.material-icons', text: '0') }
-      it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
-
-      it { is_expected.to have_css('i.material-icons:not([title]) + i.material-icons[title]') }
-    end
-
-    describe 'with printed copies' do
-      let(:book) { build :book, :printed_book, link: nil }
-
-      it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
-      it { is_expected.to have_css('i.material-icons', text: '0') }
-      it { is_expected.to have_css('i.material-icons[title] + i.material-icons:not([title])') }
-    end
-
-    describe 'with link and printed copies' do
+    describe 'with a guest user' do
+      let(:user) { build(:guest) }
       let(:book) { build :book, :printed_book, :ebook }
 
-      it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
-      it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
+      it { is_expected.not_to have_css('i') }
+    end
+
+    describe 'with a Kabisa user' do
+      let(:user)    { build(:user) }
+
+      describe 'with link' do
+        let(:book) { build :book, :ebook }
+
+        it { is_expected.to have_css('i.material-icons', text: '0') }
+        it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
+
+        it { is_expected.to have_css('i.material-icons:not([title]) + i.material-icons[title]') }
+      end
+
+      describe 'with printed copies' do
+        let(:book) { build :book, :printed_book, link: nil }
+
+        it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
+        it { is_expected.to have_css('i.material-icons', text: '0') }
+        it { is_expected.to have_css('i.material-icons[title] + i.material-icons:not([title])') }
+      end
+
+      describe 'with link and printed copies' do
+        let(:book) { build :book, :printed_book, :ebook }
+
+        it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
+        it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
+      end
     end
   end
 

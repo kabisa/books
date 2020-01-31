@@ -40,6 +40,10 @@ module BookComponents
       end
     end
 
+    def identified_user?
+      user.identified?
+    end
+
     def borrowed_by_user?
       @borrowed_by_user ||= book.borrowed_by?(user)
     end

@@ -9,13 +9,6 @@ Feature:
     When I choose "Books" from the navigation drawer
     Then I should see a list of 5 books
 
-  Scenario: List e-books and printed books
-    Given there are 3 books with a download link
-    And there are 5 books with a printed copy
-    When I choose "Books" from the navigation drawer
-    Then I should see a list of 3 e-books
-    And I should see a list of 5 printed books
-
   Scenario: List e-books for guests
     Given there are 3 books with a download link
     And there are 5 books with a printed copy
@@ -25,7 +18,7 @@ Feature:
   Scenario: List printed books for guests
     Given there are 5 books with a printed copy
     When I choose "Books" from the navigation drawer
-    Then I should see a list of 5 printed books
+    Then I should see a list of 5 books
     But I should not see information about how many copies there are
 
   Scenario: List e-books for authorized users
