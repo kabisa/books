@@ -119,20 +119,15 @@ RSpec.describe BookDecorator do
     end
   end
 
-  describe '#printed_book_icon', focus: true do
+  describe '#printed_book_icon' do
     let(:html) { decorator.printed_book_icon }
+    let(:book) { build :book }
+
     subject { Capybara.string html }
 
-    describe 'with printed copies' do
-      let(:book) { build :book, :printed_book, link: nil }
-
-      it { is_expected.to have_css('i.material-icons[title="Printed book"]', text: 'menu_book') }
-    end
-
-    describe 'without printed copies' do
-      let(:book) { build :book, :ebook, copies_count: 0 }
-
-      it { is_expected.to have_css('i.material-icons:not([title])', text: '0') }
+    it 'delegates to the BookComponents::PrintedBookIcon component' do
+      expect(h).to receive(:render).with(BookComponents::PrintedBookIcon, { book: book })
+      subject
     end
   end
 

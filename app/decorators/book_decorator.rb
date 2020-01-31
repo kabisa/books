@@ -36,11 +36,11 @@ class BookDecorator < ApplicationDecorator
   end
 
   def printed_book_icon
-    if copies.any?
-      h.material_icon('menu_book', h.tooltipify(printed_book_text))
-    else
-      h.icon_placeholder
-    end
+    options = {
+      book: self
+    }
+
+    h.render(BookComponents::PrintedBookIcon, options)
   end
 
   def ebook_icon
