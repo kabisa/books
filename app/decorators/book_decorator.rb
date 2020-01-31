@@ -31,6 +31,26 @@ class BookDecorator < ApplicationDecorator
     I18n.t('book_types.e_book')
   end
 
+  def book_type_icon
+    h.safe_join [printed_book_icon, ebook_icon]
+  end
+
+  def printed_book_icon
+    if copies.any?
+      h.material_icon('menu_book', h.tooltipify(printed_book_text))
+    else
+      h.icon_placeholder
+    end
+  end
+
+  def ebook_icon
+    if link?
+      h.material_icon('tablet_android', h.tooltipify(ebook_text))
+    else
+      h.icon_placeholder
+    end
+  end
+
   def formatted_num_of_pages
     return unless num_of_pages?
 
@@ -100,26 +120,6 @@ class BookDecorator < ApplicationDecorator
         ], ' '),
         h.tooltipify(number_of_comments))
 
-  end
-
-  def book_type_icon
-    h.safe_join [printed_book_icon, ebook_icon]
-  end
-
-  def printed_book_icon
-    if copies.any?
-      h.material_icon('menu_book', h.tooltipify(printed_book_text))
-    else
-      h.icon_placeholder
-    end
-  end
-
-  def ebook_icon
-    if link?
-      h.material_icon('tablet_android', h.tooltipify(ebook_text))
-    else
-      h.icon_placeholder
-    end
   end
 
   def truncated_summary

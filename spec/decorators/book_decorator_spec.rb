@@ -42,11 +42,6 @@ RSpec.describe BookDecorator do
     it { is_expected.to eql('2 copies') }
   end
 
-  xdescribe '#book_type_icon' do
-    subject { Capybara.string decorator.book_type_icon }
-
-  end
-
   describe '#media_and_pages' do
     subject { decorator.media_and_pages }
 
@@ -95,7 +90,7 @@ RSpec.describe BookDecorator do
     end
   end
 
-  describe '#media_and_pages' do
+  describe '#book_type_icon' do
     let(:html) { decorator.book_type_icon }
     subject { Capybara.string html }
 
@@ -121,6 +116,23 @@ RSpec.describe BookDecorator do
 
       it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
       it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
+    end
+  end
+
+  describe '#printed_book_icon', focus: true do
+    let(:html) { decorator.printed_book_icon }
+    subject { Capybara.string html }
+
+    describe 'with printed copies' do
+      let(:book) { build :book, :printed_book, link: nil }
+
+      it { is_expected.to have_css('i.material-icons[title="Printed book"]', text: 'menu_book') }
+    end
+
+    describe 'without printed copies' do
+      let(:book) { build :book, :ebook, copies_count: 0 }
+
+      it { is_expected.to have_css('i.material-icons:not([title])', text: '0') }
     end
   end
 
