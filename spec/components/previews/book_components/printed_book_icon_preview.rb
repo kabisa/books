@@ -1,11 +1,5 @@
-class BookComponents::HamburgerMenuPreview < ActionView::Component::Preview
+class BookComponents::PrintedBookIconPreview < ActionView::Component::Preview
   layout 'preview'
-
-  def with_guest_user
-    self.book = ebook
-    self.user = FactoryBot.build(:guest)
-    render_component
-  end
 
   def with_an_ebook
     self.book = ebook
@@ -22,14 +16,13 @@ class BookComponents::HamburgerMenuPreview < ActionView::Component::Preview
   attr_accessor :user, :book
 
   def render_component
-    render(BookComponents::HamburgerMenu, options)
+    render(BookComponents::PrintedBookIcon, options)
   end
 
   def options
     {
-      book: book,
-      user: user,
-      remote: true
+      book: book.decorate,
+      user: user
     }
   end
 

@@ -37,7 +37,8 @@ class BookDecorator < ApplicationDecorator
 
   def printed_book_icon
     options = {
-      book: self
+      book: self,
+      user: h.current_user
     }
 
     h.render(BookComponents::PrintedBookIcon, options)

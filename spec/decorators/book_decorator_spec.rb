@@ -120,13 +120,24 @@ RSpec.describe BookDecorator do
   end
 
   describe '#printed_book_icon' do
-    let(:html) { decorator.printed_book_icon }
-    let(:book) { build :book }
+    before do
+      allow(h).to receive(:current_user).and_return(user)
+    end
 
     subject { Capybara.string html }
 
+    let(:html) { decorator.printed_book_icon }
+    let(:book) { build :book }
+    let(:user) { build :user }
+    let(:options) do
+      {
+        book: book,
+        user: user
+      }
+    end
+
     it 'delegates to the BookComponents::PrintedBookIcon component' do
-      expect(h).to receive(:render).with(BookComponents::PrintedBookIcon, { book: book })
+      expect(h).to receive(:render).with(BookComponents::PrintedBookIcon, options)
       subject
     end
   end
