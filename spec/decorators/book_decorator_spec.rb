@@ -93,24 +93,26 @@ RSpec.describe BookDecorator do
   describe '#book_type_icon' do
     before do
       allow(h).to receive(:current_user).and_return(user)
+      allow(h).to receive(:policy).and_return(policy_stub)
     end
 
     subject { Capybara.string html }
 
     let(:html) { decorator.book_type_icon }
+    let(:user) { build(:user) }
 
-    describe 'with a guest user' do
-      let(:user) { build(:guest) }
-      let(:book) { build :book, :printed_book, :ebook }
+    describe 'user is not allowed to download or borrow books' do
+      let(:book)        { build :book, :printed_book, :ebook }
+      let(:policy_stub) { double('Policy', download?: false, borrow?: false) }
 
-      it { is_expected.not_to have_css('i') }
+      it { is_expected.to have_css('i.material-icons', text: '0', count: 2) }
     end
 
     describe 'with a Kabisa user' do
-      let(:user)    { build(:user) }
 
-      describe 'with link' do
-        let(:book) { build :book, :ebook }
+      describe 'user is allowed to download books' do
+        let(:book)        { build :book, :ebook }
+        let(:policy_stub) { double('Policy', download?: true, borrow?: false) }
 
         it { is_expected.to have_css('i.material-icons', text: '0') }
         it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
@@ -118,16 +120,18 @@ RSpec.describe BookDecorator do
         it { is_expected.to have_css('i.material-icons:not([title]) + i.material-icons[title]') }
       end
 
-      describe 'with printed copies' do
-        let(:book) { build :book, :printed_book, link: nil }
+      context 'user is allowed to borrow books' do
+        let(:book)        { build :book, :printed_book, link: nil }
+        let(:policy_stub) { double('Policy', download?: false, borrow?: true) }
 
         it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
         it { is_expected.to have_css('i.material-icons', text: '0') }
         it { is_expected.to have_css('i.material-icons[title] + i.material-icons:not([title])') }
       end
 
-      describe 'with link and printed copies' do
-        let(:book) { build :book, :printed_book, :ebook }
+      context 'user is allowed to borrow and download books' do
+        let(:book)        { build :book, :printed_book, :ebook }
+        let(:policy_stub) { double('Policy', download?: true, borrow?: true) }
 
         it { is_expected.to have_css('i.material-icons', text: 'menu_book') }
         it { is_expected.to have_css('i.material-icons', text: 'tablet_android') }
@@ -138,6 +142,7 @@ RSpec.describe BookDecorator do
   describe '#printed_book_icon' do
     before do
       allow(h).to receive(:current_user).and_return(user)
+      allow(h).to receive(:policy).and_return(policy_stub)
     end
 
     subject { Capybara.string html }
@@ -147,19 +152,31 @@ RSpec.describe BookDecorator do
     let(:user) { build :user }
     let(:options) do
       {
-        book: book,
+        book: decorator,
         user: user
       }
     end
 
-    it 'delegates to the BookComponents::PrintedBookIcon component' do
-      expect(h).to receive(:render).with(BookComponents::PrintedBookIcon, options)
-      subject
+    context 'user is allowed to borrow books' do
+      let(:policy_stub) { double('Policy', borrow?: true) }
+
+      it 'delegates to the BookComponents::PrintedBookIcon component' do
+        expect(h).to receive(:render).with(BookComponents::PrintedBookIcon, options)
+        subject
+      end
     end
+
+    context 'user is not allowed to borrow books' do
+      let(:policy_stub) { double('Policy', borrow?: false) }
+
+      it { is_expected.to have_css('i.material-icons', text: '0') }
+    end
+
   end
 
   describe '#formatted_published_on' do
     subject    { decorator.formatted_published_on }
+
     let(:book) { build :book, published_on: published_on }
 
     describe 'published_on' do

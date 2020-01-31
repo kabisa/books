@@ -36,18 +36,20 @@ class BookDecorator < ApplicationDecorator
   end
 
   def printed_book_icon
-    options = {
-      book: self,
-      user: h.current_user
-    }
+    if h.policy(self).borrow?
+      options = {
+        book: self,
+        user: h.current_user
+      }
 
-    h.render(BookComponents::PrintedBookIcon, options)
+      h.render(BookComponents::PrintedBookIcon, options)
+    else
+      h.icon_placeholder
+    end
   end
 
   def ebook_icon
-    return unless h.current_user.identified?
-
-    if link?
+    if h.policy(self).download?
       h.material_icon('tablet_android', h.tooltipify(ebook_text))
     else
       h.icon_placeholder
