@@ -6,9 +6,14 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @q = BookSearch.search(params) do |q|
-      @books = q
-        .result(distinct: true)
-        .includes(:taggings, :writers, copies: [:location])
+      @books = q.result(distinct: true)
+
+      if params[:restorable_id]
+        restorable_books = @books.unscope(:where).rewhere(id: params[:restorable_id])
+        @books = @books.or(restorable_books)
+      end
+
+      @books = @books.includes(:taggings, :writers, copies: [:location])
         .page(params[:page])
         .decorate
     end
@@ -70,7 +75,7 @@ class BooksController < ApplicationController
 
       format.html do
         flash[:action] = action
-        redirect_to books_url, notice: notice
+        redirect_to books_url(restorable_id: @book), notice: notice
       end
       format.json { head :no_content }
       format.js do

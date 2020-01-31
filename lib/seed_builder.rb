@@ -36,7 +36,7 @@ class SeedBuilder
   end
 
   def borrow_books
-    PrintedBook.all.each do |book|
+    Book.joins(:copies).each do |book|
       count = rand(book.copies.count)
       copies = book.copies.sample(count)
       borrowers = User.all.reload.sample(count)
@@ -112,13 +112,15 @@ class SeedBuilder
   end
 
   def create_ebooks
-    create_list(:ebook, ebooks_count, :random)
-    say("Created #{Ebook.count} e-books.")
+    create_list(:book, ebooks_count, :ebook, :random)
+    say("Created #{Book.count} e-books.")
   end
 
   def create_printed_books
+    books_before_count = Book.count
+
     printed_books_count.times do
-      book = build(:printed_book, :random)
+      book = build(:book, :printed_book, :random)
       book.copies.clear
 
       Location.all.each do |location|
@@ -128,7 +130,7 @@ class SeedBuilder
       book.save
     end
 
-    say("Created #{PrintedBook.count} printed books.")
+    say("Created #{books_before_count - Book.count} printed books.")
   end
 
   def say(message)

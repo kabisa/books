@@ -16,8 +16,18 @@ RSpec.describe BooksController, type: :controller do
   let(:valid_session)      { { user_id: current_user.id } }
 
   describe 'GET #index' do
-    def do_get
-      get :index, session: valid_session
+    def do_get(restorable_id=nil)
+      args = {
+        session: valid_session
+      }
+
+      if restorable_id
+        args[:params] = {
+          restorable_id: restorable_id
+        }
+      end
+
+      get :index, args
     end
 
     let(:search_spy) do
@@ -49,6 +59,51 @@ RSpec.describe BooksController, type: :controller do
     it 'assigns a `q` variable' do
       do_get
       expect(assigns[:q]).to be_a(Ransack::Search)
+    end
+
+    context 'with restorable_id' do
+      before { create_list(:book, 11) }
+
+
+      context 'part of the first 10 items' do
+        let!(:restorable_book) { Book.first.destroy }
+
+        it do
+          do_get(restorable_book.to_param)
+          expect(assigns[:books].map(&:model)).to include(restorable_book)
+        end
+      end
+
+      context 'not part of the first 10 items' do
+        let!(:restorable_book) { Book.last.destroy }
+
+        it do
+          do_get(restorable_book.to_param)
+          expect(assigns[:books].map(&:model)).not_to include(restorable_book)
+        end
+      end
+    end
+
+    context 'without restorable_id' do
+      before { create_list(:book, 11) }
+
+      context 'not part of the first 10 items' do
+        let!(:restorable_book) { Book.first.destroy }
+
+        it do
+          do_get
+          expect(assigns[:books].map(&:model)).not_to include(restorable_book)
+        end
+      end
+
+      context 'not part of the first 10 items' do
+        let!(:restorable_book) { Book.last.destroy }
+
+        it do
+          do_get
+          expect(assigns[:books].map(&:model)).not_to include(restorable_book)
+        end
+      end
     end
   end
 
@@ -189,7 +244,7 @@ RSpec.describe BooksController, type: :controller do
 
       it 'redirects to the books list' do
         do_delete(book.to_param, xhr: false)
-        expect(response).to redirect_to(books_url)
+        expect(response).to redirect_to(books_url(restorable_id: book.to_param))
       end
     end
 

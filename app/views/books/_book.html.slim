@@ -1,31 +1,34 @@
-.expansion-panel.list-group-item.stretchable(id=book.dom_id class=('show' if local_assigns[:show]) data={ controller: 'expansion-panel', action: 'click->expansion-panel#toggle', target: "##{book.dom_id(:collapse)}" })
-  .expansion-panel-toggler
-    .media-body
-      .row.align-items-center.collapsed-show
-        .col-2.col-lg-1
-          .text-center.d-inline-block.d-lg-block= image_tag book.cover_url, class: 'img-thumbnail'
-        .col-10.col-lg-4
-          h5.mb-1= book.title_highlighted_with_search
-          - if book.writers.any?
-            small(data={ toggle: 'no-collapse' })= book.written_by_highlighted_with_search
-        .col-2.col-lg-2
-          = book.book_type_icon
+- if book.deleted?
+  .show(id=book.dom_id)
+- else
+  .expansion-panel.list-group-item.stretchable(id=book.dom_id class=('show' if local_assigns[:show]) data={ controller: 'expansion-panel', action: 'click->expansion-panel#toggle', target: "##{book.dom_id(:collapse)}" })
+    .expansion-panel-toggler
+      .media-body
+        .row.align-items-center.collapsed-show
+          .col-2.col-lg-1
+            .text-center.d-inline-block.d-lg-block= image_tag book.cover_url, class: 'img-thumbnail'
+          .col-10.col-lg-4
+            h5.mb-1= book.title_highlighted_with_search
+            - if book.writers.any?
+              small(data={ toggle: 'no-collapse' })= book.written_by_highlighted_with_search
+          .col-2.col-lg-2
+            = book.book_type_icon
 
-        .col-4.col-lg-2
-          = book.number_of_comments_icon
-        .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
-          = render partial: 'books/vote', object: book, as: :book
-          = book.hamburger_menu
+          .col-4.col-lg-2
+            = book.number_of_comments_icon
+          .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
+            = render partial: 'books/vote', object: book, as: :book
+            = book.hamburger_menu
 
-      .row.align-items-center.collapsed-hide
-        .col-12.col-lg-7
-          h5.mb-1= book.title_highlighted_with_search
-          - if book.writers.any?
-            small= book.written_by_highlighted_with_search
-        .col-6.col-lg-2(data={ toggle: 'no-collapse' })
-          = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
-        .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
-          = render partial: 'books/vote', object: book, as: :book
-          = book.hamburger_menu
+        .row.align-items-center.collapsed-hide
+          .col-12.col-lg-7
+            h5.mb-1= book.title_highlighted_with_search
+            - if book.writers.any?
+              small= book.written_by_highlighted_with_search
+          .col-6.col-lg-2(data={ toggle: 'no-collapse' })
+            = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
+          .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
+            = render partial: 'books/vote', object: book, as: :book
+            = book.hamburger_menu
 
-  = render partial: 'books/collapse', object: book, as: :book, locals: { show: local_assigns[:show], parent: parent }
+    = render partial: 'books/collapse', object: book, as: :book, locals: { show: local_assigns[:show], parent: parent }

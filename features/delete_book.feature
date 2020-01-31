@@ -42,7 +42,6 @@ Feature:
     Then I see a snackbar with a message
     And I should see a list of 2 e-books
 
-  @wip
   Scenario: Undo a deletion after deleting from the show page
     Given I signed in as a Kabisaan
     And the following books:

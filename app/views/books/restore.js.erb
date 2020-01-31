@@ -10,3 +10,4 @@ el.replaceWith(restoreEl.firstChild);
 
 var snackbar       = document.createElement('div');
 snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
+document.body.appendChild(snackbar.firstChild);
