@@ -4,17 +4,12 @@ class BookDecorator < ApplicationDecorator
   delegate_all
   decorates_association :comments
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
-
   def available_copies
-    h.pluralize(copies_count - borrowings_count, Copy.model_name.human.downcase)
+    copies_count - borrowings_count
+  end
+
+  def formatted_available_copies
+    h.pluralize(available_copies, Copy.model_name.human.downcase)
   end
 
   def media_and_pages

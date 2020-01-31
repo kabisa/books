@@ -18,7 +18,7 @@
               p.mb-0= @book.formatted_published_on
 
       .col
-        p= @book.available_copies
+        p= @book.formatted_available_copies
 
         - if @book.summary?
           = simple_format @book.summary, class: 'card-text'

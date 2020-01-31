@@ -26,6 +26,19 @@ RSpec.describe BookDecorator do
 
     let(:book) { create :book, :printed_book }
 
+    it { is_expected.to eql(2) }
+  end
+
+  describe '#formatted_available_copies' do
+    before do
+      allow(book).to receive(:copies_count).and_return(5)
+      allow(book).to receive(:borrowings_count).and_return(3)
+    end
+
+    subject { decorator.formatted_available_copies }
+
+    let(:book) { create :book, :printed_book }
+
     it { is_expected.to eql('2 copies') }
   end
 
