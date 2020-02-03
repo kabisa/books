@@ -37,6 +37,14 @@
 <text text-anchor="start" x="514.28" y="-207.5" font-family="ArialMT" font-size="10.00">title </text>
 <text text-anchor="start" x="532.62" y="-207.5" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string (255) ∗</text>
 </g>
+<!-- m_Book&#45;&gt;m_Book -->
+<g id="edge10" class="edge">
+<title>m_Book&#45;&gt;m_Book</title>
+<path fill="none" stroke="black" d="M656.38,-303.57C670.43,-300.2 680.28,-291.35 680.28,-277 680.28,-264.65 672.98,-256.37 661.98,-252.15"/>
+<ellipse fill="none" stroke="black" cx="653.81" cy="-304.06" rx="2.4" ry="2.4"/>
+<ellipse fill="none" stroke="black" cx="653.78" cy="-250.08" rx="2.4" ry="2.4"/>
+<polygon fill="black" stroke="black" points="662.44,-250.1 656.11,-250.67 661.41,-254.18 662.44,-250.1"/>
+</g>
 <!-- m_Borrowing -->
 <g id="node2" class="node">
 <title>m_Borrowing</title>
@@ -163,7 +171,7 @@
 <polygon fill="black" stroke="black" points="674.6,-157.39 676.64,-151.37 671.29,-154.81 674.6,-157.39"/>
 </g>
 <!-- m_Copy&#45;&gt;m_Borrowing -->
-<g id="edge13" class="edge">
+<g id="edge14" class="edge">
 <title>m_Copy&#45;&gt;m_Borrowing</title>
 <path fill="none" stroke="black" d="M117.28,-87.45C117.28,-80.61 117.28,-73.49 117.28,-66.67"/>
 <ellipse fill="none" stroke="black" cx="117.28" cy="-89.89" rx="2.4" ry="2.4"/>
@@ -180,7 +188,7 @@
 <text text-anchor="start" x="64.06" y="-265.5" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string (255) ∗</text>
 </g>
 <!-- m_Location&#45;&gt;m_Copy -->
-<g id="edge12" class="edge">
+<g id="edge13" class="edge">
 <title>m_Location&#45;&gt;m_Copy</title>
 <path fill="none" stroke="black" d="M112.3,-250.88C113.17,-229.23 114.45,-197.46 115.5,-171.59"/>
 <ellipse fill="none" stroke="black" cx="112.19" cy="-253.57" rx="2.4" ry="2.4"/>
@@ -203,13 +211,13 @@
 <text text-anchor="start" x="247.07" y="-246.5" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string (100)</text>
 </g>
 <!-- m_User&#45;&gt;m_Borrowing -->
-<g id="edge14" class="edge">
+<g id="edge15" class="edge">
 <title>m_User&#45;&gt;m_Borrowing</title>
 <path fill="none" stroke="black" d="M248.45,-232.87C233.45,-219.58 215.67,-206.07 197.28,-197 114.39,-156.11 18.28,-218.35 1.28,-127.5"/>
 <ellipse fill="none" stroke="black" cx="250.42" cy="-234.63" rx="2.4" ry="2.4"/>
 </g>
 <!-- m_User&#45;&gt;m_Comment -->
-<g id="edge10" class="edge">
+<g id="edge11" class="edge">
 <title>m_User&#45;&gt;m_Comment</title>
 <path fill="none" stroke="black" d="M340.6,-232.81C367.15,-210.02 399.25,-182.46 423.95,-161.26"/>
 <ellipse fill="none" stroke="black" cx="338.46" cy="-234.64" rx="2.4" ry="2.4"/>
@@ -217,7 +225,7 @@
 <polygon fill="black" stroke="black" points="425.54,-162.67 428.72,-157.17 422.8,-159.48 425.54,-162.67"/>
 </g>
 <!-- m_User&#45;&gt;m_Vote -->
-<g id="edge11" class="edge">
+<g id="edge12" class="edge">
 <title>m_User&#45;&gt;m_Vote</title>
 <path fill="none" stroke="black" d="M290.28,-231.26C290.28,-210.18 290.28,-185.3 290.28,-165.19"/>
 <ellipse fill="none" stroke="black" cx="290.28" cy="-233.8" rx="2.4" ry="2.4"/>

@@ -17,6 +17,8 @@ class Book < ApplicationRecord
   has_many :borrowings, through: :copies
   has_and_belongs_to_many :writers
 
+  belongs_to :reedition, optional: true, class_name: 'Book'
+
   # validations:
   #
   validates :title, presence: true, length: { maximum: 255 }

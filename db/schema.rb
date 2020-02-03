@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_24_065703) do
+ActiveRecord::Schema.define(version: 2020_02_03_093141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,9 @@ ActiveRecord::Schema.define(version: 2020_01_24_065703) do
     t.string "cover"
     t.integer "num_of_pages", limit: 2
     t.date "published_on"
+    t.bigint "reedition_id"
     t.index ["deleted_at"], name: "index_books_on_deleted_at"
+    t.index ["reedition_id"], name: "index_books_on_reedition_id"
   end
 
   create_table "books_writers", id: false, force: :cascade do |t|
@@ -147,6 +149,7 @@ ActiveRecord::Schema.define(version: 2020_01_24_065703) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "books", "books", column: "reedition_id"
   add_foreign_key "borrowings", "copies"
   add_foreign_key "borrowings", "users"
   add_foreign_key "comments", "books"
