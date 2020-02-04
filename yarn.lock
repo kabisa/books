@@ -782,6 +782,11 @@
   resolved "https://registry.yarnpkg.com/@stimulus/webpack-helpers/-/webpack-helpers-1.1.1.tgz#eff60cd4e58b921d1a2764dc5215f5141510f2c2"
   integrity sha512-XOkqSw53N9072FLHvpLM25PIwy+ndkSSbnTtjKuyzsv8K5yfkFB2rv68jU1pzqYa9FZLcvZWP4yazC0V38dx9A==
 
+"@trevoreyre/autocomplete-js@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@trevoreyre/autocomplete-js/-/autocomplete-js-2.1.0.tgz#2d6c88c6a58273a67c51b693e999939c3a291861"
+  integrity sha512-5pwDNC+inhiXr6XORfjNj16zVZfVaj5ZuqCtb782najQYCEuvUpgKSLadH8ZgOOL78UVdiY++xXrOmjjTWP1UQ==
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
