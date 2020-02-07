@@ -11,218 +11,49 @@ import {Controller} from 'stimulus';
 import Autocomplete from '@trevoreyre/autocomplete-js';
 
 export default class extends Controller {
+  static targets = ['value'];
   initialize() {
-    const countries = [
-      'Afghanistan',
-      'Albania',
-      'Algeria',
-      'Andorra',
-      'Angola',
-      'Antigua & Barbuda',
-      'Argentina',
-      'Armenia',
-      'Australia',
-      'Austria',
-      'Azerbaijan',
-      'Bahamas',
-      'Bahrain',
-      'Bangladesh',
-      'Barbados',
-      'Belarus',
-      'Belgium',
-      'Belize',
-      'Benin',
-      'Bhutan',
-      'Bolivia',
-      'Bosnia & Herzegovina',
-      'Botswana',
-      'Brazil',
-      'Brunei',
-      'Bulgaria',
-      'Burkina Faso',
-      'Burundi',
-      'Cambodia',
-      'Cameroon',
-      'Canada',
-      'Cape Verde',
-      'Central African Republic',
-      'Chad',
-      'Chile',
-      'China',
-      'Colombia',
-      'Comoros',
-      'Congo',
-      'Congo Democratic Republic',
-      'Costa Rica',
-      "Cote D'Ivoire",
-      'Croatia',
-      'Cuba',
-      'Cyprus',
-      'Czech Republic',
-      'Denmark',
-      'Djibouti',
-      'Dominica',
-      'Dominican Republic',
-      'East Timor',
-      'Ecuador',
-      'Egypt',
-      'El Salvador',
-      'Equatorial Guinea',
-      'Eritrea',
-      'Estonia',
-      'Ethiopia',
-      'Fiji',
-      'Finland',
-      'France',
-      'Gabon',
-      'Gambia',
-      'Georgia',
-      'Germany',
-      'Ghana',
-      'Greece',
-      'Grenada',
-      'Guatemala',
-      'Guinea',
-      'Guinea-Bissau',
-      'Guyana',
-      'Haiti',
-      'Honduras',
-      'Hungary',
-      'Iceland',
-      'India',
-      'Indonesia',
-      'Iran',
-      'Iraq',
-      'Ireland',
-      'Israel',
-      'Italy',
-      'Jamaica',
-      'Japan',
-      'Jordan',
-      'Kazakhstan',
-      'Kenya',
-      'Kiribati',
-      'Korea North',
-      'Korea South',
-      'Kosovo',
-      'Kuwait',
-      'Kyrgyzstan',
-      'Laos',
-      'Latvia',
-      'Lebanon',
-      'Lesotho',
-      'Liberia',
-      'Libya',
-      'Liechtenstein',
-      'Lithuania',
-      'Luxembourg',
-      'Macedonia',
-      'Madagascar',
-      'Malawi',
-      'Malaysia',
-      'Maldives',
-      'Mali',
-      'Malta',
-      'Marshall Islands',
-      'Mauritania',
-      'Mauritius',
-      'Mexico',
-      'Micronesia',
-      'Moldova',
-      'Monaco',
-      'Mongolia',
-      'Montenegro',
-      'Morocco',
-      'Mozambique',
-      'Myanmar (Burma)',
-      'Namibia',
-      'Nauru',
-      'Nepal',
-      'New Zealand',
-      'Nicaragua',
-      'Niger',
-      'Nigeria',
-      'Norway',
-      'Oman',
-      'Pakistan',
-      'Palau',
-      'Palestinian State*',
-      'Panama',
-      'Papua New Guinea',
-      'Paraguay',
-      'Peru',
-      'Poland',
-      'Portugal',
-      'Qatar',
-      'Romania',
-      'Russia',
-      'Rwanda',
-      'Samoa',
-      'San Marino',
-      'Sao Tome & Principe',
-      'Saudi Arabia',
-      'Senegal',
-      'Serbia',
-      'Seychelles',
-      'Sierra Leone',
-      'Singapore',
-      'Slovakia',
-      'Slovenia',
-      'Solomon Islands',
-      'Somalia',
-      'South Africa',
-      'South Sudan',
-      'Spain',
-      'Sri Lanka',
-      'St. Kitts & Nevis',
-      'St. Lucia',
-      'St. Vincent & The Grenadines',
-      'Sudan',
-      'Suriname',
-      'Swaziland',
-      'Sweden',
-      'Switzerland',
-      'Syria',
-      'Taiwan',
-      'Tajikistan',
-      'Tanzania',
-      'Thailand',
-      'The Netherlands',
-      'The Philippines',
-      'Togo',
-      'Tonga',
-      'Trinidad & Tobago',
-      'Tunisia',
-      'Turkey',
-      'Turkmenistan',
-      'Tuvalu',
-      'Uganda',
-      'Ukraine',
-      'United Arab Emirates',
-      'United Kingdom',
-      'United States Of America',
-      'Uruguay',
-      'Uzbekistan',
-      'Vanuatu',
-      'Vatican City (Holy See)',
-      'Venezuela',
-      'Vietnam',
-      'Yemen',
-      'Zambia',
-      'Zimbabwe',
-    ];
+    new Autocomplete(this.element, {
+      search: this.search.bind(this),
+      onSubmit: this.onSubmit.bind(this),
+      getResultValue: this.getResultValue.bind(this),
+      renderResult: this.renderResult.bind(this),
+    });
+  }
+  search(input) {
+    const url = `/books.json?q[title_cont]=${encodeURI(input)}`;
 
-    const options = {
-      search: (input) => {
-        console.log(input);
-        if (input.length < 1) {
-          return [];
-        }
-        return countries.filter((country) => {
-          return country.toLowerCase().startsWith(input.toLowerCase());
+    return new Promise((resolve) => {
+      if (input.length < 3) {
+        return resolve([]);
+      }
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          resolve(data);
         });
-      },
-    };
-    new Autocomplete(this.element, options);
+    });
+  }
+  onSubmit(result) {
+    console.log('onSubmit');
+    this.valueTarget.value = result.id;
+  }
+  getResultValue({title}) {
+    return title;
+  }
+  renderResult(result, props) {
+    let text = `<span>${result.title}</span>`;
+
+    if (result.description) {
+      text = `${text}  - <span class="text-muted">${result.description}</span>`;
+    }
+    return `<li ${props}>${text}</li>`;
+  }
+
+  reset(e) {
+    if (e.target.value === '') {
+      this.valueTarget.value = '';
+    }
   }
 }

@@ -40,6 +40,7 @@ class BookPolicy < ApplicationPolicy
         :cover, :cover_cache, :remove_cover,
         :num_of_pages, :published_on,
         :summary, :writer_names, :tag_list,
+        :reedition_id,
         copies_attributes: [
           :id, :location_id, :number, :_destroy
         ]

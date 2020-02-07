@@ -103,6 +103,12 @@ class BookDecorator < ApplicationDecorator
     I18n.t('activerecord.attributes.book.written_by', writer_names: writer_names.to_sentence)
   end
 
+  def written_by_published_on
+    h.safe_join [
+      written_by,
+      formatted_published_on].compact, ', '
+  end
+
   def number_of_comments
     [
       comments_count,  # (1)

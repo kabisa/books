@@ -19,6 +19,8 @@ class Book < ApplicationRecord
 
   belongs_to :reedition, optional: true, class_name: 'Book'
 
+  delegate :title, to: :reedition, prefix: true, allow_nil: true
+
   # validations:
   #
   validates :title, presence: true, length: { maximum: 255 }
