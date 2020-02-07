@@ -21,7 +21,6 @@ Feature: Re-edition
     And I expand the panel for "A Re-edition"
     Then I should see a link to a re-edition for "A Re-edition"
 
-  @wip
   Scenario: Remove a re-edition
     Given I signed in as a Kabisaan
     And the following books:
@@ -33,8 +32,11 @@ Feature: Re-edition
     And I type "" into the "Re-edition" field
     And I click "Save"
     Then I should not see a link to a re-edition
+    When I choose "Books" from the navigation drawer
+    And I expand the panel for "Lorem Ipsum"
+    Then I should not see a link to a re-edition for "Lorem Ipsum"
 
-  @todo
+  @wip
   Scenario: Add an invalid re-edition
 
   @todo
