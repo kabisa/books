@@ -31,11 +31,9 @@
 
       = f.input :tag_list, input_html: { value: book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
 
-      .form-group
-        .autocomplete.floating-label.textfield-box(data-controller='autocomplete')
-          = f.label :reedition_title
-          = f.input_field :reedition_title, as: :string, class: 'autocomplete-input form-control', data: { action: 'autocomplete#reset' }
-          ul.autocomplete-result-list
-          = f.hidden_field :reedition_id, data: { target: 'autocomplete.value' }
+      .autocomplete(data-controller='autocomplete')
+        = f.input :reedition_title, as: :string, class: 'autocomplete-input form-control'
+        ul.autocomplete-result-list
+        = f.hidden_field :reedition_id, data: { target: 'autocomplete.value' }
 
   = f.button :submit, class: 'btn btn-outline-primary'

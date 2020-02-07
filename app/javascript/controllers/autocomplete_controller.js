@@ -12,6 +12,7 @@ import Autocomplete from '@trevoreyre/autocomplete-js';
 
 export default class extends Controller {
   static targets = ['value'];
+
   initialize() {
     new Autocomplete(this.element, {
       search: this.search.bind(this),
@@ -22,6 +23,7 @@ export default class extends Controller {
   }
   search(input) {
     const url = `/books.json?q[title_cont]=${encodeURI(input)}`;
+    this.valueTarget.value = '';
 
     return new Promise((resolve) => {
       if (input.length < 3) {
@@ -36,7 +38,6 @@ export default class extends Controller {
     });
   }
   onSubmit(result) {
-    console.log('onSubmit');
     this.valueTarget.value = result.id;
   }
   getResultValue({title}) {

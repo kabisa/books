@@ -19,10 +19,10 @@ Given("the following book(s):") do |table|
   table.map_column!('comments_count', false) { |c| c.to_i }
   table.map_column!('created_at', false)     { |c| Chronic.parse(c) }
   table.map_column!('published_on', false)   { |p| Chronic.parse(p) }
-  table.map_column!('reedition', false)   { |r| Book.find_by(title: r) }
 
   table.hashes.each do |h|
     time = h.delete('created_at') || Time.current
+    h['reedition'] = Book.find_by(title: h['reedition'])
 
     travel_to(time) do
       if h['link'].blank?

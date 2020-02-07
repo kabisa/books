@@ -19,7 +19,7 @@ class Book < ApplicationRecord
 
   belongs_to :reedition, optional: true, class_name: 'Book'
 
-  delegate :title, to: :reedition, prefix: true, allow_nil: true
+  #delegate :title, to: :reedition, prefix: true, allow_nil: true
 
   # validations:
   #
@@ -28,6 +28,7 @@ class Book < ApplicationRecord
   validates :num_of_pages, numericality: { greater_than: 0, less_than: 2**15 }, allow_nil: true # [2]
   validates :summary, length: { maximum: 2048 }
   validate :at_least_one_medium_is_required
+  validate :reedition_should_be_known
 
   before_validation :set_writers
 
@@ -48,6 +49,12 @@ class Book < ApplicationRecord
 
   ransacker :published_years_ago, formatter: -> (v) { v.to_i.year.ago }, type: :integer do |parent|
     parent.table[:published_on]
+  end
+
+  def reedition_should_be_known
+    if @reedition_title.present? && !reedition_id
+      errors.add(:reedition_title, :invalid)
+    end
   end
 
   def to_s
@@ -74,6 +81,14 @@ class Book < ApplicationRecord
     end
   end
 
+  def reedition_title
+    @reedition_title ||= reedition&.title
+  end
+
+  def reedition_title=(value)
+    @reedition_title = value
+  end
+
   def tag_list=(value)
     begin
       arr = parse_tagify_json(value)
@@ -94,7 +109,7 @@ class Book < ApplicationRecord
   private
 
   def at_least_one_medium_is_required
-    # At this in the validation process a book still has copies,
+    # At this point in the validation process a book still has copies,
     # so `copies.empty?` is `false`.
     # Instead we can use the `marked_for_destruction?` attribute
     # to check if the user has removed all copies.

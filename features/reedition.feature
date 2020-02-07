@@ -25,8 +25,8 @@ Feature: Re-edition
     Given I signed in as a Kabisaan
     And the following books:
       | title       | link                                  | reedition |
-      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Dolor Sit |
       | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        |           |
+      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Dolor Sit |
     When I choose "Books" from the navigation drawer
     And I edit the book "Lorem Ipsum"
     And I type "" into the "Re-edition" field
@@ -36,11 +36,14 @@ Feature: Re-edition
     And I expand the panel for "Lorem Ipsum"
     Then I should not see a link to a re-edition for "Lorem Ipsum"
 
-  @wip
   Scenario: Add an invalid re-edition
-
-  @todo
-  Scenario: View re-edition on a collapsed book item
-
-  @todo
-  Scenario: View re-edition on an expanded book item
+    Given I signed in as a Kabisaan
+    And the following books:
+      | title       | link                                  | reedition |
+      | Dolor Sit   | http://kabisa.nl/dolor-sit.pdf        |           |
+      | Lorem Ipsum | http://www.kabisa.nl/lorem-ipsum.epub | Dolor Sit |
+    When I choose "Books" from the navigation drawer
+    And I edit the book "Lorem Ipsum"
+    And I type "Invalid re-edition" into the "Re-edition" field
+    And I click "Save"
+    Then I see a validation error for "Re-edition"

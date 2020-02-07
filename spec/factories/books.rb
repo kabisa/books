@@ -6,6 +6,7 @@ FactoryBot.define do
     link { 'http://www.kabisa.nl' }
     num_of_pages { 200 }
     published_on { Date.parse('2004-12-31') }
+    reedition { nil }
 
     transient do
       comments_count { 0 }
