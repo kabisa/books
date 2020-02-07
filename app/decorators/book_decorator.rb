@@ -156,6 +156,13 @@ class BookDecorator < ApplicationDecorator
       h.tag.div(I18n.t('you_are_currently_borrowing'), class: 'alert alert-info')
     end
   end
+
+  def reedition_alert
+    if reedition
+      h.tag.div('A newer edition for this book is available.', class: 'alert alert-light')
+    end
+
+  end
 end
 
 # (1) Using `comments.size` will not use counter cache. We could also have used `model.comments.size`.

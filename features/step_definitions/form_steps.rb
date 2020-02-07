@@ -33,6 +33,10 @@ Given("I fill in {string} with {string}") do |locator, value|
   fill_in locator, with: value
 end
 
+When("I type {string} into the {string} field") do |value, locator|
+  step %Q(I fill in "#{locator}" with "#{value}")
+end
+
 When("I select {string} as {string}") do |value, name|
   choose value
 end
@@ -76,3 +80,10 @@ Then("I {do_or_not}see a validation error (for ){string}") do |should_do, label|
   end
 end
 
+When("I choose {string} from the {string} autocomplete list") do |value, locator|
+  # Take some time to process the `fetch` call.
+  sleep 0.1
+  within('ul.autocomplete-result-list') do
+    find('li', text: value).click
+  end
+end

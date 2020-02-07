@@ -245,6 +245,12 @@ Then("I {should_or_should_not}see a download link") do |should_do|
   expect(page).send(to_have_or_not_have, have_css('.dropdown .dropdown-menu', text: 'Download', visible: false))
 end
 
+Then("I {should_or_should_not}see a link to a re-edition") do |should_do|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+  expect(page).send(to_have_or_not_have, have_css('.alert', text: 'A newer edition for this book is available.'))
+end
+
+
 Then("I see there are {int} copies of the book") do |copies_count|
   expect(page).to have_text("#{copies_count} copies")
 end
@@ -277,6 +283,15 @@ Then("I {should_or_should_not}see the summary for {string}") do |should_do, titl
 
   within('.list-group-item', text: title) do
     expect(page).send(to_have_or_not_have, have_text(book.summary))
+  end
+end
+
+Then("I {should_or_should_not}see a link to a re-edition for {string}") do |should_do, title|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+
+  within('.list-group-item', text: title) do
+    expect(page).send(to_have_or_not_have, have_css('h5 .badge', text: 're-edition available', visible: false))
+    expect(page).send(to_have_or_not_have, have_css('.alert', text: 'A newer edition for this book is available.'))
   end
 end
 

@@ -33,7 +33,7 @@
 
       .form-group
         .autocomplete.floating-label.textfield-box(data-controller='autocomplete')
-          = f.label :reedition
+          = f.label :reedition_title
           = f.input_field :reedition_title, as: :string, class: 'autocomplete-input form-control', data: { action: 'autocomplete#reset' }
           ul.autocomplete-result-list
           = f.hidden_field :reedition_id, data: { target: 'autocomplete.value' }
