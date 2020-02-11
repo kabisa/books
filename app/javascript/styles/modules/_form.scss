@@ -9,3 +9,7 @@
 textarea.form-control:not([rows='1']) {
   margin-top: $textfield-margin-y;
 }
+
+.autocomplete.form-group-invalid .invalid-feedback {
+  display: block;
+}

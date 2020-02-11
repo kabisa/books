@@ -30,10 +30,8 @@
         = f.input :num_of_pages, as: :string, wrapper: :input_group, append: 'pages', wrapper_html: { class: 'col-lg' }
 
       = f.input :tag_list, input_html: { value: book.tag_list.to_s, data: { controller: 'chip-input', whitelist: Book.tags_on(:tags).pluck(:name).join(',') }}
-
-      .autocomplete(data-controller='autocomplete')
-        = f.input :reedition_title, as: :string, class: 'autocomplete-input form-control'
-        ul.autocomplete-result-list
-        = f.hidden_field :reedition_id, data: { target: 'autocomplete.value' }
+      = f.input :reedition, as: :autocomplete
 
   = f.button :submit, class: 'btn btn-outline-primary'
+
+/= console
