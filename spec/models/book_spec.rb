@@ -11,6 +11,7 @@ RSpec.describe Book, type: :model do
     it { is_expected.to accept_nested_attributes_for(:copies).
          allow_destroy(true) }
     it { is_expected.to have_many(:borrowings).through(:copies) }
+    it { is_expected.to belong_to(:reedition).optional.class_name('Book') }
 
     context 'borrowables' do
       subject { instance.copies.borrowables }
@@ -56,6 +57,9 @@ RSpec.describe Book, type: :model do
   end
 
   describe 'validations' do
+    let(:instance) { create(:book, title: 'Lorem', reedition: reedition) }
+    let(:reedition) { create(:book, title: 'Ipsum') }
+
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_length_of(:title).is_at_most(255) }
     it { is_expected.to validate_length_of(:summary).is_at_most(2048) }
@@ -64,6 +68,15 @@ RSpec.describe Book, type: :model do
 
     it do
       expect(build(:book, link: 'invalid')).to be_invalid
+    end
+
+    it 'is invalid with only a title but no reedition id' do
+      # This can happen when the user tries to replace a book's
+      # reedition with an invalid title.
+      instance.reedition_title = 'Dolor'
+      instance.reedition_id = nil
+      expect(instance).to be_invalid
+      expect(instance.errors[:reedition_title]).not_to be_empty
     end
   end
 
@@ -257,6 +270,20 @@ RSpec.describe Book, type: :model do
         instance.validate
         expect(instance.writers.size).to be(2)
       end
+    end
+  end
+
+  describe '##reedition_title' do
+    let(:instance) { create(:book, title: 'Lorem', reedition: reedition) }
+    let(:reedition) { create(:book, title: 'Ipsum') }
+
+    it 'returns the title of the associated reedition' do
+      expect(instance.reedition_title).to eql(reedition.title)
+    end
+
+    it 'can be overwritten' do
+      instance.reedition_title = 'Dolor'
+      expect(instance.reedition_title).to eql('Dolor')
     end
   end
 end

@@ -16,10 +16,7 @@ class Book < ApplicationRecord
   end
   has_many :borrowings, through: :copies
   has_and_belongs_to_many :writers
-
   belongs_to :reedition, optional: true, class_name: 'Book'
-
-  #delegate :title, to: :reedition, prefix: true, allow_nil: true
 
   # validations:
   #
@@ -49,12 +46,6 @@ class Book < ApplicationRecord
 
   ransacker :published_years_ago, formatter: -> (v) { v.to_i.year.ago }, type: :integer do |parent|
     parent.table[:published_on]
-  end
-
-  def reedition_should_be_known
-    if @reedition_title.present? && !reedition_id
-      errors.add(:reedition_title, :invalid)
-    end
   end
 
   def to_s
@@ -117,6 +108,17 @@ class Book < ApplicationRecord
     if copies.all?(&:marked_for_destruction?) && link.blank?
       self.copies = Copy.none
       errors.add(:link, :blank)
+    end
+  end
+
+  # This validation checks if a users
+  # tries to replace a book's reedition
+  # with an non-existing title.
+  # The form then already cleared the reedition_id field
+  # but the submit contains a (non-existing) title.
+  def reedition_should_be_known
+    if @reedition_title.present? && !reedition_id
+      errors.add(:reedition_title, :invalid)
     end
   end
 
