@@ -312,7 +312,6 @@ RSpec.describe BookDecorator do
       let(:options) { { class: 'lorem' } }
 
       it { is_expected.to have_css('p.lorem') }
-
     end
   end
 

@@ -1,5 +1,6 @@
 class BookDecorator < ApplicationDecorator
-  include HighlightedWithSearch
+  include Book::HighlightedWithSearch
+  include Book::Icons
 
   delegate_all
   decorates_association :comments
@@ -29,31 +30,6 @@ class BookDecorator < ApplicationDecorator
     return unless link?
 
     I18n.t('book_types.e_book')
-  end
-
-  def book_type_icon
-    h.safe_join [printed_book_icon, ebook_icon]
-  end
-
-  def printed_book_icon
-    if h.policy(self).borrow?
-      options = {
-        book: self,
-        user: h.current_user
-      }
-
-      h.render(BookComponents::PrintedBookIcon, options)
-    else
-      h.icon_placeholder
-    end
-  end
-
-  def ebook_icon
-    if h.policy(self).download?
-      h.material_icon('tablet_android', h.tooltipify(ebook_text))
-    else
-      h.icon_placeholder
-    end
   end
 
   def formatted_num_of_pages
@@ -116,23 +92,6 @@ class BookDecorator < ApplicationDecorator
     ].join(' ')
   end
 
-  # Return an icon and a number and shows a tooltip
-  # @example
-  # book.number_of_comments_icon
-  # # => <span data-toggle="tooltip" title="17 Comments">
-  #        <i class="material-icons">mode_comment</i> 17
-  #      </span>
-  def number_of_comments_icon
-    h.tag.span(
-      h.safe_join(
-        [
-          h.material_icon('mode_comment'),
-          comments_count # (1)
-        ], ' '),
-        h.tooltipify(number_of_comments))
-
-  end
-
   def truncated_summary
     h.truncate(summary, length: 240)
   end
@@ -153,7 +112,12 @@ class BookDecorator < ApplicationDecorator
 
   def currently_borrowing_alert
     if borrowed_by?(h.current_user)
-      h.tag.div(I18n.t('you_are_currently_borrowing'), class: 'alert alert-info')
+      options = {
+        content: I18n.t('you_are_currently_borrowing'),
+        type: :info
+      }
+
+      h.render(Bootstrap::Alert, options)
     end
   end
 
@@ -161,7 +125,6 @@ class BookDecorator < ApplicationDecorator
     if reedition
       h.tag.div('A newer edition for this book is available.', class: 'alert alert-light')
     end
-
   end
 end
 

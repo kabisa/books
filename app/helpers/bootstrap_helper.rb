@@ -1,10 +1,6 @@
 require 'bootstrap/alert'
 
 module BootstrapHelper
-  def bs_flash(options = {})
-    Bootstrap::Alert.new(options, self).render
-  end
-
   def bs_snackbar
     render(Material::Snackbar, flash: flash)
   end

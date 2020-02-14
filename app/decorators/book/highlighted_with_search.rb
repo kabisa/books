@@ -1,6 +1,6 @@
 # This module contains methods that return attributes or other text
 # with the keywords entered in the search field.
-module HighlightedWithSearch
+module Book::HighlightedWithSearch
   def title_highlighted_with_search
     highlighted_with_search(title)
   end
