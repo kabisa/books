@@ -175,6 +175,7 @@ en:
   view_on_github: 'View the repository on GitHub'
   no_copies_available: 'no copies available'
   you_are_currently_borrowing: 'You are currently borrowing a copy.'
+  reedition_available: 'A newer edition for this book is available.'
   errors:
     messages:
       content_type_whitelist_error: 'should be an image file'

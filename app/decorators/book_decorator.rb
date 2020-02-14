@@ -123,7 +123,11 @@ class BookDecorator < ApplicationDecorator
 
   def reedition_alert
     if reedition
-      h.tag.div('A newer edition for this book is available.', class: 'alert alert-light')
+      options = {
+        content: I18n.t('reedition_available')
+      }
+
+      h.render(Bootstrap::Alert, options)
     end
   end
 end

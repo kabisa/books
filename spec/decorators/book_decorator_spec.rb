@@ -378,4 +378,25 @@ RSpec.describe BookDecorator do
       it      { is_expected.to be_nil }
     end
   end
+
+  describe '#reedition_alert' do
+    before  { allow(book).to receive(:reedition).and_return(reedition_stub) }
+
+    let(:book) { create :book }
+    let(:html) { decorator.reedition_alert }
+
+    context 'reedition available' do
+      let(:reedition_stub) { double('Reedition') }
+      subject              { Capybara.string html }
+
+      it                   { is_expected.to have_css('.alert.alert-light', text: 'A newer edition for this book is available.') }
+    end
+
+    context 'no reedition available' do
+      let(:reedition_stub) { nil }
+      subject              { html }
+
+      it                   { is_expected.to be_nil }
+    end
+  end
 end
