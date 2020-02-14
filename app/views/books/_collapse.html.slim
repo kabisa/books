@@ -12,8 +12,8 @@
         - if policy(book).borrow?
           p= book.formatted_available_copies
 
-        = book.reedition_alert
         = book.currently_borrowing_alert
+        = book.reedition_alert
         = book.summary_highlighted_with_search
 
         - if book.tag_list.any?

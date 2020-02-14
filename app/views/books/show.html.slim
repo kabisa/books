@@ -21,8 +21,8 @@
         - if policy(@book).borrow?
           p= @book.formatted_available_copies
 
-        = @book.reedition_alert
         = @book.currently_borrowing_alert
+        = @book.reedition_alert
 
         - if @book.summary?
           = simple_format @book.summary, class: 'card-text'
