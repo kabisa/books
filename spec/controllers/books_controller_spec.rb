@@ -16,9 +16,10 @@ RSpec.describe BooksController, type: :controller do
   let(:valid_session)      { { user_id: current_user.id } }
 
   describe 'GET #index' do
-    def do_get(restorable_id=nil)
+    def do_get(restorable_id=nil, format=:html)
       args = {
-        session: valid_session
+        session: valid_session,
+        format: format
       }
 
       if restorable_id
@@ -30,10 +31,7 @@ RSpec.describe BooksController, type: :controller do
       get :index, args
     end
 
-    let(:search_spy) do
-      #Ransack::Search.new(Book, nil)
-      spy('Ransack::Search')
-    end
+    let(:search_spy) { spy('Ransack::Search') }
 
     it 'returns a success response' do
       do_get
@@ -103,6 +101,20 @@ RSpec.describe BooksController, type: :controller do
           do_get
           expect(assigns[:books].map(&:model)).not_to include(restorable_book)
         end
+      end
+    end
+
+    describe 'JSON' do
+      render_views
+
+      let!(:book) { create(:book) }
+      let(:json)  { JSON.parse(response.body) }
+
+      it do
+        do_get(nil, :json)
+        expect(json.map { |i| i['title'] }).to include(book.title)
+        expect(json.map { |i| i['description'] }).to include(/Published/)
+        # That's all we need for now
       end
     end
   end
