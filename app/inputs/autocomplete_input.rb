@@ -14,7 +14,7 @@
 # attribute that is expected by the input is already available.
 # Also, the model (or decorator, if used) is expected also to have
 # a `reedition_title` attribute or method, see the Book model for a concrete example.
-class AutocompleteInput < SimpleForm::Inputs::StringInput
+class AutocompleteInput < StringInput
   def initialize(builder, attribute_name, column, input_type, options = {})
     super
 

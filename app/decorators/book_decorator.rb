@@ -130,6 +130,15 @@ class BookDecorator < ApplicationDecorator
       h.tag.div(h.render(Bootstrap::Alert, options), data: { toggle: 'no-collapse' })
     end
   end
+
+  def reedition_badge
+    if reedition
+      h.tag.small do
+        options = h.tooltipify(I18n.t('reedition_available')).merge(class: 'badge badge-pill badge-light')
+        h.content_tag(:span, I18n.t('outdated'), options)
+      end
+    end
+  end
 end
 
 # (1) Using `comments.size` will not use counter cache. We could also have used `model.comments.size`.

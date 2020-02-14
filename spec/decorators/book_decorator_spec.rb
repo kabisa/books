@@ -397,4 +397,23 @@ RSpec.describe BookDecorator do
       it              { is_expected.to be_nil }
     end
   end
+
+  describe '#reedition_badge' do
+    let(:book) { create :book, reedition: reedition }
+    let(:html) { decorator.reedition_badge }
+
+    context 'reedition available' do
+      let(:reedition) { create(:book) }
+      subject         { Capybara.string html }
+
+      it              { is_expected.to have_css('small span.badge.badge-pill.badge-light[title][data-toggle="tooltip"]', text: 'outdated') }
+    end
+
+    context 'no reedition available' do
+      let(:reedition) { nil }
+      subject         { html }
+
+      it              { is_expected.to be_nil }
+    end
+  end
 end

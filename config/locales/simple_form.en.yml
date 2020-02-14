@@ -21,6 +21,9 @@ en:
     labels:
       borrowing:
         copy_id: 'Location'
+    hints:
+      book:
+        reedition_title: 'If a newer version of this book is available, enter it as a re-edition'
     # Examples
     # labels:
     #   defaults:

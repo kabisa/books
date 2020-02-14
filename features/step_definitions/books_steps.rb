@@ -248,7 +248,7 @@ end
 
 Then("I {should_or_should_not}see a link to a re-edition") do |should_do|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
-  expect(page).send(to_have_or_not_have, have_css('.alert', text: 'A newer edition for this book is available.'))
+  expect(page).send(to_have_or_not_have, have_css('.alert a', text: 'A newer edition for this book is available.'))
 end
 
 
@@ -289,10 +289,11 @@ end
 
 Then("I {should_or_should_not}see a link to a re-edition for {string}") do |should_do, title|
   to_have_or_not_have = should_do ? 'to' : 'not_to'
+  should_or_not = should_do ? '' : 'not '
 
   within('.list-group-item', text: title) do
-    expect(page).send(to_have_or_not_have, have_css('h5 .badge', text: 're-edition available', visible: false))
-    expect(page).send(to_have_or_not_have, have_css('.alert', text: 'A newer edition for this book is available.'))
+    expect(page).send(to_have_or_not_have, have_css('h5 .badge', text: 'outdated', visible: false))
+    step %Q(I should #{should_or_not}see a link to a re-edition)
   end
 end
 
