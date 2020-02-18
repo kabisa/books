@@ -38,7 +38,7 @@
 <text text-anchor="start" x="532.62" y="-207.5" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string (255) ∗</text>
 </g>
 <!-- m_Book&#45;&gt;m_Book -->
-<g id="edge10" class="edge">
+<g id="edge9" class="edge">
 <title>m_Book&#45;&gt;m_Book</title>
 <path fill="none" stroke="black" d="M656.38,-303.57C670.43,-300.2 680.28,-291.35 680.28,-277 680.28,-264.65 672.98,-256.37 661.98,-252.15"/>
 <ellipse fill="none" stroke="black" cx="653.81" cy="-304.06" rx="2.4" ry="2.4"/>
@@ -162,7 +162,7 @@
 <text text-anchor="start" x="658.07" y="-115" font-family="Arial ItalicMT" font-size="10.00" fill="#999999">string ∗ U</text>
 </g>
 <!-- m_Book&#45;&gt;m_Writer -->
-<g id="edge9" class="edge">
+<g id="edge10" class="edge">
 <title>m_Book&#45;&gt;m_Writer</title>
 <path fill="none" stroke="black" d="M647.42,-188.77C656.55,-177.08 665.33,-165.84 672.83,-156.24"/>
 <ellipse fill="none" stroke="black" cx="642.16" cy="-195.51" rx="2.4" ry="2.4"/>

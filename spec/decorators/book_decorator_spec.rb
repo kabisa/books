@@ -416,4 +416,25 @@ RSpec.describe BookDecorator do
       it              { is_expected.to be_nil }
     end
   end
+
+  describe '#latest_edition_badge' do
+    before     { allow(book).to receive(:latest_edition?).and_return(is_latest_edition) }
+
+    let(:book) { create :book }
+    let(:html) { decorator.latest_edition_badge }
+
+    context 'is latest edition' do
+      let(:is_latest_edition) { true }
+      subject                 { Capybara.string html }
+
+      it                      { is_expected.to have_css('small span.badge.badge-pill.badge-primary[title][data-toggle="tooltip"]', text: 'latest') }
+    end
+
+    context 'is not latest edition' do
+      let(:is_latest_edition) { false }
+      subject                 { html }
+
+      it                      { is_expected.to be_nil }
+    end
+  end
 end

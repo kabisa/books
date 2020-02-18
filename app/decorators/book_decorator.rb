@@ -139,6 +139,15 @@ class BookDecorator < ApplicationDecorator
       end
     end
   end
+
+  def latest_edition_badge
+    if latest_edition?
+      h.tag.small do
+        options = h.tooltipify(I18n.t('latest_edition')).merge(class: 'badge badge-pill badge-primary')
+        h.content_tag(:span, I18n.t('latest'), options)
+      end
+    end
+  end
 end
 
 # (1) Using `comments.size` will not use counter cache. We could also have used `model.comments.size`.

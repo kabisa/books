@@ -10,11 +10,8 @@
           .col-10.col-lg-4
             h5.mb-1
               = book.title_highlighted_with_search
-              = book.reedition_badge
-              - if book.reedition.nil? && book.previous_editions.any?
-                small<
-                  span.badge.badge-pill.badge-primary
-                    | latest
+              => book.reedition_badge
+              => book.latest_edition_badge
 
             - if book.writers.any?
               small(data={ toggle: 'no-collapse' })= book.written_by_highlighted_with_search

@@ -98,6 +98,10 @@ class Book < ApplicationRecord
     !!borrow_by(user)
   end
 
+  def latest_edition?
+    !reedition && previous_editions.any?
+  end
+
   private
 
   def at_least_one_medium_is_required

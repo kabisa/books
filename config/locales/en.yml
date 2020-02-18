@@ -174,12 +174,14 @@ en:
     not_authorized: 'You are not authorized to perform this operation'
   time_ago: '%{time} ago'
   outdated: 'outdated'
+  latest: 'latest'
   num_of_pages: '%{num_of_pages} pages'
   published_on: 'Published %{published_on}'
   view_on_github: 'View the repository on GitHub'
   no_copies_available: 'no copies available'
   you_are_currently_borrowing: 'You are currently borrowing a copy.'
   reedition_available: 'A newer edition for this book is available.'
+  latest_edition: 'This is the latest edition for this book in our library.'
   errors:
     messages:
       content_type_whitelist_error: 'should be an image file'
