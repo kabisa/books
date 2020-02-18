@@ -406,7 +406,7 @@ RSpec.describe BookDecorator do
       let(:reedition) { create(:book) }
       subject         { Capybara.string html }
 
-      it              { is_expected.to have_css('small span.badge.badge-pill.badge-light[title][data-toggle="tooltip"]', text: 'outdated') }
+      it              { is_expected.to have_css('small[title][data-toggle="tooltip"] span.badge.badge-pill.badge-light', text: 'outdated') }
     end
 
     context 'no reedition available' do
@@ -427,7 +427,7 @@ RSpec.describe BookDecorator do
       let(:is_latest_edition) { true }
       subject                 { Capybara.string html }
 
-      it                      { is_expected.to have_css('small span.badge.badge-pill.badge-primary[title][data-toggle="tooltip"]', text: 'latest') }
+      it                      { is_expected.to have_css('small span.badge.badge-pill.badge-primary', text: 'latest') }
     end
 
     context 'is not latest edition' do

@@ -48,7 +48,6 @@ Feature: Re-edition
     And I click "Save"
     Then I see a validation error for "Re-edition"
 
-  @wip
   Scenario: See the latest version
     And the following books:
       | title                  | link                                  | reedition   |

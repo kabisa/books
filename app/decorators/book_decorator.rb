@@ -133,19 +133,21 @@ class BookDecorator < ApplicationDecorator
 
   def reedition_badge
     if reedition
-      h.tag.small do
-        options = h.tooltipify(I18n.t('reedition_available')).merge(class: 'badge badge-pill badge-light')
-        h.content_tag(:span, I18n.t('outdated'), options)
-      end
+      options = {
+        content: I18n.t('outdated'),
+        type: :light
+      }
+      h.tag.small(h.render(Bootstrap::Badge, options), h.tooltipify(I18n.t('reedition_available')))
     end
   end
 
   def latest_edition_badge
     if latest_edition?
-      h.tag.small do
-        options = h.tooltipify(I18n.t('latest_edition')).merge(class: 'badge badge-pill badge-primary')
-        h.content_tag(:span, I18n.t('latest'), options)
-      end
+      options = {
+        content: I18n.t('latest'),
+        type: :primary
+      }
+      h.tag.small(h.render(Bootstrap::Badge, options))
     end
   end
 end
