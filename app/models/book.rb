@@ -15,6 +15,7 @@ class Book < ApplicationRecord
     end
   end
   has_many :borrowings, through: :copies
+  has_many :previous_editions, class_name: 'Book', foreign_key: 'reedition_id'
   has_and_belongs_to_many :writers
   belongs_to :reedition, optional: true, class_name: 'Book'
 

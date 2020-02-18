@@ -47,3 +47,14 @@ Feature: Re-edition
     And I type "Invalid re-edition" into the "Re-edition" field
     And I click "Save"
     Then I see a validation error for "Re-edition"
+
+  @wip
+  Scenario: See the latest version
+    And the following books:
+      | title                  | link                                  | reedition   |
+      | Dolor Sit              | http://kabisa.nl/dolor-sit.pdf        |             |
+      | Lorem Ipsum            | http://www.kabisa.nl/lorem-ipsum.epub | Dolor Sit   |
+      | Consectetur Adipiscing | http://kabisa.nl/consectetur/         | Lorem Ipsum |
+    When I choose "Books" from the navigation drawer
+    Then I should see that the book "Dolor Sit" is the latest version
+    But I should not see that the book "Lorem Ipsum" is the latest version

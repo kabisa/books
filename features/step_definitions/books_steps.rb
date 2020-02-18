@@ -317,6 +317,15 @@ Then("I see {string} for the book {string}") do |text, title|
   end
 end
 
+
+Then("I {should_or_should_not}see that the book {string} is the latest version") do |should_do, title|
+  to_have_or_not_have = should_do ? 'to' : 'not_to'
+
+  within('.list-group-item', text: title) do
+    expect(page).send(to_have_or_not_have, have_content('latest'))
+  end
+end
+
 Then("there are no more books to be shown") do
   within_list_group do
     expect(page).not_to have_css('a.list-group-item', text: 'More books')
