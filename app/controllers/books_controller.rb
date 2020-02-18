@@ -8,7 +8,7 @@ class BooksController < ApplicationController
     @q = BookSearch.search(params) do |q|
       @books = q.result(distinct: true)
         .complement_with(id: params[:restorable_id])
-        .includes(:reedition, :taggings, :writers, copies: [:location])
+        .includes(:reedition, :taggings, :writers, :previous_editions, copies: [:location])
         .page(params[:page])
         .decorate
     end
