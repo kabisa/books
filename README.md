@@ -61,7 +61,7 @@ The production version of this application uses [SendGrid](http://sendgrid.com) 
 
 ### S3
 
-In [some environments](config/initializers/carrierwave.rb) images are uploaded to an S3 bucke using [CarrierWave](https://github.com/carrierwaveuploader/carrierwave). If you want to use this feature, make sure you have an S3 bucket created and add the required keys to the corresponding ENV variables:
+In [some environments](config/initializers/carrierwave.rb) images are uploaded to an S3 bucket using [CarrierWave](https://github.com/carrierwaveuploader/carrierwave). If you want to use this feature, make sure you have an S3 bucket created and add the required keys to the corresponding ENV variables:
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
