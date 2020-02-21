@@ -66,7 +66,7 @@ Given("I add the writers {string}") do |text|
 end
 
 When("I toggle the {string} switch") do |label|
-  find_field(label).click
+  find('label', text: label).click
 end
 
 Then("I {do_or_not}see a validation error (for ){string}") do |should_do, label|

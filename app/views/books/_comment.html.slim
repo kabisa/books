@@ -3,7 +3,12 @@
       div
         a.anchor(id=comment.dom_id)
         small
-          strong(class=('badge badge-pill badge-light' if comment.user == current_user))= comment.user.email
+          strong(class=('badge badge-pill badge-light' if comment.user == current_user))
+            - if comment.user.comments_anonymously? && comment.user != current_user
+              | anonymous
+            - else
+              = comment.user.email
+
           span.text-black-secondary=< comment.formatted_created_at
       = comment.body
 
