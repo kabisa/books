@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'sign_in', to: 'sessions#create'
   get 'sign_in/:token', to: 'sessions#show', as: :token_sign_in
   delete 'sign_out', to: 'sessions#destroy'
+  get 'profile', to: 'users#show'
 
   root to: 'welcome#index'
 end

@@ -17,4 +17,9 @@ When("I choose {string} from the navigation drawer") do |menu|
   end
 end
 
-
+When("I choose {string} from the account menu") do |string|
+  within('nav') do
+    click_on @user.email
+    click_on 'Profile'
+  end
+end

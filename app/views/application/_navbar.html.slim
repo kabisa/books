@@ -14,5 +14,6 @@ nav.navbar.fixed-top.navbar-full.navbar-light.bg-white
             i.material-icons person
             span.clearfix.d-none.d-sm-inline-block= current_user.email
           .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
+            = link_to 'Profile', profile_path, class: 'dropdown-item'
             = link_to t('helpers.submit.session.destroy'), sign_out_path, method: :delete, class: 'dropdown-item'
 
