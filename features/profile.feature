@@ -10,9 +10,14 @@ Feature: Profile
     Given I signed in as a Kabisaan
     And I am on my profile page
     When I exit my profile page
-    Then I'm back on the main page
+    Then I should be back on the main page
 
   @wip
   Scenario: Edit a profile
+    Given I signed in as a Kabisaan
+    And I am on my profile page
+    When I check "Post comments anonymously"
+    And I click "Save"
+    Then I should be back on the main page
 
   Scenario: Guest cannot access profile

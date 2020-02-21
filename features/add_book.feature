@@ -20,5 +20,5 @@ Feature:
     Given I did not sign in
     When I navigate to page for adding a new book
     Then I see an error telling me I am not unauthorized
-    And I'm back on the main page
+    And I should be back on the main page
 

@@ -45,7 +45,7 @@ Feature:
   Scenario: Return to main page
     Given I am on the Sign in page
     When I click the "Cancel" button
-    Then I'm back on the main page
+    Then I should be back on the main page
 
   @todo
   Scenario: Sign in with invalid url
