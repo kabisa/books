@@ -1,4 +1,4 @@
 - content_for :header do
   h1.card-title= t('.title', subject: Book.model_name.human.downcase)
 
-= render partial: 'form', locals: { book: @book }, layout: 'form_layout'
+= render partial: 'form', locals: { book: @book }, layout: 'shared/form_layout'

@@ -74,6 +74,7 @@ en:
     create: *new_book
     show:
       edit: 'Edit'
+      cancel: 'Back'
     destroy:
       notice: "'%{title}' deleted."
     restore:
@@ -104,6 +105,9 @@ en:
       latest_comment: 'Latest comment'
       recently_added: 'Recently added'
       most_liked_book: 'Most-liked book'
+  users:
+    edit:
+      cancel: 'Cancel profile changes'
   modals:
     borrow:
       title: 'Borrow %{title}'

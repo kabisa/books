@@ -20,9 +20,10 @@ module BootstrapHelper
     content_tag(:i, icon, options)
   end
 
-  def tooltipify(title)
+  def tooltipify(title, data_attributes = {})
+    data = { toggle: 'tooltip' }.merge(data_attributes)
     {
-      data: { toggle: 'tooltip' },
+      data: data,
       title: title
     }
   end
