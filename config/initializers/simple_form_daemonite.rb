@@ -98,7 +98,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
     b.wrapper tag: 'span', class: 'custom-control-track' do; end
-    b.use :input, class: 'custom-control-input', error_class: 'is-invalid', valid_class: 'is-valid'
+    b.use :input, class: 'custom-control-input', error_class: 'is-invalid', valid_class: false
     b.use :label, class: 'custom-control-label'
     b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
