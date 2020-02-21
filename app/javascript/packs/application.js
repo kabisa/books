@@ -20,6 +20,8 @@ import 'bootstrap/dist/js/bootstrap';
 import 'daemonite-material/js/material';
 
 $(document).on('turbolinks:load', function() {
+  // Bootstrap:
+  //
   $(
     '.floating-label .custom-select, .floating-label .form-control',
   ).floatinglabel();
@@ -34,6 +36,16 @@ $(document).on('turbolinks:load', function() {
     container: 'body',
     html: true,
     trigger: 'hover',
+  });
+
+  // Daemonite:
+  //
+  $(window).on('scroll', function() {
+    if ($(window).scrollTop() > 0) {
+      $('.toolbar-waterfall').addClass('waterfall');
+    } else {
+      $('.toolbar-waterfall').removeClass('waterfall');
+    }
   });
 });
 

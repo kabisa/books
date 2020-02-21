@@ -1,0 +1,5 @@
+- if action_name == 'index'
+  button.navbar-toggler aria-controls="navdrawerDefault" aria-expanded="false" aria-label=("Toggle Navdrawer") data-target="#navdrawerDefault" data-toggle="navdrawer"
+    span.navbar-toggler-icon
+- else
+  = link_to material_icon('arrow_back'), 'javascript:history.back()', class: 'navbar-toggler'

@@ -5,14 +5,14 @@ Feature: Profile
     When I choose "Profile" from the account menu
     Then I should be on my profile page
 
-  @todo
+  @javascript
   Scenario: Exiting profile
     Given I signed in as a Kabisaan
     And I am on my profile page
     When I exit my profile page
-    Then I should be on the books page
+    Then I'm back on the main page
 
-  @todo
+  @wip
   Scenario: Edit a profile
 
   Scenario: Guest cannot access profile

@@ -23,3 +23,9 @@ When("I choose {string} from the account menu") do |string|
     click_on 'Profile'
   end
 end
+
+When("I navigate back") do
+  within('nav.navbar') do
+    click_on 'arrow_back'
+  end
+end
