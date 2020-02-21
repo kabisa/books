@@ -4,8 +4,4 @@ class NullUserPolicy < ApplicationPolicy
       scope.all
     end
   end
-
-  def show?
-    false
-  end
 end

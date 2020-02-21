@@ -21,6 +21,8 @@ en:
     labels:
       borrowing:
         copy_id: 'Location'
+      user:
+        comments_anonymously: 'Post comments anonymously'
     hints:
       book:
         reedition_title: 'If a newer version of this book is available, enter it as a re-edition'

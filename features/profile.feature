@@ -12,11 +12,10 @@ Feature: Profile
     When I exit my profile page
     Then I should be back on the main page
 
-  @wip
   Scenario: Edit a profile
     Given I signed in as a Kabisaan
     And I am on my profile page
-    When I check "Post comments anonymously"
+    When I toggle the "Post comments anonymously" switch
     And I click "Save"
     Then I should be back on the main page
 

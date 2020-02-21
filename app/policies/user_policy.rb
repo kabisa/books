@@ -5,7 +5,15 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  def show?
+  def edit?
     true
+  end
+
+  def update?
+    true
+  end
+
+  def permitted_attributes
+    [:comments_anonymously]
   end
 end
