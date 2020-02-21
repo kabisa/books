@@ -44,4 +44,46 @@ RSpec.describe CommentDecorator do
     it { is_expected.to have_css('br', count: 2) }
     it { is_expected.to have_content('...') }
   end
+
+  describe '#commenter_html' do
+    before        { allow(h).to receive(:current_user).and_return(user) }
+
+    subject       { Capybara.string(decorator.commenter_html) }
+
+    let(:user)    { create(:user, email: 'john.doe@kabisa.nl') }
+    let(:comment) { create :comment, book: book, user: commenter }
+
+    context 'known comment' do
+      context 'user views his own comment' do
+        let(:commenter) { user }
+
+        it { is_expected.to have_css('small span.badge.badge-pill.badge-light', text: commenter.email) }
+        it { is_expected.to have_css('small span.text-black-secondary', text: 'less than a minute ago') }
+      end
+
+      context 'user views other comment' do
+        let(:commenter) { create(:user) }
+        it { is_expected.to have_css('strong', text: commenter.email) }
+        it { is_expected.to have_css('small span.text-black-secondary', text: 'less than a minute ago') }
+      end
+    end
+
+    context 'anonymous comment' do
+      before { commenter.update(comments_anonymously: true) }
+
+      context 'user views his own comment' do
+        let(:commenter) { user }
+
+        it { is_expected.to have_css('small span.badge.badge-pill.badge-light', text: commenter.email) }
+        it { is_expected.to have_css('small span.text-black-secondary', text: 'less than a minute ago') }
+      end
+
+      context 'user views other comment' do
+        let(:commenter) { create(:user) }
+
+        it { is_expected.to have_css('strong', text: 'anonymous') }
+        it { is_expected.to have_css('small span.text-black-secondary', text: 'less than a minute ago') }
+      end
+    end
+  end
 end

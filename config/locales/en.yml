@@ -182,6 +182,7 @@ en:
   you_are_currently_borrowing: 'You are currently borrowing a copy.'
   reedition_available: 'A newer edition for this book is available.'
   latest_edition: 'This is the latest edition for this book in our library.'
+  anonymous: 'anonymous'
   errors:
     messages:
       content_type_whitelist_error: 'should be an image file'

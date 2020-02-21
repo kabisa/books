@@ -7,7 +7,7 @@
     = render('suggestion', book: @suggestions.last_commented_on, title: t('.latest_comment'), image: 'book_01.jpg') do |book|
       blockquote.blockquote.mb-0
         = book.comments.last.truncated_body_html
-        footer.blockquote-footer= book.comments.last.user.email
+        footer.blockquote-footer= book.comments.last.commenter
 
     = render('suggestion', book: @suggestions.recently_added, title: t('.recently_added'), image: 'book_02.jpg') do |book|
       = book.truncated_summary_html(class: 'card-text')
