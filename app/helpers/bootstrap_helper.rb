@@ -1,14 +1,6 @@
 require 'bootstrap/alert'
 
 module BootstrapHelper
-  def bs_snackbar
-    render(Material::Snackbar, flash: flash)
-  end
-
-  def navigation_icon
-    render(Material::NavigationIcon, action_name: action_name)
-  end
-
   # @param icon [String] For all available icons, please refer to Material icons library (https://material.io/resources/icons/)
   def material_icon(icon, options={})
     default_options = { class: 'material-icons' }

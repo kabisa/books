@@ -1,5 +1,6 @@
-- if action_name == 'index'
-  button.navbar-toggler aria-controls="navdrawerDefault" aria-expanded="false" aria-label=("Toggle Navdrawer") data-target="#navdrawerDefault" data-toggle="navdrawer"
+- if menu?
+  button(class=toggler_class aria={ controls: 'navdrawerDefault', expanded: false, label: 'Toggle Navdrawer' } data={ target: '#navdrawerDefault', toggle: 'navdrawer' })
     span.navbar-toggler-icon
 - else
-  = link_to material_icon('arrow_back'), 'javascript:history.back()', tooltipify(t('cancel', scope: [controller.controller_name, controller.action_name]), placement: :right).merge(class: 'navbar-toggler')
+  = link_to material_icon('arrow_back'), url, tooltipify(t('cancel', scope: [controller.controller_name, controller.action_name]), placement: :right).merge(class: toggler_class)
+
