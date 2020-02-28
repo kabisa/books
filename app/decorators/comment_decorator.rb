@@ -1,5 +1,7 @@
 class CommentDecorator < ApplicationDecorator
   delegate_all
+  delegate :commenter, to: :user
+  decorates_association :user
 
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
@@ -26,18 +28,11 @@ class CommentDecorator < ApplicationDecorator
     end
   end
 
-  def commenter
-    if user.comments_anonymously? && !from_current_user?
-      I18n.t('anonymous')
-    else
-      user.email
-    end
-  end
-
   private
 
   def commenter_badge
-    if from_current_user?
+
+    if user.current_user?
       options = {
         content: commenter,
         type: :light
@@ -47,9 +42,5 @@ class CommentDecorator < ApplicationDecorator
     else
       h.tag.strong(commenter)
     end
-  end
-
-  def from_current_user?
-    user == h.current_user
   end
 end

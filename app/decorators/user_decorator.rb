@@ -11,7 +11,7 @@ class UserDecorator < ApplicationDecorator
   #   end
 
   def destroy_link
-    if self == h.current_user
+    if current_user?
       h.link_to I18n.t('users.user.destroy'), '#', class: 'btn btn-danger disabled'
     else
       h.link_to I18n.t('users.user.destroy'), self, method: :delete, class: 'btn btn-danger', data: { confirm: I18n.t('users.user.confirm', name: self) }
@@ -27,5 +27,17 @@ class UserDecorator < ApplicationDecorator
 
   def role_word
     I18n.t("role/#{role}", scope: [:activerecord, :attributes, :user])
+  end
+
+  def commenter
+    if comments_anonymously? && !current_user?
+      I18n.t('anonymous')
+    else
+      email
+    end
+  end
+
+  def current_user?
+    self == h.current_user
   end
 end
