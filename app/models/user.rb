@@ -5,6 +5,8 @@ class User < ApplicationRecord
     email: true
   validates :name, length: { maximum: 100 }
 
+  mount_uploader :avatar, AvatarUploader
+
   def anonymous?
     false
   end

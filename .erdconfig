@@ -6,3 +6,4 @@ filetype: svg
 inheritance: true
 notation: bachman
 title: Class Diagram Books
+exclude: 'ActiveRecord::InternalMetadata, ActiveRecord::SchemaMigration'

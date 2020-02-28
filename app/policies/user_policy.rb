@@ -14,6 +14,9 @@ class UserPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:comments_anonymously]
+    [
+      :comments_anonymously,
+      :avatar, :avatar_cache, :remove_avatar
+    ]
   end
 end
