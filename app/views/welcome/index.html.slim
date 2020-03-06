@@ -1,4 +1,4 @@
-= render(Search::Form, q: @q)
+= render(Search::Form.new(q: @q))
 
 - if @suggestions.any?
   h2= t('.title')

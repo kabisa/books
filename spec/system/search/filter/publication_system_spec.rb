@@ -95,7 +95,7 @@ RSpec.describe Search::Filter::Publication, type: :system do
     end
 
     it 'also resets content' do
-      find('.dropdown-toggle-split').click
+      find('[data-controller="publication"] .dropdown-toggle-split').click
       click_on('Publication')
 
       expect(page).to have_css('.dropdown .btn-group.btn-group-fluid.border:not(.border-primary)')

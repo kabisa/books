@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 describe Search::Filter::Dropdown, type: :component do
-  let(:html) { render_inline(Search::Filter::Dropdown, options) { content } }
   subject       { Capybara.string html }
 
-  let(:options) do
-    { title: title }
-  end
-  let(:title) { 'Greetings' }
+  let(:html)    { render_inline(described_class.new(options)) { content } }
+  let(:options) {{ title: title }}
+  let(:title)   { 'Greetings' }
   let(:content) { 'Hello World!' }
 
   describe 'container' do

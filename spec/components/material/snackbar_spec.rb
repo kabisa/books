@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Material::Snackbar, type: :component do
   subject       { Capybara.string html }
-  let(:html)    {  render_inline(Material::Snackbar, options) }
+  let(:html)    {  render_inline(described_class.new(options)) }
   let(:flash)   { { notice: content } }
   let(:options) { { flash: flash } }
   let(:content) { 'Lorem' }

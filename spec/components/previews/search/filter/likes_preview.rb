@@ -1,4 +1,4 @@
-class Search::Filter::LikesPreview < ActionView::Component::Preview
+class Search::Filter::LikesPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_no_likes
@@ -16,7 +16,7 @@ class Search::Filter::LikesPreview < ActionView::Component::Preview
   attr_accessor :likes_count_gteq
 
   def render_component
-    render(Search::Form, options).css('[data-controller="likes"]')
+    render(Search::Form.new(options))
   end
 
   def options

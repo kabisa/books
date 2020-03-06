@@ -1,4 +1,4 @@
-class VoteBarPreview < ActionView::Component::Preview
+class VoteBarPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_vote_from_user
@@ -16,7 +16,7 @@ class VoteBarPreview < ActionView::Component::Preview
   attr_accessor :has_voted
 
   def render_component
-    render(VoteBar, options)
+    render(VoteBar.new(options))
   end
 
   def options

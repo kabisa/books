@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe BookComponents::VoteStats, type: :component do
   subject       { Capybara.string html }
-  let(:html)    {  render_inline(described_class, options) }
+  let(:html)    {  render_inline(described_class.new(options)) }
   let(:options) { { like_count: 3, dislike_count: 1 } }
 
   it { is_expected.to have_content('75%') }

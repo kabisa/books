@@ -1,4 +1,4 @@
-class Material::SnackbarPreview < ActionView::Component::Preview
+class Material::SnackbarPreview < ViewComponent::Preview
   include ActionView::Helpers::UrlHelper
   layout 'preview'
 
@@ -22,7 +22,7 @@ class Material::SnackbarPreview < ActionView::Component::Preview
   attr_accessor :notice, :action
 
   def render_component
-    render(Material::Snackbar, options)
+    render(Material::Snackbar.new(options))
   end
 
   def options

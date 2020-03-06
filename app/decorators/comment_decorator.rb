@@ -38,7 +38,7 @@ class CommentDecorator < ApplicationDecorator
         type: :light
       }
 
-      h.render(Bootstrap::Badge, options)
+      h.render(Bootstrap::Badge.new(options))
     else
       h.tag.strong(commenter)
     end

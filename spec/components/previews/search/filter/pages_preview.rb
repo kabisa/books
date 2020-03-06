@@ -1,4 +1,4 @@
-class Search::Filter::PagesPreview < ActionView::Component::Preview
+class Search::Filter::PagesPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_no_pages
@@ -30,7 +30,7 @@ class Search::Filter::PagesPreview < ActionView::Component::Preview
   attr_accessor :num_of_pages_gteq, :num_of_pages_lteq
 
   def render_component
-    render(Search::Form, options).css('[data-controller="pages"]')
+    render(Search::Form.new(options))#.css('[data-controller="pages"]')
   end
 
   def options

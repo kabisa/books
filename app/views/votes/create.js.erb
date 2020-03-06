@@ -5,5 +5,5 @@ elements.forEach((el) => {
 })
 
 var snackbar       = document.createElement('div');
-snackbar.innerHTML = '<%= j render(Material::Snackbar, flash: flash) %>';
+snackbar.innerHTML = '<%= j render(Material::Snackbar.new(flash: flash)) %>';
 document.body.appendChild(snackbar.firstChild);
