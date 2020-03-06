@@ -10,6 +10,7 @@
     "@trevoreyre/autocomplete-js": "^2.1.0",
     "@yaireo/tagify": "^3.1.0",
     "bootstrap": "^4.3.1",
+    "croppie": "^2.6.4",
     "daemonite-material": "^4.1.1",
     "expose-loader": "^0.7.5",
     "jquery": "^3.4.1",
