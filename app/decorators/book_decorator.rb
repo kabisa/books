@@ -53,7 +53,7 @@ class BookDecorator < ApplicationDecorator
       dislike: dislikes.find_by(user: h.current_user)
     }
 
-    h.render(BookComponents::VoteButtons, options)
+    h.render(BookComponents::VoteButtons.new(options))
   end
 
   def vote_stats
@@ -62,7 +62,7 @@ class BookDecorator < ApplicationDecorator
       dislike_count: dislikes.size
     }
 
-    h.render(BookComponents::VoteStats, options)
+    h.render(BookComponents::VoteStats.new(options))
   end
 
   def formatted_tag_list
@@ -107,7 +107,7 @@ class BookDecorator < ApplicationDecorator
       user: h.current_user
     }
 
-    h.render(BookComponents::HamburgerMenu, options)
+    h.render(BookComponents::HamburgerMenu.new(options))
   end
 
   def currently_borrowing_alert
@@ -117,7 +117,7 @@ class BookDecorator < ApplicationDecorator
         type: :info
       }
 
-      h.render(Bootstrap::Alert, options)
+      h.render(Bootstrap::Alert.new(options))
     end
   end
 
@@ -127,7 +127,7 @@ class BookDecorator < ApplicationDecorator
         content: h.link_to(I18n.t('reedition_available'), reedition, class: 'alert-link')
       }
 
-      h.tag.div(h.render(Bootstrap::Alert, options), data: { toggle: 'no-collapse' })
+      h.tag.div(h.render(Bootstrap::Alert.new(options)), data: { toggle: 'no-collapse' })
     end
   end
 
@@ -137,7 +137,7 @@ class BookDecorator < ApplicationDecorator
         content: I18n.t('outdated'),
         type: :light
       }
-      h.tag.small(h.render(Bootstrap::Badge, options), h.tooltipify(I18n.t('reedition_available')))
+      h.tag.small(h.render(Bootstrap::Badge.new(options)), h.tooltipify(I18n.t('reedition_available')))
     end
   end
 
@@ -147,7 +147,7 @@ class BookDecorator < ApplicationDecorator
         content: I18n.t('latest'),
         type: :primary
       }
-      h.tag.small(h.render(Bootstrap::Badge, options))
+      h.tag.small(h.render(Bootstrap::Badge.new(options)))
     end
   end
 end

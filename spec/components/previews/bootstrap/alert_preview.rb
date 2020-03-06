@@ -1,4 +1,4 @@
-class Bootstrap::AlertPreview < ActionView::Component::Preview
+class Bootstrap::AlertPreview < ViewComponent::Preview
   include ActionView::Helpers::UrlHelper
   layout 'preview'
 
@@ -14,7 +14,7 @@ class Bootstrap::AlertPreview < ActionView::Component::Preview
   attr_accessor :content, :type
 
   def render_component
-    render(Bootstrap::Alert, options)
+    render(Bootstrap::Alert.new(options))
   end
 
   def options

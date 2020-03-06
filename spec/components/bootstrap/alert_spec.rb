@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Bootstrap::Alert, type: :component do
   subject       { Capybara.string html }
-  let(:html)    {  render_inline(described_class, options) }
+  let(:html)    {  render_inline(described_class.new(options)) }
   let(:options) { { content: content, type: type } }
   let(:content) { 'Lorem' }
   let(:type)   { :primary }

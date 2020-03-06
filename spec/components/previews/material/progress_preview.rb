@@ -1,4 +1,4 @@
-class Material::ProgressPreview < ActionView::Component::Preview
+class Material::ProgressPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_default_background
@@ -45,7 +45,7 @@ class Material::ProgressPreview < ActionView::Component::Preview
   attr_accessor :background, :html
 
   def render_component
-    render(Material::Progress, options)
+    render(Material::Progress.new(options))
   end
 
   def options

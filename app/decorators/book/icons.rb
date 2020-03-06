@@ -10,7 +10,7 @@ module Book::Icons
         user: h.current_user
       }
 
-      h.render(BookComponents::PrintedBookIcon, options)
+      h.render(BookComponents::PrintedBookIcon.new(options))
     else
       h.icon_placeholder
     end

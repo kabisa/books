@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe BookComponents::HamburgerMenu, type: :component do
   subject       { Capybara.string html }
-  let(:html)    {  render_inline(described_class, options) }
+  let(:html)    {  render_inline(described_class.new(options)) }
   let(:options) { { book: book, user: user, remote: remote } }
   let(:book)    { create(:book) }
   let(:remote)  { true }

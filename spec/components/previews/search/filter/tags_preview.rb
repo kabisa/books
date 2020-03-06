@@ -1,4 +1,4 @@
-class Search::Filter::TagsPreview < ActionView::Component::Preview
+class Search::Filter::TagsPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_nothing_checked
@@ -26,7 +26,7 @@ class Search::Filter::TagsPreview < ActionView::Component::Preview
   attr_accessor :tags_id_in
 
   def render_component
-    render(Search::Form, options).css('[data-controller="tags"]')
+    render(Search::Form.new(options))#.css('[data-controller="tags"]')
   end
 
   def options

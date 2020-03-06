@@ -1,4 +1,4 @@
-class BookComponents::HamburgerMenuPreview < ActionView::Component::Preview
+class BookComponents::HamburgerMenuPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_guest_user
@@ -22,7 +22,7 @@ class BookComponents::HamburgerMenuPreview < ActionView::Component::Preview
   attr_accessor :user, :book
 
   def render_component
-    render(BookComponents::HamburgerMenu, options)
+    render(BookComponents::HamburgerMenu.new(options))
   end
 
   def options

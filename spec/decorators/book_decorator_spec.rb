@@ -159,9 +159,11 @@ RSpec.describe BookDecorator do
 
     context 'user is allowed to borrow books' do
       let(:policy_stub) { double('Policy', borrow?: true) }
+      let(:component_stub) { double('BookComponents::PrintedBookIcon') }
 
       it 'delegates to the BookComponents::PrintedBookIcon component' do
-        expect(h).to receive(:render).with(BookComponents::PrintedBookIcon, options)
+        expect(BookComponents::PrintedBookIcon).to receive(:new).with(options).and_return(component_stub)
+        expect(h).to receive(:render).with(component_stub)
         subject
       end
     end

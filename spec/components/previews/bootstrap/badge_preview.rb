@@ -1,4 +1,4 @@
-class Bootstrap::BadgePreview < ActionView::Component::Preview
+class Bootstrap::BadgePreview < ViewComponent::Preview
   include ActionView::Helpers::UrlHelper
   layout 'preview'
 
@@ -14,7 +14,7 @@ class Bootstrap::BadgePreview < ActionView::Component::Preview
   attr_accessor :content, :type
 
   def render_component
-    render(Bootstrap::Badge, options)
+    render(Bootstrap::Badge.new(options))
   end
 
   def options

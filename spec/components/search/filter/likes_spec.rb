@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Search::Filter::Likes, type: :component do
   subject              { Capybara.string html }
-  let(:html)           { render_inline(Search::Filter::Likes, options) }
+  let(:html)           { render_inline(described_class.new(options)) }
   let(:options)        { { q: search_double, builder: builder_double } }
   let(:search_double)  { Ransack::Search.new(Book, params) }
   let(:builder_double) { double('builder').as_null_object }

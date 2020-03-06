@@ -1,4 +1,4 @@
-class Search::Filter::PublicationPreview < ActionView::Component::Preview
+class Search::Filter::PublicationPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_no_publication_date
@@ -30,7 +30,7 @@ class Search::Filter::PublicationPreview < ActionView::Component::Preview
   attr_accessor :published_years_ago_lteq, :published_years_ago_gteq
 
   def render_component
-    render(Search::Form, options).css('[data-controller="publication"]')
+    render(Search::Form.new(options))#.css('[data-controller="publication"]')
   end
 
   def options

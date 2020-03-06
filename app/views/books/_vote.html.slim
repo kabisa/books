@@ -6,7 +6,7 @@
 .vote.text-center
   - if current_user.identified?
     = book.vote_buttons
-    .mt-1= render(VoteBar, like_count: like_count, dislike_count: dislike_count, has_voted: (like || dislike))
+    .mt-1= render(VoteBar.new(like_count: like_count, dislike_count: dislike_count, has_voted: (like || dislike)))
   - else
       .text-right(style="min-width: 90px;")
         = book.vote_stats

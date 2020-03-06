@@ -1,4 +1,4 @@
-class BookComponents::PrintedBookIconPreview < ActionView::Component::Preview
+class BookComponents::PrintedBookIconPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_an_ebook
@@ -16,7 +16,7 @@ class BookComponents::PrintedBookIconPreview < ActionView::Component::Preview
   attr_accessor :user, :book
 
   def render_component
-    render(BookComponents::PrintedBookIcon, options)
+    render(BookComponents::PrintedBookIcon.new(options))
   end
 
   def options

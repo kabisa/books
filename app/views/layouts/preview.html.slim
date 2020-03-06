@@ -16,7 +16,7 @@ html
       .navdrawer-content
         .card.m-3
           nav.navdrawer-nav
-            - ActionView::Component::Preview.all.each_with_index do |preview, index|
+            - ViewComponent::Preview.all.each_with_index do |preview, index|
               - if index.nonzero?
                 .navdrawer-divider
               p.navdrawer-subheader= preview.preview_name
