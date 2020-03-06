@@ -1,0 +1,11 @@
+.modal(tabindex="-1" role="dialog" data=data)
+  .modal-dialog(role="document")
+    .modal-content
+      .modal-header
+        h5.modal-title= title
+        = close_icon(data: { dismiss: :modal })
+
+      .modal-body
+        = content
+      .modal-footer
+        = footer
