@@ -23,7 +23,7 @@ class DropzoneCropInput < SimpleForm::Inputs::FileInput
   def crop_results
     template.capture do
       %w[x y w h].each do |attribute|
-        template.concat @builder.text_field("crop_#{attribute}", data: { target: "#{data_controller}.crop#{attribute.upcase}" })
+        template.concat @builder.hidden_field("crop_#{attribute}", data: { target: "#{data_controller}.crop#{attribute.upcase}" })
       end
     end
 

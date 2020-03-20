@@ -7,33 +7,21 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #storage :file
   # storage :fog
 
-  #process resize_to_fill: [400, 400]
-
-  version :thumb do
-    process :crop
-    #resize_to_fill(400, 400)
-  end
+  process :crop
 
   def crop
-    #byebug
-    # Have a look at https://gist.github.com/maxivak/3924976 maybe...
     if model.crop_x.present?
       manipulate! do |img|
-        x = model.crop_x
-        y = model.crop_y
-        w = model.crop_w
-        h = model.crop_h
-        p "*"*10, [x,y,w,h]
-        #byebug
-        img.gravity('NorthWest')
-        img.crop("#{w}x#{h}+#{x}+#{y}")
-        #img.resize("#{w}x#{h}")
-        #img.crop('100x100+319+319')
+        # This step is VERY important.
+        # Cropping a PNG gave me unexplainable results.
+        img.format('jpg')
+        img.crop(geometry)
         img
       end
+
+      resize_to_fill(400, 400)
     end
   end
-
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -46,17 +34,17 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-   def default_url(*args)
-  #   # For Rails 3.1+ asset pipeline compatibility:
-  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  #
-     #"/images/fallback/" + [version_name, "default.jpg"].compact.join('_')
-     ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-   end
+  def default_url(*args)
+    #   # For Rails 3.1+ asset pipeline compatibility:
+    #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+    #
+    #"/images/fallback/" + [version_name, "default.jpg"].compact.join('_')
+    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  end
 
-   def size_range
-     0..2.megabytes
-   end
+  def size_range
+    0..2.megabytes
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
@@ -84,9 +72,18 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #   %w(jpg jpeg gif png)
   # end
 
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    'avatar.jpg'
+  end
+
+  private
+
+  def geometry
+    x = model.crop_x.to_i
+    y = model.crop_y.to_i
+    w = model.crop_w.to_i
+    h = model.crop_h.to_i
+
+    "#{w}x#{h}+#{x}+#{y}"
+  end
 end
