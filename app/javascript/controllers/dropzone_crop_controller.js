@@ -9,17 +9,21 @@ export default class extends Controller {
     'removeImage',
     'modal',
     'cropper',
+    'cropX',
+    'cropY',
+    'cropW',
+    'cropH',
   ];
   initialize() {
     let opts = {
       viewport: {
-        width: 200,
-        height: 200,
+        width: 300,
+        height: 300,
         type: 'circle',
       },
       boundary: {
-        width: 300,
-        height: 300,
+        width: 400,
+        height: 400,
       },
     };
     this.cropper = new Croppie(this.cropperTarget, opts);
@@ -53,12 +57,20 @@ export default class extends Controller {
     }
   }
 
-  crop() {
-    let previewImageTarget = this.previewImageTarget;
+  async crop() {
+    const result = await this.cropper.result({type: 'canvas', circle: false});
 
-    this.cropper.result({type: 'canvas', circle: false}).then((result) => {
-      previewImageTarget.setAttribute('src', result);
-    });
+    this.previewImageTarget.setAttribute('src', result);
+    const [
+      topLeftX,
+      topLeftY,
+      bottomRightX,
+      bottomRightY,
+    ] = this.cropper.get().points;
+    this.cropXTarget.value = topLeftX;
+    this.cropYTarget.value = topLeftY;
+    this.cropWTarget.value = bottomRightX - topLeftX;
+    this.cropHTarget.value = bottomRightY - topLeftY;
   }
 
   browse(e) {

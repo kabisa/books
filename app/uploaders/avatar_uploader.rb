@@ -7,7 +7,33 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #storage :file
   # storage :fog
 
-  process resize_to_fill: [400, 400]
+  #process resize_to_fill: [400, 400]
+
+  version :thumb do
+    process :crop
+    #resize_to_fill(400, 400)
+  end
+
+  def crop
+    #byebug
+    # Have a look at https://gist.github.com/maxivak/3924976 maybe...
+    if model.crop_x.present?
+      manipulate! do |img|
+        x = model.crop_x
+        y = model.crop_y
+        w = model.crop_w
+        h = model.crop_h
+        p "*"*10, [x,y,w,h]
+        #byebug
+        img.gravity('NorthWest')
+        img.crop("#{w}x#{h}+#{x}+#{y}")
+        #img.resize("#{w}x#{h}")
+        #img.crop('100x100+319+319')
+        img
+      end
+    end
+  end
+
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:

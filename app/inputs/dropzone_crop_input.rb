@@ -11,12 +11,22 @@ class DropzoneCropInput < SimpleForm::Inputs::FileInput
     template.tag.div(class: 'dropzone-container img-thumbnail', data: { controller: data_controller }) do
       template.concat input_element
       template.concat crop_modal
+      template.concat crop_results
     end
   end
 
   private
   def data_controller
     'dropzone-crop'
+  end
+
+  def crop_results
+    template.capture do
+      %w[x y w h].each do |attribute|
+        template.concat @builder.text_field("crop_#{attribute}", data: { target: "#{data_controller}.crop#{attribute.upcase}" })
+      end
+    end
+
   end
 
   def input_element
