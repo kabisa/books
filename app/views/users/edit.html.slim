@@ -1,4 +1,4 @@
 - content_for(:header) do
-  h1.card-title.mb-1= @user.email
+  h1.card-title= @user.email
 
 = render partial: 'form', locals: { user: @user }, layout: 'shared/form_layout'
