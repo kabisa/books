@@ -113,6 +113,9 @@ en:
     borrow:
       title: 'Borrow %{title}'
       content: 'This book is available on multiple locations.'
+    crop:
+      title: 'Crop Image'
+      submit: 'Apply'
   # mailers:
   sessions_mailer:
     magic_link:
