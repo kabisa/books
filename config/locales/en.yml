@@ -108,6 +108,8 @@ en:
       most_liked_book: 'Most-liked book'
   users:
     edit:
+      remove: *remove_image
+      upload: *upload_image
       cancel: 'Cancel profile changes'
   modals:
     borrow:
