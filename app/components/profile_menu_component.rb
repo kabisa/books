@@ -5,8 +5,6 @@ class ProfileMenuComponent < ViewComponent::Base
     @user = user
   end
 
-  private
-
   def item_class
     avatar? ? 'navbar-toggler' : %w(btn btn-outline dropdown-toggle)
   end

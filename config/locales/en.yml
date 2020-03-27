@@ -49,6 +49,7 @@ en:
       undo: 'Undo'
       show: 'View Details'
       remove_resource: 'Remove %{resource}'
+      profile: 'Profile'
     options: 'Options'
   # pages
   application:

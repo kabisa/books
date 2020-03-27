@@ -1,7 +1,9 @@
 a(*item_attributes)
-  - if user.avatar?
+  - if avatar?
     = image_tag user.avatar_url, class: 'img-fluid rounded-circle'
   - else
     i.material-icons person
     span.clearfix.d-none.d-sm-inline-block= user.email
+.dropdown-menu.dropdown-menu-right(aria={ labelledby: item_id })
+  = content
 

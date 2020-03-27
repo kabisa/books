@@ -13,10 +13,9 @@ describe ProfileMenuComponent, type: :component do
   let(:user) { build(:user, email: email) }
   let(:email) { 'john.doe@example.org' }
   let(:avatar_url) { 'http://example.org/avatar.png' }
+  let(:has_avatar) { true }
 
   describe 'with avatar' do
-    let(:has_avatar) { true }
-
     it { is_expected.to have_css('a#dropdownMenuLink.navbar-toggler[href="#"][data-toggle="dropdown"][aria-expanded="false"][aria-haspopup="true"]') }
     it { is_expected.to have_css("a img.img-fluid.rounded-circle[src='#{avatar_url}']") }
   end
@@ -27,5 +26,12 @@ describe ProfileMenuComponent, type: :component do
     it { is_expected.to have_css('a#dropdownMenuLink.btn.btn-outline.dropdown-toggle[href="#"][role="button"][data-toggle="dropdown"][aria-expanded="false"][aria-haspopup="true"]') }
     it { is_expected.to have_css('a i.material-icons', text: 'person') }
     it { is_expected.to have_css('a span.clearfix.d-none.d-sm-inline-block', text: email) }
+  end
+
+  describe 'content' do
+    let(:html)    {  render_inline(described_class.new(options)) { content } }
+    let(:content) { 'Lorem Ipsum' }
+
+    it { is_expected.to have_css('div.dropdown-menu.dropdown-menu-right[aria-labelledby="dropdownMenuLink"]', text: content) }
   end
 end
