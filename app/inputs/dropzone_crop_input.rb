@@ -1,6 +1,6 @@
 class DropzoneCropInput < SimpleForm::Inputs::FileInput
   def input(wrapper_options)
-    input_html_options.merge!({
+    input_html_options.deep_merge!({
       accept: 'image/*',
       data: {
         target: "#{data_controller}.fileInput",
@@ -10,8 +10,7 @@ class DropzoneCropInput < SimpleForm::Inputs::FileInput
 
     template.tag.div(class: 'dropzone-container img-thumbnail', data: { controller: data_controller }) do
       template.concat input_element
-      template.concat crop_modal
-      template.concat crop_results
+      template.concat crop_elements if crop?
     end
   end
 
@@ -20,13 +19,8 @@ class DropzoneCropInput < SimpleForm::Inputs::FileInput
     'dropzone-crop'
   end
 
-  def crop_results
-    template.capture do
-      %w[x y w h].each do |attribute|
-        template.concat @builder.hidden_field("crop_#{attribute}", data: { target: "#{data_controller}.crop#{attribute.upcase}" })
-      end
-    end
-
+  def crop?
+    input_html_options.dig(:data, :crop)
   end
 
   def input_element
@@ -38,6 +32,40 @@ class DropzoneCropInput < SimpleForm::Inputs::FileInput
       template.concat remove_image
       template.concat image_cache
     end
+  end
+
+  def crop_elements
+    template.capture do
+      template.concat crop_modal
+      template.concat crop_results
+    end
+  end
+
+  def crop_modal
+    options = {
+      title: 'Lorem',
+      data: {
+        target: "#{data_controller}.modal"
+      }
+    }
+
+    template.render(Bootstrap::ModalComponent.new(options)) do |c|
+      template.capture do
+        template.concat template.tag.img(data: { target: "#{data_controller}.cropper" })
+        template.concat(c.with(:footer) do
+          template.content_tag(:button, 'Crop', class: 'btn btn-primary', data: { action: "#{data_controller}#crop", dismiss: :modal })
+        end)
+      end
+    end
+  end
+
+  def crop_results
+    template.capture do
+      %w[x y w h].each do |attribute|
+        template.concat @builder.hidden_field("crop_#{attribute}", data: { target: "#{data_controller}.crop#{attribute.upcase}" })
+      end
+    end
+
   end
 
   def overlay
@@ -86,23 +114,5 @@ class DropzoneCropInput < SimpleForm::Inputs::FileInput
   # https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
   def image_cache
     @builder.hidden_field("#{attribute_name}_cache".to_sym)
-  end
-
-  def crop_modal
-    options = {
-      title: 'Lorem',
-      data: {
-        target: "#{data_controller}.modal"
-      }
-    }
-
-    template.render(Bootstrap::ModalComponent.new(options)) do |c|
-      template.capture do
-        template.concat template.tag.img(data: { target: "#{data_controller}.cropper" })
-        template.concat(c.with(:footer) do
-          template.content_tag(:button, 'Crop', class: 'btn btn-primary', data: { action: "#{data_controller}#crop", dismiss: :modal })
-        end)
-      end
-    end
   end
 end
