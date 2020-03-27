@@ -14,20 +14,24 @@ export default class extends Controller {
     'cropW',
     'cropH',
   ];
+
   initialize() {
-    let opts = {
-      viewport: {
-        width: 300,
-        height: 300,
-        type: 'circle',
-      },
-      boundary: {
-        width: 400,
-        height: 400,
-      },
-    };
-    this.cropper = new Croppie(this.cropperTarget, opts);
+    if (this.canCrop) {
+      let opts = {
+        viewport: {
+          width: 300,
+          height: 300,
+          type: 'circle',
+        },
+        boundary: {
+          width: 400,
+          height: 400,
+        },
+      };
+      this.cropper = new Croppie(this.cropperTarget, opts);
+    }
   }
+
   connect() {
     if (this.previewImageTarget.src === '') {
       this.removeButtonTarget.style.display = 'none';
@@ -43,13 +47,15 @@ export default class extends Controller {
       let reader = new FileReader();
       reader.onload = (event) => {
         this.previewImageTarget.setAttribute('src', event.target.result);
-        $(this.modalTarget).on('shown.bs.modal', () => {
-          cropper.bind({
-            url: event.target.result,
+        if (this.canCrop) {
+          $(this.modalTarget).on('shown.bs.modal', () => {
+            cropper.bind({
+              url: event.target.result,
+            });
           });
-        });
 
-        $(this.modalTarget).modal('show');
+          $(this.modalTarget).modal('show');
+        }
       };
       reader.readAsDataURL(e.target.files[0]);
       this.removeImageTarget.value = false;
@@ -59,14 +65,14 @@ export default class extends Controller {
 
   async crop() {
     const result = await this.cropper.result({type: 'canvas', circle: false});
-
-    this.previewImageTarget.setAttribute('src', result);
     const [
       topLeftX,
       topLeftY,
       bottomRightX,
       bottomRightY,
     ] = this.cropper.get().points;
+
+    this.previewImageTarget.setAttribute('src', result);
     this.cropXTarget.value = topLeftX;
     this.cropYTarget.value = topLeftY;
     this.cropWTarget.value = bottomRightX - topLeftX;
@@ -93,5 +99,9 @@ export default class extends Controller {
 
   noop(e) {
     e.preventDefault();
+  }
+
+  get canCrop() {
+    return this.hasCropperTarget;
   }
 }
