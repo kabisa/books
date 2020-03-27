@@ -1,0 +1,7 @@
+a(*item_attributes)
+  - if user.avatar?
+    = image_tag user.avatar_url, class: 'img-fluid rounded-circle'
+  - else
+    i.material-icons person
+    span.clearfix.d-none.d-sm-inline-block= user.email
+
