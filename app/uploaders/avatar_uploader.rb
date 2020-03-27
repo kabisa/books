@@ -73,7 +73,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   def filename
-    'avatar.jpg'
+    'avatar.jpg' if original_filename.present?
   end
 
   private
