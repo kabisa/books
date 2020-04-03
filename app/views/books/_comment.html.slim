@@ -1,8 +1,5 @@
   li.media.my-4
-    - if comment.user.comments_anonymously?
-      .mr-3= image_tag(comment.user.avatar.thumb.default_url, class: 'img-fluid rounded-circle')
-    - else
-      .mr-3= image_tag(comment.user.avatar.thumb.url, class: 'img-fluid rounded-circle')
+    .mr-3= comment.user.secure_avatar_thumbnail
 
     .media-body
       h5.mt-0.mb-1

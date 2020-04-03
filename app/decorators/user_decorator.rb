@@ -40,4 +40,10 @@ class UserDecorator < ApplicationDecorator
   def current_user?
     self == h.current_user
   end
+
+  def secure_avatar_thumbnail
+    thumb = avatar.thumb
+    source = comments_anonymously? ? thumb.default_url : thumb.url
+    h.image_tag(source, class: 'img-fluid rounded-circle')
+  end
 end
