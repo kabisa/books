@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  default_scope { includes(:user).order(created_at: :desc) }
+  default_scope { includes(:user) }
 
   validates :body, presence: true, length: { maximum: 1024 }
 

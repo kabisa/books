@@ -24,7 +24,7 @@ Feature: Dashboard
       | Consectetur Adipiscing | lorraine@kabisa.nl               |                                                     |
       | sint occaecat          |                                  | marty@kabisa.nl emmett@kabisa.nl lorraine@kabisa.nl |
     When I open the application
-    Then I see the book "Lorem Ipsum" suggested as "Latest comment"
+    Then I see the book "Dolor Sit" suggested as "Latest comment"
     And I see the book "Dolor Sit" suggested as "Recently added"
     And I see the book "Morbi ullamcorper" suggested as "Most-liked book"
 
