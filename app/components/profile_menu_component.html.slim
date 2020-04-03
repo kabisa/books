@@ -1,6 +1,6 @@
 a(*item_attributes)
   - if avatar?
-    = image_tag user.avatar_url, class: 'img-fluid rounded-circle'
+    = image_tag user.avatar.thumb.url, class: 'img-fluid rounded-circle'
   - else
     i.material-icons person
     span.clearfix.d-none.d-sm-inline-block= user.email

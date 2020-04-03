@@ -3,7 +3,7 @@ require 'rails_helper'
 describe ProfileMenuComponent, type: :component do
   before do
     allow(user).to receive(:avatar?).and_return(has_avatar)
-    allow(user).to receive(:avatar_url).and_return(avatar_url)
+    allow(user).to receive(:avatar).and_return(avatar)
   end
 
   subject       { Capybara.string html }
@@ -12,6 +12,7 @@ describe ProfileMenuComponent, type: :component do
   let(:options) { { user: user } }
   let(:user) { build(:user, email: email) }
   let(:email) { 'john.doe@example.org' }
+  let(:avatar) { double('avatar', thumb: OpenStruct.new(url: avatar_url)) }
   let(:avatar_url) { 'http://example.org/avatar.png' }
   let(:has_avatar) { true }
 

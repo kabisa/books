@@ -1,11 +1,10 @@
-.comments.mb-3
-  .card-header.border-0.pb-0
-    h2.card-subtitle
-      = book.number_of_comments
+.comments.card-body
+  h2.card-subtitle
+    = book.number_of_comments
 
-  ul.list-group.list-group-flush
+  ul.list-unstyled
     - if policy(Comment).new?
-      li.list-group-item.border-0.new-comment
+      li.my-3.new-comment
         = simple_form_for([book, new_comment], html: { autocomplete: 'off' }, wrapper: :vertical_form_w_text_field_boxes) do |f|
           = f.input :body, required: false
           = f.button :submit, class: 'btn btn-outline'

@@ -9,6 +9,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   process :crop
 
+  version :thumb do
+    process resize_to_fill: [36, 36]
+  end
+
   def crop
     if model.crop_x.present?
       manipulate! do |img|
@@ -39,7 +43,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
     #
     #"/images/fallback/" + [version_name, "default.jpg"].compact.join('_')
-    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "baseline_person_black_18dp.png"].compact.join('_'))
   end
 
   def size_range

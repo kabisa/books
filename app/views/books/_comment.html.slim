@@ -1,6 +1,11 @@
-  li.list-group-item.border-0.d-flex.justify-content-between.align-items-baseline
-    div
-      div
+  li.media.my-4
+    - if comment.user.comments_anonymously?
+      .mr-3= image_tag(comment.user.avatar.thumb.default_url, class: 'img-fluid rounded-circle')
+    - else
+      .mr-3= image_tag(comment.user.avatar.thumb.url, class: 'img-fluid rounded-circle')
+
+    .media-body
+      h5.mt-0.mb-1
         a.anchor(id=comment.dom_id)
         = comment.commenter_html
       = comment.body
