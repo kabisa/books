@@ -26,6 +26,8 @@ en:
     hints:
       book:
         reedition_title: 'If a newer version of this book is available, enter it as a re-edition'
+      user:
+        comments_anonymously: 'Your name and profile picture will not be shown with your comments'
     # Examples
     # labels:
     #   defaults:
