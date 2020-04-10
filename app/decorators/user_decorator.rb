@@ -19,7 +19,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def to_label
-    return name if name.present?
+    return name.truncate(25) if name.present?
 
     email
   end
@@ -33,7 +33,7 @@ class UserDecorator < ApplicationDecorator
     if comments_anonymously? && !current_user?
       I18n.t('anonymous')
     else
-      email
+      to_label
     end
   end
 
