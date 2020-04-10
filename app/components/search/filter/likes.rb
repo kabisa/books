@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Likes < ActionView::Component::Base
+    class Likes < ViewComponent::Base
       def initialize(q:, builder:)
         @q = q
         @builder = builder

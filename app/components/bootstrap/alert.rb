@@ -1,5 +1,5 @@
 module Bootstrap
-  class Alert < ActionView::Component::Base
+  class Alert < ViewComponent::Base
     ALLOWED_TYPES = %i(primary secondary danger info success warning dark light)
     DEFAULT_TYPE=ALLOWED_TYPES.last
 

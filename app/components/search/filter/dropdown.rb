@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Dropdown < ActionView::Component::Base
+    class Dropdown < ViewComponent::Base
       include BootstrapHelper
 
       def initialize(data_controller: 'dropdown', title:)

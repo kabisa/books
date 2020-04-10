@@ -1,5 +1,5 @@
 module Material
-  class NavigationIcon < ActionView::Component::Base
+  class NavigationIcon < ViewComponent::Base
     include BootstrapHelper
 
     def initialize(action_name:)

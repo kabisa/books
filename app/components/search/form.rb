@@ -1,5 +1,5 @@
 module Search
-  class Form < ActionView::Component::Base
+  class Form < ViewComponent::Base
     include Ransack::Helpers::FormHelper
     include BootstrapHelper
 

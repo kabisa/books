@@ -1,5 +1,5 @@
 module BookComponents
-  class VoteStats < ActionView::Component::Base
+  class VoteStats < ViewComponent::Base
     def initialize(like_count:, dislike_count:)
       @like_count = like_count
       @dislike_count = dislike_count

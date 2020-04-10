@@ -1,6 +1,6 @@
 module Material
   # See http://daemonite.github.io/material/docs/4.1/components/progress/
-  class Progress < ActionView::Component::Base
+  class Progress < ViewComponent::Base
     def initialize(value:, background: nil, html: {})
       @value = value
       @background = background

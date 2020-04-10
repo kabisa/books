@@ -1,5 +1,5 @@
 module BookComponents
-  class VoteButtons < ActionView::Component::Base
+  class VoteButtons < ViewComponent::Base
     include BootstrapHelper
 
     def initialize(book:, like:, dislike:, like_count:, dislike_count:)

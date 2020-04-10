@@ -1,5 +1,5 @@
 module Bootstrap
-  class Badge < ActionView::Component::Base
+  class Badge < ViewComponent::Base
     ALLOWED_TYPES = %i(primary secondary danger info success warning dark light)
     DEFAULT_TYPE=ALLOWED_TYPES.last
 

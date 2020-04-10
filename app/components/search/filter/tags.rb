@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Tags < ActionView::Component::Base
+    class Tags < ViewComponent::Base
       def initialize(q:, builder:)
         @q = q
         @builder = builder

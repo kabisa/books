@@ -4,7 +4,7 @@ module Search
   module Filter
     # This is a base class to be used for rendering
     # a filter component with a multi-range slider.
-    class MultiHandleRange < ActionView::Component::Base
+    class MultiHandleRange < ViewComponent::Base
       METHOD_MISSING = 'Please implement this method in your inheriting class.'
 
       def initialize(q:, builder:)
