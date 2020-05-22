@@ -10,4 +10,15 @@ RSpec.describe Writer, type: :model do
   describe 'associations' do
     it { is_expected.to have_and_belong_to_many(:books) }
   end
+
+  describe 'scopes' do
+    describe '.with_books' do
+      subject { described_class.with_books }
+
+      let!(:writer_w_book) { create(:writer, :with_books) }
+      let!(:writer_wo_book) { create(:writer) }
+
+      it { is_expected.to contain_exactly(writer_w_book) }
+    end
+  end
 end
