@@ -1,3 +1,5 @@
+h1.text-center.mb-5= Book.model_name.human.pluralize
+
 = render(Search::Form.new(q: @q))
 
 - if @books.any?

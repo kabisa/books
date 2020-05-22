@@ -11,7 +11,7 @@ class WriterDecorator < ApplicationDecorator
   #   end
 
   def first_book_title_and_more
-    return if books.empty?
+    return if books.none?
 
     sorted_books = books.sort_by(&:title)
     title = sorted_books.shift.title

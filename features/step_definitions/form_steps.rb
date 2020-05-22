@@ -1,5 +1,4 @@
-Given("I populate the {string} field with {string}") do |label, value|
-
+Given('I populate the {string} field with {string}') do |label, value|
   label_to_placeholder_mapping = {
     'Title' => 'book_title',
     'Link' => 'book_link',
@@ -11,10 +10,8 @@ Given("I populate the {string} field with {string}") do |label, value|
   fill_in label_to_placeholder_mapping[label], with: value
 end
 
-Given("I select {string} in the {string} datepicker") do |value, label|
-  label_to_placeholder_mapping = {
-    'Publish Date' => 'book_published_on'
-  }
+Given('I select {string} in the {string} datepicker') do |value, label|
+  label_to_placeholder_mapping = { 'Publish Date' => 'book_published_on' }
 
   id = label_to_placeholder_mapping[label]
 
@@ -23,25 +20,27 @@ Given("I select {string} in the {string} datepicker") do |value, label|
   expect(page).to have_css('.picker-frame')
 
   # then we close it
-  find('.picker').click
   # and set the value with some JS
   # (instead of selecting the proper date via the datepicker)
-  page.execute_script("$('##{id}').val('#{value}')")
+  script = <<-JS
+    document.querySelector('.picker').remove();
+    $('##{id}').val('#{value}');
+  JS
+
+  page.execute_script(script)
 end
 
-Given("I fill in {string} with {string}") do |locator, value|
+Given('I fill in {string} with {string}') do |locator, value|
   fill_in locator, with: value
 end
 
-When("I type {string} into the {string} field") do |value, locator|
-  step %Q(I fill in "#{locator}" with "#{value}")
+When('I type {string} into the {string} field') do |value, locator|
+  step "I fill in \"#{locator}\" with \"#{value}\""
 end
 
-When("I select {string} as {string}") do |value, name|
-  choose value
-end
+When('I select {string} as {string}') { |value, name| choose value }
 
-When("I add the tags {string}") do |text|
+When('I add the tags {string}') do |text|
   tags = text.split(/\s*,\s*/)
 
   tags.each do |tag|
@@ -53,7 +52,7 @@ When("I add the tags {string}") do |text|
   end
 end
 
-Given("I add the writers {string}") do |text|
+Given('I add the writers {string}') do |text|
   tags = text.split(/\s*,\s*/)
 
   tags.each do |tag|
@@ -65,21 +64,26 @@ Given("I add the writers {string}") do |text|
   end
 end
 
-When("I toggle the {string} switch") do |label|
+When('I toggle the {string} switch') do |label|
   find('label', text: label).click
 end
 
-Then("I {do_or_not}see a validation error (for ){string}") do |should_do, label|
+Then(
+  'I {do_or_not}see a validation error (for ){string}'
+) do |should_do, label|
   within('form') do
     to_have_or_not_have = should_do ? 'to' : 'not_to'
-    expect(page).send(to_have_or_not_have, have_css('.form-group.form-group-invalid', text: label))
+    expect(page).send(
+      to_have_or_not_have,
+      have_css('.form-group.form-group-invalid', text: label)
+    )
   end
 end
 
-When("I choose {string} from the {string} autocomplete list") do |value, locator|
+When(
+  'I choose {string} from the {string} autocomplete list'
+) do |value, locator|
   # Take some time to process the `fetch` call.
   sleep 0.1
-  within('ul.autocomplete-result-list') do
-    find('li', text: value).click
-  end
+  within('ul.autocomplete-result-list') { find('li', text: value).click }
 end

@@ -16,3 +16,7 @@ Feature:
 
         Scenario: Show writers
              Then I expect to see "Consectetur Adipiscing +2"
+
+        Scenario: Show all books for a specific writer
+             When I click on the card for writer "Stephen King"
+             Then I should see a list of 3 books

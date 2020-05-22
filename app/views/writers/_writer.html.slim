@@ -1,4 +1,4 @@
-.card
+= link_to books_path(q: { writers_name_eq: writer.name }), class: 'card text-body'  do
   .card-body
     h5.card-title= writer.name
     p.card-text= writer.first_book_title_and_more
