@@ -64,39 +64,6 @@ module BootstrapHelper
     tag.button(options) { tag.span('×', aria: { hidden: true }) }
   end
 
-  def responsive_card_deck(idx)
-    capture do
-      concat wrap_every_2_on_sm(idx + 1)
-      concat wrap_every_3_on_md(idx + 1)
-      concat wrap_every_4_on_lg(idx + 1)
-      concat wrap_every_5_on_xl(idx + 1)
-    end
-  end
-
-  def wrap_every_2_on_sm(tags_count)
-    return if (tags_count % 2).nonzero?
-
-    tag.div(class: 'w-100 d-none d-sm-block d-md-none')
-  end
-
-  def wrap_every_3_on_md(tags_count)
-    return if (tags_count % 3).nonzero?
-
-    tag.div(class: 'w-100 d-none d-md-block d-lg-none')
-  end
-
-  def wrap_every_4_on_lg(tags_count)
-    return if (tags_count % 4).nonzero?
-
-    tag.div(class: 'w-100 d-none d-lg-block d-xl-none')
-  end
-
-  def wrap_every_5_on_xl(tags_count)
-    return if (tags_count % 5).nonzero?
-
-    tag.div(class: 'w-100 d-none d-xl-block')
-  end
-
   private
 
   def join_classnames(default_classnames, classnames)
