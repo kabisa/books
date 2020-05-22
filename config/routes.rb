@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :writers, only: %i(index)
   resources :borrowings
   resources :users, only: %i(update)
 

@@ -61,6 +61,7 @@ group :development do
   gem 'rails-erd' # Automatically generate an entity-relationship diagram (ERD) for your Rails models.
   gem 'railroady'
   gem 'bullet' # help to kill N+1 queries and unused eager loading.
+  gem 'solargraph'
 end
 
 group :test do

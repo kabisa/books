@@ -10,4 +10,8 @@
           = material_icon('library_books', class: 'mr-3')
           = Book.model_name.human.pluralize
       li.nav-item
+        = link_to writers_path, class: 'nav-link' do
+          = material_icon('create', class: 'mr-3')
+          = Writer.model_name.human.pluralize
+      li.nav-item
         = link_to_github
