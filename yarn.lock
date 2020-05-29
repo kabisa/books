@@ -930,9 +930,9 @@
   integrity sha512-XOkqSw53N9072FLHvpLM25PIwy+ndkSSbnTtjKuyzsv8K5yfkFB2rv68jU1pzqYa9FZLcvZWP4yazC0V38dx9A==
 
 "@trevoreyre/autocomplete-js@^2.1.0":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@trevoreyre/autocomplete-js/-/autocomplete-js-2.1.1.tgz#7a4af9b8612c852e05f2e33a4649ad1353af4a86"
-  integrity sha512-G9I3Z3jYfVYUkz7XS49Mp/LMLaVcW1wVj4V/COqHq4Nk3rOgGG5ONlLGzCKpElqTIPm5p+7V7/92Mo/xsvPRvQ==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@trevoreyre/autocomplete-js/-/autocomplete-js-2.2.0.tgz#54a4dcf30a91782f58478f5d8d402f5f46433df5"
+  integrity sha512-emHJWZBPWdB5iDW9MrLSfq3lopyDlIhYXa8ttnCX9kQp1g+G0Lmfu/v6fW2aggjAfsZX8ksuZSG65o+EdwoN0g==
 
 "@types/events@*":
   version "3.0.0"
