@@ -1,30 +1,65 @@
-@import '~@yaireo/tagify/src/tagify';
+$tags-border-color: transparent;
+$tags-hover-border-color: transparent;
+$tags-focus-border-color: transparent;
+$tagMargin: 5px;
+// $tag-pad: 0.3em 0.5em !default;
+// $tag-text-color: black !default;
+// $tag-text-color--edit: black !default;
+$tag-bg: $chip-bg;
+$tag-hover: $chip-bg;
+$tag-remove: darken($chip-bg, 20%);
+// $tag-remove-btn-bg: darken($chip-bg, 20%);
+$tag-remove-btn-bg: $close-color;
+$tag-remove-btn-bg--hover: $close-color-hover;
+// $tag-invalid-color: $tag-remove !default;
+// $tag-invalid-bg: rgba($tag-remove, 0.5) !default;
+// $tag-inset-shadow-size: 1.1em !default;
+// $placeholder-color: $tag-text-color !default;
 
-tags {
-  &.tagify {
-    padding: {
-      bottom: 0;
-      top: 0;
+@import "~@yaireo/tagify/src/tagify";
+
+.tagify {
+  @extend %form-control;
+  align-items: center;
+  &.tagify--focus {
+    @extend %form-control:focus;
+  }
+  &__input {
+    padding: 0;
+    margin-left: 0;
+  }
+
+  &__tag {
+    margin: $tagMargin $tagMargin $tagMargin 0;
+    height: $chip-height;
+    padding-right: $chip-padding-x;
+    padding-left: $chip-padding-x;
+    &:first-child {
+      margin-left: 0;
     }
-  }
-}
+    > div {
+      border-radius: ($chip-height / 2);
+    }
 
-.tagify__input {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-}
+    .tagify__tag__removeBtn {
+      $size: 18px;
 
-.tagify__tag {
-  margin: 0 5px 0 0;
+      font-size: #{$size};
+      width: $size;
+      height: $size;
+      margin-right: -4px;
+      margin-left: 0;
 
-  &:hover:not([readonly]) div::before {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-  .close.material-icons {
-    font-size: 24px;
+      &::after {
+        color: white;
+      }
+    }
+
+    &:hover:not([readonly]) div::before {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
   }
 }
