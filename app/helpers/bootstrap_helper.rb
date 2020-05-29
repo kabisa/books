@@ -5,7 +5,7 @@ module BootstrapHelper
   def material_icon(icon, options = {})
     default_options = { class: 'material-icons' }
 
-    options.deep_merge!(default_options) do |key, this_val, other_val|
+    options.deep_merge!(default_options) do |_, this_val, other_val|
       [this_val, other_val].join(' ').strip
     end
 
