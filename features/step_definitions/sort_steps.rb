@@ -1,16 +1,16 @@
-
-When("I sort on {string}") do |label|
+When('I sort on {string}') do |label|
   click_on('Sort by')
   click_on(label)
+  sleep 0.1
 end
 
-Then("I see {string} as the first book") do |title|
+Then('I see {string} as the first book') do |title|
   el = first('.list-group-item')
 
   expect(el).to have_content(title)
 end
 
-Then("I see {string} as the last book") do |title|
+Then('I see {string} as the last book') do |title|
   el = all('.list-group-item').last
 
   expect(el).to have_content(title)

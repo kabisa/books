@@ -61,7 +61,7 @@ export default class extends Controller {
       };
       reader.readAsDataURL(droppedFile);
       this.removeImageTarget.value = false;
-      this.removeButtonTarget.style.display = 'block';
+      this.removeButtonTarget.style.display = 'inline-flex';
     }
   }
 

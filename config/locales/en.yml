@@ -36,56 +36,58 @@ en:
       update: Save
       destroy: Delete
       session:
-        create: &sign_in 'Sign in'
-        destroy: 'Log out'
+        create: &sign_in "Sign in"
+        destroy: "Log out"
       borrowing:
-        submit: 'Borrow'
-        destroy: 'Return book'
+        submit: "Borrow"
+        destroy: "Return book"
       comment:
-        create: 'Comment'
-      edit: 'Edit'
-      cancel: &cancel 'Cancel'
-      download: 'Download'
-      undo: 'Undo'
-      show: 'View Details'
-      remove_resource: 'Remove %{resource}'
-      profile: 'Profile'
-    options: 'Options'
+        create: "Comment"
+      edit: "Edit"
+      cancel: &cancel "Cancel"
+      download: "Download"
+      undo: "Undo"
+      show: "View Details"
+      remove_resource: "Remove %{resource}"
+      profile: "Profile"
+    options: "Options"
   # pages
   application:
     navbar:
       sign_in: *sign_in
   sessions:
     new:
-      title: 'Simply login with your email'
+      title: "Simply login with your email"
       sign_in: *sign_in
     create:
-      title: 'Check your email!'
+      title: "Check your email!"
       body: "We've emailed a special link to %{email}. Click the link to confirm your address and get started."
   books:
     new: &new_book
-      title: 'Create a new %{subject}'
-      remove: &remove_image 'Remove image'
-      upload: &upload_image 'Upload an image'
-      cancel: 'Cancel book creation'
+      title: "Create a new %{subject}"
+      remove: &remove_image "Remove image"
+      upload: &upload_image "Upload an image"
+      cancel: "Cancel book creation"
     edit: &edit_book
       remove: *remove_image
       upload: *upload_image
-      cancel: 'Cancel book changes'
+      cancel: "Cancel book changes"
     create: *new_book
     update: *edit_book
     show:
-      edit: 'Edit'
-      cancel: 'Back'
+      edit: "Edit"
+      cancel: "Back"
     destroy:
       notice: "'%{title}' deleted."
     restore:
       notice: "Action undone."
     no_results:
-      no_results: 'No books found.'
-      clear_all: 'Clear all filters'
+      no_results: "No books found."
+      clear_all: "Clear all filters"
     sort_by:
-      sort_by: 'Sort by'
+      sort_by: "Sort by"
+    form:
+      add_copy: "Add copy"
   borrowings:
     create:
       notice: "You're now borrowing '%{title}'."
@@ -103,109 +105,108 @@ en:
       notice: "Your vote has been registered."
   welcome:
     index:
-      title: 'Suggested for you'
-      latest_comment: 'Latest comment'
-      recently_added: 'Recently added'
-      most_liked_book: 'Most-liked book'
+      title: "Suggested for you"
+      latest_comment: "Latest comment"
+      recently_added: "Recently added"
+      most_liked_book: "Most-liked book"
   users:
     edit:
       remove: *remove_image
       upload: *upload_image
-      cancel: 'Cancel profile changes'
+      cancel: "Cancel profile changes"
   modals:
     borrow:
-      title: 'Borrow %{title}'
-      content: 'This book is available on multiple locations.'
+      title: "Borrow %{title}"
+      content: "This book is available on multiple locations."
     crop:
-      title: 'Crop Image'
-      submit: 'Apply'
+      title: "Crop Image"
+      submit: "Apply"
   # mailers:
   sessions_mailer:
     magic_link:
-      subject: '%{user}, welcome to %{app_name}!'
-      body: 'Someone (hopefully you) has requested access to %{app_name}. Follow the link to open the application.'
-      signature: 'The %{app_name} Team'
+      subject: "%{user}, welcome to %{app_name}!"
+      body: "Someone (hopefully you) has requested access to %{app_name}. Follow the link to open the application."
+      signature: "The %{app_name} Team"
 
   # components:
   search_form:
-    clear: 'Clear'
+    clear: "Clear"
     publication:
-      title: 'Publication'
+      title: "Publication"
     pages:
-      title: 'Pages'
+      title: "Pages"
     likes:
-      zero: 'Any'
-      other: 'At least' # no. of likes is rendered in the component
+      zero: "Any"
+      other: "At least" # no. of likes is rendered in the component
     tags:
-      select_all: 'Select all tags'
+      select_all: "Select all tags"
     placeholders:
-      search_field: 'Search within title, summary or writers'
-
+      search_field: "Search within title, summary or writers"
 
   activerecord:
     attributes:
       user:
-        email: 'Email'
+        email: "Email"
       book:
-        link: 'Download location'
-        likes_count: 'Likes'
-        tag_list: 'Tags'
-        cover: 'Cover image'
-        remove_cover: 'Remove'
-        written_by: 'By %{writer_names}'
-        num_of_pages: 'Number of pages'
-        writer_names: 'Written by'
-        reedition_title: 'Re-edition'
+        link: "Download location"
+        likes_count: "Likes"
+        tag_list: "Tags"
+        cover: "Cover image"
+        remove_cover: "Remove"
+        written_by: "By %{writer_names}"
+        num_of_pages: "Number of pages"
+        writer_names: "Written by"
+        reedition_title: "Re-edition"
       comment:
-        body: 'Comment'
+        body: "Comment"
     errors:
       models:
         user:
           attributes:
             email:
-              not_an_email_address: 'is not an email address'
-              unauthorized: 'is not authorized to sign in'
+              not_an_email_address: "is not an email address"
+              unauthorized: "is not authorized to sign in"
         book:
           attributes:
             link:
-              format: '%{message}'
+              format: "%{message}"
               blank: "If you don't have any printed copies, you need to add a download link"
-              not_a_url: 'Link is not a url'
+              not_a_url: "Link is not a url"
             reedition_title:
-              format: '%{message}'
-              invalid: 'This title is not available in the library'
+              format: "%{message}"
+              invalid: "This title is not available in the library"
 
         copy:
           attributes:
             location:
-              taken: 'must be unique'
+              taken: "must be unique"
 
   flash:
-    logged_out: 'You are now logged out'
-    not_authorized: 'You are not authorized to perform this operation'
-  time_ago: '%{time} ago'
-  outdated: 'outdated'
-  latest: 'latest'
-  num_of_pages: '%{num_of_pages} pages'
-  published_on: 'Published %{published_on}'
-  view_on_github: 'View the repository on GitHub'
-  no_copies_available: 'no copies available'
-  you_are_currently_borrowing: 'You are currently borrowing a copy.'
-  reedition_available: 'A newer edition for this book is available.'
-  latest_edition: 'This is the latest edition for this book in our library.'
-  anonymous: 'anonymous'
+    logged_out: "You are now logged out"
+    not_authorized: "You are not authorized to perform this operation"
+  time_ago: "%{time} ago"
+  outdated: "outdated"
+  latest: "latest"
+  num_of_pages: "%{num_of_pages} pages"
+  published_on: "Published %{published_on}"
+  view_on_github: "View the repository on GitHub"
+  no_copies_available: "no copies available"
+  you_are_currently_borrowing: "You are currently borrowing a copy."
+  reedition_available: "A newer edition for this book is available."
+  latest_edition: "This is the latest edition for this book in our library."
+  anonymous: "anonymous"
   errors:
     messages:
-      content_type_whitelist_error: 'should be an image file'
+      content_type_whitelist_error: "should be an image file"
 
   ransack:
     attributes:
       book:
-        likes_count: 'Most-liked'
-        comments_count: 'Most commented'
-        num_of_pages_nulls_last: 'Pages'
-        published_on_nulls_last: 'Publish Date'
+        likes_count: "Most-liked"
+        comments_count: "Most commented"
+        num_of_pages_nulls_last: "Pages"
+        published_on_nulls_last: "Publish Date"
   date:
     formats:
       js:
-        default: 'yyyy-mm-dd' # This is the Daemonite picker version of `date.formats.default`, see https://daemonite.github.io/material/docs/4.1/material/pickers/#formatting-rules
+        default: "yyyy-mm-dd" # This is the Daemonite picker version of `date.formats.default`, see https://daemonite.github.io/material/docs/4.1/material/pickers/#formatting-rules

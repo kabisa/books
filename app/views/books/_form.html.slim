@@ -20,7 +20,7 @@
               = render 'copy_fields', f: copy
 
             div(data-target='nested-form.links')
-              = link_to "Add Copy", "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
+              = link_to t('.add_copy'), "#", class: 'btn btn-outline', role: :button, data: { action: 'nested-form#add_association' }
 
       = f.input :link
       = f.input :summary, as: :text

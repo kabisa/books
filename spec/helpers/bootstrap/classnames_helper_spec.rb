@@ -11,13 +11,21 @@ RSpec.describe BootstrapHelper, type: :helper do
       context 'as string' do
         let(:classnames) { 'lorem ipsum' }
 
-        it { is_expected.to match(/(?=.*\bbtn-float\b)(?=.*\bbtn\b)(?=.*\blorem\b)(?=.*\bipsum\b)/) }
+        it do
+          is_expected.to match(
+            /(?=.*\bbtn-float\b)(?=.*\bbtn\b)(?=.*\blorem\b)(?=.*\bipsum\b)/
+          )
+        end
       end
 
       context 'as array' do
-        let(:classnames) { %w(lorem ipsum) }
+        let(:classnames) { %w[lorem ipsum] }
 
-        it { is_expected.to match(/(?=.*\bbtn-float\b)(?=.*\bbtn\b)(?=.*\blorem\b)(?=.*\bipsum\b)/) }
+        it do
+          is_expected.to match(
+            /(?=.*\bbtn-float\b)(?=.*\bbtn\b)(?=.*\blorem\b)(?=.*\bipsum\b)/
+          )
+        end
       end
     end
   end
@@ -26,19 +34,19 @@ RSpec.describe BootstrapHelper, type: :helper do
     subject { helper.sm_rnd_btn_class(classnames) }
     let(:classnames) { nil }
 
-    it { is_expected.to match(/(?=.*\bbtn-float\b)(?=.*\bbtn-sm\b)(?=.*\bbtn\b)(?=.*\bshadow-none\b)/) }
+    it { is_expected.to eql('btn-sm navbar-toggler') }
 
     context 'extra classnames' do
       context 'as string' do
         let(:classnames) { 'lorem ipsum' }
 
-        it { is_expected.to match(/(?=.*\bbtn-float\b)(?=.*\bbtn-sm\b)(?=.*\bbtn\b)(?=.*\bshadow-none\b)(?=.*\blorem\b)(?=.*\bipsum\b)/) }
+        it { is_expected.to eql('btn-sm navbar-toggler lorem ipsum') }
       end
 
       context 'as array' do
-        let(:classnames) { %w(lorem ipsum) }
+        let(:classnames) { %w[lorem ipsum] }
 
-        it { is_expected.to match(/(?=.*\bbtn-float\b)(?=.*\bbtn-sm\b)(?=.*\bbtn\b)(?=.*\bshadow-none\b)(?=.*\blorem\b)(?=.*\bipsum\b)/) }
+        it { is_expected.to eql('btn-sm navbar-toggler lorem ipsum') }
       end
     end
   end

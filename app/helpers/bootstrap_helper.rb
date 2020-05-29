@@ -37,11 +37,11 @@ module BootstrapHelper
   # @param [String|Array<String>] extra classnames that are added to the output
   # @return [String] classnames
   # @example
-  #   sm_rnd_btn_class #=> 'btn-float btn btn-sm shadow-none'
-  #   sm_rnd_btn_class('my-1 text-primary') #=> 'btn-float btn btn-sm shadow-none my-1 text-primary'
-  #   sm_rnd_btn_class(%(my-1 text-primary)) #=> 'btn-float btn btn-sm shadow-none my-1 text-primary'
+  #   sm_rnd_btn_class #=> 'btn-sm navbar-toggler'
+  #   sm_rnd_btn_class('my-1 text-primary') #=> 'btn-sm navbar-toggler my-1 text-primary'
+  #   sm_rnd_btn_class(%(my-1 text-primary)) #=> 'btn-sm navbar-toggler my-1 text-primary'
   def sm_rnd_btn_class(classnames = nil)
-    default_classnames = Array(fab_class(%w[btn-sm shadow-none]))
+    default_classnames = %w[btn-sm navbar-toggler]
     join_classnames(default_classnames, classnames)
   end
 
