@@ -1,4 +1,4 @@
 h1.text-center.mb-5= Writer.model_name.human.pluralize
 
-.card-deck
-  = render partial: 'writer', collection: @writers, layout: 'card_deck_breakpoints_layout'
+.card-grid
+  = render partial: 'writer', collection: @writers

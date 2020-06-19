@@ -1,21 +1,22 @@
 // According to https://sass-lang.com/documentation/at-rules/import#index-files
 // we should be able to create a `modules/_index.scss` file but I didn't manage
 // to get this working :(
-@import 'modules/sign-in';
-@import 'modules/fab-add';
-@import 'modules/form';
-@import 'modules/search-form';
-@import 'modules/extended-fab';
-@import 'modules/expansion-panels';
-@import 'modules/comment-list';
-@import 'modules/suggestions';
-@import 'modules/load-more';
-@import 'modules/spinner';
-@import 'modules/dropzone';
-@import 'modules/sort-by';
-@import 'modules/vote-buttons';
-@import 'modules/filter-buttons';
-@import 'modules/input-range-multiple';
-@import 'modules/submenu';
-@import 'modules/dropdown-menu';
-@import 'modules/autocomplete-js';
+@import "modules/sign-in";
+@import "modules/fab-add";
+@import "modules/form";
+@import "modules/search-form";
+@import "modules/extended-fab";
+@import "modules/expansion-panels";
+@import "modules/comment-list";
+@import "modules/suggestions";
+@import "modules/load-more";
+@import "modules/spinner";
+@import "modules/dropzone";
+@import "modules/sort-by";
+@import "modules/vote-buttons";
+@import "modules/filter-buttons";
+@import "modules/input-range-multiple";
+@import "modules/submenu";
+@import "modules/dropdown-menu";
+@import "modules/autocomplete-js";
+@import "modules/card-grid";
