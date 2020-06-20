@@ -8,4 +8,6 @@ class Writer < ApplicationRecord
 
   scope :with_books,
         -> { left_joins(:books).where.not(books: { id: nil }).distinct }
+
+  paginates_per 36
 end

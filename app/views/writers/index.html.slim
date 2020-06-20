@@ -1,4 +1,3 @@
 h1.text-center.mb-5= Writer.model_name.human.pluralize
 
-.card-grid
-  = render partial: 'writer', collection: @writers
+= render(partial: 'results', object: @writers, layout: 'results_layout')
