@@ -31,7 +31,6 @@ Feature:
              When I click on the card for writer "Stephen King"
              Then I should see a list of 3 books
 
-        @wip
         Scenario: Show more writers
             Given there are 72 writers with books
              When I choose "Writers" from the navigation drawer
