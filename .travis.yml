@@ -19,3 +19,5 @@ cache:
   yarn: true
 services:
   - postgresql
+addons:
+  chrome: stable

@@ -75,3 +75,5 @@ Generated using [https://dummyimage.com/200x300/212121/fafafa.png&text=No+Cover+
 ## Deployment
 
 The application is hosted by Heroku ([staging](https://thawing-badlands-71406.herokuapp.com) and [production](https://books.kabisa.nl)). Instruction about the deployment process can be found [here](https://devcenter.heroku.com/articles/getting-started-with-rails5).
+
+[![Build Status](https://travis-ci.org/kabisa/books.svg?branch=develop)](https://travis-ci.org/kabisa/books)
