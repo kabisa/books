@@ -19,5 +19,12 @@ cache:
   yarn: true
 services:
   - postgresql
+env:
+  global:
+    - MOZ_HEADLESS=1
 addons:
-  chrome: stable
+  firefox: latest
+
+branches:
+  only:
+    - feature/travis
