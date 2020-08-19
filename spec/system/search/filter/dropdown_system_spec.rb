@@ -3,6 +3,8 @@ require 'rails_helper'
 # This tests uses the preview located in spec/components/previews...
 # and test the JS behaviour managed by Stimulus.
 RSpec.describe Search::Filter::Dropdown, type: :system do
+  before { driven_by(:selenium_headless) }
+
   let(:preview_path) { '/rails/view_components/search/filter/dropdown/' }
 
   describe 'default' do
@@ -47,7 +49,5 @@ end
 require 'rspec/expectations'
 
 RSpec::Matchers.define :have_a_dropdown_menu do
-  match do |actual|
-    expect(actual).to have_css('.dropdown .dropdown-menu')
-  end
+  match { |actual| expect(actual).to have_css('.dropdown .dropdown-menu') }
 end
