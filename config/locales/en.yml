@@ -81,6 +81,8 @@ en:
       notice: "'%{title}' deleted."
     restore:
       notice: "Action undone."
+    results:
+      load_more: "More books"
     no_results:
       no_results: "No books found."
       clear_all: "Clear all filters"
@@ -109,6 +111,9 @@ en:
       latest_comment: "Latest comment"
       recently_added: "Recently added"
       most_liked_book: "Most-liked book"
+  writers:
+    results:
+      load_more: "More writers"
   users:
     edit:
       remove: *remove_image

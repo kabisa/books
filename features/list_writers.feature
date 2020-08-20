@@ -35,7 +35,7 @@ Feature:
             Given there are 72 writers with books
              When I choose "Writers" from the navigation drawer
              Then I should see 36 cards with writers
-             When I click "More writers"
+             When I scroll to the bottom of the page
              Then I should see 72 cards with writers
               And there are no more writers to be shown
 

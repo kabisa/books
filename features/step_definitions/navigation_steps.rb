@@ -1,13 +1,9 @@
-Given("I open the application") do
-  visit '/'
-end
+Given('I open the application') { visit '/' }
 
-Given("I navigate to page for adding a new book") do
-  visit(new_book_path)
-end
+Given('I navigate to page for adding a new book') { visit(new_book_path) }
 
-When("I choose {string} from the navigation drawer") do |menu|
-  step %q(I open the application)
+When('I choose {string} from the navigation drawer') do |menu|
+  step 'I open the application'
   find('nav button.navbar-toggler').click
 
   within('.navdrawer-nav') do
@@ -17,15 +13,20 @@ When("I choose {string} from the navigation drawer") do |menu|
   end
 end
 
-When("I choose {string} from the account menu") do |string|
+When('I choose {string} from the account menu') do |string|
   within('nav') do
     click_on @user.email
     click_on 'Profile'
   end
 end
 
-When("I navigate back") do
-  within('nav.navbar') do
-    click_on 'arrow_back'
-  end
+When('I navigate back') { within('nav.navbar') { click_on 'arrow_back' } }
+
+When('I scroll to the bottom of the page') do
+  script = <<-JS
+  window.scrollTo(0, document.body.scrollHeight);
+  JS
+
+  page.execute_script(script)
+  sleep 0.5
 end

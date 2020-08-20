@@ -24,3 +24,8 @@ env:
     - MOZ_HEADLESS=1
 addons:
   firefox: latest
+branches:
+  only:
+    - master
+    - develop
+    - /^feature\/.+$/
