@@ -1,9 +1,9 @@
 .search-form.card.mb-5
   .card-body.pb-0
-    = search_form_for q, html: { autocomplete: :off } do |f|
+    = search_form_for q, url: url_for, remote: true, html: { autocomplete: :off, data: { controller: 'search', target: 'search.form' } } do |f|
       .form-group
         .textfield-box
-          = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control'
+          = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control', data: { target: 'search.query', action: 'input->search#perform' }
 
       .d-flex.justify-content-end
         = render(Search::Filter::Publication.new(q: q, builder: f))

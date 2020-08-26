@@ -1,3 +1,9 @@
-var el = document.getElementsByClassName('load-more')[0];
+var htmlString = '<%= j render(partial: 'results', object: @books, locals: { parent: 'books' }) %>'
 
-el.outerHTML = '<%= j render(partial: 'results', object: @books, locals: { parent: 'books' }) %>'
+<%- if @books.first_page? %>
+  var el = document.querySelector('.books');
+  el.innerHTML = htmlString;
+<%- else %>
+  var el = document.querySelector('.load-more');
+  el.outerHTML = htmlString;
+<%- end %>
