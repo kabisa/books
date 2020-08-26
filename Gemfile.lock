@@ -100,7 +100,7 @@ GEM
     childprocess (3.0.0)
     choice (0.2.0)
     chronic (0.10.2)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     crass (1.0.6)
     cucumber (3.1.2)
       builder (>= 2.1.2)
@@ -171,7 +171,7 @@ GEM
     html2slim (0.2.0)
       hpricot
     htmlentities (4.3.4)
-    i18n (1.8.2)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     image_processing (1.10.3)
       mini_magick (>= 4.9.5, < 5)
@@ -393,7 +393,7 @@ GEM
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
     uniform_notifier (1.13.0)
-    view_component (2.7.0)
+    view_component (2.18.1)
       activesupport (>= 5.0.0, < 7.0)
     web-console (4.0.2)
       actionview (>= 6.0.0)
@@ -415,7 +415,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.25)
-    zeitwerk (2.3.0)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby

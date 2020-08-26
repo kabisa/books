@@ -17,7 +17,8 @@ module Books
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.app_name = 'Books'
-    config.view_component.preview_path = "#{Rails.root}/spec/components/previews"
+    config.view_component.preview_paths =
+      "#{Rails.root}/spec/components/previews"
     config.active_model.i18n_customize_full_message = true
 
     config.x.search.num_of_pages_upper = 525
