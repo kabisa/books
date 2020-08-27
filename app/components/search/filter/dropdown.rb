@@ -2,6 +2,7 @@ module Search
   module Filter
     class Dropdown < ViewComponent::Base
       include BootstrapHelper
+      include LiveSearchable
 
       def initialize(data_controller: 'dropdown', title:, live_search: false)
         @data_controller = data_controller
@@ -57,22 +58,10 @@ module Search
         )
       end
 
-      def decorate_dataset(dataset = {})
-        return dataset unless live_search? && dataset.has_key?(:action)
-
-        dataset[:action] << ' search#perform'
-
-        dataset
-      end
-
       def deep_merge_and_join(h1, h2)
         h1.deep_merge!(h2) do |key, this_val, other_val|
           [this_val, other_val].join(' ').strip
         end
-      end
-
-      def live_search?
-        @live_search
       end
     end
   end

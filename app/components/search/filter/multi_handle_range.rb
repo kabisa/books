@@ -5,6 +5,7 @@ module Search
     # This is a base class to be used for rendering
     # a filter component with a multi-range slider.
     class MultiHandleRange < ViewComponent::Base
+      include LiveSearchable
       METHOD_MISSING = 'Please implement this method in your inheriting class.'
 
       def initialize(q:, builder:, live_search: false)
@@ -43,18 +44,6 @@ module Search
 
       def scope
         raise METHOD_MISSING
-      end
-
-      def live_search?
-        @live_search
-      end
-
-      def decorate_dataset(dataset = {})
-        return dataset unless live_search? && dataset.has_key?(:action)
-
-        dataset[:action] << ' search#perform'
-
-        dataset
       end
 
       def range_field_dataset(target)
