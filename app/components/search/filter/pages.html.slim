@@ -4,7 +4,7 @@
   .d-none(data={ target: "#{data_controller}.otherItems" })
     .d-flex.justify-content-between
       .text-primary(data={ target: "#{data_controller}.label" })
-      div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: "#{data_controller}#reset" }
+      div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: "#{data_controller}#reset search#perform" }
   = range_field :num_of_pages_gteq, 'min'
   = range_field :num_of_pages_lteq, 'max'
 

@@ -4,3 +4,7 @@ body {
     top: $body-padding-y;
   }
 }
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}

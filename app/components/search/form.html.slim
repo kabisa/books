@@ -1,17 +1,18 @@
 .search-form.card.mb-5
   .card-body.pb-0
-    = search_form_for q, url: url_for, remote: true, html: { autocomplete: :off, data: { controller: 'search', target: 'search.form' } } do |f|
+    = search_form_for q, search_form_options do |f|
       .form-group
         .textfield-box
-          = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control', data: { target: 'search.query', action: 'input->search#perform' }
+          = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control', data: { target: "#{data_controller}.query", action: "input->#{data_controller}#perform" }
 
-      .d-flex.justify-content-end
-        = render(Search::Filter::Publication.new(q: q, builder: f))
-        = render(Search::Filter::Pages.new(q: q, builder: f))
-        = render(Search::Filter::Tags.new(q: q, builder: f))
-        = render(Search::Filter::Likes.new(q: q, builder: f))
+      .form-group.d-flex.justify-content-end(class=('mb-0' unless live_search?))
+        = render(Search::Filter::Publication.new(q: q, builder: f, live_search: live_search?))
+        = render(Search::Filter::Pages.new(q: q, builder: f, live_search: live_search?))
+        = render(Search::Filter::Tags.new(q: q, builder: f, live_search: live_search?))
+        = render(Search::Filter::Likes.new(q: q, builder: f, live_search: live_search?))
 
-      .action-buttons.d-flex.justify-content-center
-        = f.button class: 'extended-fab btn btn-primary btn-lg' do
-          => material_icon(:search)
-          = t('ransack.search').titleize
+      - unless live_search?
+        .action-buttons.d-flex.justify-content-center
+          = f.button class: 'extended-fab btn btn-primary btn-lg' do
+            => material_icon(:search)
+            = t('ransack.search').titleize

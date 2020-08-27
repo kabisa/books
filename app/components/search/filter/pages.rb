@@ -3,7 +3,7 @@ module Search
     class Pages < MultiHandleRange
       NUM_OF_PAGES_UPPER = BookSearch::NUM_OF_PAGES_UPPER
 
-      def initialize(q:, builder:)
+      def initialize(q:, builder:, live_search: false)
         super
       end
 

@@ -1,11 +1,11 @@
 = render(Search::Filter::Dropdown.new(data_controller: data_controller, title: title)) do
   .custom-control.custom-switch.my-3
-    = check_box_tag :select_all, 1, false, class: 'custom-control-input', data: { target: "#{data_controller}.selectAll", action: "#{data_controller}#toggle" }
+    = check_box_tag :select_all, 1, false, class: 'custom-control-input', data: decorate_dataset(target: "#{data_controller}.selectAll", action: "#{data_controller}#toggle")
     span.custom-control-track
     = label_tag :select_all, t('search_form.tags.select_all'), class: 'custom-control-label'
 
   .tags
     - f.collection_check_boxes :tags_id_in, Book.tags_on(:tags).sort_by { |t| t.name.downcase }, :id, :name do |b|
       .custom-control.custom-checkbox
-        = b.check_box(class: 'custom-control-input', data: { target: "#{data_controller}.value", action: "#{data_controller}#render" }) + b.label(class: 'custom-control-label')
+        = b.check_box(class: 'custom-control-input', data: decorate_dataset(target: "#{data_controller}.value", action: "#{data_controller}#render")) + b.label(class: 'custom-control-label')
 

@@ -4,7 +4,7 @@
   .d-none(data={ target: "#{data_controller}.otherItems" })
     .d-flex.justify-content-between
       .text-primary(data={ target: "#{data_controller}.label" })
-      div= link_to t('search_form.clear'), '#', class: 'text-primary', data: { action: "#{data_controller}#reset" }
+      div= link_to t('search_form.clear'), '#', class: 'text-primary', data: decorate_dataset(action: "#{data_controller}#reset")
   = range_field :published_years_ago_lteq, 'min'
   = range_field :published_years_ago_gteq, 'max'
 

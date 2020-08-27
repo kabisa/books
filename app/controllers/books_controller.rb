@@ -1,17 +1,22 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
-  skip_after_action :verify_authorized, only: %i(show)
+  before_action :set_book, only: %i[show edit update destroy]
+  skip_after_action :verify_authorized, only: %i[show]
 
   # GET /books
   # GET /books.json
   def index
-    @q = BookSearch.search(params) do |q|
-      @books = q.result(distinct: true)
-        .complement_with(id: params[:restorable_id])
-        .includes(:reedition, :taggings, :writers, :previous_editions, copies: [:location])
-        .page(params[:page])
-        .decorate
-    end
+    @q =
+      BookSearch.search(params) do |q|
+        @books =
+          q.result(distinct: true).complement_with(id: params[:restorable_id])
+            .includes(
+            :reedition,
+            :taggings,
+            :writers,
+            :previous_editions,
+            copies: %i[location]
+          ).page(params[:page]).decorate
+      end
   end
 
   # GET /books/1
@@ -27,8 +32,7 @@ class BooksController < ApplicationController
   end
 
   # GET /books/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /books
   # POST /books.json
@@ -51,7 +55,9 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html do
+          redirect_to @book, notice: 'Book was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
@@ -66,7 +72,12 @@ class BooksController < ApplicationController
     @book.destroy
     respond_to do |format|
       notice = t('.notice', title: @book.title)
-      action = helpers.link_to(t('helpers.submit.undo'), restore_book_path(@book), method: :post, remote: true)
+      action =
+        helpers.link_to(
+          t('helpers.submit.undo'),
+          restore_book_path(@book),
+          method: :post, remote: true
+        )
 
       format.html do
         flash[:action] = action
@@ -81,7 +92,9 @@ class BooksController < ApplicationController
   end
 
   def restore
-    @book = authorize Book.only_deleted.find(params[:id]).restore(recursive: true).decorate
+    @book =
+      authorize Book.only_deleted.find(params[:id]).restore(recursive: true)
+                  .decorate
 
     respond_to do |format|
       flash.now.notice = t('.notice')
@@ -90,13 +103,14 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = authorize Book.find(params[:id]).decorate
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      permitted_attributes(Book)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = authorize Book.find(params[:id]).decorate
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    permitted_attributes(Book)
+  end
 end

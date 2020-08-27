@@ -7,15 +7,16 @@ module Search
     class MultiHandleRange < ViewComponent::Base
       METHOD_MISSING = 'Please implement this method in your inheriting class.'
 
-      def initialize(q:, builder:)
+      def initialize(q:, builder:, live_search: false)
         @q = q
         @builder = builder
+        @live_search = live_search
       end
 
       private
 
       attr_reader :q, :builder
-      alias :f :builder
+      alias f builder
 
       def title
         I18n.t("search_form.#{scope}.title")
@@ -27,10 +28,7 @@ module Search
           min: 0,
           max: max,
           step: step,
-          data: {
-            target: "#{data_controller}.#{target}",
-            action: "change->#{data_controller}#validate input->#{data_controller}#render"
-          }
+          data: range_field_dataset(target)
         }
         f.range_field method, options
       end
@@ -45,6 +43,28 @@ module Search
 
       def scope
         raise METHOD_MISSING
+      end
+
+      def live_search?
+        @live_search
+      end
+
+      def decorate_dataset(dataset = {})
+        return dataset unless live_search? && dataset.has_key?(:action)
+
+        dataset[:action] << ' search#perform'
+
+        dataset
+      end
+
+      def range_field_dataset(target)
+        decorate_dataset(
+          target: "#{data_controller}.#{target}",
+          action:
+            "change->#{data_controller}#validate input->#{
+              data_controller
+            }#render"
+        )
       end
 
       # Stimulus

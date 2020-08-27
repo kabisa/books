@@ -3,7 +3,7 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   initialize() {
     let options = {
-      rootMargin: "200px",
+      rootMargin: "100px",
     };
 
     this.intersectionObserver = new IntersectionObserver(
