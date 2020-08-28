@@ -1,4 +1,4 @@
-class Search::Filter::PagesPreview < ViewComponent::Preview
+class Search::Filter::PagesComponentPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_no_pages

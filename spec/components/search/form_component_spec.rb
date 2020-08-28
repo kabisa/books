@@ -34,7 +34,7 @@ describe Search::FormComponent, type: :component do
 
     [
       Search::Filter::Publication,
-      Search::Filter::Pages,
+      Search::Filter::PagesComponent,
       Search::Filter::Tags,
       Search::Filter::LikesComponent
     ].each do |component|

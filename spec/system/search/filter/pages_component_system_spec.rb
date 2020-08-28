@@ -2,10 +2,10 @@ require 'rails_helper'
 
 # This tests uses the preview located in spec/components/previews...
 # and test the JS behaviour managed by Stimulus.
-RSpec.describe Search::Filter::Pages, type: :system do
+RSpec.describe Search::Filter::PagesComponent, type: :system do
   before { driven_by(:selenium_headless) }
 
-  let(:preview_path) { '/rails/view_components/search/filter/pages/' }
+  let(:preview_path) { '/rails/view_components/search/filter/pages_component/' }
 
   describe 'with_no_pages' do
     before { visit preview_path.concat('with_no_pages') }

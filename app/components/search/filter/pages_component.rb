@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Pages < MultiHandleRange
+    class PagesComponent < MultiHandleRange
       NUM_OF_PAGES_UPPER = BookSearch::NUM_OF_PAGES_UPPER
 
       def initialize(q:, builder:, live_search: false)

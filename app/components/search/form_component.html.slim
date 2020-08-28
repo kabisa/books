@@ -7,7 +7,7 @@
 
       .form-group.d-flex.justify-content-end(class=('mb-0' unless live_search?))
         = render(Search::Filter::Publication.new(q: q, builder: f, live_search: live_search?))
-        = render(Search::Filter::Pages.new(q: q, builder: f, live_search: live_search?))
+        = render(Search::Filter::PagesComponent.new(q: q, builder: f, live_search: live_search?))
         = render(Search::Filter::Tags.new(q: q, builder: f, live_search: live_search?))
         = render(Search::Filter::LikesComponent.new(q: q, builder: f, live_search: live_search?))
 
