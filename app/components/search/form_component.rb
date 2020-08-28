@@ -1,5 +1,5 @@
 module Search
-  class Form < ViewComponent::Base
+  class FormComponent < ViewComponent::Base
     include Ransack::Helpers::FormHelper
     include BootstrapHelper
     include LiveSearchable

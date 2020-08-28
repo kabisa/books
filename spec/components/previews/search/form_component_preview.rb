@@ -1,4 +1,4 @@
-class Search::FormPreview < ViewComponent::Preview
+class Search::FormComponentPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_nothing_checked_and_no_likes
@@ -42,7 +42,7 @@ class Search::FormPreview < ViewComponent::Preview
   attr_accessor :tags_id_in, :likes_count_gteq
 
   def render_component
-    render(Search::Form.new(options))
+    render(Search::FormComponent.new(options))
   end
 
   def options
@@ -54,11 +54,10 @@ class Search::FormPreview < ViewComponent::Preview
   end
 
   def params
-    { tags_id_in: tags_id_in,
-      likes_count_gteq: likes_count_gteq }
+    { tags_id_in: tags_id_in, likes_count_gteq: likes_count_gteq }
   end
 
-  def tag_ids(count=1)
+  def tag_ids(count = 1)
     Book.tags_on(:tags).sort_by { |t| t.name.downcase }.first(count).map(&:id)
   end
 end

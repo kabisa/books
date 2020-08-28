@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Search::Form, type: :component do
+describe Search::FormComponent, type: :component do
   before do
     allow_any_instance_of(described_class).to receive(:url_for).and_return('#')
   end

@@ -1,4 +1,4 @@
-= render(Search::Form.new(q: @q))
+= render(Search::FormComponent.new(q: @q))
 
 - if @suggestions.any?
   .animate__animated.animate__fadeIn

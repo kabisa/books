@@ -1,6 +1,6 @@
 h1.text-center.mb-5= Book.model_name.human.pluralize
 
-= render(Search::Form.new(q: @q, live_search: true))
+= render(Search::FormComponent.new(q: @q, live_search: true))
 
 - if @books.any?
   = render(partial: 'sort_by', locals: { q: @q })

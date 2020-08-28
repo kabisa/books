@@ -26,7 +26,7 @@ class Search::Filter::TagsPreview < ViewComponent::Preview
   attr_accessor :tags_id_in
 
   def render_component
-    render(Search::Form.new(options))#.css('[data-controller="tags"]')
+    render(Search::FormComponent.new(options)) #.css('[data-controller="tags"]')
   end
 
   def options
@@ -41,7 +41,7 @@ class Search::Filter::TagsPreview < ViewComponent::Preview
     { tags_id_in: tags_id_in }
   end
 
-  def tag_ids(count=nil)
+  def tag_ids(count = nil)
     tags = Book.tags_on(:tags).sort_by { |t| t.name.downcase }
     tags = tags.first(count) if count
 
