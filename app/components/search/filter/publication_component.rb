@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Publication < MultiHandleRange
+    class PublicationComponent < MultiHandleRange
       PUBLISHED_YEARS_AGO_UPPER = BookSearch::PUBLISHED_YEARS_AGO_UPPER
 
       def initialize(q:, builder:, live_search: false)

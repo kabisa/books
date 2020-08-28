@@ -2,10 +2,12 @@ require 'rails_helper'
 
 # This tests uses the preview located in spec/components/previews...
 # and test the JS behaviour managed by Stimulus.
-RSpec.describe Search::Filter::Publication, type: :system do
+RSpec.describe Search::Filter::PublicationComponent, type: :system do
   before { driven_by(:selenium_headless) }
 
-  let(:preview_path) { '/rails/view_components/search/filter/publication/' }
+  let(:preview_path) do
+    '/rails/view_components/search/filter/publication_component/'
+  end
 
   describe 'with_no_publication_date' do
     before { visit preview_path.concat('with_no_publication_date') }

@@ -1,17 +1,17 @@
-class Search::Filter::PublicationPreview < ViewComponent::Preview
+class Search::Filter::PublicationComponentPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_no_publication_date
     self.published_years_ago_lteq = 0
     self.published_years_ago_gteq =
-      Search::Filter::Publication::PUBLISHED_YEARS_AGO_UPPER
+      Search::Filter::PublicationComponent::PUBLISHED_YEARS_AGO_UPPER
     render_component
   end
 
   def with_min_publication_date
     self.published_years_ago_lteq = 2
     self.published_years_ago_gteq =
-      Search::Filter::Publication::PUBLISHED_YEARS_AGO_UPPER
+      Search::Filter::PublicationComponent::PUBLISHED_YEARS_AGO_UPPER
     render_component
   end
 

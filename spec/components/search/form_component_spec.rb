@@ -33,7 +33,7 @@ describe Search::FormComponent, type: :component do
     end
 
     [
-      Search::Filter::Publication,
+      Search::Filter::PublicationComponent,
       Search::Filter::PagesComponent,
       Search::Filter::Tags,
       Search::Filter::LikesComponent
