@@ -35,7 +35,7 @@ describe Search::FormComponent, type: :component do
     [
       Search::Filter::PublicationComponent,
       Search::Filter::PagesComponent,
-      Search::Filter::Tags,
+      Search::Filter::TagsComponent,
       Search::Filter::LikesComponent
     ].each do |component|
       it "passes the boolean to the #{component} component" do

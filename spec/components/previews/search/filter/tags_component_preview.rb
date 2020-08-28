@@ -1,4 +1,4 @@
-class Search::Filter::TagsPreview < ViewComponent::Preview
+class Search::Filter::TagsComponentPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_nothing_checked

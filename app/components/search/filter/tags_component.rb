@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Tags < ViewComponent::Base
+    class TagsComponent < ViewComponent::Base
       include LiveSearchable
 
       def initialize(q:, builder:, live_search: false)
