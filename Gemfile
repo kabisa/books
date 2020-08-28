@@ -35,7 +35,7 @@ gem 'paranoia' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3
 gem 'view_component' # View components for Rails, intended for upstreaming in Rails 6.1
 gem 'ransack' # Object-based searching.
 # acts-as-taggable-on is not yet compatible w/ Rails 6+. Until then use a customized version.
-gem 'acts-as-taggable-on', github: 'mkilling/acts-as-taggable-on',branch: 'support-rails-6' # With ActsAsTaggableOn, you can tag a single model on several contexts, such as skills, interests, and awards. It also provides other advanced functionality
+gem 'acts-as-taggable-on' # With ActsAsTaggableOn, you can tag a single model on several contexts, such as skills, interests, and awards. It also provides other advanced functionality
 gem 'kaminari'
 gem 'carrierwave', '~> 2.0'
 gem 'fog-aws'
