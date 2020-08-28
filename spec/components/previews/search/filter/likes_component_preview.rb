@@ -1,4 +1,4 @@
-class Search::Filter::LikesPreview < ViewComponent::Preview
+class Search::Filter::LikesComponentPreview < ViewComponent::Preview
   layout 'preview'
 
   def with_no_likes

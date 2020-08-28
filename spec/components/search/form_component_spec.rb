@@ -36,7 +36,7 @@ describe Search::FormComponent, type: :component do
       Search::Filter::Publication,
       Search::Filter::Pages,
       Search::Filter::Tags,
-      Search::Filter::Likes
+      Search::Filter::LikesComponent
     ].each do |component|
       it "passes the boolean to the #{component} component" do
         expect(component).to receive(:new).with(

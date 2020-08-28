@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Search::Filter::Likes, type: :component do
+describe Search::Filter::LikesComponent, type: :component do
   subject { Capybara.string html }
   let(:html) { render_inline(described_class.new(options)) }
   let(:options) do

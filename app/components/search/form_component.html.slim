@@ -9,7 +9,7 @@
         = render(Search::Filter::Publication.new(q: q, builder: f, live_search: live_search?))
         = render(Search::Filter::Pages.new(q: q, builder: f, live_search: live_search?))
         = render(Search::Filter::Tags.new(q: q, builder: f, live_search: live_search?))
-        = render(Search::Filter::Likes.new(q: q, builder: f, live_search: live_search?))
+        = render(Search::Filter::LikesComponent.new(q: q, builder: f, live_search: live_search?))
 
       - unless live_search?
         .action-buttons.d-flex.justify-content-center

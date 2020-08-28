@@ -2,10 +2,10 @@ require 'rails_helper'
 
 # This tests uses the preview located in spec/components/previews...
 # and test the JS behaviour managed by Stimulus.
-RSpec.describe Search::Filter::Likes, type: :system do
+RSpec.describe Search::Filter::LikesComponent, type: :system do
   before { driven_by(:selenium_headless) }
 
-  let(:preview_path) { '/rails/view_components/search/filter/likes/' }
+  let(:preview_path) { '/rails/view_components/search/filter/likes_component/' }
 
   describe 'with_no_likes' do
     before { visit preview_path.concat('with_no_likes') }

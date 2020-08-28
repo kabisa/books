@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Likes < ViewComponent::Base
+    class LikesComponent < ViewComponent::Base
       include LiveSearchable
 
       def initialize(q:, builder:, live_search: false)
