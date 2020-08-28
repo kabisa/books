@@ -1,4 +1,4 @@
-= render(Search::Filter::Dropdown.new(data_controller: data_controller, title: title, live_search: live_search?)) do
+= render(Search::Filter::DropdownComponent.new(data_controller: data_controller, title: title, live_search: live_search?)) do
   div(data={ target: "#{data_controller}.zeroItems" })
     = t('search_form.likes.zero')
   .d-none(data={ target: "#{data_controller}.otherItems" })

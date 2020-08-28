@@ -1,6 +1,6 @@
 module Search
   module Filter
-    class Dropdown < ViewComponent::Base
+    class DropdownComponent < ViewComponent::Base
       include BootstrapHelper
       include LiveSearchable
 

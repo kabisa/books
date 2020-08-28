@@ -2,10 +2,12 @@ require 'rails_helper'
 
 # This tests uses the preview located in spec/components/previews...
 # and test the JS behaviour managed by Stimulus.
-RSpec.describe Search::Filter::Dropdown, type: :system do
+RSpec.describe Search::Filter::DropdownComponent, type: :system do
   before { driven_by(:selenium_headless) }
 
-  let(:preview_path) { '/rails/view_components/search/filter/dropdown/' }
+  let(:preview_path) do
+    '/rails/view_components/search/filter/dropdown_component/'
+  end
 
   describe 'default' do
     before { visit preview_path.concat('default') }
