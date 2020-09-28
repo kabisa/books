@@ -2,7 +2,9 @@ var htmlString = '<%= j render(partial: 'results', object: @books, locals: { par
 
 <%- if @books.first_page? %>
   var el = document.querySelector('.books');
+
   el.innerHTML = htmlString;
+  document.querySelector('.sort-by').style.display = '<%= @books.none? ? "none" : "block" %>';
 <%- else %>
   var el = document.querySelector('.load-more');
   el.outerHTML = htmlString;

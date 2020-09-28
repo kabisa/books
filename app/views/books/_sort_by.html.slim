@@ -1,14 +1,15 @@
-.dropdown.d-flex.justify-content-end.sort-by.mb-3
-  a#sort_dropdown.btn.btn-sm.btn-outline.dropdown-toggle(aria={ expanded: false, haspopup: true } data={ toggle: :dropdown } role='button' href='#')
-    = t('.sort_by')
-    | :
-  .dropdown-menu.menu.dropdown-menu-right(aria-labelledby='sort_dropdown')
-    h6.dropdown-header.font-weight-normal.d-flex.justify-content-between
-      span= t('.sort_by')
-      span= material_icon('sort')
-    = decorated_sort_link(q, :title)
-    = decorated_sort_link(q, :likes_count, { default_order: :desc })
-    = decorated_sort_link(q, :comments_count, { default_order: :desc })
-    = decorated_sort_link(q, :num_of_pages_nulls_last)
-    = decorated_sort_link(q, :published_on_nulls_last)
+.sort-by(style="display: #{result.none? ? 'none' : 'block'}")
+  .dropdown.d-flex.justify-content-end.mb-3
+    a#sort_dropdown.btn.btn-sm.btn-outline.dropdown-toggle(aria={ expanded: false, haspopup: true } data={ toggle: :dropdown } role='button' href='#')
+      = t('.sort_by')
+      | :
+    .dropdown-menu.menu.dropdown-menu-right(aria-labelledby='sort_dropdown')
+      h6.dropdown-header.font-weight-normal.d-flex.justify-content-between
+        span= t('.sort_by')
+        span= material_icon('sort')
+      = decorated_sort_link(q, :title)
+      = decorated_sort_link(q, :likes_count, { default_order: :desc })
+      = decorated_sort_link(q, :comments_count, { default_order: :desc })
+      = decorated_sort_link(q, :num_of_pages_nulls_last)
+      = decorated_sort_link(q, :published_on_nulls_last)
 
