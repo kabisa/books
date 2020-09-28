@@ -1,5 +1,2 @@
-- if results.any?
-  = render(partial: 'book', collection: results, locals: { parent: parent })
-  = show_more_link_to results, t('.load_more'), remote: true, class: 'list-group-item d-flex justify-content-start align-items-center load-more', data: { controller: 'infinite-scroll' }
-- else
-  = render('no_results')
+= render(results, parent: parent)
+= show_more_link_to results, t('.load_more'), remote: true, class: 'list-group-item d-flex justify-content-start align-items-center load-more', data: { controller: 'infinite-scroll' }

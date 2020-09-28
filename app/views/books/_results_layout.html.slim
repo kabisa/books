@@ -1,3 +1,7 @@
-.list-group.animate__animated.animate__fadeInUp.books(id=parent)
-  = yield
-
+  .main
+    - if books.any?
+      = render('sort_by', q: q, result: books)
+      .list-group.animate__animated.animate__fadeInUp(id=parent)
+        = yield
+    - else
+      = render('no_results')
