@@ -27,6 +27,14 @@ module Search
       { controller: data_controller, target: "#{data_controller}.form" }
     end
 
+    def sort_params(f)
+      helpers.safe_join(
+        q.sorts.map do |sort|
+          f.hidden_field :s, multiple: true, value: "#{sort.name} #{sort.dir}"
+        end
+      )
+    end
+
     # Stimulus
     def data_controller
       'search'

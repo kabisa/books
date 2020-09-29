@@ -1,8 +1,7 @@
 .search-form.card.mb-5
   .card-body.pb-0
     = search_form_for q, search_form_options do |f|
-      - q.sorts.each do |sort|
-        = f.hidden_field :s, multiple: true, value: "#{sort.name} #{sort.dir}"
+      = sort_params(f)
       .form-group
         .textfield-box
           = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control', data: { target: "#{data_controller}.query", action: "input->#{data_controller}#perform" }
