@@ -10,5 +10,5 @@ if (isExpanded)
 el.replaceWith(restoreEl);
 
 var snackbar       = document.createElement('div');
-snackbar.innerHTML = '<%= j render(Material::Snackbar.new(flash: flash)) %>';
+snackbar.innerHTML = '<%= j render(Material::SnackbarComponent.new(flash: flash)) %>';
 document.body.appendChild(snackbar.firstChild);

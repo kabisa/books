@@ -1,0 +1,7 @@
+div(data-controller='snackbar' data-target='snackbar.container' class=component_class)
+  .snackbar-body
+    = message
+    - if action
+      span.snackbar-btn.d-inline-block.ml-4
+        =< action
+  = close_icon(class: 'text-light ml-2', data: { action: 'snackbar#hide' })

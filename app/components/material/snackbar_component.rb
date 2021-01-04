@@ -1,5 +1,5 @@
 module Material
-  class Snackbar < ViewComponent::Base
+  class SnackbarComponent < ViewComponent::Base
     include BootstrapHelper
 
     def initialize(flash:, action: nil)
@@ -7,15 +7,19 @@ module Material
       self.flash = flash
     end
 
-    def snackbar_class
-      snackbar_class = %w(snackbar)
-      snackbar_class << 'snackbar-multi-line' if long_message?
-      snackbar_class
+    def render?
+      message.present?
     end
 
     private
 
     attr_reader :flash, :action
+
+    def component_class
+      class_names = %w[snackbar]
+      class_names << 'snackbar-multi-line' if long_message?
+      class_names
+    end
 
     def action=(value)
       @action = value&.html_safe
@@ -27,7 +31,7 @@ module Material
     end
 
     def message
-      flash.map { |type, msg| msg }.to_sentence
+      flash.map { |_type, msg| msg }.to_sentence
     end
 
     def long_message?

@@ -1,6 +1,6 @@
 module MaterialHelper
   def bs_snackbar
-    render(Material::Snackbar.new(flash: flash))
+    render(Material::SnackbarComponent.new(flash: flash))
   end
 
   def navigation_icon

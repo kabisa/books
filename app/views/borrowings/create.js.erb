@@ -9,5 +9,5 @@ var snackbar        = document.createElement('div');
 restoreEl.innerHTML = isExpanded ? expandedHTML : collapsedHTML;
 el.replaceWith(restoreEl.firstChild);
 
-snackbar.innerHTML = '<%= j render(Material::Snackbar.new(flash: flash)) %>';
+snackbar.innerHTML = '<%= j render(Material::SnackbarComponent.new(flash: flash)) %>';
 document.body.appendChild(snackbar.firstChild);
