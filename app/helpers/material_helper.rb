@@ -4,6 +4,6 @@ module MaterialHelper
   end
 
   def navigation_icon
-    render(Material::NavigationIcon.new(action_name: action_name))
+    render(Material::NavigationIconComponent.new(action_name: action_name))
   end
 end
