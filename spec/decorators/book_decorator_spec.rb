@@ -109,7 +109,6 @@ RSpec.describe BookDecorator do
     end
 
     describe 'with a Kabisa user' do
-
       describe 'user is allowed to download books' do
         let(:book)        { build :book, :ebook }
         let(:policy_stub) { double('Policy', download?: true, borrow?: false) }
@@ -173,7 +172,6 @@ RSpec.describe BookDecorator do
 
       it { is_expected.to have_css('i.material-icons', text: '0') }
     end
-
   end
 
   describe '#formatted_published_on' do
@@ -270,7 +268,7 @@ RSpec.describe BookDecorator do
     subject    { Capybara.string decorator.number_of_comments_icon }
     let(:book) { create :book, comments_count: 5 }
 
-    it { is_expected.to have_css('i.material-icons',text: 'mode_comment') }
+    it { is_expected.to have_css('i.material-icons', text: 'mode_comment') }
     it { is_expected.to have_content('5') }
   end
 
@@ -280,15 +278,15 @@ RSpec.describe BookDecorator do
     let(:summary) do
       <<~SUMMARY
         Bla
-        #{"Bla " * 50}
-        #{"Bla " * 100}
-        #{"Bla " * 150}
+        #{'Bla ' * 50}
+        #{'Bla ' * 100}
+        #{'Bla ' * 150}
         Bla
       SUMMARY
     end
 
     it { expect(subject.size).to eql(240) }
-    it { is_expected.to have_content('...') }
+    it { is_expected.to end_with('...') }
   end
 
   describe '#truncated_summary_html' do
@@ -297,9 +295,9 @@ RSpec.describe BookDecorator do
     let(:summary) do
       <<~SUMMARY
         Bla
-        #{"Bla " * 50}
-        #{"Bla " * 100}
-        #{"Bla " * 150}
+        #{'Bla ' * 50}
+        #{'Bla ' * 100}
+        #{'Bla ' * 150}
         Bla
       SUMMARY
     end
@@ -348,7 +346,7 @@ RSpec.describe BookDecorator do
       subject          { Capybara.string decorator.written_by_highlighted_with_search }
       let(:parameters) { { q: { title_or_summary_or_writers_name_cont: 'king' } } }
 
-      it { is_expected.to have_css('a[href$="q%5Bwriters_name_eq%5D=Stephen+King"] mark' ,text: 'King') }
+      it { is_expected.to have_css('a[href$="q%5Bwriters_name_eq%5D=Stephen+King"] mark', text: 'King') }
     end
 
     context 'no writers' do

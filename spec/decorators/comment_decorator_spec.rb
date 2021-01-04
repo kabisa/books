@@ -16,15 +16,15 @@ RSpec.describe CommentDecorator do
     let(:body) do
       <<~BODY
         Bla
-        #{"Bla " * 10}
-        #{"Bla " * 20}
+        #{'Bla ' * 10}
+        #{'Bla ' * 20}
         Bla
       BODY
     end
     let(:comment) { create :comment, body: body, book: book }
 
     it { expect(subject.size).to eql(120) }
-    it { is_expected.to have_content('...') }
+    it { is_expected.to end_with('...') }
   end
 
   describe '#truncated_body_html' do
@@ -32,8 +32,8 @@ RSpec.describe CommentDecorator do
     let(:body) do
       <<~BODY
         Bla
-        #{"Bla " * 10}
-        #{"Bla " * 20}
+        #{'Bla ' * 10}
+        #{'Bla ' * 20}
         Bla
       BODY
     end
