@@ -1,5 +1,3 @@
-require 'bootstrap/alert'
-
 module BootstrapHelper
   # @param icon [String] For all available icons, please refer to Material icons library (https://material.io/resources/icons/)
   def material_icon(icon, options = {})
@@ -57,7 +55,7 @@ module BootstrapHelper
       class: 'close', type: :button, aria: { label: 'Close' }
     }
     # Deep merge and join values
-    options.deep_merge!(default_options) do |key, this_val, other_val|
+    options.deep_merge!(default_options) do |_key, this_val, other_val|
       [this_val, other_val].join(' ').strip
     end
 

@@ -17,7 +17,8 @@ class BookDecorator < ApplicationDecorator
     h.safe_join [
       printed_book_text,
       ebook_text,
-      formatted_num_of_pages].compact, ', '
+      formatted_num_of_pages
+    ].compact, ', '
   end
 
   def printed_book_text
@@ -82,7 +83,8 @@ class BookDecorator < ApplicationDecorator
   def written_by_published_on
     h.safe_join [
       written_by,
-      formatted_published_on].compact, ', '
+      formatted_published_on
+    ].compact, ', '
   end
 
   def number_of_comments
@@ -96,7 +98,7 @@ class BookDecorator < ApplicationDecorator
     h.truncate(summary, length: 240)
   end
 
-  def truncated_summary_html(options={})
+  def truncated_summary_html(options = {})
     h.simple_format(truncated_summary, options)
   end
 
@@ -117,7 +119,7 @@ class BookDecorator < ApplicationDecorator
         type: :info
       }
 
-      h.render(Bootstrap::Alert.new(options))
+      h.render(Bootstrap::AlertComponent.new(options))
     end
   end
 
@@ -127,7 +129,7 @@ class BookDecorator < ApplicationDecorator
         content: h.link_to(I18n.t('reedition_available'), reedition, class: 'alert-link')
       }
 
-      h.tag.div(h.render(Bootstrap::Alert.new(options)), data: { toggle: 'no-collapse' })
+      h.tag.div(h.render(Bootstrap::AlertComponent.new(options)), data: { toggle: 'no-collapse' })
     end
   end
 

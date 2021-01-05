@@ -1,7 +1,7 @@
 module Bootstrap
   class Badge < ViewComponent::Base
-    ALLOWED_TYPES = %i(primary secondary danger info success warning dark light)
-    DEFAULT_TYPE=ALLOWED_TYPES.last
+    ALLOWED_TYPES = %i[primary secondary danger info success warning dark light].freeze
+    DEFAULT_TYPE = ALLOWED_TYPES.last
 
     def initialize(content:, type: DEFAULT_TYPE)
       @content = content
