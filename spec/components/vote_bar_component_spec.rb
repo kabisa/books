@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe VoteBar, type: :component do
+describe VoteBarComponent, type: :component do
   subject       { Capybara.string html }
-  let(:html)    {  render_inline(described_class.new(options)) }
+  let(:html)    { render_inline(described_class.new(options)) }
   let(:options) { { like_count: 75, dislike_count: 25, has_voted: true } }
 
   it { is_expected.to have_css('.progress .progress-bar[role="progressbar"]') }

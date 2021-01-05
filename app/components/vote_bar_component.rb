@@ -1,5 +1,4 @@
-class VoteBar < ViewComponent::Base
-
+class VoteBarComponent < ViewComponent::Base
   def initialize(like_count:, dislike_count:, has_voted: false)
     @like_count = like_count
     @dislike_count = dislike_count
