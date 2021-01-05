@@ -31,14 +31,13 @@ class CommentDecorator < ApplicationDecorator
   private
 
   def commenter_badge
-
     if user.current_user?
       options = {
         content: commenter,
         type: :light
       }
 
-      h.render(Bootstrap::Badge.new(options))
+      h.render(Bootstrap::BadgeComponent.new(options))
     else
       h.tag.strong(commenter)
     end

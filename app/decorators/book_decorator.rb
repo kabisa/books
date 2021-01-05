@@ -139,7 +139,7 @@ class BookDecorator < ApplicationDecorator
         content: I18n.t('outdated'),
         type: :light
       }
-      h.tag.small(h.render(Bootstrap::Badge.new(options)), h.tooltipify(I18n.t('reedition_available')))
+      h.tag.small(h.render(Bootstrap::BadgeComponent.new(options)), h.tooltipify(I18n.t('reedition_available')))
     end
   end
 
@@ -149,7 +149,7 @@ class BookDecorator < ApplicationDecorator
         content: I18n.t('latest'),
         type: :primary
       }
-      h.tag.small(h.render(Bootstrap::Badge.new(options)))
+      h.tag.small(h.render(Bootstrap::BadgeComponent.new(options)))
     end
   end
 end
