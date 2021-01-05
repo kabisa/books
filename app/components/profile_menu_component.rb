@@ -6,7 +6,7 @@ class ProfileMenuComponent < ViewComponent::Base
   end
 
   def item_class
-    avatar? ? 'navbar-toggler' : %w(btn btn-outline dropdown-toggle)
+    avatar? ? 'navbar-toggler' : %w[btn btn-outline dropdown-toggle]
   end
 
   def item_id
