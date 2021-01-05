@@ -109,7 +109,7 @@ class BookDecorator < ApplicationDecorator
       user: h.current_user
     }
 
-    h.render(BookComponents::HamburgerMenu.new(options))
+    h.render(Books::HamburgerMenuComponent.new(options))
   end
 
   def currently_borrowing_alert

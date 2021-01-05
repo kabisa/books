@@ -1,5 +1,5 @@
-module BookComponents
-  class HamburgerMenu < ViewComponent::Base
+module Books
+  class HamburgerMenuComponent < ViewComponent::Base
     include BootstrapHelper
     include ApplicationHelper
 
