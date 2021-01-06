@@ -158,10 +158,10 @@ RSpec.describe BookDecorator do
 
     context 'user is allowed to borrow books' do
       let(:policy_stub) { double('Policy', borrow?: true) }
-      let(:component_stub) { double('BookComponents::PrintedBookIcon') }
+      let(:component_stub) { double('Books::PrintedBookIconComponent') }
 
-      it 'delegates to the BookComponents::PrintedBookIcon component' do
-        expect(BookComponents::PrintedBookIcon).to receive(:new).with(options).and_return(component_stub)
+      it 'delegates to the Books::PrintedBookIconComponent component' do
+        expect(Books::PrintedBookIconComponent).to receive(:new).with(options).and_return(component_stub)
         expect(h).to receive(:render).with(component_stub)
         subject
       end
@@ -387,7 +387,10 @@ RSpec.describe BookDecorator do
       let(:reedition) { create(:book) }
       subject         { Capybara.string html }
 
-      it              { is_expected.to have_css('div[data-toggle="no-collapse"] .alert.alert-light a.alert-link', text: 'A newer edition for this book is available.') }
+      it              {
+        is_expected.to have_css('div[data-toggle="no-collapse"] .alert.alert-light a.alert-link',
+                                text: 'A newer edition for this book is available.')
+      }
     end
 
     context 'no reedition available' do
@@ -406,7 +409,10 @@ RSpec.describe BookDecorator do
       let(:reedition) { create(:book) }
       subject         { Capybara.string html }
 
-      it              { is_expected.to have_css('small[title][data-toggle="tooltip"] span.badge.badge-pill.badge-light', text: 'outdated') }
+      it              {
+        is_expected.to have_css('small[title][data-toggle="tooltip"] span.badge.badge-pill.badge-light',
+                                text: 'outdated')
+      }
     end
 
     context 'no reedition available' do

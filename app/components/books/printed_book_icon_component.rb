@@ -1,5 +1,5 @@
-module BookComponents
-  class PrintedBookIcon < ViewComponent::Base
+module Books
+  class PrintedBookIconComponent < ViewComponent::Base
     include BootstrapHelper
     include ApplicationHelper
 

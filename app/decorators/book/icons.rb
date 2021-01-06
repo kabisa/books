@@ -10,7 +10,7 @@ module Book::Icons
         user: h.current_user
       }
 
-      h.render(BookComponents::PrintedBookIcon.new(options))
+      h.render(Books::PrintedBookIconComponent.new(options))
     else
       h.icon_placeholder
     end
@@ -36,9 +36,9 @@ module Book::Icons
         [
           h.material_icon('mode_comment'),
           comments_count # (1)
-        ], ' '),
-        h.tooltipify(number_of_comments))
-
+        ], ' '
+      ),
+      h.tooltipify(number_of_comments)
+    )
   end
-
 end
