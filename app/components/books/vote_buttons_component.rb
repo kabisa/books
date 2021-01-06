@@ -1,5 +1,5 @@
-module BookComponents
-  class VoteButtons < ViewComponent::Base
+module Books
+  class VoteButtonsComponent < ViewComponent::Base
     include BootstrapHelper
 
     def initialize(book:, like:, dislike:, like_count:, dislike_count:)
@@ -15,4 +15,3 @@ module BookComponents
     attr_reader :book, :like, :dislike, :like_count, :dislike_count
   end
 end
-

@@ -54,7 +54,7 @@ class BookDecorator < ApplicationDecorator
       dislike: dislikes.find_by(user: h.current_user)
     }
 
-    h.render(BookComponents::VoteButtons.new(options))
+    h.render(Books::VoteButtonsComponent.new(options))
   end
 
   def vote_stats
