@@ -63,7 +63,7 @@ class BookDecorator < ApplicationDecorator
       dislike_count: dislikes.size
     }
 
-    h.render(BookComponents::VoteStats.new(options))
+    h.render(Books::VoteStatsComponent.new(options))
   end
 
   def formatted_tag_list
