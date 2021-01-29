@@ -115,7 +115,7 @@ class BookDecorator < ApplicationDecorator
   def currently_borrowing_alert
     if borrowed_by?(h.current_user)
       options = {
-        content: I18n.t('you_are_currently_borrowing'),
+        text: I18n.t('you_are_currently_borrowing'),
         type: :info
       }
 
@@ -126,7 +126,7 @@ class BookDecorator < ApplicationDecorator
   def reedition_alert
     if reedition
       options = {
-        content: h.link_to(I18n.t('reedition_available'), reedition, class: 'alert-link')
+        text: h.link_to(I18n.t('reedition_available'), reedition, class: 'alert-link')
       }
 
       h.tag.div(h.render(Bootstrap::AlertComponent.new(options)), data: { toggle: 'no-collapse' })
@@ -136,7 +136,7 @@ class BookDecorator < ApplicationDecorator
   def reedition_badge
     if reedition
       options = {
-        content: I18n.t('outdated'),
+        text: I18n.t('outdated'),
         type: :light
       }
       h.tag.small(h.render(Bootstrap::BadgeComponent.new(options)), h.tooltipify(I18n.t('reedition_available')))
@@ -146,7 +146,7 @@ class BookDecorator < ApplicationDecorator
   def latest_edition_badge
     if latest_edition?
       options = {
-        content: I18n.t('latest'),
+        text: I18n.t('latest'),
         type: :primary
       }
       h.tag.small(h.render(Bootstrap::BadgeComponent.new(options)))

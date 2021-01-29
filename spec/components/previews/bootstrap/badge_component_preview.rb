@@ -20,13 +20,13 @@ module Bootstrap
 
     def options
       {
-        content: content,
+        text: text,
         type: type
       }
     end
 
-    def content
-      @content || Faker::Lorem.word
+    def text
+      @text || Faker::Lorem.word
     end
   end
 end

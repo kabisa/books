@@ -33,7 +33,7 @@ class CommentDecorator < ApplicationDecorator
   def commenter_badge
     if user.current_user?
       options = {
-        content: commenter,
+        text: commenter,
         type: :light
       }
 
