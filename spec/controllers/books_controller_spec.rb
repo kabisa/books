@@ -196,7 +196,7 @@ RSpec.describe BooksController, type: :controller do
     context 'with invalid params' do
       it "returns a success response (i.e. to display the 'new' template)" do
         do_post(invalid_attributes)
-        expect(response).to be_successful
+        expect(response).to have_http_status(422)
       end
 
       it 'renders the new template' do
@@ -230,7 +230,7 @@ RSpec.describe BooksController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
         do_put(invalid_attributes)
-        expect(response).to be_successful
+        expect(response).to have_http_status(422)
       end
     end
   end

@@ -22,7 +22,7 @@ FactoryBot.define do
 
     after(:create) do |book, evaluator|
       create_list(:comment, evaluator.comments_count, book: book)
-      create_list(:writer, evaluator.writers_count, :random, books: [book])
+      create_list(:writer, evaluator.writers_count, books: [book])
     end
 
     trait :invalid do
@@ -39,8 +39,8 @@ FactoryBot.define do
       transient do
         copies_count { 1 }
       end
-
     end
+
     trait :random do
       title { Faker::Book.title }
       summary { Array.new(rand(6))  { Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 5) }.join("\n") }

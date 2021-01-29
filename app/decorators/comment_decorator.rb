@@ -2,6 +2,7 @@ class CommentDecorator < ApplicationDecorator
   delegate_all
   delegate :commenter, to: :user
   decorates_association :user
+  decorates_association :book
 
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:

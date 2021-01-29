@@ -106,7 +106,7 @@ end
 
 When('I edit the book {string}') do |title|
   within(
-    #step %Q(I expand the panel for "#{title}")
+    # step %Q(I expand the panel for "#{title}")
     '.list-group-item',
     text: title
   ) do
@@ -163,7 +163,7 @@ Then("it's an e-book") { expect(page).to have_content(/e-book/i) }
 
 Then('I {can_or_not}edit {string}') do |should_do, title|
   # Expand first
-  #step %Q(I expand the panel for "#{title}")
+  # step %Q(I expand the panel for "#{title}")
   to_have_or_not_have =
     should_do ? 'to' : 'not_to'
 
@@ -186,11 +186,8 @@ Then('I am viewing the {book}') do |book|
   route = book.model_name.singular_route_key
   expected_path = send("#{route}_path", book)
 
-  expect(current_path).to eql(expected_path)
   expect(page).to have_content(book.title)
-  if book.num_of_pages?
-    expect(page).to have_content("#{book.num_of_pages} pages")
-  end
+  expect(page).to have_content("#{book.num_of_pages} pages") if book.num_of_pages?
   expect(page).to have_content(book.summary) if book.summary?
   if book.published_on?
     expect(page).to have_content(
@@ -198,9 +195,8 @@ Then('I am viewing the {book}') do |book|
     )
   end
   expect(page).to have_content(book.tag_list.to_s)
-  if book.writers.any?
-    expect(page).to have_content("By #{book.writer_names.to_sentence}")
-  end
+  expect(page).to have_content("By #{book.writer_names.to_sentence}") if book.writers.any?
+  expect(current_path).to eql(expected_path)
 end
 
 Then('I am adding a new book') do

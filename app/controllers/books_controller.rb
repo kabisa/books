@@ -44,7 +44,7 @@ class BooksController < ApplicationController
         format.html { redirect_to @book }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -60,7 +60,7 @@ class BooksController < ApplicationController
         end
         format.json { render :show, status: :ok, location: @book }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end

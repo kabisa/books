@@ -3,10 +3,10 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-require('@rails/ujs').start();
-require('turbolinks').start();
-require('@rails/activestorage').start();
-require('channels');
+require("@rails/ujs").start();
+import "@hotwired/turbo-rails";
+require("@rails/activestorage").start();
+require("channels");
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -15,42 +15,42 @@ require('channels');
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import $ from 'jquery';
-import 'bootstrap/dist/js/bootstrap';
-import 'daemonite-material/js/material';
+import $ from "jquery";
+import "bootstrap/dist/js/bootstrap";
+import "daemonite-material/js/material";
 
-$(document).on('turbolinks:load', function() {
+$(document).on("turbo:load", function () {
   // Bootstrap:
   //
   $(
-    '.floating-label .custom-select, .floating-label .form-control',
+    ".floating-label .custom-select, .floating-label .form-control"
   ).floatinglabel();
 
-  $('body').tooltip({
+  $("body").tooltip({
     selector: '[data-toggle="tooltip"]',
-    container: 'body',
+    container: "body",
   });
 
-  $('body').popover({
+  $("body").popover({
     selector: '[data-toggle="popover"]',
-    container: 'body',
+    container: "body",
     html: true,
-    trigger: 'hover',
+    trigger: "hover",
   });
 
   // Daemonite:
   //
-  $(window).on('scroll', function() {
+  $(window).on("scroll", function () {
     if ($(window).scrollTop() > 0) {
-      $('.toolbar-waterfall').addClass('waterfall');
+      $(".toolbar-waterfall").addClass("waterfall");
     } else {
-      $('.toolbar-waterfall').removeClass('waterfall');
+      $(".toolbar-waterfall").removeClass("waterfall");
     }
   });
 });
 
-$(document).on('ajax:before', function() {
-  $('.tooltip').tooltip('dispose');
+$(document).on("ajax:before", function () {
+  $(".tooltip").tooltip("dispose");
 });
 
-import 'controllers';
+import "controllers";
