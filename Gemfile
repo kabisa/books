@@ -37,7 +37,7 @@ gem 'ransack' # Object-based searching.
 # acts-as-taggable-on is not yet compatible w/ Rails 6+. Until then use a customized version.
 gem 'acts-as-taggable-on' # With ActsAsTaggableOn, you can tag a single model on several contexts, such as skills, interests, and awards. It also provides other advanced functionality
 gem 'kaminari'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'fog-aws'
 
 group :development, :test do
