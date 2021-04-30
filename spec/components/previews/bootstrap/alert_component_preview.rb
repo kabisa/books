@@ -12,7 +12,7 @@ module Bootstrap
 
     private
 
-    attr_accessor :content, :type
+    attr_accessor :text, :type
 
     def render_component
       render(AlertComponent.new(options))
@@ -20,13 +20,13 @@ module Bootstrap
 
     def options
       {
-        content: content,
+        text: text,
         type: type
       }
     end
 
-    def content
-      @content || Faker::Lorem.sentence
+    def text
+      @text || Faker::Lorem.sentence
     end
   end
 end
