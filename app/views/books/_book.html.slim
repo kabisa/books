@@ -30,7 +30,7 @@
             - if book.writers.any?
               small= book.written_by_highlighted_with_search
           .col-6.col-lg-2(data={ toggle: 'no-collapse' })
-            = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button
+            = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button, target: '_top'
           .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
             = render partial: 'books/vote', object: book, as: :book
             = book.hamburger_menu

@@ -81,7 +81,7 @@ en:
       notice: "'%{title}' deleted."
     restore:
       notice: "Action undone."
-    results:
+    main:
       load_more: "More books"
     no_results:
       no_results: "No books found."

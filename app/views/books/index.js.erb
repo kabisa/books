@@ -1,7 +1,0 @@
-<%- if @books.first_page? %>
-  var el = document.querySelector('.main');
-  el.outerHTML = '<%= j render 'main', q: @q, books: @books %>';
-<%- else %>
-  var el = document.querySelector('.load-more');
-  el.outerHTML = '<%= j render(partial: 'results', object: @books, locals: { parent: 'books' }) %>';
-<%- end %>

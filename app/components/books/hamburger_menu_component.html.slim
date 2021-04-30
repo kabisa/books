@@ -1,6 +1,6 @@
 = hamburger_menu do
   - if edit?
-    li= link_to I18n.t('helpers.submit.edit'), edit_book_path(book), class: item_class
+    li= link_to I18n.t('helpers.submit.edit'), edit_book_path(book), class: item_class, target: '_top'
   - if download?
     li= link_to I18n.t('helpers.submit.download'), book.link, class: item_class, role: :button, target: '_blank'
   - if borrow?

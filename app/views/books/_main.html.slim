@@ -1,1 +1,15 @@
-= render(partial: 'results', object: books, layout: 'results_layout', locals: { q: q, books: books, parent: 'books' })
+= turbo_frame_tag 'results' do
+
+  - if books.any?
+    = render('sort_by', q: q, result: books)
+    #books.list-group.animate__animated.animate__fadeInUp
+      = turbo_frame_tag "results-#{books.current_page}" do
+        = render(books, parent: 'books')
+
+        - if books.next_page
+          = turbo_frame_tag "results-#{books.next_page}", loading: :lazy, src: next_page_path(books) do
+            .list-group-item.d-flex.justify-content-start.align-items-center.load-more
+              .spinner-container= spinner
+              = t('.load_more')
+  - else
+    = render('no_results')
