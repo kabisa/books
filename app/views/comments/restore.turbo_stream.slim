@@ -1,6 +1,0 @@
-= turbo_stream.replace @comment do
-  = render(partial: 'comment', object: @comment, formats: :html)
-  = bs_snackbar
-
-= turbo_stream.replace 'number-of-comments' do
-  = render(partial: 'books/number_of_comments', locals: { book: @book }, formats: :html)

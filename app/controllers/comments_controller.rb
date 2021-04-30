@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = authorize Comment.find(params[:id]).decorate
-    @book    = @comment.book
+    @book = @comment.book
 
     @comment.destroy
     notice = t('.notice')
@@ -43,12 +43,15 @@ class CommentsController < ApplicationController
 
   def restore
     @comment = authorize Comment.only_deleted.find(params[:id]).restore.decorate
-    @book    = @comment.book
+    @book = @comment.book
     notice = t('.notice')
 
     respond_to do |format|
       format.html { redirect_to book_path(@book, anchor: @comment.dom_id), notice: notice }
-      format.turbo_stream { flash.now[:notice] = notice }
+      format.turbo_stream do
+        flash.now[:notice] = notice
+        render :destroy
+      end
     end
   end
 
