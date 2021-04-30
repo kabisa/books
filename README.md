@@ -24,16 +24,20 @@ $ bin/rails db:setup
 
 ## Running / Development
 
-- `bin/rails s`
-- `bin/webpack-dev-server`
+- `$ bin/rails s`
+- `$ bin/webpack-dev-server`
 - Visit your app at [http://localhost:3000](http://localhost:3000).
-- View the [ActionView::Components](https://github.com/github/actionview-component) at [http://localhost:3000/rails/components](http://localhost:3000/rails/components)
+- Preview the [ViewComponents](https://viewcomponent.org/) at [http://localhost:3000/rails/components](http://localhost:3000/rails/components)
 
 ### Populate the database
 
 The project comes with a `seed.rb` which you can use to populate your development environment:
 
-`bin/rails db:seed [USERS_COUNT=n] [BOOKS_COUNT=m]`
+`$ bin/rails db:seed [USERS_COUNT=n] [BOOKS_COUNT=m]`
+
+## Running tests
+
+`$ bin/rails ci`
 
 ## Technical details
 
@@ -43,7 +47,7 @@ The project comes with a `seed.rb` which you can use to populate your developmen
 
 To update the diagram, run the following command:
 
-`bin/rails erd`
+`$ bin/rails erd`
 
 ### Daemonite's Material UI
 
