@@ -1,0 +1,6 @@
+= turbo_stream.replace @book do
+  = render @book, parent: 'books', show: @show
+
+= turbo_stream.prepend 'results' do
+  = bs_snackbar
+

@@ -5,7 +5,7 @@
 
 .vote.text-center
   - if current_user.identified?
-    = book.vote_buttons
+    = book.vote_buttons(show: local_assigns[:show])
     .mt-1= render(VoteBarComponent.new(like_count: like_count, dislike_count: dislike_count, has_voted: (like || dislike)))
   - else
       .text-right(style="min-width: 90px;")

@@ -1,7 +1,7 @@
 - if book.deleted?
-  .show(id=book.dom_id)
+  = turbo_frame_tag book, class: 'show'
 - else
-  .expansion-panel.list-group-item.stretchable(id=book.dom_id class=('show' if local_assigns[:show]) data={ controller: 'expansion-panel', action: 'click->expansion-panel#toggle', target: "##{book.dom_id(:collapse)}" })
+  = turbo_frame_tag book, class: "expansion-panel list-group-item stretchable #{local_assigns[:show] ? 'show' : ''}", data: { controller: 'expansion-panel', action: 'click->expansion-panel#toggle', target: "##{book.dom_id(:collapse)}" }
     .expansion-panel-toggler
       .media-body
         .row.align-items-center.collapsed-show
@@ -21,7 +21,7 @@
           .col-4.col-lg-2
             = book.number_of_comments_icon
           .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
-            = render partial: 'books/vote', object: book, as: :book
+            = render partial: 'books/vote', object: book, as: :book, locals: { show: false }
             = book.hamburger_menu
 
         .row.align-items-center.collapsed-hide
@@ -32,7 +32,7 @@
           .col-6.col-lg-2(data={ toggle: 'no-collapse' })
             = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button, target: '_top'
           .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
-            = render partial: 'books/vote', object: book, as: :book
+            = render partial: 'books/vote', object: book, as: :book, locals: { show: true }
             = book.hamburger_menu
 
     = render partial: 'books/collapse', object: book, as: :book, locals: { show: local_assigns[:show], parent: parent }

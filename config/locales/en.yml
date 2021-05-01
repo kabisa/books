@@ -105,6 +105,8 @@ en:
   votes:
     create:
       notice: "Your vote has been registered."
+    destroy:
+      notice: "Your vote has been unregistered."
   welcome:
     index:
       title: "Suggested for you"

@@ -45,13 +45,14 @@ class BookDecorator < ApplicationDecorator
     I18n.t('published_on', published_on: I18n.l(published_on))
   end
 
-  def vote_buttons
+  def vote_buttons(show:)
     options = {
       book: object,
       like_count: likes.size,
       dislike_count: dislikes.size,
       like: likes.find_by(user: h.current_user),
-      dislike: dislikes.find_by(user: h.current_user)
+      dislike: dislikes.find_by(user: h.current_user),
+      show: show
     }
 
     h.render(Books::VoteButtonsComponent.new(options))

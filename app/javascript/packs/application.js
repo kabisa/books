@@ -49,8 +49,11 @@ $(document).on("turbo:load", function () {
   });
 });
 
-$(document).on("ajax:before", function () {
-  $(".tooltip").tooltip("dispose");
-});
+document.documentElement.addEventListener(
+  "turbo:before-fetch-request",
+  function () {
+    $(".tooltip").tooltip("dispose");
+  }
+);
 
 import "controllers";

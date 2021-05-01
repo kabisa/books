@@ -1,9 +1,0 @@
-var elements = document.getElementById('<%= @book.dom_id %>').querySelectorAll('.vote');
-
-elements.forEach((el) => {
-  el.outerHTML = '<%= j render(partial: 'books/vote', object: @book, as: :book) %>';
-})
-
-var snackbar       = document.createElement('div');
-snackbar.innerHTML = '<%= j render(Material::SnackbarComponent.new(flash: flash)) %>';
-document.body.appendChild(snackbar.firstChild);
