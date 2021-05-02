@@ -3,6 +3,10 @@
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   grid-gap: (3 * $card-margin-y) (3 * $card-margin-x);
 
+  .as-contents {
+    display: contents;
+  }
+
   .load-more {
     grid-column: 1 / -1;
   }

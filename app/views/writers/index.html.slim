@@ -1,3 +1,11 @@
 h1.text-center.mb-5= Writer.model_name.human.pluralize
 
-= render(partial: 'results', object: @writers, layout: 'results_layout')
+.card-grid.animate__animated.animate__fadeInUp
+  = turbo_frame_tag "results-#{@writers.current_page}", class: 'as-contents' do
+    = render @writers
+
+    - if @writers.next_page
+      = turbo_frame_tag "results-#{@writers.next_page}", loading: :lazy, src: next_page_path(@writers), data: { controller: 'grid', action: 'turbo:before-fetch-response@document->grid#adjustLayout', 'grid-contents-class': 'as-contents' } do
+        .list-group-item.d-flex.justify-content-start.align-items-center.load-more
+          .spinner-container= spinner
+          = t('.load_more')
