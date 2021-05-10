@@ -7,15 +7,15 @@ module Books
     delegate :copies, to: :book
     delegate :borrowables, to: :copies
 
-    def initialize(book:, remote:, user:)
+    def initialize(book:, show:, user:)
       @book = book
-      @remote = remote
+      @show = show
       @user = user
     end
 
     private
 
-    attr_reader :book, :remote, :user
+    attr_reader :book, :show, :user
 
     def policy
       Pundit.policy(user, book)

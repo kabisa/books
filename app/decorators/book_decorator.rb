@@ -103,10 +103,10 @@ class BookDecorator < ApplicationDecorator
     h.simple_format(truncated_summary, options)
   end
 
-  def hamburger_menu(remote: true)
+  def hamburger_menu(show: true)
     options = {
       book: self,
-      remote: remote,
+      show: show,
       user: h.current_user
     }
 

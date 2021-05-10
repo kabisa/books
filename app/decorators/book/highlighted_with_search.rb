@@ -36,9 +36,9 @@ module Book::HighlightedWithSearch
   end
 
   def writer_name_link_highlighted_with_search(writer_name)
-    name         = writer_name_highlighted_with_search(writer_name)
-    options      = { q: { writers_name_eq: writer_name } }
-    html_options = { class: 'text-primary' }
+    name = writer_name_highlighted_with_search(writer_name)
+    options = { q: { writers_name_eq: writer_name } }
+    html_options = { class: 'text-primary', target: '_top' }
 
     h.link_to(name, h.books_path(options), html_options)
   end

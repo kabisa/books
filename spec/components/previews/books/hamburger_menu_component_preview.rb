@@ -30,7 +30,7 @@ module Books
       {
         book: book,
         user: user,
-        remote: true
+        show: true
       }
     end
 

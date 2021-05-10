@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
         format.turbo_stream { flash.now[:notice] = notice }
       end
     else
-      render 'books/show'
+      render 'books/show', status: :unprocessable_entity
     end
   end
 

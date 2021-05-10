@@ -21,7 +21,7 @@ describe Search::FormComponent, type: :component do
       )
     end
 
-    it { is_expected.to have_css('form[data-remote="true"]') }
+    it { is_expected.to have_css('form[data-turbo-frame="results"]') }
 
     it 'adds some whitespace' do
       is_expected.not_to have_css('.search-form .form-group.mb-0')

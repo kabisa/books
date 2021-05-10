@@ -2,11 +2,11 @@ require 'rails_helper'
 
 module Books
   describe HamburgerMenuComponent, type: :component do
-    subject       { Capybara.string html }
-    let(:html)    { render_inline(described_class.new(options)) }
-    let(:options) { { book: book, user: user, remote: remote } }
-    let(:book)    { create(:book) }
-    let(:remote)  { true }
+    subject { Capybara.string html }
+    let(:html) { render_inline(described_class.new(options)) }
+    let(:options) { { book: book, user: user, show: show } }
+    let(:book) { create(:book) }
+    let(:show) { true }
 
     describe 'with a guest user' do
       let(:user) { build(:guest) }
@@ -27,12 +27,12 @@ module Books
         )
       }
 
-      context 'with synchronous calls' do
+      xcontext 'with synchronous calls' do
         let(:remote) { false }
         it { is_expected.to have_no_css(".dropdown-item[data-remote='true']", text: 'Delete') }
       end
 
-      context 'with asynchronous calls' do
+      xcontext 'with asynchronous calls' do
         let(:remote) { true }
         it { is_expected.to have_css(".dropdown-item[data-remote='true']", text: 'Delete') }
       end
@@ -56,14 +56,14 @@ module Books
             is_expected.to have_css('.dropdown-menu li form[method="post"][action^="/borrowings"] input[type="submit"][value="Borrow"]')
           }
 
-          context 'with synchronous calls' do
-            let(:remote) { false }
-            it { is_expected.to have_no_css('form[data-remote="true"] input[type="submit"][value="Borrow"]') }
+          context 'with `show` set to `true`' do
+            let(:show) { true }
+            it { is_expected.to have_css('form[action*="show=true"] input[type="submit"][value="Borrow"]') }
           end
 
-          context 'with asynchronous calls' do
-            let(:remote) { true }
-            it { is_expected.to have_css('form[data-remote="true"] input[type="submit"][value="Borrow"]') }
+          context 'with `show` set to `false`' do
+            let(:show) { false }
+            it { is_expected.to have_css('form[action*="show=false"] input[type="submit"][value="Borrow"]') }
           end
         end
 
@@ -79,14 +79,14 @@ module Books
             )
           }
 
-          context 'with synchronous calls' do
-            let(:remote) { false }
-            it { is_expected.to have_no_css('.dropdown-submenu ul.dropdown-menu li form[data-remote="true"]') }
+          context 'with `show` set to `true`' do
+            let(:show) { true }
+            it { is_expected.to have_css('.dropdown-submenu ul.dropdown-menu li form[action*="show=true"]') }
           end
 
-          context 'with asynchronous calls' do
-            let(:remote) { true }
-            it { is_expected.to have_css('.dropdown-submenu ul.dropdown-menu li form[data-remote="true"]', count: 2) }
+          context 'with `show` set to `true`' do
+            let(:show) { false }
+            it { is_expected.to have_css('.dropdown-submenu ul.dropdown-menu li form[action*="show=false"]', count: 2) }
           end
         end
 
@@ -99,14 +99,14 @@ module Books
           it { is_expected.to have_css('.dropdown-menu li form input[name="_method"][value="delete"]', visible: false) }
           it { is_expected.to have_css('.dropdown-menu li form input.dropdown-item[value="Return book"]') }
 
-          context 'with synchronous calls' do
-            let(:remote) { false }
-            it { is_expected.to have_no_css('.dropdown-menu li form[data-remote="true"]') }
+          context 'with `show` set to `true`' do
+            let(:show) { true }
+            it { is_expected.to have_css('.dropdown-menu li form[action*="show=true"]') }
           end
 
-          context 'with asynchronous calls' do
-            let(:remote) { true }
-            it { is_expected.to have_css('.dropdown-menu li form[data-remote="true"]') }
+          context 'with `show` set to `true`' do
+            let(:show) { false }
+            it { is_expected.to have_css('.dropdown-menu li form[action*="show=false"]') }
           end
         end
 

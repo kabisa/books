@@ -18,13 +18,12 @@ module Search
 
       {
         url: url_for,
-        remote: true,
         html: { autocomplete: :off, data: search_form_dataset }
       }
     end
 
     def search_form_dataset
-      { controller: data_controller, target: "#{data_controller}.form" }
+      { controller: data_controller, target: "#{data_controller}.form", turbo_frame: "results" }
     end
 
     def sort_params(f)

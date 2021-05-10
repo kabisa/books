@@ -25,54 +25,54 @@ gem 'redis', '~> 4.0'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
-gem 'slim-rails' # Provides the generator settings required for Rails 3+ to use Slim
-gem 'simple_form' # Forms made easy!
-gem 'draper' # Draper adds an object-oriented layer of presentation logic to your Rails apps.
-gem 'pundit' # Object oriented authorization for Rails applications
-gem 'paranoia' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3, 4, and 5, using much, much, much less code.
-gem 'view_component' # View components for Rails, intended for upstreaming in Rails 6.1
-gem 'ransack' # Object-based searching.
 gem 'acts-as-taggable-on' # With ActsAsTaggableOn, you can tag a single model on several contexts, such as skills, interests, and awards. It also provides other advanced functionality
-gem 'kaminari'
+gem 'bootsnap', '>= 1.4.2', require: false
 gem 'carrierwave', '~> 2.0'
+gem 'draper' # Draper adds an object-oriented layer of presentation logic to your Rails apps.
 gem 'fog-aws'
-gem "turbo-rails", "~> 0.5.8"
+gem 'kaminari'
+gem 'paranoia' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3, 4, and 5, using much, much, much less code.
+gem 'pundit' # Object oriented authorization for Rails applications
+gem 'ransack' # Object-based searching.
+gem 'simple_form' # Forms made easy!
+gem 'slim-rails' # Provides the generator settings required for Rails 3+ to use Slim
+gem 'turbo-rails', '~> 0.5.8'
+gem 'view_component' # View components for Rails, intended for upstreaming in Rails 6.1
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails'
-  gem 'rspec-collection_matchers'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails' # factory_bot_rails provides integration between factory_bot and rails 4.2 or newer
   gem 'faker' # easily generate fake data: names, addresses, phone numbers, etc.
+  gem 'rspec-collection_matchers'
+  gem 'rspec-rails'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'bullet' # help to kill N+1 queries and unused eager loading.
   gem 'html2slim'
   gem 'letter_opener' # When mail is sent from your application, Letter Opener will open a preview in the browser instead of sending.
-  gem 'rails-erd' # Automatically generate an entity-relationship diagram (ERD) for your Rails models.
   gem 'railroady'
-  gem 'bullet' # help to kill N+1 queries and unused eager loading.
-  gem 'solargraph'
+  gem 'rails-erd' # Automatically generate an entity-relationship diagram (ERD) for your Rails models.
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  # gem 'solargraph'
 end
 
 group :test do
-  gem 'webdrivers' # Easy installation and use of web drivers to run system tests with browsers
+  gem 'chronic' # Chronic is a natural language date/time parser written in pure Ruby
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'email_spec' # Easily test email in RSpec, Cucumber, and MiniTest
+  gem 'pundit-matchers'
   gem 'rails-controller-testing' # Extracting `assigns` and `assert_template` from ActionDispatch.
   gem 'shoulda-matchers'
-  gem 'pundit-matchers'
-  gem 'chronic' # Chronic is a natural language date/time parser written in pure Ruby
+  gem 'webdrivers' # Easy installation and use of web drivers to run system tests with browsers
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

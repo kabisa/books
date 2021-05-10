@@ -1,11 +1,10 @@
-= turbo_frame_tag book
-  .comments.card-body
-    = render partial: 'books/number_of_comments', locals: { book: book }
+.comments.card-body
+  = render partial: 'books/number_of_comments', locals: { book: book }
 
-    - if policy(Comment).new?
-      = simple_form_for([book, new_comment], html: { autocomplete: 'off' }, wrapper: :vertical_form_w_text_field_boxes, data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' }) do |f|
-        = f.input :body, required: false
-        = f.button :submit, class: 'btn btn-outline'
+  - if policy(Comment).new?
+    = simple_form_for([book, new_comment], html: { autocomplete: 'off' }, wrapper: :vertical_form_w_text_field_boxes, data: { controller: 'reset-form', action: 'turbo:submit-end->reset-form#reset' }) do |f|
+      = f.input :body, required: false
+      = f.button :submit, class: 'btn btn-outline'
 
-    ul.list-unstyled#comments
-      = render book.comments.order(created_at: :desc)
+  ul.list-unstyled#comments
+    = render book.comments.order(created_at: :desc)

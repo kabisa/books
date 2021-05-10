@@ -1,7 +1,7 @@
 @javascript
 Feature: As a Kabisaan
               I want to borrow a printed book
-  So I can read it
+    So I can read it
 
         Scenario: Show `Borrow` button
             Given I signed in as a Kabisaan
