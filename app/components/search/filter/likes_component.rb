@@ -22,6 +22,10 @@ module Search
       def data_controller
         'likes'
       end
+
+      def data_target
+        "#{data_controller}-target"
+      end
     end
   end
 end

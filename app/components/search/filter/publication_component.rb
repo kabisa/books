@@ -16,6 +16,10 @@ module Search
       def scope
         'publication'
       end
+
+      def data_target
+        "#{data_controller}-target"
+      end
     end
   end
 end

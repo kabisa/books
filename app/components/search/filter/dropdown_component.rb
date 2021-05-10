@@ -63,6 +63,10 @@ module Search
           [this_val, other_val].join(' ').strip
         end
       end
+
+      def data_target
+        "#{data_controller}-target"
+      end
     end
   end
 end

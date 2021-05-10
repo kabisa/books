@@ -8,7 +8,7 @@ module Material
     let(:options) { { flash: flash } }
     let(:content) { 'Lorem' }
 
-    it { is_expected.to have_css('.snackbar[data-controller="snackbar"][data-target="snackbar.container"]') }
+    it { is_expected.to have_css('.snackbar[data-controller="snackbar"][data-snackbar-target="container"]') }
     it { is_expected.to have_css('.snackbar .snackbar-body', text: content) }
     it { is_expected.to have_css('button[data-action="snackbar#hide"]') }
 

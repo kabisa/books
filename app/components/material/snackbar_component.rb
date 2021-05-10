@@ -37,5 +37,14 @@ module Material
     def long_message?
       message.size > 75
     end
+
+    # Stimulus
+    def data_controller
+      "snackbar"
+    end
+
+    def data_target
+      "#{data_controller}-target"
+    end
   end
 end

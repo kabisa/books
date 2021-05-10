@@ -48,7 +48,7 @@ module Search
 
       def range_field_dataset(target)
         decorate_dataset(
-          "#{data_controller}-target": "#{target}",
+          "#{data_target}": target,
           action: "change->#{data_controller}#validate input->#{data_controller}#render"
         )
       end
@@ -56,6 +56,10 @@ module Search
       # Stimulus
       def data_controller
         scope
+      end
+
+      def data_target
+        "#{data_controller}-target"
       end
     end
   end

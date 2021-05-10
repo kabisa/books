@@ -22,6 +22,10 @@ module Search
       def data_controller
         'tags'
       end
+
+      def data_target
+        "#{data_controller}-target"
+      end
     end
   end
 end

@@ -20,6 +20,10 @@ module Search
       def scope
         'pages'
       end
+
+      def data_target
+        "#{data_controller}-target"
+      end
     end
   end
 end

@@ -4,7 +4,7 @@
       = sort_params(f)
       .form-group
         .textfield-box
-          = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control', data: { "#{data_controller}-target": "query", action: "input->#{data_controller}#perform" }
+          = f.search_field :title_or_summary_or_writers_name_cont, autofocus: true, placeholder: t('search_form.placeholders.search_field'), class: 'form-control', data: { "#{data_target}": "query", action: "input->#{data_controller}#perform" }
 
       .form-group.d-flex.justify-content-end(class=('mb-0' unless live_search?))
         = render(Search::Filter::PublicationComponent.new(q: q, builder: f, live_search: live_search?))

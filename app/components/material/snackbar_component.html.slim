@@ -1,4 +1,4 @@
-div(data-controller='snackbar' data-target='snackbar.container' class=component_class)
+div(data={ controller: data_controller, "#{data_target}": 'container' } class=component_class)
   .snackbar-body
     = message
     - if action
