@@ -48,11 +48,8 @@ module Search
 
       def range_field_dataset(target)
         decorate_dataset(
-          target: "#{data_controller}.#{target}",
-          action:
-            "change->#{data_controller}#validate input->#{
-              data_controller
-            }#render"
+          "#{data_controller}-target": "#{target}",
+          action: "change->#{data_controller}#validate input->#{data_controller}#render"
         )
       end
 

@@ -22,7 +22,7 @@ module Search
         options = {
           class: sm_btn_class('dropdown-toggle'),
           role: 'button',
-          data: { target: "#{data_controller}.zeroItems" }
+          data: { "#{data_controller}-target": "zeroItems" }
         }
 
         deep_merge_and_join(options, dropdown_options)
@@ -33,7 +33,7 @@ module Search
           class: sm_btn_class('text-primary pr-2 d-none'),
           role: 'button',
           data: {
-            target: "#{data_controller}.toggle #{data_controller}.otherItems"
+            "#{data_controller}-target": "toggle otherItems"
           }
         }
 
@@ -53,7 +53,7 @@ module Search
 
       def dropdown_caret_dataset
         decorate_dataset(
-          target: "#{data_controller}.otherItems",
+          "#{data_controller}-target": "otherItems",
           action: "#{data_controller}#reset"
         )
       end

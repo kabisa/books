@@ -51,31 +51,31 @@ describe Search::Filter::LikesComponent, type: :component do
 
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="likes.zeroItems"]',
+        '.btn-group [data-likes-target="zeroItems"]',
         text: 'Likes'
       )
     end
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="likes.zeroItems"]',
+        '.btn-group [data-likes-target="zeroItems"]',
         text: 'Any'
       )
     end
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="likes.otherItems"]',
+        '.btn-group [data-likes-target="otherItems"]',
         text: 'At least'
       )
     end
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="likes.label"]',
+        '.btn-group [data-likes-target="label"]',
         text: 'At least'
       )
     end
     it do
       is_expected.to have_css(
-        '.btn-group span[data-target="likes.value"]',
+        '.btn-group span[data-likes-target="value"]',
         text: nil
       )
     end # Stimulus will set the text.
@@ -89,7 +89,7 @@ describe Search::Filter::LikesComponent, type: :component do
 
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="likes.otherItems"][data-action="likes#reset"]',
+        '.btn-group [data-likes-target="otherItems"][data-action="likes#reset"]',
         text: 'Toggle Dropdown'
       )
     end
@@ -98,7 +98,7 @@ describe Search::Filter::LikesComponent, type: :component do
       expect(builder_double).to receive(:range_field).with(
         anything,
         hash_including(
-          data: { target: 'likes.range', action: 'input->likes#render' }
+          data: { 'likes-target': 'range', action: 'input->likes#render' }
         )
       )
       subject
@@ -115,7 +115,7 @@ describe Search::Filter::LikesComponent, type: :component do
       end
       it do
         is_expected.to have_css(
-          '.btn-group [data-target="likes.otherItems"][data-action="likes#reset search#perform"]',
+          '.btn-group [data-likes-target="otherItems"][data-action="likes#reset search#perform"]',
           text: 'Toggle Dropdown'
         )
       end
@@ -125,7 +125,7 @@ describe Search::Filter::LikesComponent, type: :component do
           anything,
           hash_including(
             data: {
-              target: 'likes.range',
+              'likes-target': 'range',
               action: 'input->likes#render search#perform'
             }
           )

@@ -46,25 +46,25 @@ describe Search::Filter::PublicationComponent, type: :component do
 
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="publication.zeroItems"]',
+        '.btn-group [data-publication-target="zeroItems"]',
         text: 'Publication'
       )
     end
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="publication.otherItems"][data-action="publication#reset"]',
+        '.btn-group [data-publication-target="otherItems"][data-action="publication#reset"]',
         text: 'Toggle Dropdown'
       )
     end
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="publication.zeroItems"]',
+        '.btn-group [data-publication-target="zeroItems"]',
         text: 'Any'
       )
     end
     it do
       is_expected.to have_css(
-        '.btn-group [data-target="publication.otherItems"] [data-target="publication.label"]',
+        '.btn-group [data-publication-target="otherItems"] [data-publication-target="label"]',
         text: nil
       )
     end
@@ -80,7 +80,7 @@ describe Search::Filter::PublicationComponent, type: :component do
         anything,
         hash_including(
           data: {
-            target: 'publication.min',
+            'publication-target': 'min',
             action: 'change->publication#validate input->publication#render'
           }
         )
@@ -93,7 +93,7 @@ describe Search::Filter::PublicationComponent, type: :component do
         anything,
         hash_including(
           data: {
-            target: 'publication.max',
+            'publication-target': 'max',
             action: 'change->publication#validate input->publication#render'
           }
         )

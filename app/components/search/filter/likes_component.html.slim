@@ -1,11 +1,11 @@
 = render(Search::Filter::DropdownComponent.new(data_controller: data_controller, title: title, live_search: live_search?)) do
-  div(data={ target: "#{data_controller}.zeroItems" })
+  div(data={ "#{data_controller}-target": "zeroItems" })
     = t('search_form.likes.zero')
-  .d-none(data={ target: "#{data_controller}.otherItems" })
+  .d-none(data={ "#{data_controller}-target": "otherItems" })
     .d-flex.justify-content-between
-      .text-primary(data={ target: "#{data_controller}.label" })
+      .text-primary(data={ "#{data_controller}-target": "label" })
         = t('search_form.likes.other')
-        span<(data-target="#{data_controller}.value")
+        span<(data={"#{data_controller}-target": "value"})
       div= link_to t('search_form.clear'), '#', class: 'text-primary', data: decorate_dataset(action: "#{data_controller}#reset")
-  = f.range_field :likes_count_gteq, class: 'custom-range', min: 0, max: 25, data: decorate_dataset(target: "#{data_controller}.range", action: "input->#{data_controller}#render")
+  = f.range_field :likes_count_gteq, class: 'custom-range', min: 0, max: 25, data: decorate_dataset("#{data_controller}-target": "range", action: "input->#{data_controller}#render")
 
