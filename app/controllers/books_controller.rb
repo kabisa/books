@@ -76,7 +76,7 @@ class BooksController < ApplicationController
         helpers.link_to(
           t('helpers.submit.undo'),
           restore_book_path(@book),
-          method: :post, remote: true
+          method: :post
         )
 
       format.html do
@@ -84,9 +84,9 @@ class BooksController < ApplicationController
         redirect_to books_url(restorable_id: @book), notice: notice
       end
       format.json { head :no_content }
-      format.js do
+      format.turbo_stream do
         flash.now[:action] = action
-        flash.now.notice = notice
+        flash.now[:notice] = notice
       end
     end
   end
@@ -97,8 +97,12 @@ class BooksController < ApplicationController
                   .decorate
 
     respond_to do |format|
-      flash.now.notice = t('.notice')
-      format.js
+      notice = t('.notice')
+
+      format.turbo_stream {
+        flash.now[:notice] = notice
+        render :destroy
+      }
     end
   end
 

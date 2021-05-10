@@ -25,8 +25,7 @@ class CommentsController < ApplicationController
 
     @comment.destroy
     notice = t('.notice')
-    action = helpers.link_to(t('helpers.submit.undo'), restore_comment_path(@comment), method: :post,
-                                                                                       data: { turbo_frame: '_top' })
+    action = helpers.link_to(t('helpers.submit.undo'), restore_comment_path(@comment), method: :post)
     respond_to do |format|
       format.html do
         flash[:notice] = notice

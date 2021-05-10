@@ -238,8 +238,8 @@ RSpec.describe BooksController, type: :controller do
   describe 'DELETE #destroy' do
     let!(:book) { create :book }
 
-    def do_delete(id, xhr: true)
-      delete :destroy, xhr: xhr, params: {id: id}, session: valid_session
+    def do_delete(id, as: nil)
+      delete :destroy, params: {id: id}, session: valid_session, as: as
     end
 
     it 'destroys the requested book' do
@@ -250,24 +250,24 @@ RSpec.describe BooksController, type: :controller do
 
     context 'synchronous' do
       it 'sets a flash notice' do
-        do_delete(book.to_param, xhr: false)
+        do_delete(book.to_param)
         expect(request.flash.notice).to match(/deleted/)
       end
 
       it 'redirects to the books list' do
-        do_delete(book.to_param, xhr: false)
+        do_delete(book.to_param)
         expect(response).to redirect_to(books_url(restorable_id: book.to_param))
       end
     end
 
-    context 'asynchronous' do
+    context 'turbo_stream' do
       it 'sets a flash notice' do
-        do_delete(book.to_param)
+        do_delete(book.to_param, as: :turbo_stream)
         expect(request.flash.notice).to match(/deleted/)
       end
 
       it 'renders destroy' do
-        do_delete(book.to_param)
+        do_delete(book.to_param, as: :turbo_stream)
         expect(response).to render_template(:destroy)
       end
     end
@@ -278,19 +278,27 @@ RSpec.describe BooksController, type: :controller do
 
     let!(:book) { create :book }
 
-    def do_post(id)
-      post :restore, xhr: true, params: {id: id}, session: valid_session
+    def do_post(id, as: nil)
+      post :restore, params: {id: id}, session: valid_session, as: as
     end
 
     it 'restores the requested book' do
       expect {
-        do_post(book.to_param)
+        do_post(book.to_param, as: :turbo_stream)
       }.to change(Book, :count).by(1)
     end
 
     it 'sets a flash notice' do
-      do_post(book.to_param)
+      do_post(book.to_param, as: :turbo_stream)
       expect(request.flash.notice).to match('Action undone.')
     end
+
+    context 'turbo_stream' do
+      it 'renders destroy' do
+        do_post(book.to_param, as: :turbo_stream)
+        expect(response).to render_template(:destroy)
+      end
+    end
+
   end
 end

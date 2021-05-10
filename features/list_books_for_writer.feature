@@ -2,7 +2,7 @@ Feature:
               As a user
               I want to see all books for a specific writer
 
-        @javascript @wip
+        @javascript
         Scenario: Show all books for a specific writer
             Given the following books:
                   | title                  | link                                  | writer_names                  |

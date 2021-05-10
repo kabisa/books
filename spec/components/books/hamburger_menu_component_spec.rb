@@ -23,7 +23,10 @@ module Books
       it { is_expected.to have_css('.dropdown-menu li.dropdown-divider') }
       it {
         is_expected.to have_css(
-          ".dropdown-menu li a.dropdown-item.text-danger[data-method='delete'][href='/books/#{book.id}']", text: 'Delete'
+          ".dropdown-menu li form[action='/books/#{book.id}'] input[name='_method'][value='delete']", visible: false
+        )
+        is_expected.to have_css(
+          ".dropdown-menu li form[action='/books/#{book.id}'] input.dropdown-item.text-danger[value='Delete']"
         )
       }
 

@@ -18,5 +18,4 @@
             li= button_to c.location.to_label, borrowings_path(borrowing: { book_id: book, copy_id: c }, show: @show), class: item_class
   - if destroy?
     li.dropdown-divider
-    li= link_to I18n.t('helpers.submit.destroy'), book, method: :delete, class: "#{item_class} text-danger"
-
+    li= button_to I18n.t('helpers.submit.destroy'), book, method: :delete, class: "#{item_class} text-danger", data: { turbo: (action_name != "show") }
