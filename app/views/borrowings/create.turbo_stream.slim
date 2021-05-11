@@ -1,13 +1,13 @@
 - case request.referrer
-  - when book_url(@book)
-    = turbo_stream.replace @book do
-      = render template: 'books/show', book: @book
-
-    = turbo_stream.append @book do
-      = bs_snackbar
-  - when books_url
+  - when /#{books_url}/
     = turbo_stream.replace @book do
       = render @book, parent: 'books', show: @show
 
     = turbo_stream.prepend 'results' do
+      = bs_snackbar
+  - when /#{book_url(@book)}/
+    = turbo_stream.replace @book do
+      = render template: 'books/show', book: @book
+
+    = turbo_stream.append @book do
       = bs_snackbar
