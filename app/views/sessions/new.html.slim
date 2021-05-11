@@ -1,9 +1,9 @@
 .sign-in.align-items-center
   .card.shadow-none.p-4
     .card-body
-      h1.card-title= t('.title')
+      h1.card-title= t(".title")
 
-      = simple_form_for(@user, url: sign_in_path, html: { autocomplete: :off }) do |f|
+      = simple_form_for(@user, url: sign_in_path, html: { autocomplete: :off }, data: { turbo: false }) do |f|
         = f.input :email, autofocus: true, required: false
-        => f.submit t('helpers.submit.session.create'), class: 'btn btn-primary'
-        = link_to t('helpers.submit.cancel'), root_path, role: :button, class: 'btn btn-outline-primary'
+        => f.submit t("helpers.submit.session.create"), class: "btn btn-primary"
+        = link_to t("helpers.submit.cancel"), root_path, role: :button, class: "btn btn-outline-primary"
