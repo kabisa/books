@@ -3,7 +3,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
     input_html_options.deep_merge!({
       accept: 'image/*',
       data: {
-        target: "#{data_controller}.fileInput",
+        "#{data_target}": "fileInput",
         action: "#{data_controller}#handleImage"
       }
     })
@@ -17,6 +17,10 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
   private
   def data_controller
     'dropzone'
+  end
+
+  def data_target
+    "#{data_controller}-target"
   end
 
   def crop?
@@ -45,13 +49,13 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
     options = {
       title: I18n.t('modals.crop.title'),
       data: {
-        target: "#{data_controller}.modal"
+        "#{data_target}": "modal"
       }
     }
 
     template.render(Bootstrap::ModalComponent.new(options)) do |c|
       template.capture do
-        template.concat template.tag.img(data: { target: "#{data_controller}.cropper" })
+        template.concat template.tag.img(data: { "#{data_target}": "cropper" })
         template.concat(c.with(:footer) do
           template.content_tag(:button, I18n.t('modals.crop.submit'), class: 'btn btn-primary', data: { action: "#{data_controller}#crop", dismiss: :modal })
         end)
@@ -62,7 +66,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
   def crop_results
     template.capture do
       %w[x y w h].each do |attribute|
-        template.concat @builder.hidden_field("crop_#{attribute}", data: { target: "#{data_controller}.crop#{attribute.upcase}" })
+        template.concat @builder.hidden_field("crop_#{attribute}", data: { "#{data_target}": "crop#{attribute.upcase}" })
       end
     end
 
@@ -83,7 +87,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
   end
 
   def remove_icon
-    template.link_to '#', class: template.sm_rnd_btn_class('dropzone-action ml-3 text-light'), data: { target: "#{data_controller}.removeButton", action: "dragover->#{data_controller}#acceptDrag drop->#{data_controller}#noop #{data_controller}#removeImage" } do
+    template.link_to '#', class: template.sm_rnd_btn_class('dropzone-action ml-3 text-light'), data: { "#{data_target}": "removeButton", action: "dragover->#{data_controller}#acceptDrag drop->#{data_controller}#noop #{data_controller}#removeImage" } do
       template.material_icon('close', template.tooltipify(I18n.t('remove', scope: [template.controller.controller_name, template.controller.action_name])))
     end
   end
@@ -96,7 +100,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
     options = {
       class: 'img-fluid w-100',
       data: {
-        target: "#{data_controller}.previewImage"
+        "#{data_target}": "previewImage"
       }
     }
 
@@ -108,7 +112,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
   end
 
   def remove_image
-    @builder.hidden_field("remove_#{attribute_name}".to_sym, data: { target: "#{data_controller}.removeImage" })
+    @builder.hidden_field("remove_#{attribute_name}".to_sym, data: { "#{data_target}": "removeImage" })
   end
 
   # https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
