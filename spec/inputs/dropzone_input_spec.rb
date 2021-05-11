@@ -98,23 +98,23 @@ describe 'form', type: :view do
         end
         it do
           is_expected.to have_css(
-            '.dropzone-overlay a[data-action="dragover->dropzone#acceptDrag drop->dropzone#noop dropzone#removeImage"][data-target="dropzone.removeButton"]',
+            '.dropzone-overlay a[data-action="dragover->dropzone#acceptDrag drop->dropzone#noop dropzone#removeImage"][data-dropzone-target="removeButton"]',
             text: 'close'
           )
         end
         it do
           is_expected.to have_css(
-            '.dropzone-container img[data-target="dropzone.previewImage"]'
+            '.dropzone-container img[data-dropzone-target="previewImage"]'
           )
         end
         it do
           is_expected.to have_css(
-            '.dropzone-container input[type="file"][data-target="dropzone.fileInput"][data-action="dropzone#handleImage"]'
+            '.dropzone-container input[type="file"][data-dropzone-target="fileInput"][data-action="dropzone#handleImage"]'
           )
         end
         it do
           is_expected.to have_css(
-            '.dropzone-container input[type="hidden"][data-target="dropzone.removeImage"]',
+            '.dropzone-container input[type="hidden"][data-dropzone-target="removeImage"]',
             visible: false
           )
         end

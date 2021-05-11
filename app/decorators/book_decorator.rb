@@ -127,7 +127,7 @@ class BookDecorator < ApplicationDecorator
   def reedition_alert
     if reedition
       options = {
-        text: h.link_to(I18n.t('reedition_available'), reedition, class: 'alert-link')
+        text: h.link_to(I18n.t('reedition_available'), reedition, class: 'alert-link', target: '_top')
       }
 
       h.tag.div(h.render(Bootstrap::AlertComponent.new(options)), data: { toggle: 'no-collapse' })
