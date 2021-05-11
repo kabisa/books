@@ -1,23 +1,16 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '3.0.0'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.0'
-# Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
-# Use Puma as the app server
-gem 'puma'
-# Use SCSS for stylesheets
-gem 'sass-rails'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.0'
+gem 'pg', '>= 0.18', '< 2.0' # Use postgresql as the database for Active Record
+gem 'puma' # Use Puma as the app server
+gem 'rails', '~> 6.1.0' # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'sass-rails' # Use SCSS for stylesheets
+gem 'webpacker', '~> 5.0' # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'redis', '~> 4.0' # Use Redis adapter to run Action Cable in production
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -27,16 +20,16 @@ gem 'redis', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'acts-as-taggable-on' # With ActsAsTaggableOn, you can tag a single model on several contexts, such as skills, interests, and awards. It also provides other advanced functionality
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.0' # Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends.
 gem 'draper' # Draper adds an object-oriented layer of presentation logic to your Rails apps.
-gem 'fog-aws'
-gem 'kaminari'
+gem 'fog-aws' # This library can be used as a module for `fog` or as standalone provider to use the Amazon Web Services in applications..
+gem 'kaminari' # Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 4+
 gem 'paranoia' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3, 4, and 5, using much, much, much less code.
 gem 'pundit' # Object oriented authorization for Rails applications
 gem 'ransack' # Object-based searching.
 gem 'simple_form' # Forms made easy!
 gem 'slim-rails' # Provides the generator settings required for Rails 3+ to use Slim
-gem 'turbo-rails', '~> 0.5.8'
+gem 'turbo-rails', '~> 0.5.8' # The speed of a single-page web application without having to write any JavaScript.
 gem 'view_component' # View components for Rails, intended for upstreaming in Rails 6.1
 
 group :development, :test do
