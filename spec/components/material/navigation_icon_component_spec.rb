@@ -3,7 +3,7 @@ require 'rails_helper'
 module Material
   describe NavigationIconComponent, type: :component do
     subject       { Capybara.string html }
-    let(:html)    { render_inline(described_class.new(options)) }
+    let(:html)    { render_inline(described_class.new(**options)) }
     let(:options) { { action_name: action_name } }
 
     context 'with index action' do

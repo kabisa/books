@@ -15,7 +15,7 @@ module Bootstrap
     attr_accessor :text, :type
 
     def render_component
-      render(AlertComponent.new(options))
+      render(AlertComponent.new(**options))
     end
 
     def options

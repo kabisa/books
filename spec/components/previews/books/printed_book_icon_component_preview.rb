@@ -17,7 +17,7 @@ module Books
     attr_accessor :user, :book
 
     def render_component
-      render(PrintedBookIconComponent.new(options))
+      render(PrintedBookIconComponent.new(**options))
     end
 
     def options

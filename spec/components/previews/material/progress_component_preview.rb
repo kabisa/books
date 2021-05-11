@@ -46,7 +46,7 @@ module Material
     attr_accessor :background, :html
 
     def render_component
-      render(ProgressComponent.new(options))
+      render(ProgressComponent.new(**options))
     end
 
     def options

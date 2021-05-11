@@ -23,14 +23,15 @@ module Books
     attr_accessor :user, :book
 
     def render_component
-      render(HamburgerMenuComponent.new(options))
+      render(HamburgerMenuComponent.new(**options))
     end
 
     def options
       {
         book: book,
         user: user,
-        show: true
+        show: true,
+        singly: true
       }
     end
 

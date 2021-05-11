@@ -3,7 +3,7 @@ require 'rails_helper'
 module Books
   describe HamburgerMenuComponent, type: :component do
     subject { Capybara.string html }
-    let(:html) { render_inline(described_class.new(options)) }
+    let(:html) { render_inline(described_class.new(**options)) }
     let(:options) { { book: book, user: user, show: show, singly: singly } }
     let(:book) { create(:book) }
     let(:show) { true }

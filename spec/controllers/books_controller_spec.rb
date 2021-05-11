@@ -16,7 +16,7 @@ RSpec.describe BooksController, type: :controller do
   let(:valid_session)      { { user_id: current_user.id } }
 
   describe 'GET #index' do
-    def do_get(restorable_id=nil, format=:html)
+    def do_get(restorable_id = nil, format = :html)
       args = {
         session: valid_session,
         format: format
@@ -28,7 +28,7 @@ RSpec.describe BooksController, type: :controller do
         }
       end
 
-      get :index, args
+      get :index, **args
     end
 
     let(:search_spy) { spy('Ransack::Search') }

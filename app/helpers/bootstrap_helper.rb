@@ -59,7 +59,7 @@ module BootstrapHelper
       [this_val, other_val].join(' ').strip
     end
 
-    tag.button(options) { tag.span('×', aria: { hidden: true }) }
+    tag.button(**options) { tag.span('×', aria: { hidden: true }) }
   end
 
   private

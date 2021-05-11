@@ -30,7 +30,7 @@ class Search::Filter::PagesComponentPreview < ViewComponent::Preview
   attr_accessor :num_of_pages_gteq, :num_of_pages_lteq
 
   def render_component
-    render(Search::FormComponent.new(options)) #.css('[data-controller="pages"]')
+    render(Search::FormComponent.new(**options)) #.css('[data-controller="pages"]')
   end
 
   def options

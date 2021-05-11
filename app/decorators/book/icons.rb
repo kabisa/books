@@ -10,7 +10,7 @@ module Book::Icons
         user: h.current_user
       }
 
-      h.render(Books::PrintedBookIconComponent.new(options))
+      h.render(Books::PrintedBookIconComponent.new(**options))
     else
       h.icon_placeholder
     end
@@ -38,7 +38,9 @@ module Book::Icons
           comments_count # (1)
         ], ' '
       ),
-      h.tooltipify(number_of_comments)
+      **h.tooltipify(number_of_comments)
     )
   end
 end
+
+# (1) Using `comments.size` will not use counter cache. We could also have used `model.comments.size`.

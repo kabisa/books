@@ -61,6 +61,10 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body).merge(user: current_user, book: @book)
+    params.require(:comment).permit(:body).merge(user: current_user, book: @book.model) # (1)
   end
 end
+
+# (1)
+# When using @book (instead of @book.model) we get an ArgumentError after upgrading to Ruby 3.
+# I expect this is caused by draper, so this might be fixed after upgrading the draper gem.

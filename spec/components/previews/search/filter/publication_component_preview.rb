@@ -32,7 +32,7 @@ class Search::Filter::PublicationComponentPreview < ViewComponent::Preview
   attr_accessor :published_years_ago_lteq, :published_years_ago_gteq
 
   def render_component
-    render(Search::FormComponent.new(options)) #.css('[data-controller="publication"]')
+    render(Search::FormComponent.new(**options)) #.css('[data-controller="publication"]')
   end
 
   def options

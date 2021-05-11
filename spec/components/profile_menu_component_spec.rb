@@ -8,7 +8,7 @@ describe ProfileMenuComponent, type: :component do
 
   subject       { Capybara.string html }
 
-  let(:html)    {  render_inline(described_class.new(options)) }
+  let(:html)    {  render_inline(described_class.new(**options)) }
   let(:options) { { user: user } }
   let(:user) { build(:user, email: email).decorate }
   let(:email) { 'john.doe@example.org' }
@@ -30,7 +30,7 @@ describe ProfileMenuComponent, type: :component do
   end
 
   describe 'content' do
-    let(:html)    {  render_inline(described_class.new(options)) { content } }
+    let(:html)    {  render_inline(described_class.new(**options)) { content } }
     let(:content) { 'Lorem Ipsum' }
 
     it { is_expected.to have_css('div.dropdown-menu.dropdown-menu-right[aria-labelledby="dropdownMenuLink"]', text: content) }

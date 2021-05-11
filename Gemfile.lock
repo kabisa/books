@@ -372,7 +372,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     uniform_notifier (1.13.2)
-    view_component (2.25.0)
+    view_component (2.31.1)
       activesupport (>= 5.0.0, < 7.0)
     web-console (4.1.0)
       actionview (>= 6.0.0)

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Search::Filter::DropdownComponent, type: :component do
   subject { Capybara.string html }
 
-  let(:html) { render_inline(described_class.new(options)) { content } }
+  let(:html) { render_inline(described_class.new(**options)) { content } }
   let(:options) { { title: title } }
   let(:title) { 'Greetings' }
   let(:content) { 'Hello World!' }

@@ -55,7 +55,7 @@ class BookDecorator < ApplicationDecorator
       show: show
     }
 
-    h.render(Books::VoteButtonsComponent.new(options))
+    h.render(Books::VoteButtonsComponent.new(**options))
   end
 
   def vote_stats
@@ -64,7 +64,7 @@ class BookDecorator < ApplicationDecorator
       dislike_count: dislikes.size
     }
 
-    h.render(Books::VoteStatsComponent.new(options))
+    h.render(Books::VoteStatsComponent.new(**options))
   end
 
   def formatted_tag_list
@@ -111,7 +111,7 @@ class BookDecorator < ApplicationDecorator
       user: h.current_user
     }
 
-    h.render(Books::HamburgerMenuComponent.new(options))
+    h.render(Books::HamburgerMenuComponent.new(**options))
   end
 
   def currently_borrowing_alert
@@ -121,7 +121,7 @@ class BookDecorator < ApplicationDecorator
         type: :info
       }
 
-      h.render(Bootstrap::AlertComponent.new(options))
+      h.render(Bootstrap::AlertComponent.new(**options))
     end
   end
 
@@ -131,7 +131,7 @@ class BookDecorator < ApplicationDecorator
         text: h.link_to(I18n.t('reedition_available'), reedition, class: 'alert-link', target: '_top')
       }
 
-      h.tag.div(h.render(Bootstrap::AlertComponent.new(options)), data: { toggle: 'no-collapse' })
+      h.tag.div(h.render(Bootstrap::AlertComponent.new(**options)), data: { toggle: 'no-collapse' })
     end
   end
 
@@ -141,7 +141,7 @@ class BookDecorator < ApplicationDecorator
         text: I18n.t('outdated'),
         type: :light
       }
-      h.tag.small(h.render(Bootstrap::BadgeComponent.new(options)), h.tooltipify(I18n.t('reedition_available')))
+      h.tag.small(h.render(Bootstrap::BadgeComponent.new(**options)), **h.tooltipify(I18n.t('reedition_available')))
     end
   end
 
@@ -151,9 +151,7 @@ class BookDecorator < ApplicationDecorator
         text: I18n.t('latest'),
         type: :primary
       }
-      h.tag.small(h.render(Bootstrap::BadgeComponent.new(options)))
+      h.tag.small(h.render(Bootstrap::BadgeComponent.new(**options)))
     end
   end
 end
-
-# (1) Using `comments.size` will not use counter cache. We could also have used `model.comments.size`.

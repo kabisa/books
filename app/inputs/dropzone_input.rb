@@ -53,7 +53,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
       }
     }
 
-    template.render(Bootstrap::ModalComponent.new(options)) do |c|
+    template.render(Bootstrap::ModalComponent.new(**options)) do |c|
       template.capture do
         template.concat template.tag.img(data: { "#{data_target}": "cropper" })
         template.concat(c.with(:footer) do
@@ -107,7 +107,7 @@ class DropzoneInput < SimpleForm::Inputs::FileInput
     if object.send("#{attribute_name}?")
       template.image_tag object.send("#{attribute_name}_url"), options
     else
-      template.tag.img(options)
+      template.tag.img(**options)
     end
   end
 

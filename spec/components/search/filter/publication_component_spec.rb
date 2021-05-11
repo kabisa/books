@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Search::Filter::PublicationComponent, type: :component do
   subject { Capybara.string html }
-  let(:html) { render_inline(described_class.new(options)) }
+  let(:html) { render_inline(described_class.new(**options)) }
   let(:options) do
     { q: search_double, builder: builder_double, live_search: live_search }
   end

@@ -16,7 +16,7 @@ class VoteBarComponentPreview < ViewComponent::Preview
   attr_accessor :has_voted
 
   def render_component
-    render(VoteBarComponent.new(options))
+    render(VoteBarComponent.new(**options))
   end
 
   def options

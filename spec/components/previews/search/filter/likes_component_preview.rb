@@ -16,7 +16,7 @@ class Search::Filter::LikesComponentPreview < ViewComponent::Preview
   attr_accessor :likes_count_gteq
 
   def render_component
-    render(Search::FormComponent.new(options))
+    render(Search::FormComponent.new(**options))
   end
 
   def options

@@ -15,7 +15,7 @@ module Bootstrap
     attr_accessor :content, :type
 
     def render_component
-      render(BadgeComponent.new(options))
+      render(BadgeComponent.new(**options))
     end
 
     def options

@@ -42,7 +42,7 @@ class Search::FormComponentPreview < ViewComponent::Preview
   attr_accessor :tags_id_in, :likes_count_gteq
 
   def render_component
-    render(Search::FormComponent.new(options))
+    render(Search::FormComponent.new(**options))
   end
 
   def options

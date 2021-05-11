@@ -26,7 +26,7 @@ class Search::Filter::TagsComponentPreview < ViewComponent::Preview
   attr_accessor :tags_id_in
 
   def render_component
-    render(Search::FormComponent.new(options)) #.css('[data-controller="tags"]')
+    render(Search::FormComponent.new(**options)) #.css('[data-controller="tags"]')
   end
 
   def options

@@ -23,7 +23,7 @@ module Material
     attr_accessor :notice, :action
 
     def render_component
-      render(SnackbarComponent.new(options))
+      render(SnackbarComponent.new(**options))
     end
 
     def options

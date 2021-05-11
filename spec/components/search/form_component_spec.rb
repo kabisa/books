@@ -6,7 +6,7 @@ describe Search::FormComponent, type: :component do
   end
 
   subject { Capybara.string html }
-  let(:html) { render_inline(described_class.new(options)) }
+  let(:html) { render_inline(described_class.new(**options)) }
   let(:options) { { q: search_double, live_search: live_search } }
   let(:search_double) { Ransack::Search.new(Book, params) }
   let(:params) { {} }
