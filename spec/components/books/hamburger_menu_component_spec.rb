@@ -4,9 +4,10 @@ module Books
   describe HamburgerMenuComponent, type: :component do
     subject { Capybara.string html }
     let(:html) { render_inline(described_class.new(options)) }
-    let(:options) { { book: book, user: user, show: show } }
+    let(:options) { { book: book, user: user, show: show, singly: singly } }
     let(:book) { create(:book) }
     let(:show) { true }
+    let(:singly) { true }
 
     describe 'with a guest user' do
       let(:user) { build(:guest) }

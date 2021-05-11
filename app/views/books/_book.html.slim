@@ -22,7 +22,7 @@
             = book.number_of_comments_icon
           .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
             = render partial: 'books/vote', object: book, as: :book, locals: { show: false }
-            = book.hamburger_menu(show: false)
+            = book.hamburger_menu(show: false, singly: false)
 
         .row.align-items-center.collapsed-hide
           .col-12.col-lg-7
@@ -33,6 +33,6 @@
             = link_to t('helpers.submit.show'), book, class: 'btn btn-outline-primary', role: :button, target: '_top'
           .col-6.col-lg-3.d-flex.justify-content-end(data={ toggle: 'no-collapse' })
             = render partial: 'books/vote', object: book, as: :book, locals: { show: true }
-            = book.hamburger_menu(show: true)
+            = book.hamburger_menu(show: true, singly: false)
 
     = render partial: 'books/collapse', object: book, as: :book, locals: { show: local_assigns[:show], parent: parent }

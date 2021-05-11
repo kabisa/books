@@ -7,15 +7,16 @@ module Books
     delegate :copies, to: :book
     delegate :borrowables, to: :copies
 
-    def initialize(book:, show:, user:)
+    def initialize(book:, show:, singly:, user:)
       @book = book
       @show = show
+      @singly = singly
       @user = user
     end
 
     private
 
-    attr_reader :book, :show, :user
+    attr_reader :book, :show, :singly, :user
 
     def policy
       Pundit.policy(user, book)
@@ -31,6 +32,14 @@ module Books
 
     def item_class
       'dropdown-item'
+    end
+
+    def singly?
+      !!singly
+    end
+
+    def show?
+      !!show
     end
   end
 end
