@@ -29,7 +29,7 @@ describe Search::FormComponent, type: :component do
 
     describe 'Stimulus API' do
       it { is_expected.to have_css('form[data-controller="search"]') }
-      it { is_expected.to have_css('form[data-target="search.form"]') }
+      it { is_expected.to have_css('form[data-search-target="form"]') }
     end
 
     [
