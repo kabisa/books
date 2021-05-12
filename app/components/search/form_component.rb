@@ -23,7 +23,7 @@ module Search
     end
 
     def search_form_dataset
-      { controller: data_controller, target: "#{data_controller}.form", turbo_frame: "results" }
+      { controller: data_controller, "#{data_target}": 'form', turbo_frame: 'results' }
     end
 
     def sort_params(f)
