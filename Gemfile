@@ -20,7 +20,7 @@ gem 'redis', '~> 4.0' # Use Redis adapter to run Action Cable in production
 # Reduces boot times through caching; required in config/boot.rb
 gem 'acts-as-taggable-on' # With ActsAsTaggableOn, you can tag a single model on several contexts, such as skills, interests, and awards. It also provides other advanced functionality
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'carrierwave', '~> 2.0' # Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends.
+gem 'carrierwave', '~> 2.1' # Upload files in your Ruby applications, map them to a range of ORMs, store them on different backends.
 gem 'draper' # Draper adds an object-oriented layer of presentation logic to your Rails apps.
 gem 'fog-aws' # This library can be used as a module for `fog` or as standalone provider to use the Amazon Web Services in applications..
 gem 'kaminari' # Kaminari is a Scope & Engine based, clean, powerful, agnostic, customizable and sophisticated paginator for Rails 4+
